@@ -1,12 +1,13 @@
 import React from 'react';
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
 } from "react-router-dom";
 
 import Timeline from './timeline';
+import BaseTimeline from './base_timeline';
 import Home from './ReactHome';
 import EventForm from './addevent';
 import LoginForm from './login/login_form';
@@ -29,7 +30,7 @@ function App() {
 				<Link to="/"> Home </Link>
 			</li>
 			<li>
-				<Link to="/timeline"> Timeline </Link>
+				<Link to="/base_timeline"> Base Timeline </Link>
 			</li>
 			<li>
 				<Link to="/add"> Add new</Link>
@@ -42,8 +43,12 @@ function App() {
 
 	<Switch>
 
-		<Route path="/timeline">
-			<Timeline />
+		<Route path="/timeline/:timeline_url"
+		component={Timeline}/>
+
+
+		<Route path="/base_timeline">
+			<BaseTimeline />
 		</Route>
 
 		<Route path="/add">
