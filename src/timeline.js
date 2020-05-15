@@ -182,6 +182,10 @@ class Timeline extends React.Component {
                             icon={<StarIcon/>}
                         />
                         <DataEvent data={data1}/>
+                        {this.state.timeline_events.map(
+                            function(evt){
+                                return <DataEvent data={evt}/>
+                            })}
 
 
                     </VerticalTimeline>
