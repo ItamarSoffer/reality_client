@@ -2,19 +2,24 @@ import React from 'react';
 import { VerticalTimelineElement }  from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
 
-
+import {
+  AiFillStar as StarIcon,
+} from "react-icons/ai";
 {/*
 the props.data will contain:
-- background: 'rgb(33, 150, 243)'
-- date
-- iconBackground
-- iconColor
-- icon:
-- h3
-- h4
-- p
+- event_id
+V - header
+V - text
+- link
+V - event_time
+X - insertion_time
+- create_user
+V - text_color
+V - background_color
+V- frame_color
+V - icon_color
+V- icon
 
- more will later.
 */}
 class DataEvent extends React.Component {
 
@@ -23,18 +28,20 @@ class DataEvent extends React.Component {
         return (
             <VerticalTimelineElement
             className="vertical-timeline-element--work"
-            contentStyle={{ background: this.props.data.background, color: '#fff' }}
-            contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
-            date={this.props.data.date}
-            iconStyle={{ background: this.props.data.iconBackground, color: this.props.data.iconColor }}
-            icon={this.props.data.icon}
+            contentStyle={{
+                background: this.props.data.background_color,
+                color: this.props.data.text_color,
+            borderTop: `3px solid ${this.props.data.frame_color}`}}
+            contentArrowStyle={{ borderRight: `7px solid  ${this.props.data.background_color}` }}
+            date={this.props.data.event_time}
+            iconStyle={{ background: this.props.data.frame_color, color: this.props.data.icon_color }}
+            icon={<StarIcon/>}
 
           >
-            <h3 className="vertical-timeline-element-title">this.props.data.h3</h3>
-            <h4 className="vertical-timeline-element-subtitle">this.props.data.h4</h4>
-            <p>
-              this.props.data.p
-            </p>
+            <h1 className="vertical-timeline-element-title">{this.props.data.header}</h1>
+            <h4>
+                {this.props.data.text}
+            </h4>
           </VerticalTimelineElement>
 
         );
