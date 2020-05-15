@@ -13,17 +13,16 @@ import {Tag} from 'antd';
 import DataEvent from './dataEvent/dataEventComponent'
 
 
-
 const base_url = "http://itsoffer:5005/api/timeline/";
 const data1 = {
-    background: 'rgb(255, 255, 255)',
-    date: "2011 - present",
-    iconBackground: 'rgb(33, 150, 243)',
-    iconColor: '#fff',
+    background_color: 'rgb(255, 255, 255)',
+    event_time: "2011 - present",
+    frame_color: 'rgb(33, 150, 0)',
+    text_color: '#f00',
+    icon_color: '#fff',
     icon: <WorkIcon />,
-    h3: "Creative Director",
-    h4: "Miami, FL",
-    p: "check my dataEvent component"
+    header: "Creative Director",
+    text: "check my dataEvent component"
 };
 
 class Timeline extends React.Component {
