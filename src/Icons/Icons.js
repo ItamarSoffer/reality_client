@@ -9,6 +9,7 @@ import {
   AiFillStar as StarIcon,
 } from "react-icons/ai";
 import { FaLightbulb, FaPython } from "react-icons/fa";
+
 const TimelineIcons = {
     "work": <WorkIcon/>,
     "school": <SchoolIcon/>,
@@ -20,4 +21,4 @@ const TimelineIcons = {
     "globe": <MdLanguage/>
 };
 
-export default TimelineIcons
+export default {TimelineIcons};
