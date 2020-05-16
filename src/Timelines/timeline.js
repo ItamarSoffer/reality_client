@@ -8,8 +8,9 @@ import {
   AiFillStar as StarIcon,
 } from "react-icons/ai";
 import axios from 'axios';
-import {Tag} from 'antd';
-import DataEvent from '../DataEvent/dataEventComponent'
+import {Tag, Layout} from 'antd';
+import DataEvent from '../DataEvent/dataEventComponent';
+import SideMenu from '../SideMenu/SideMenu';
 
 
 const base_url = "http://itsoffer:5005/api/timeline/";
@@ -60,10 +61,16 @@ class Timeline extends React.Component {
                 //returns the timeline.
 
             return (
+                <Layout style={{ minHeight: '100vh' }} >
+
+                          <SideMenu />
+                  <Layout>
+
                 <div
                     style={{
                         backgroundColor: '#ccc',
                     }}>
+
                     <h2>{this.props.match.params.timeline_url}</h2>
 
 
@@ -189,7 +196,9 @@ class Timeline extends React.Component {
 
                     </VerticalTimeline>
                 </div>
+                  </Layout>
 
+                </Layout>
 
             );
         }
