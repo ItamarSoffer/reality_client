@@ -21,4 +21,4 @@ const TimelineIcons = {
     "globe": <MdLanguage/>
 };
 
-export default {TimelineIcons};
+export default TimelineIcons;
