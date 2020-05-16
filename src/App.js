@@ -11,6 +11,8 @@ import BaseTimeline from './Timelines/base_timeline';
 import Home from './HomePage/ReactHome';
 import EventForm from './AddEvent/AddEvent';
 import LoginForm from './login/login_form';
+import SideMenuDemo from './SideMenu/OriginalSideMenu';
+
 import './App.css';
 import 'antd/dist/antd.css';
 import './login/adds_atnd.css'
@@ -42,7 +44,9 @@ function App() {
 		</nav>
 
 	<Switch>
-
+		<Route path="/side_menu">
+			<SideMenuDemo />
+		</Route>
 		<Route path="/timeline/:timeline_url"
 		component={Timeline}/>
 
