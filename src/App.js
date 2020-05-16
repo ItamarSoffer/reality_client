@@ -6,10 +6,10 @@ import {
     Link
 } from "react-router-dom";
 
-import Timeline from './timeline';
-import BaseTimeline from './base_timeline';
-import Home from './ReactHome';
-import EventForm from './addevent';
+import Timeline from './Timelines/timeline';
+import BaseTimeline from './Timelines/base_timeline';
+import Home from './HomePage/ReactHome';
+import EventForm from './AddEvent/AddEvent';
 import LoginForm from './login/login_form';
 import './App.css';
 import 'antd/dist/antd.css';
@@ -45,6 +45,7 @@ function App() {
 
 		<Route path="/timeline/:timeline_url"
 		component={Timeline}/>
+
 
 
 		<Route path="/base_timeline">

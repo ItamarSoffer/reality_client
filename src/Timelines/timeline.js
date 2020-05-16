@@ -1,7 +1,6 @@
 import React from 'react';
 import { VerticalTimeline, VerticalTimelineElement }  from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
-import './main.css';
 import {
   MdWork as WorkIcon,
   MdSchool as SchoolIcon  } from "react-icons/md";
@@ -10,7 +9,7 @@ import {
 } from "react-icons/ai";
 import axios from 'axios';
 import {Tag} from 'antd';
-import DataEvent from './dataEvent/dataEventComponent'
+import DataEvent from '../DataEvent/dataEventComponent'
 
 
 const base_url = "http://itsoffer:5005/api/timeline/";
