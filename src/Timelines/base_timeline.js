@@ -11,7 +11,19 @@ import {
 
 import {Tag} from 'antd';
 import TimelineIcons from '../Icons/Icons'
+import DataEvent from "../DataEvent/dataEventComponent";
 
+
+const data1 = {
+    background_color: 'rgb(255, 255, 255)',
+    event_time: "2011 - present",
+    frame_color: 'rgb(33, 150, 0)',
+    text_color: '#f00',
+    icon_color: '#fff',
+    icon: <WorkIcon />,
+    header: "Creative Director",
+    text: "check my dataEvent component"
+};
 
 class BaseTimeline extends React.Component {
 
@@ -135,6 +147,7 @@ class BaseTimeline extends React.Component {
             iconStyle={{ background: 'rgb(16, 204, 82)', color: '#fff' }}
             icon={<StarIcon />}
           />
+          <DataEvent data={data1}/>
 
         </VerticalTimeline>
               </div>
