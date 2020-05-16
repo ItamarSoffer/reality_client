@@ -1,10 +1,9 @@
 import React from 'react';
 import { VerticalTimelineElement }  from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
+import TimelineIcons from '../Icons/Icons'
 
-import {
-  AiFillStar as StarIcon,
-} from "react-icons/ai";
+
 {/*
 the props.data will contain:
 - event_id
@@ -35,7 +34,7 @@ class DataEvent extends React.Component {
             contentArrowStyle={{ borderRight: `7px solid  ${this.props.data.background_color}` }}
             date={this.props.data.event_time}
             iconStyle={{ background: this.props.data.frame_color, color: this.props.data.icon_color }}
-            icon={<StarIcon/>}
+            icon={TimelineIcons[this.props.data.icon]}
 
           >
             <h1 className="vertical-timeline-element-title">{this.props.data.header}</h1>

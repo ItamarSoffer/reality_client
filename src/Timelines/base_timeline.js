@@ -10,6 +10,7 @@ import {
 } from "react-icons/ai";
 
 import {Tag} from 'antd';
+import TimelineIcons from '../Icons/Icons'
 
 
 class BaseTimeline extends React.Component {
@@ -45,7 +46,7 @@ class BaseTimeline extends React.Component {
             className="vertical-timeline-element--work"
             date="2010 - 2011"
             iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
-            icon={<WorkIcon />}
+            icon={TimelineIcons["python"]}
 
           >
             <h3 className="vertical-timeline-element-title">Art Director</h3>
