@@ -5,7 +5,6 @@ import 'react-vertical-timeline-component/style.min.css';
 import axios from 'axios';
 import {Tag, Layout} from 'antd';
 import DataEvent from '../DataEvent/dataEventComponent';
-import SideMenu from '../SideMenu/SideMenu';
 
 
 const base_url = "http://itsoffer:5005/api/timeline/";
