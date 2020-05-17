@@ -1,13 +1,6 @@
 import React from 'react';
 import { Layout, Menu, Switch } from 'antd';
 import {
-  DesktopOutlined,
-  PieChartOutlined,
-  FileOutlined,
-  TeamOutlined,
-  UserOutlined,
-} from '@ant-design/icons';
-import {
 
     Link
 } from "react-router-dom";
@@ -55,6 +48,7 @@ class SideMenu extends React.Component {
               theme={this.state.theme}
               mode="inline"
               defaultSelectedKeys={['1']}
+              selectable={false}
           >
             <SubMenu key="sub1" icon={MenuIcons['user']} title="Development">
               <Menu.Item key="s1">
@@ -78,6 +72,11 @@ class SideMenu extends React.Component {
             <Menu.Item key="Home" icon={MenuIcons['piechart']}>
               <Link to="/"> Home </Link>
             </Menu.Item>
+
+              <Menu.Item key="s4" icon={MenuIcons['appstore']}>
+                <Link to="/all"> All cards</Link>
+              </Menu.Item>
+
 
             <Menu.Item key="my_timelines" icon={MenuIcons['piechart']}>
               My Timelines

@@ -1,10 +1,11 @@
 import React from 'react';
 import {
-  DesktopOutlined,
-  PieChartOutlined,
-  FileOutlined,
-  TeamOutlined,
-  UserOutlined,
+    DesktopOutlined,
+    PieChartOutlined,
+    FileOutlined,
+    TeamOutlined,
+    UserOutlined,
+    AppstoreOutlined
 } from '@ant-design/icons';
 
 export const MenuIcons = {
@@ -12,6 +13,7 @@ export const MenuIcons = {
     "file": <FileOutlined/>,
     "piechart": <PieChartOutlined/>,
     "team": <TeamOutlined/>,
-    "user": <UserOutlined/>
+    "user": <UserOutlined/>,
+    "appstore":<AppstoreOutlined />
 };
 export default MenuIcons;
