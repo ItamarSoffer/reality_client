@@ -9,10 +9,10 @@ the props.data will contain:
 - event_id
 V - header
 V - text
-- link
+TODO: - link
 V - event_time
 X - insertion_time
-- create_user
+TODO: - create_user
 V - text_color
 V - background_color
 V- frame_color
@@ -26,6 +26,7 @@ class DataEvent extends React.Component {
         console.log("rendered me");
         return (
             <VerticalTimelineElement
+                id={this.props.data.event_id}
             className="vertical-timeline-element--work"
             contentStyle={{
                 background: this.props.data.background_color,
