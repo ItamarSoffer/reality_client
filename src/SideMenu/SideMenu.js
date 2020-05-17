@@ -7,6 +7,10 @@ import {
   TeamOutlined,
   UserOutlined,
 } from '@ant-design/icons';
+import {
+
+    Link
+} from "react-router-dom";
 
 import MenuIcons from '../Icons/MenuIcons';
 
@@ -39,7 +43,8 @@ class SideMenu extends React.Component {
 
   render() {
     return (
-        <Sider collapsible
+        <Sider selectable={false}
+            collapsible
                collapsed={this.state.collapsed}
                onCollapse={this.onCollapse}
                style={{background: this.state.menuBackground,
@@ -52,36 +57,35 @@ class SideMenu extends React.Component {
               defaultSelectedKeys={['1']}
           >
             <SubMenu key="sub1" icon={MenuIcons['user']} title="Development">
-              <Menu.Item key="3">Tom</Menu.Item>
-              <Menu.Item key="4">Bill</Menu.Item>
-              <Menu.Item key="5">Alex</Menu.Item>
+              <Menu.Item key="s1">
+				<Link to="/base_timeline"> Base Timeline </Link>
+              </Menu.Item>
+
+              <Menu.Item key="s2">
+                <Link to="/add"> Add new</Link>
+              </Menu.Item>
+
+              <Menu.Item key="s3">
+                <Link to="/login"> Login Form</Link>
+              </Menu.Item>
+
+              <Menu.Item key="s4">
+                <Link to="/all"> All cards</Link>
+              </Menu.Item>
+
             </SubMenu>
+
+            <Menu.Item key="Home" icon={MenuIcons['piechart']}>
+              <Link to="/"> Home </Link>
+            </Menu.Item>
+
             <Menu.Item key="my_timelines" icon={MenuIcons['piechart']}>
               My Timelines
             </Menu.Item>
-            <Menu.Item key="Home" icon={MenuIcons['piechart']}>
-              Home
-            </Menu.Item>
             <Menu.Item key="Logout" icon={MenuIcons['piechart']}>
-              Logout
+              Logout- not
             </Menu.Item>
 
-            <Menu.Item key="1" icon={MenuIcons['piechart']}>
-              Option 1
-            </Menu.Item>
-            <Menu.Item key="2" icon={MenuIcons['desktop']}>
-              Option 2
-            </Menu.Item>
-            <SubMenu key="sub1" icon={MenuIcons['user']} title="User">
-              <Menu.Item key="3">Tom</Menu.Item>
-              <Menu.Item key="4">Bill</Menu.Item>
-              <Menu.Item key="5">Alex</Menu.Item>
-            </SubMenu>
-            <SubMenu key="sub2" icon={MenuIcons['team']} title="Team">
-              <Menu.Item key="6">Team 1</Menu.Item>
-              <Menu.Item key="8">Team 2</Menu.Item>
-            </SubMenu>
-            <Menu.Item key="9" icon={<FileOutlined />} />
           </Menu>
             <br/>
             <Switch
