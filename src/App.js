@@ -8,12 +8,12 @@ import {
 
 
 import BaseTimeline from './Timelines/base_timeline';
-import EventForm from './AddEvent/AddEvent';
 import LoginForm from './login/login_form';
 import SideMenuDemo from './SideMenu/OriginalSideMenu';
 import RealityPage from './page/RealityPage';
 import HomePage from './page/HomePage';
 import CardsPage from './page/CardsPage';
+import NewTimelinePage from './page/NewTimelinePage';
 
 
 
@@ -64,8 +64,8 @@ function App() {
 		</Route>
 
 
-		<Route path="/add">
-		<EventForm />
+		<Route path="/new_timeline">
+		<NewTimelinePage/>
 		</Route>
 
 		<Route path="/login">

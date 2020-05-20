@@ -56,7 +56,7 @@ class SideMenu extends React.Component {
               </Menu.Item>
 
               <Menu.Item key="s2">
-                <Link to="/add"> Add new</Link>
+                <Link to="/new_timeline"> Create New Timeline</Link>
               </Menu.Item>
 
               <Menu.Item key="s3">
