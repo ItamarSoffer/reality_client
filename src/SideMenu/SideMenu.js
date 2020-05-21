@@ -1,17 +1,15 @@
 import React from 'react';
 import { Layout, Menu, Switch } from 'antd';
 import {
-
-    Link
+  Redirect,
+    Link,
+    withRouter
 } from "react-router-dom";
 
 import MenuIcons from '../Icons/MenuIcons';
 
-
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
-
-
 
 class SideMenu extends React.Component {
   state = {
@@ -67,18 +65,42 @@ class SideMenu extends React.Component {
                 <Link to="/all"> All cards</Link>
               </Menu.Item>
 
-            </SubMenu>
-
-            <Menu.Item key="Home" icon={MenuIcons['piechart']}>
-              <Link to="/"> Home </Link>
-            </Menu.Item>
-
-              <Menu.Item key="s4" icon={MenuIcons['appstore']}>
-                <Link to="/all"> All cards</Link>
+              <Menu.Item key="s4">
+                <Link to="/New_Event"> New Event</Link>
               </Menu.Item>
 
 
-            <Menu.Item key="my_timelines" icon={MenuIcons['piechart']}>
+            </SubMenu>
+
+            <Menu.Item key="Home" icon={MenuIcons['piechart']}
+                            onClick={() => {this.props.history.push({
+            pathname: `/home/`,
+        });
+      }}>
+              <Link to="/"> Home </Link>
+            </Menu.Item>
+
+            <Menu.Item key="s4" icon={MenuIcons['appstore']}
+                            onClick={() => {this.props.history.push({
+            pathname: `/all/`,
+        });
+      }}>
+              <Link to="/all"> All cards</Link>
+            </Menu.Item>
+
+            <Menu.Item
+                key="new"
+                icon={MenuIcons['nodeindex']}
+                onClick={() => {this.props.history.push({
+            pathname: `/new_timeline/`,
+        });
+      }}
+            >
+              <Link to="/new_timeline"> New Timeline</Link>
+            </Menu.Item>
+
+            <Menu.Item key="my_timelines" icon={MenuIcons['piechart']}
+            >
               My Timelines
             </Menu.Item>
             <Menu.Item key="Logout" icon={MenuIcons['piechart']}>
@@ -100,4 +122,4 @@ class SideMenu extends React.Component {
   }
 }
 
-export default SideMenu;
+export default withRouter(SideMenu);
