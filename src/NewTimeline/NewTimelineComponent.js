@@ -2,6 +2,7 @@ import React from 'react';
 import {Form, Input, Button, Card, Modal, message, Space} from 'antd';
 import 'antd/dist/antd.css';
 import axios from "axios";
+import { withRouter } from "react-router-dom";
 
 const layout = {
   labelCol: { span: 8 },
@@ -25,14 +26,11 @@ class CreateNewTimeline extends React.Component {
     }
 
     onFinish = values => {
-        if (values.timeline_url.length <= 4){
-            message.error("URL must me al least 3 chars!")
+
+        if (values.timeline_url.length <= 3){
+            message.error("URL must be al least 3 chars!")
         }
         else {
-
-
-
-
     console.log('Received values from form: ', values);
      axios.post(api_create_timeline, {
              create_user: values.create_user,
@@ -40,14 +38,22 @@ class CreateNewTimeline extends React.Component {
              name: values.timeline_title,
              url: values.timeline_url
      })
+
          .then((response) => {
   console.log("resp", response);
   if (response.status === 201){
       message.warning(response.data)
   }
-  if (response.status === 200){
-      message.success(response.data)
-      
+  else if (response.status === 200){
+  message.success(response.data)
+      .then(() => {
+      return message.loading('redirecting', 1);
+  })
+      .then(() => {this.props.history.push({
+            pathname: `/timeline/`.concat(values.timeline_url),
+        });
+      })
+
   }
 }, (error) => {
   console.log("error", error);
@@ -67,6 +73,7 @@ class CreateNewTimeline extends React.Component {
   };
 
     render() {
+
         return (
             <div
       style={{
@@ -138,4 +145,4 @@ class CreateNewTimeline extends React.Component {
 
 }
 
-export default CreateNewTimeline
+export default withRouter(CreateNewTimeline)
