@@ -5,7 +5,8 @@ import {
     FileOutlined,
     TeamOutlined,
     UserOutlined,
-    AppstoreOutlined
+    AppstoreOutlined,
+    NodeIndexOutlined
 } from '@ant-design/icons';
 
 export const MenuIcons = {
@@ -14,6 +15,7 @@ export const MenuIcons = {
     "piechart": <PieChartOutlined/>,
     "team": <TeamOutlined/>,
     "user": <UserOutlined/>,
-    "appstore":<AppstoreOutlined />
+    "appstore":<AppstoreOutlined />,
+    "nodeindex": <NodeIndexOutlined />
 };
 export default MenuIcons;
