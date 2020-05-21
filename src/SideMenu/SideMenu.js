@@ -15,7 +15,7 @@ const { SubMenu } = Menu;
 
 class SideMenu extends React.Component {
   state = {
-    collapsed: false,
+    collapsed: true,
     theme: 'dark',
     menuBackground: 'rgb(0,21,41)'
 

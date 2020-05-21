@@ -40,9 +40,9 @@ class RealityCard extends React.Component{
             <EllipsisOutlined key="ellipsis" style={{borderRadius: '8px'}}/>,
           ]}>
 				<Link to={this.timeline_url}>
-                     <h2 style={{color: '#1890ff'}}>{this.props.cardData.name} </h2></Link>
-      <p>Card content</p>
-      <p>Card content</p>
+                     <h2 style={{color: '#1890ff'}}>{this.props.cardData.name} </h2>
+				</Link>
+            <h4>{this.props.cardData.description}</h4>
       <p>Created by: {this.props.cardData.create_user}</p>
         </Card>
 
