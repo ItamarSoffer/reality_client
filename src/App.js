@@ -20,7 +20,8 @@ import NewTimelinePage from './page/NewTimelinePage';
 import './App.css';
 import 'antd/dist/antd.css';
 import './login/adds_atnd.css'
-import './main.css' // ??
+import './main.css'
+import CreateNewEvent from "./NewEvent/NewEventComponent"; // ??
 
 
 function App() {
@@ -63,6 +64,9 @@ function App() {
 		<CardsPage />
 		</Route>
 
+		<Route path="/new_event">
+		<CreateNewEvent />
+		</Route>
 
 		<Route path="/new_timeline">
 		<NewTimelinePage/>

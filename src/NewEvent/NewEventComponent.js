@@ -1,6 +1,11 @@
 import React from 'react';
-import {Form, Input, Button, Card, Modal} from 'antd';
+import {Form, Input, Button, Card, Modal, DatePicker, TimePicker, ConfigProvider, Select} from 'antd';
 import 'antd/dist/antd.css';
+import {UserOutlined} from '@ant-design/icons';
+import IconsSelect from '../Icons/IconsSelect';
+
+const { TextArea } = Input;
+
 
 
 
@@ -31,43 +36,94 @@ class CreateNewEvent extends React.Component {
     return (
       <div>
         <Button type="primary" onClick={this.showModal}>
-          New Timeline
+          New Event
         </Button>
+          <ConfigProvider direction={"rtl"}>
         <Modal
-          title="New Timeline"
+          title="אירוע חדש"
           visible={this.state.visible}
           onOk={this.handleOk}
           onCancel={this.handleCancel}
-            okText="Create"
-          cancelText="Cancel"
+            okText="צור אירוע"
+          cancelText="בטל"
+          style={{
+  borderRadius: '16px',
+        }}
         >
             <Form>
-                                <Form.Item
+                <Form.Item
                     className="title-form"
-                    label="Title"
+                    // label="כותרת"
                     name="Title"
                     rules={[{
                         required: true,
-                        message: 'Timeline Title' }]}
+                        message: 'Event Title' }]}
                 >
-                    <Input />
+                    <Input direction="rtl" placeholder={"כותרת"} />
                 </Form.Item>
+
 
                 <Form.Item
                     className="link-form"
-                    label="Link"
-                    name="Link"
+                    //label="תאריך"
+                    name="date"
                     rules={[{
                         required: true,
-                        message: 'Timeline Uniq URL' }]}
+                        message: 'Event date' }]}
                 >
-                    <Input />
+                    <DatePicker placeholder={"תאריך"} />
+                </Form.Item>
+                <Form.Item
+                    className="link-form"
+                    //label="שעה"
+                    name="time"
+                    rules={[{
+                        message: 'Event hour' }]}
+                >
+                    <TimePicker placeholder={"שעה"}/>
+                </Form.Item>
+                <Form.Item
+                    className="link-form"
+                    //label="קישור"
+                    name="Link"
+                    rules={[{
+                        message: 'Event link' }]}
+                >
+                    <Input placeholder={"קישור"}/>
+                </Form.Item>
+                <Form.Item
+                    className="link-form"
+                    //label="תוכן"
+                    name="text"
+                    rules={[{
+                        message: 'Event content' }]}
+                >
+                    <TextArea rows={3} placeholder={"תוכן האירוע"}/>
+                </Form.Item>
+                <Form.Item
+                    className="link-form"
+                    //label="שם משתמש"
+                    name="user"
+                    rules={[{
+                        message: 'Event username' }]}
+                >
+                    <Input
+                        placeholder="יוצר האירוע"
+                        prefix={<UserOutlined className="site-form-item-icon" />}
+                    />
+                </Form.Item>
+                <Form.Item
+                    className="link-form"
+                    //label="אייקון"
+                    name="icon"
+                    rules={[{
+                        message: 'Event Icon' }]}
+                >
+                <IconsSelect/>
                 </Form.Item>
             </Form>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
         </Modal>
+          </ConfigProvider>
       </div>
     );
   }
