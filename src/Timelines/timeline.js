@@ -45,7 +45,7 @@ class Timeline extends React.Component {
                 <div
                     style={{backgroundColor: '#ccc'}}>
 
-                    <h2>{this.props.url}</h2>
+                    <h1>{this.props.url}</h1>
                     <VerticalTimeline
                         style={{background: '#f00'}}>
                         {this.state.timeline_events.map(
