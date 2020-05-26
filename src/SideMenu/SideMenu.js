@@ -34,6 +34,7 @@ class SideMenu extends React.Component {
 
   render() {
     return (
+
         <Sider selectable={false}
             collapsible
                collapsed={this.state.collapsed}
@@ -103,11 +104,20 @@ class SideMenu extends React.Component {
             >
               My Timelines
             </Menu.Item>
-            <Menu.Item key="Logout" icon={MenuIcons['piechart']}>
+
+            <Menu.Item key="addEvent" icon={MenuIcons['piechart']}>
               Logout- not
             </Menu.Item>
 
+              {this.props.url
+        ? <Menu.Item key="Logout" icon={MenuIcons['deployment']}>
+                      <Link to={this.props.url.concat("/add")}> Add Event</Link>
+            </Menu.Item>
+        : null
+      }
+
           </Menu>
+            <br/>
             <br/>
             <Switch
           checked={this.state.theme === 'dark'}
@@ -115,6 +125,7 @@ class SideMenu extends React.Component {
           checkedChildren="Dark"
           unCheckedChildren="Light"
         />
+
         </Sider>
 
 

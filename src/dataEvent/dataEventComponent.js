@@ -33,15 +33,19 @@ class DataEvent extends React.Component {
                 color: this.props.data.text_color,
             borderTop: `3px solid ${this.props.data.frame_color}`}}
             contentArrowStyle={{ borderRight: `7px solid  ${this.props.data.background_color}` }}
-            date={this.props.data.event_time}
             iconStyle={{ background: this.props.data.frame_color, color: this.props.data.icon_color }}
             icon={TimelineIcons[this.props.data.icon]}
 
-          >
-            <h1 className="vertical-timeline-element-title">{this.props.data.header}</h1>
-            <h4>
+            date={this.props.data.event_time}
+
+          >{this.props.data.header ?
+            <h1 className="vertical-timeline-element-title">{this.props.data.header}</h1>: null }
+            {this.props.data.text ?
+                <h4>
                 {this.props.data.text}
-            </h4>
+            </h4>: null}
+                {this.props.data.link ?
+                    <a href={this.props.data.link}>{this.props.data.link}</a>: null}
           </VerticalTimelineElement>
 
         );
