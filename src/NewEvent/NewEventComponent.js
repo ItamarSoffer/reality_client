@@ -1,11 +1,11 @@
 import React from 'react';
-import {Form, Input, Button, Card, Modal, DatePicker, TimePicker, ConfigProvider, Select} from 'antd';
+import {Form, Input, Button, Card, Modal, DatePicker, TimePicker, ConfigProvider, Select, message} from 'antd';
 import 'antd/dist/antd.css';
 import {UserOutlined} from '@ant-design/icons';
 import IconsSelect from '../Icons/IconsSelect';
-
+import axios from "axios";
+import formatDate from '../Utils/DateFunctions';
 const { TextArea } = Input;
-
 
 
 
@@ -32,6 +32,39 @@ class CreateNewEvent extends React.Component {
     });
   };
 
+  onFinish = values => {
+      const api_add_event = `http://localhost:5005/api/timeline/${this.props.url}/add`;
+      console.log("FINITO", values);
+      console.log("SENDS TO", api_add_event);
+      console.log(formatDate(values.date));
+      axios.post(api_add_event, {
+  "header": values.title,
+  "text": values.text,
+  "date": "2020-05-23",
+//  "frame_color": values.color,
+  "icon": values.icon,
+  "link": values.link,
+  "user": values.user
+})
+         .then((response) => {
+  console.log("resp", response);
+  if (response.status === 201){
+      message.warning(response.data)
+  }
+  else if (response.status === 200){
+  message.success(response.data, 1.5)
+      .then(() => {
+      return message.loading('redirecting', 1);
+  })
+  }
+  })
+  };
+
+  onFinishFailed = errorInfo => {
+    console.log('Failed:', errorInfo);
+    message.error('Missing fields!')
+  };
+
   render() {
     return (
       <div>
@@ -46,20 +79,44 @@ class CreateNewEvent extends React.Component {
           onCancel={this.handleCancel}
             okText="צור אירוע"
           cancelText="בטל"
+          footer={[<Button type="default"  key="close" onClick={this.handleCancel}>
+            Cancel
+        </Button>,
+        <Button type="primary" form="add_event_form" key="submit" htmlType="submit">
+            Add Event
+        </Button>
+
+
+        ]}
           style={{
   borderRadius: '16px',
         }}
         >
-            <Form>
+            <Form
+                id={"add_event_form"}
+                onFinish={this.onFinish}
+                onFinishFailed={this.onFinishFailed}
+
+>
+                {/*<Form.Item*/}
+                {/*    className="title-form"*/}
+                {/*    // label="כותרת"*/}
+                {/*    name="url"*/}
+                {/*    rules={[{*/}
+                {/*        required: true,*/}
+                {/*        message: 'Event Title' }]}*/}
+                {/*>*/}
+                {/*    <Input placeholder={"url"} />*/}
+                {/*</Form.Item>*/}
                 <Form.Item
                     className="title-form"
                     // label="כותרת"
-                    name="Title"
+                    name="title"
                     rules={[{
                         required: true,
                         message: 'Event Title' }]}
                 >
-                    <Input direction="rtl" placeholder={"כותרת"} />
+                    <Input placeholder={"כותרת"} />
                 </Form.Item>
 
 
@@ -85,7 +142,7 @@ class CreateNewEvent extends React.Component {
                 <Form.Item
                     className="link-form"
                     //label="קישור"
-                    name="Link"
+                    name="link"
                     rules={[{
                         message: 'Event link' }]}
                 >
@@ -96,6 +153,7 @@ class CreateNewEvent extends React.Component {
                     //label="תוכן"
                     name="text"
                     rules={[{
+                        required: true,
                         message: 'Event content' }]}
                 >
                     <TextArea rows={3} placeholder={"תוכן האירוע"}/>
@@ -105,6 +163,7 @@ class CreateNewEvent extends React.Component {
                     //label="שם משתמש"
                     name="user"
                     rules={[{
+                        required: true,
                         message: 'Event username' }]}
                 >
                     <Input
@@ -128,4 +187,5 @@ class CreateNewEvent extends React.Component {
     );
   }
 }
-export default CreateNewEvent
+
+export default CreateNewEvent;

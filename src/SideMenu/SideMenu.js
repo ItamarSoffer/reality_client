@@ -105,9 +105,7 @@ class SideMenu extends React.Component {
               My Timelines
             </Menu.Item>
 
-            <Menu.Item key="addEvent" icon={MenuIcons['piechart']}>
-              Logout- not
-            </Menu.Item>
+
 
               {this.props.url
         ? <Menu.Item key="Logout" icon={MenuIcons['deployment']}>
@@ -115,6 +113,9 @@ class SideMenu extends React.Component {
             </Menu.Item>
         : null
       }
+      <Menu.Item key="addEvent" icon={MenuIcons['piechart']}>
+              Logout- not
+            </Menu.Item>
 
           </Menu>
             <br/>
