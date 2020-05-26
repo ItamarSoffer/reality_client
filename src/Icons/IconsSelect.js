@@ -30,8 +30,8 @@ onSearch(val) {
         return(
 <Select
     labelInValue
-    defaultValue={{ key: 'lucy' }}
-    style={{ width: 120 }}
+    placeholder={"icon"}
+    style={{ width: 80 }}
     onChange={this.handleChange}
   >
 
