@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Menu, Switch } from 'antd';
+import { Layout, Menu} from 'antd';
 import {
   AppstoreOutlined,
   BarChartOutlined,

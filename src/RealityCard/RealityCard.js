@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card, Col, Menu, Row} from 'antd';
+import {Card } from 'antd';
 import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
 import { Link } from "react-router-dom";
 /*
@@ -10,12 +10,6 @@ The Reality card will get a data as prop with the the following things:
 - create user
  */
 
-const cardData = {
-    "name": "my test- ציר זמן ראשון",
-    "url": "base",
-    "id": "2525",
-    "create_user":"itamar"
-};
 
 class RealityCard extends React.Component{
      timeline_url = "/timeline/".concat(this.props.cardData.url);

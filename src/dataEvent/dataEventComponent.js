@@ -4,22 +4,6 @@ import 'react-vertical-timeline-component/style.min.css';
 import TimelineIcons from '../Icons/Icons'
 
 
-{/*
-the props.data will contain:
-- event_id
-V - header
-V - text
-TODO: - link
-V - event_time
-X - insertion_time
-TODO: - create_user
-V - text_color
-V - background_color
-V- frame_color
-V - icon_color
-V- icon
-
-*/}
 class DataEvent extends React.Component {
 
     render() {

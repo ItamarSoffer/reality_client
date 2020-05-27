@@ -1,16 +1,13 @@
 import React from 'react';
-import {Form, Input, Button, Modal, DatePicker, TimePicker, ConfigProvider, Select, message} from 'antd';
+import {Form, Input, Button, Modal, DatePicker, TimePicker, ConfigProvider, message} from 'antd';
 import 'antd/dist/antd.css';
 import {UserOutlined} from '@ant-design/icons';
 import axios from "axios"
-import TimelineIcons from "../Icons/Icons";
 import IconsSelect from '../Icons/IconsSelect';
 import ColorPicker from '../ColorPicker/ColorPicker';
 
 
-
 const { TextArea } = Input;
-const { Option } = Select;
 
 
 class CreateNewEvent extends React.Component {

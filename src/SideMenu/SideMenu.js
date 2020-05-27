@@ -1,14 +1,13 @@
 import React from 'react';
 import { Layout, Menu, Switch } from 'antd';
 import {
-  Redirect,
     Link,
     withRouter
 } from "react-router-dom";
 
 import MenuIcons from '../Icons/MenuIcons';
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Sider } = Layout;
 const { SubMenu } = Menu;
 
 class SideMenu extends React.Component {
