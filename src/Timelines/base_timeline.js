@@ -139,8 +139,8 @@ class BaseTimeline extends React.Component {
             <h2 className="vertical-timeline-element-title">האם זה יעשה עברית יפה? כותרת 2</h2>
             <h3 className="vertical-timeline-element-title">האם זה יעשה עברית יפה? כותרת 3</h3>
             <h4 className="vertical-timeline-element-subtitle">ומה יקרה פה? כותרת 4</h4>
-            <p>
-              Creative Direction, Visual Design
+            <p style={{whiteSpace:"pre"}}>
+                {'Creative Direction, Visual Design bogo bogo\nbobo bobo\ncolo colo'}
             </p>
           </VerticalTimelineElement>
           <VerticalTimelineElement

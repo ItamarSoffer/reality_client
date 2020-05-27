@@ -39,11 +39,11 @@ class DataEvent extends React.Component {
             date={this.props.data.event_time}
 
           >{this.props.data.header ?
-            <h1 className="vertical-timeline-element-title">{this.props.data.header}</h1>: null }
+            <h2 className="vertical-timeline-element-title">{this.props.data.header}</h2>: null }
             {this.props.data.text ?
-                <h4>
+                <p style={{whiteSpace:"pre"}}>
                 {this.props.data.text}
-            </h4>: null}
+            </p>: null}
                 {this.props.data.link ?
                     <a href={this.props.data.link}>{this.props.data.link}</a>: null}
           </VerticalTimelineElement>
