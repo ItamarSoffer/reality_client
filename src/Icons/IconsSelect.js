@@ -4,7 +4,7 @@ import TimelineIcons from './Icons';
 
 const { Option } = Select;
 
-
+// non used component
 class IconsSelect extends React.Component {
     handleChange(value) {
   console.log(value); // { key: "lucy", label: "Lucy (101)" }
@@ -29,16 +29,16 @@ onSearch(val) {
 
         return(
 <Select
-    labelInValue
+    //labelInValue
     placeholder={"icon"}
     style={{ width: 80 }}
     onChange={this.handleChange}
   >
 
                 {Object.keys(TimelineIcons).map(
-                        function(key){
+                        function(icon_key){
                             return (
-                                <Option value={key}>{TimelineIcons[key]}</Option>
+                                <Option value={icon_key}>{TimelineIcons[icon_key]}</Option>
                             )
                         }
                     )}

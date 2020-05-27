@@ -5,8 +5,10 @@ import {UserOutlined} from '@ant-design/icons';
 import IconsSelect from '../Icons/IconsSelect';
 import axios from "axios";
 import formatDate from '../Utils/DateFunctions';
+import TimelineIcons from "../Icons/Icons";
 const { TextArea } = Input;
 
+const { Option } = Select;
 
 
 class CreateNewEvent extends React.Component {
@@ -15,6 +17,12 @@ class CreateNewEvent extends React.Component {
   showModal = () => {
     this.setState({
       visible: true,
+    });
+  };
+
+  closeModal = () => {
+    this.setState({
+      visible: false,
     });
   };
 
@@ -36,11 +44,12 @@ class CreateNewEvent extends React.Component {
       const api_add_event = `http://localhost:5005/api/timeline/${this.props.url}/add`;
       console.log("FINITO", values);
       console.log("SENDS TO", api_add_event);
-      console.log(formatDate(values.date));
+      console.log(values.date.format('YYYY-MM-DD'));
       axios.post(api_add_event, {
   "header": values.title,
   "text": values.text,
-  "date": "2020-05-23",
+  "date": values.date.format('YYYY-MM-DD'),
+          "hour":values.hour.format('hh:mm:ss'),
 //  "frame_color": values.color,
   "icon": values.icon,
   "link": values.link,
@@ -54,10 +63,11 @@ class CreateNewEvent extends React.Component {
   else if (response.status === 200){
   message.success(response.data, 1.5)
       .then(() => {
+
       return message.loading('redirecting', 1);
   })
   }
-  })
+  }).then(() => this.closeModal());
   };
 
   onFinishFailed = errorInfo => {
@@ -133,9 +143,7 @@ class CreateNewEvent extends React.Component {
                 <Form.Item
                     className="link-form"
                     //label="שעה"
-                    name="time"
-                    rules={[{
-                        message: 'Event hour' }]}
+                    name="hour"
                 >
                     <TimePicker placeholder={"שעה"}/>
                 </Form.Item>
@@ -178,7 +186,22 @@ class CreateNewEvent extends React.Component {
                     rules={[{
                         message: 'Event Icon' }]}
                 >
-                <IconsSelect/>
+                    {<Select
+    //labelInValue
+    placeholder={"icon"}
+    style={{ width: 80 }}
+    //onChange={this.handleChange}
+  >
+
+                {Object.keys(TimelineIcons).map(
+                        function(icon_key){
+                            return (
+                                <Option value={icon_key}>{TimelineIcons[icon_key]}</Option>
+                            )
+                        }
+                    )}
+  </Select>
+                    }
                 </Form.Item>
             </Form>
         </Modal>
