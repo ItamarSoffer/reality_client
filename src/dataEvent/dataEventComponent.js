@@ -29,11 +29,11 @@ class DataEvent extends React.Component {
                 id={this.props.data.event_id}
             className="vertical-timeline-element--work"
             contentStyle={{
-                background: this.props.data.background_color,
-                color: this.props.data.text_color,
+                background: 'rgb(255, 255, 255)',
+                color: '#000',
             borderTop: `3px solid ${this.props.data.frame_color}`}}
-            contentArrowStyle={{ borderRight: `7px solid  ${this.props.data.background_color}` }}
-            iconStyle={{ background: this.props.data.frame_color, color: this.props.data.icon_color }}
+            contentArrowStyle={{ borderRight: '7px solid  rgb(255, 255, 255)' }}
+            iconStyle={{ background: this.props.data.frame_color, color: '#fff' }}
             icon={TimelineIcons[this.props.data.icon]}
 
             date={this.props.data.event_time}
@@ -41,7 +41,7 @@ class DataEvent extends React.Component {
           >{this.props.data.header ?
             <h2 className="vertical-timeline-element-title">{this.props.data.header}</h2>: null }
             {this.props.data.text ?
-                <p style={{whiteSpace:"pre"}}>
+                <p style={{whiteSpace:"pre-line"}}>
                 {this.props.data.text}
             </p>: null}
                 {this.props.data.link ?
