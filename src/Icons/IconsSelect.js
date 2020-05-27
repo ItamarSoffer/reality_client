@@ -26,13 +26,14 @@ onSearch(val) {
 }
 
     render() {
+        const {handleIconChange } = this.props;
 
         return(
 <Select
     //labelInValue
     placeholder={"icon"}
     style={{ width: 80 }}
-    onChange={this.handleChange}
+    onChange={value => handleIconChange(value)}
   >
 
                 {Object.keys(TimelineIcons).map(

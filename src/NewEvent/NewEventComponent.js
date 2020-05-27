@@ -1,13 +1,15 @@
 import React from 'react';
-import {Form, Input, Button, Card, Modal, DatePicker, TimePicker, ConfigProvider, Select, message} from 'antd';
+import {Form, Input, Button, Modal, DatePicker, TimePicker, ConfigProvider, Select, message} from 'antd';
 import 'antd/dist/antd.css';
 import {UserOutlined} from '@ant-design/icons';
-import IconsSelect from '../Icons/IconsSelect';
-import axios from "axios";
-import formatDate from '../Utils/DateFunctions';
+import axios from "axios"
 import TimelineIcons from "../Icons/Icons";
-const { TextArea } = Input;
+import IconsSelect from '../Icons/IconsSelect';
+import ColorPicker from '../ColorPicker/ColorPicker';
 
+
+
+const { TextArea } = Input;
 const { Option } = Select;
 
 
@@ -46,14 +48,14 @@ class CreateNewEvent extends React.Component {
       console.log("SENDS TO", api_add_event);
       console.log(values.date.format('YYYY-MM-DD'));
       axios.post(api_add_event, {
-  "header": values.title,
-  "text": values.text,
-  "date": values.date.format('YYYY-MM-DD'),
+          "header": values.title,
+          "text": values.text,
+          "date": values.date.format('YYYY-MM-DD'),
           "hour":values.hour.format('hh:mm:ss'),
-//  "frame_color": values.color,
-  "icon": values.icon,
-  "link": values.link,
-  "user": values.user
+          "frame_color": this.state.color,
+          "icon": this.state.icon,
+          "link": values.link,
+          "user": values.user
 })
          .then((response) => {
   console.log("resp", response);
@@ -73,6 +75,18 @@ class CreateNewEvent extends React.Component {
   onFinishFailed = errorInfo => {
     console.log('Failed:', errorInfo);
     message.error('Missing fields!')
+  };
+
+  onColorChange = (newColor) => {
+      this.setState({
+          color: newColor
+      })
+  };
+
+  onIconChange = (newIcon) => {
+      this.setState({
+          icon: newIcon
+      })
   };
 
   render() {
@@ -186,22 +200,16 @@ class CreateNewEvent extends React.Component {
                     rules={[{
                         message: 'Event Icon' }]}
                 >
-                    {<Select
-    //labelInValue
-    placeholder={"icon"}
-    style={{ width: 80 }}
-    //onChange={this.handleChange}
-  >
-
-                {Object.keys(TimelineIcons).map(
-                        function(icon_key){
-                            return (
-                                <Option value={icon_key}>{TimelineIcons[icon_key]}</Option>
-                            )
-                        }
-                    )}
-  </Select>
-                    }
+                    <IconsSelect handleIconChange={this.onIconChange}/>
+                </Form.Item>
+                 <Form.Item
+                    className="link-form"
+                    //label="צבע"
+                    name="color"
+                    rules={[{
+                        message: 'Event Color' }]}
+                >
+                    <ColorPicker handleColorChange={this.onColorChange}/>
                 </Form.Item>
             </Form>
         </Modal>
@@ -210,5 +218,6 @@ class CreateNewEvent extends React.Component {
     );
   }
 }
+
 
 export default CreateNewEvent;
