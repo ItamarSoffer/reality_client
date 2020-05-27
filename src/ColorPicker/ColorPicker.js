@@ -1,6 +1,6 @@
 import React from 'react';
-import { red, volcano, orange, gold, yellow, lime, green, cyan, blue,
-    geekblue, purple, magenta, grey } from '@ant-design/colors';
+import { red, volcano, orange, gold, yellow, green, cyan, blue,
+    geekblue, purple, magenta } from '@ant-design/colors';
 import { SwatchesPicker } from 'react-color';
 
 const colorPalette = [

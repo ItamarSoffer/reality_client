@@ -5,9 +5,6 @@ import {RotateSpinner} from 'react-spinners-kit';
 
 
 class LoadingComponent extends React.Component{
-    constructor(props){
-        super(props)
-    }
 
     render() {
         return(

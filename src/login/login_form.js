@@ -14,7 +14,9 @@ const LoginForm = () => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-      }}>
+        position: 'absolute', left: '50%', top: '50%',
+        transform: 'translate(-50%, -50%)'
+      }} >
       <Card
       style={{
           width: 400,
@@ -49,7 +51,7 @@ const LoginForm = () => {
           <Checkbox>Remember me</Checkbox>
         </Form.Item>
 
-        <a className="login-form-forgot" href="">
+        <a className="login-form-forgot" href=".">
           Forgot password
         </a>
       </Form.Item>
@@ -58,7 +60,7 @@ const LoginForm = () => {
         <Button type="primary" htmlType="submit" className="login-form-button">
           Log in
         </Button>
-        Or <a href="">register now!</a>
+        Or <a href=".">register now!</a>
       </Form.Item>
     </Form>
           </Card>
