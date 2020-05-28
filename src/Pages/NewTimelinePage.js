@@ -1,7 +1,7 @@
 import React from 'react';
-import SideMenu from '../SideMenu/SideMenu';
+import SideMenu from '../Components/SideMenu/SideMenu';
 import {Layout} from "antd";
-import CreateNewTimeline from '../NewTimeline/NewTimelineComponent';
+import CreateNewTimeline from '../Components/NewTimeline/NewTimelineComponent';
 
 
 class NewTimelinePage extends React.Component{

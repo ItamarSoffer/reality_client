@@ -1,5 +1,5 @@
 import React from 'react';
-import SideMenu from '../SideMenu/SideMenu';
+import SideMenu from '../Components/SideMenu/SideMenu';
 import {Layout} from "antd";
 import CardsGrid from '../RealityCard/CardsGrid'
 import axios from "axios";

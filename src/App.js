@@ -6,21 +6,21 @@ import {
 } from "react-router-dom";
 
 
-import BaseTimeline from './Timelines/base_timeline';
+import BaseTimeline from './Components/Timelines/base_timeline';
 import LoginForm from './login/login_form';
-import SideMenuDemo from './SideMenu/OriginalSideMenu';
-import RealityPage from './page/RealityPage';
-import HomePage from './page/HomePage';
-import CardsPage from './page/CardsPage';
-import NewTimelinePage from './page/NewTimelinePage';
+import SideMenuDemo from './Components/SideMenu/OriginalSideMenu';
+import RealityPage from './Pages/TimelinePage';
+import HomePage from './Pages/HomePage';
+import CardsPage from './Pages/CardsPage';
+import NewTimelinePage from './Pages/NewTimelinePage';
 
 
+import CreateNewEvent from "./Components/NewEvent/NewEventComponent"; // ??
 
 import './App.css';
 import 'antd/dist/antd.css';
 import './login/adds_atnd.css'
 import './main.css'
-import CreateNewEvent from "./NewEvent/NewEventComponent"; // ??
 
 
 function App() {
