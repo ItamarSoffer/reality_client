@@ -1,7 +1,10 @@
 import React from 'react';
 import { VerticalTimelineElement }  from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
-import TimelineIcons from '../Icons/Icons'
+import TimelineIcons from '../Icons/Icons';
+import { Typography, ConfigProvider } from 'antd';
+
+const { Paragraph, Title } = Typography;
 
 
 class DataEvent extends React.Component {
@@ -9,6 +12,7 @@ class DataEvent extends React.Component {
     render() {
         console.log("rendered me");
         return (
+            <ConfigProvider direction={"rtl"} >
             <VerticalTimelineElement
                 id={this.props.data.event_id}
             className="vertical-timeline-element--work"
@@ -22,15 +26,17 @@ class DataEvent extends React.Component {
 
             date={this.props.data.event_time}
 
-          >{this.props.data.header ?
-            <h2 className="vertical-timeline-element-title">{this.props.data.header}</h2>: null }
-            {this.props.data.text ?
-                <p style={{whiteSpace:"pre-line"}}>
-                {this.props.data.text}
-            </p>: null}
-                {this.props.data.link ?
-                    <a href={this.props.data.link}>{this.props.data.link}</a>: null}
+          >
+                {!this.props.data.header ? null : <Title level={3}>{this.props.data.header}</Title> }
+            {!this.props.data.text ? null :
+                <Paragraph ellipsis={{rows: 3, expandable: true}} style={{whiteSpace: "pre-line"}}>
+                    {this.props.data.text}
+                </Paragraph>}
+                {!this.props.data.link ? null :
+                    <div><a href={this.props.data.link}>{this.props.data.link}</a> <br/></div>}
+
           </VerticalTimelineElement>
+            </ConfigProvider>
 
         );
     }

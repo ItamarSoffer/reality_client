@@ -1,8 +1,10 @@
 import React from 'react';
 import SideMenu from '../Components/SideMenu/SideMenu';
 import {Layout} from "antd";
-import CardsGrid from '../RealityCard/CardsGrid'
+import CardsGrid from '../Components/RealityCard/CardsGrid'
 import axios from "axios";
+import LoadingPage from '../Components/LoadingComponent/LoadingPage';
+
 
 
 const base_timelines_url = "http://localhost:5005/api/get_all_names";
@@ -29,14 +31,21 @@ class CardsPage extends  React.Component {
 
 
     render() {
-        return(
-        <Layout style={{ minHeight: '100vh' }} >
-                          <SideMenu />
-                  <Layout>
-                      <CardsGrid cardsList={this.state.timelines}/>
-                  </Layout>
-        </Layout>
-        )
+        if (!this.state.isLoaded) {
+            // if Not Loaded:
+
+            return <LoadingPage/>;
+        }
+        else {
+            return (
+                <Layout style={{minHeight: '100vh'}}>
+                    <SideMenu/>
+                    <Layout>
+                        <CardsGrid cardsList={this.state.timelines}/>
+                    </Layout>
+                </Layout>
+            )
+        }
     }
 
 }

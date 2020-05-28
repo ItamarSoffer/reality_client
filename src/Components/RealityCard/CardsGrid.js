@@ -1,6 +1,7 @@
 import React from 'react';
 import { Col, Row } from 'antd';
-import RealityCard from './RealityCard'
+import RealityCard from './RealityCard';
+
 
 /*
 This component will get a list of cards, and arrange them in a grid format
