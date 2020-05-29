@@ -5,8 +5,10 @@ import {UserOutlined} from '@ant-design/icons';
 import axios from "axios";
 import IconsSelect from '../Icons/IconsSelect';
 import ColorPicker from '../ColorPicker/ColorPicker';
+import MenuIcons from "../Icons/MenuIcons";
+import { Typography } from 'antd';
 
-
+const { Text } = Typography;
 const { TextArea } = Input;
 
 
@@ -89,9 +91,9 @@ class CreateNewEvent extends React.Component {
   render() {
     return (
       <div>
-        <Button type="primary" onClick={this.showModal}>
-          New Event
-        </Button>
+        <Text onClick={this.showModal} >
+            {MenuIcons['plus']}Add Event
+        </Text>
           <ConfigProvider direction={"rtl"}>
         <Modal
           title="אירוע חדש"

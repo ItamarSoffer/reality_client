@@ -9,7 +9,10 @@ import {
     NodeIndexOutlined,
     DeploymentUnitOutlined,
     FileExcelOutlined,
-    DownloadOutlined
+    DownloadOutlined,
+    LogoutOutlined,
+    SettingOutlined,
+    PlusOutlined
 } from '@ant-design/icons';
 
 export const MenuIcons = {
@@ -22,6 +25,9 @@ export const MenuIcons = {
     "nodeindex": <NodeIndexOutlined />,
     "deployment": <DeploymentUnitOutlined/>,
     "download": <DownloadOutlined />,
-    "excel": <FileExcelOutlined />
+    "excel": <FileExcelOutlined />,
+    "logout": <LogoutOutlined />,
+    "setting": <SettingOutlined />,
+    "plus": <PlusOutlined />
 };
 export default MenuIcons;
