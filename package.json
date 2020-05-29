@@ -9,6 +9,7 @@
     "@types/react-color": "^3.0.1",
     "antd": "^4.2.0",
     "axios": "^0.19.2",
+    "js-file-download": "^0.4.12",
     "moment": "^2.26.0",
     "node-fetch": "^2.6.0",
     "react": "^16.13.1",

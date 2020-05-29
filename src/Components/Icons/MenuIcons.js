@@ -7,7 +7,9 @@ import {
     UserOutlined,
     AppstoreOutlined,
     NodeIndexOutlined,
-    DeploymentUnitOutlined
+    DeploymentUnitOutlined,
+    FileExcelOutlined,
+    DownloadOutlined
 } from '@ant-design/icons';
 
 export const MenuIcons = {
@@ -18,6 +20,8 @@ export const MenuIcons = {
     "user": <UserOutlined/>,
     "appstore":<AppstoreOutlined />,
     "nodeindex": <NodeIndexOutlined />,
-    "deployment": <DeploymentUnitOutlined/>
+    "deployment": <DeploymentUnitOutlined/>,
+    "download": <DownloadOutlined />,
+    "excel": <FileExcelOutlined />
 };
 export default MenuIcons;

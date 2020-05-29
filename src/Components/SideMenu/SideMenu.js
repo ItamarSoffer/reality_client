@@ -6,6 +6,8 @@ import {
 } from "react-router-dom";
 
 import MenuIcons from '../Icons/MenuIcons';
+import DownloadExcel from '../Export/ToExcel';
+
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
@@ -107,12 +109,15 @@ class SideMenu extends React.Component {
 
 
               {this.props.url
-        ? <Menu.Item key="Logout" icon={MenuIcons['deployment']}>
-                      <Link to={this.props.url.concat("/add")}> Add Event</Link>
+        ?
+                  <SubMenu key="export" icon={MenuIcons['download']} title="Export">
+              <Menu.Item key="excel" icon={MenuIcons['excel']} onClick={() => DownloadExcel(this.props.url)}>
+                      Excel
             </Menu.Item>
+            </SubMenu>
         : null
       }
-      <Menu.Item key="addEvent" icon={MenuIcons['piechart']}>
+      <Menu.Item key="logout" icon={MenuIcons['piechart']}>
               Logout- not
             </Menu.Item>
 
