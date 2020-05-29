@@ -40,8 +40,7 @@ class SideMenu extends React.Component {
             collapsible
                collapsed={this.state.collapsed}
                onCollapse={this.onCollapse}
-               style={{background: this.state.menuBackground,
-      }}
+               style={{background: this.state.menuBackground,}}
         >
           <div className="logo" />
           <Menu
@@ -76,29 +75,25 @@ class SideMenu extends React.Component {
 
             <Menu.Item key="Home" icon={MenuIcons['piechart']}
                             onClick={() => {this.props.history.push({
-            pathname: `/home/`,
-        });
+            pathname: `/home/`,});
       }}>
-              <Link to="/"> Home </Link>
+              Home
             </Menu.Item>
 
             <Menu.Item key="s4" icon={MenuIcons['appstore']}
                             onClick={() => {this.props.history.push({
-            pathname: `/all/`,
-        });
+            pathname: `/all/`,});
       }}>
-              <Link to="/all"> All cards</Link>
+                All cards
             </Menu.Item>
 
             <Menu.Item
                 key="new"
                 icon={MenuIcons['nodeindex']}
                 onClick={() => {this.props.history.push({
-            pathname: `/new_timeline/`,
-        });
+            pathname: `/new_timeline/`,});
       }}
-            >
-              <Link to="/new_timeline"> New Timeline</Link>
+            >New Timeline
             </Menu.Item>
 
             <Menu.Item key="my_timelines" icon={MenuIcons['piechart']}
@@ -117,7 +112,7 @@ class SideMenu extends React.Component {
             </SubMenu>
         : null
       }
-      <Menu.Item key="logout" icon={MenuIcons['piechart']}>
+      <Menu.Item key="logout" icon={MenuIcons['logout']}>
               Logout- not
             </Menu.Item>
 
@@ -125,6 +120,7 @@ class SideMenu extends React.Component {
             <br/>
             <br/>
             <Switch
+                id={"theme_switch"}
           checked={this.state.theme === 'dark'}
           onChange={this.changeTheme}
           checkedChildren="Dark"
