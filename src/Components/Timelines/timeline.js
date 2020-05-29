@@ -6,8 +6,6 @@ import 'react-vertical-timeline-component/style.min.css';
 import axios from 'axios';
 import DataEvent from '../DataEvent/dataEventComponent';
 import LoadingPage from '../LoadingComponent/LoadingPage';
-
-
 const { Title } = Typography;
 
 const base_url = "http://itsoffer:5005/api/timeline/";
@@ -24,15 +22,27 @@ class Timeline extends React.Component {
 
     componentDidMount() {
         const TimelineUrl = this.props.url;
-        const url = base_url.concat(TimelineUrl);
-        console.log(url);
-        axios.get(url)
+
+        const apiGetBasicData = base_url.concat(`${TimelineUrl}/basic_data`);
+        axios.get(apiGetBasicData)
+            .then(res => res.data[0])
+            .then((data) => {
+                this.setState({
+                    basic_data:data})})
+                .then(() => {console.log("basic data", this.state.basic_data)});
+
+
+        const apiGetEvents = base_url.concat(TimelineUrl);
+        console.log(apiGetEvents);
+        axios.get(apiGetEvents)
             .then(res => res.data.events)
             .then((evs) => {
                 this.setState({
                     timeline_events:evs,
                     isLoaded: true})})
                 .then(() => {console.log("StateEvents:", this.state.timeline_events)});
+
+
     }
 
     render() {
@@ -59,8 +69,11 @@ class Timeline extends React.Component {
                     //style={{backgroundColor: '#ccc'}}
                 >
 
-                    <h1>{this.props.url}</h1>
+                    <Title level={1} style={{textAlign:'center'}}>{this.state.basic_data.name}</Title>
+                    <Title level={4} style={{textAlign:'center'}}>{this.state.basic_data.description}</Title>
+
                     <VerticalTimeline
+                        id={this.state.basic_data.id}
                         style={{background: '#f00'}}>
                         {this.state.timeline_events.map(
                             function(evt){

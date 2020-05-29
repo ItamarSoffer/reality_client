@@ -125,6 +125,7 @@ class CreateNewTimeline extends React.Component {
                     label="User"
                     name="create_user"
                     rules={[{
+                        required: true,
                         message: 'Creator user' }]}
                 >
                     <Input />
