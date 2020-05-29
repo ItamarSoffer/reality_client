@@ -13,7 +13,8 @@ const options = {
 
 
 function DownloadExcel(timeline_url) {
-    const api_get_excel = `http://localhost:5005/api//timeline/${timeline_url}/get_xlsx`;
+    const api_get_excel = `http://localhost:5005/api/timeline/${timeline_url}/get_xlsx`;
+    const output_file_name = `${SystemName}_${timeline_url}_${moment().format('YYYYMMDD-hhmmss')}.xlsx`;
     axios({
     method:'GET',
     url: api_get_excel,
@@ -25,7 +26,7 @@ function DownloadExcel(timeline_url) {
                 message.warning(response.data)
             }
             else if (response.status === 200){
-                fileDownload(new Blob([response.data]), `${SystemName}_${timeline_url}_${moment().format('YYYYMMDD-hhmmss')}.xlsx`);
+                fileDownload(new Blob([response.data]), output_file_name);
                 message.success("Downloaded Timeline Excel!", 1.5)
   }
   })
