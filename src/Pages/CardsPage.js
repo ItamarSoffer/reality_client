@@ -4,6 +4,7 @@ import {Layout} from "antd";
 import CardsGrid from '../Components/RealityCard/CardsGrid'
 import axios from "axios";
 import LoadingPage from '../Components/LoadingComponent/LoadingPage';
+import SideMenuPage from "./sideMenuPage";
 
 
 
@@ -39,7 +40,8 @@ class CardsPage extends  React.Component {
         else {
             return (
                 <Layout style={{minHeight: '100vh'}}>
-                    <SideMenu/>
+                    <SideMenuPage url={this.props.match.params.timeline_url} />
+
                     <Layout>
                         <CardsGrid cardsList={this.state.timelines}/>
                     </Layout>

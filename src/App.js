@@ -4,15 +4,18 @@ import {
     Switch,
     Route,
 } from "react-router-dom";
+import { connect } from 'react-redux';
+
 
 
 import BaseTimeline from './Components/Timelines/base_timeline';
-import LoginForm from './login/login_form';
 import SideMenuDemo from './Components/SideMenu/OriginalSideMenu';
 import RealityPage from './Pages/TimelinePage';
 import HomePage from './Pages/HomePage';
 import CardsPage from './Pages/CardsPage';
 import NewTimelinePage from './Pages/NewTimelinePage';
+
+import LoginPage from './Pages/LoginPage';
 
 
 import CreateNewEvent from "./Components/NewEvent/NewEventComponent"; // ??
@@ -48,36 +51,21 @@ function App() {
 		{/*</nav>*/}
 
 	<Switch>
-		<Route path="/side_menu">
-			<SideMenuDemo />
-		</Route>
+		<Route path="/side_menu" component={SideMenuDemo}/>
 
-		<Route path="/timeline/:timeline_url"
-		component={RealityPage}/>
+		<Route path="/base_timeline" component= {BaseTimeline} />
 
-		<Route path="/base_timeline">
-			<BaseTimeline />
-		</Route>
+		<Route path="/timeline/:timeline_url" component={RealityPage}/>
 
-		<Route path="/all">
-		<CardsPage />
-		</Route>
+		<Route path="/all" component={CardsPage} />
 
-		<Route path="/new_event">
-		<CreateNewEvent />
-		</Route>
+		<Route path="/new_event" component={CreateNewEvent}/>
 
-		<Route path="/new_timeline">
-		<NewTimelinePage/>
-		</Route>
+		<Route path="/new_timeline" component={NewTimelinePage}/>
 
-		<Route path="/login">
-		<LoginForm />
-		</Route>
+		<Route path="/login" component={LoginPage}/>
 
-		<Route path= "/">
-			<HomePage />
-		</Route>
+		<Route path= "/" component={HomePage}/>
 
 	</Switch>
 
@@ -87,4 +75,14 @@ function App() {
 
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    isLogged: state.usersReducer.isLogged
+  }
+};
+
+const mapDispatchToProps = disaptch => {
+
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

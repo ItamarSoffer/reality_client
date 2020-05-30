@@ -4,6 +4,7 @@ import {Layout} from "antd";
 import Timeline from '../Components/Timelines/timeline';
 import CreateNewEvent from '../Components/NewEvent/NewEventComponent';
 import TimelineMenu from "../Components/TimelineMenu/TimelineMenu";
+import SideMenuPage from './sideMenuPage'
 
 
 class RealityPage extends  React.Component {
@@ -12,7 +13,7 @@ class RealityPage extends  React.Component {
         <Layout
             style={{ minHeight: '100vh' }}
         >
-                          <SideMenu url={this.props.match.params.timeline_url} />
+                          <SideMenuPage url={this.props.match.params.timeline_url} />
                   <Layout>
                       <TimelineMenu url={this.props.match.params.timeline_url} />
                       <Timeline url={this.props.match.params.timeline_url} />

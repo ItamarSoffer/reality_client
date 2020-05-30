@@ -33,7 +33,10 @@ class SideMenu extends React.Component {
       menuBackground: value ? 'rgb(0,21,41)' : 'rgb(255,255,255)'
     });
   };
-
+  handleLogout = () => {
+      this.props.handlerLogout();
+      console.log("logged out")
+  };
 
   render() {
     return (
@@ -105,8 +108,7 @@ class SideMenu extends React.Component {
 
 
 
-              {this.props.url
-        ?
+              {this.props.url ?
                   <SubMenu key="export" icon={MenuIcons['download']} title="Export">
               <Menu.Item key="excel" icon={MenuIcons['excel']} onClick={() => DownloadExcel(this.props.url)}>
                       Excel
@@ -114,7 +116,7 @@ class SideMenu extends React.Component {
             </SubMenu>
         : null
       }
-      <Menu.Item key="logout" icon={MenuIcons['logout']}>
+      <Menu.Item key="logout" icon={MenuIcons['logout']} onClick={this.handleLogout}>
               Logout- not
             </Menu.Item>
 
