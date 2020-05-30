@@ -10,7 +10,6 @@ const { Paragraph, Title } = Typography;
 class DataEvent extends React.Component {
 
     render() {
-        console.log("rendered me");
         return (
             <ConfigProvider direction={"rtl"} >
             <VerticalTimelineElement

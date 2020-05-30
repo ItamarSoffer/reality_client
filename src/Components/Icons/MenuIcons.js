@@ -12,7 +12,9 @@ import {
     DownloadOutlined,
     LogoutOutlined,
     SettingOutlined,
-    PlusOutlined
+    PlusOutlined,
+    LinkOutlined,
+    FormOutlined
 } from '@ant-design/icons';
 
 export const MenuIcons = {
@@ -28,6 +30,8 @@ export const MenuIcons = {
     "excel": <FileExcelOutlined />,
     "logout": <LogoutOutlined />,
     "setting": <SettingOutlined />,
-    "plus": <PlusOutlined />
+    "plus": <PlusOutlined />,
+    "link": <LinkOutlined />,
+    "form": <FormOutlined />
 };
 export default MenuIcons;

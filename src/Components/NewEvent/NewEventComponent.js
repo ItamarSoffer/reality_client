@@ -167,7 +167,8 @@ class CreateNewEvent extends React.Component {
                     rules={[{
                         message: 'Event link' }]}
                 >
-                    <Input placeholder={"קישור"}/>
+                    <Input placeholder={"קישור"}
+                     prefix={MenuIcons["link"]}/>
                 </Form.Item>
                 <Form.Item
                     className="link-form"
@@ -177,7 +178,7 @@ class CreateNewEvent extends React.Component {
                         required: true,
                         message: 'Event content' }]}
                 >
-                    <TextArea rows={3} placeholder={"תוכן האירוע"}/>
+                    <TextArea rows={3} placeholder={"תוכן האירוע"} prefix={MenuIcons["form"]}/>
                 </Form.Item>
                 <Form.Item
                     className="link-form"

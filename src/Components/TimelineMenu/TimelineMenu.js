@@ -33,8 +33,8 @@ class TimelineMenu extends React.Component {
                      <CreateNewEvent url={this.props.url} />
              </Menu.Item>
         <SubMenu icon={MenuIcons["setting"]} title="Filter">
-            <Menu.Item key="filter_by_time" >By Date</Menu.Item>
-            <Menu.Item key="filter_by_word">By Word</Menu.Item>
+            <Menu.Item disabled key="filter_by_time" >By Date</Menu.Item>
+            <Menu.Item disabled key="filter_by_word">By Word</Menu.Item>
         </SubMenu>
 
          <SubMenu key="export" icon={MenuIcons['download']} title="Export">
