@@ -45,12 +45,12 @@ class CreateNewEvent extends React.Component {
       const api_add_event = `http://localhost:5005/api/timeline/${this.props.url}/add`;
       console.log("FINITO", values);
       console.log("SENDS TO", api_add_event);
-      console.log(values.date.format('YYYY-MM-DD'));
+      const hour = typeof values.hour !== "undefined" ? values.hour.format('hh:mm:ss'): "";
       axios.post(api_add_event, {
           "header": values.title,
           "text": values.text,
           "date": values.date.format('YYYY-MM-DD'),
-          "hour":values.hour.format('hh:mm:ss'),
+          "hour":hour,
           "frame_color": this.state.color,
           "icon": this.state.icon,
           "link": values.link,
@@ -63,7 +63,9 @@ class CreateNewEvent extends React.Component {
   }
   else if (response.status === 200){
   message.success(response.data, 1.5)
+
       .then(() => {
+
 
       return message.loading('redirecting', 1);
   })
