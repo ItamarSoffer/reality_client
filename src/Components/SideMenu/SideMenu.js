@@ -80,7 +80,7 @@ class SideMenu extends React.Component {
 
             <Menu.Item key="Home" icon={MenuIcons['piechart']}
                             onClick={() => {this.props.history.push({
-            pathname: `/home/`,});
+            pathname: `/`,});
       }}>
               Home
             </Menu.Item>

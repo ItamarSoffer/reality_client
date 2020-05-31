@@ -6,6 +6,8 @@ import {
 } from "react-router-dom";
 import { connect } from 'react-redux';
 
+import AppRouter from './Structure/AppRouter';
+
 
 
 import BaseTimeline from './Components/Timelines/base_timeline';
@@ -26,53 +28,13 @@ import './login/adds_atnd.css'
 import './main.css'
 
 
-function App() {
-  return (
+class App extends React.Component{
+  render() {
+	  return (
+	  	<AppRouter isLogged={this.props.isLogged}/>
 
-	<Router>
-
-	<div>
-      {/*comment the nav to hide this*/}
-		{/*<nav>*/}
-		{/*<ul>*/}
-		{/*	<li>*/}
-		{/*		<Link to="/"> Home </Link>*/}
-		{/*	</li>*/}
-		{/*	<li>*/}
-		{/*		<Link to="/base_timeline"> Base Timeline </Link>*/}
-		{/*	</li>*/}
-		{/*	<li>*/}
-		{/*		<Link to="/add"> Add new</Link>*/}
-		{/*	</li>*/}
-		{/*	<li>*/}
-		{/*		<Link to="/login"> Login Form</Link>*/}
-		{/*	</li>*/}
-		{/*</ul>*/}
-		{/*</nav>*/}
-
-	<Switch>
-		<Route path="/side_menu" component={SideMenuDemo}/>
-
-		<Route path="/base_timeline" component= {BaseTimeline} />
-
-		<Route path="/timeline/:timeline_url" component={RealityPage}/>
-
-		<Route path="/all" component={CardsPage} />
-
-		<Route path="/new_event" component={CreateNewEvent}/>
-
-		<Route path="/new_timeline" component={NewTimelinePage}/>
-
-		<Route path="/login" component={LoginPage}/>
-
-		<Route path= "/" component={HomePage}/>
-
-	</Switch>
-
-	</div>
-	</Router>
-);
-
+	  );
+  }
 }
 
 const mapStateToProps = state => {
