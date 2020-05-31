@@ -47,7 +47,9 @@ class AppRouter extends React.Component{
                                   <Route path="/new_timeline" component={NewTimelinePage}/>
 
                                   {/*<Route path="/login" component={LoginPage}/>*/}
+                                  <Route path="/login" component={LoginPage}/>
 
+                                  <Route exact={true} path="/home" component={HomePage}/>
                                   <Route exact={true} path="/" component={HomePage}/>
                               </div>
 

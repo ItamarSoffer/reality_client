@@ -12,7 +12,7 @@ class LoginPage extends React.Component{
     componentWillMount() {
         console.log("props",this.props);
         if(this.props.isLogged === true) {
-            this.props.history.push({pathname: `/home/`,})
+            this.props.history.push({pathname: `/`,})
             // this.props.history.push('/');
         }
     }
@@ -20,7 +20,7 @@ class LoginPage extends React.Component{
     handlerLogin = (email,password) => {
         this.props.login(email,password);
         if(this.props.isLogged === true) {
-            this.props.history.push({pathname: `/home/`,})
+            this.props.history.push({pathname: `/`,})
         }
         //this.props.history.push('/'); //? FIX!
     };

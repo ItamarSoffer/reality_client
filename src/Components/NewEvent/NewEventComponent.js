@@ -54,7 +54,7 @@ class CreateNewEvent extends React.Component {
           "frame_color": this.state.color,
           "icon": this.state.icon,
           "link": values.link,
-          "user": values.user
+          "user": this.props.loggedUser
 })
          .then((response) => {
   console.log("resp", response);
@@ -180,19 +180,7 @@ class CreateNewEvent extends React.Component {
                 >
                     <TextArea rows={3} placeholder={"תוכן האירוע"} prefix={MenuIcons["form"]}/>
                 </Form.Item>
-                <Form.Item
-                    className="link-form"
-                    //label="שם משתמש"
-                    name="user"
-                    rules={[{
-                        required: true,
-                        message: 'Event username' }]}
-                >
-                    <Input
-                        placeholder="יוצר האירוע"
-                        prefix={<UserOutlined className="site-form-item-icon" />}
-                    />
-                </Form.Item>
+
                 <Form.Item
                     className="link-form"
                     //label="אייקון"

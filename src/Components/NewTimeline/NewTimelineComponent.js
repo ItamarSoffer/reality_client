@@ -33,7 +33,7 @@ class CreateNewTimeline extends React.Component {
         else {
     console.log('Received values from form: ', values);
      axios.post(api_create_timeline, {
-             create_user: values.create_user,
+             create_user: this.props.loggedUser,
              description: values.timeline_description,
              name: values.timeline_title,
              url: values.timeline_url
@@ -63,7 +63,7 @@ class CreateNewTimeline extends React.Component {
     console.log(values.timeline_url);
     console.log(values.timeline_title);
     console.log(values.timeline_description);
-    console.log(values.create_user);
+    console.log(this.props.loggedUser);
  }
   };
 
@@ -88,6 +88,7 @@ class CreateNewTimeline extends React.Component {
 
 
             >
+
                 <Form.Item
                     className="title-form"
                     label="Title"
@@ -96,6 +97,7 @@ class CreateNewTimeline extends React.Component {
                         required: true,
                         message: 'Timeline Title' }]}
                 >
+
                     <Input />
                 </Form.Item>
 
@@ -116,17 +118,6 @@ class CreateNewTimeline extends React.Component {
                     name="timeline_description"
                     rules={[{
                         message: 'Timeline Description' }]}
-                >
-                    <Input />
-                </Form.Item>
-
-                <Form.Item
-                    //className="link-form"
-                    label="User"
-                    name="create_user"
-                    rules={[{
-                        required: true,
-                        message: 'Creator user' }]}
                 >
                     <Input />
                 </Form.Item>

@@ -30,7 +30,7 @@ class TimelineMenu extends React.Component {
           // theme={"dark"}
       >
           <Menu.Item key={"m_add"} >
-                     <CreateNewEvent url={this.props.url} />
+                     <CreateNewEvent url={this.props.url} loggedUser={this.props.loggedUser} />
              </Menu.Item>
         <SubMenu icon={MenuIcons["setting"]} title="Filter">
             <Menu.Item disabled key="filter_by_time" >By Date</Menu.Item>
