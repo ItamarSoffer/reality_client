@@ -1,10 +1,12 @@
 import React from 'react';
 import {connect} from "react-redux";
-
 import {withRouter} from "react-router";
 
 import {logoutAction} from "../Actions/usersActions";
+import {changeThemeAction} from '../Actions/siteActions';
 import SideMenu from '../Components/SideMenu/SideMenu';
+
+
 class SideMenuPage extends React.Component{
 
     handlerLogout = () => {
@@ -13,9 +15,19 @@ class SideMenuPage extends React.Component{
         this.props.history.push('/login');
     };
 
+    handleChangeTheme = (isDark) => {
+        this.props.changeTheme(isDark)
+
+    };
+
     render() {
+        console.log("side menu props", this.props);
         return (
-            <SideMenu url={this.props.url} handlerLogout={this.handlerLogout} />
+            <SideMenu url={this.props.url}
+                      darkMode={this.DarkMode}
+                      handlerLogout={this.handlerLogout}
+                      handleChangeTheme={this.handleChangeTheme}
+            />
         )
     }
 
@@ -26,7 +38,9 @@ class SideMenuPage extends React.Component{
 
 const mapStateToProps = state => {
     return {
-        isLogged: state.usersReducer.isLogged
+        isLogged: state.usersReducer.isLogged,
+        DarkMode: state.sitesReducer.DarkMode
+
     }
 };
 
@@ -34,7 +48,8 @@ const mapDispatchToProps = disaptch => {
     return {
         logout: () => {
             disaptch(logoutAction());
-        }
+        },
+        changeTheme : (isDark) => {disaptch(changeThemeAction(isDark));}
     }
 };
 

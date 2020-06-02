@@ -20,14 +20,17 @@ class TimelineMenu extends React.Component {
     });
   };
 
-  render() {
+
+    render() {
+        const menuTheme = this.props.DarkMode === true ? "dark": "light";
+        // console.log('Dark theme timeline', this.props.DarkMode);
     return (
       <Menu
           onClick={this.handleClick}
           mode="horizontal"
           align="center"
           selectable={false}
-          // theme={"dark"}
+          theme={menuTheme}
       >
           <Menu.Item key={"m_add"} >
                      <CreateNewEvent url={this.props.url} loggedUser={this.props.loggedUser} />

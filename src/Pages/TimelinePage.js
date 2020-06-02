@@ -16,7 +16,7 @@ class RealityPage extends  React.Component {
         >
                           <SideMenuPage url={this.props.match.params.timeline_url} />
                   <Layout>
-                      <TimelineMenu url={this.props.match.params.timeline_url}
+                      <TimelineMenu url={this.props.match.params.timeline_url} DarkMode={this.props.DarkMode}
                       loggedUser={this.props.loggedUser}/>
                       <Timeline url={this.props.match.params.timeline_url} />
                   </Layout>
@@ -29,7 +29,9 @@ class RealityPage extends  React.Component {
 
 const mapStateToProps = state => {
   return {
-    loggedUser: state.usersReducer.loggedUser
+    loggedUser: state.usersReducer.loggedUser,
+      DarkMode: state.sitesReducer.DarkMode
+
   }
 };
 

@@ -8,26 +8,29 @@ import {
 import MenuIcons from '../Icons/MenuIcons';
 import DownloadExcel from '../Export/ToExcel';
 
-
 const { Sider } = Layout;
 const { SubMenu } = Menu;
 
 class SideMenu extends React.Component {
+
   state = {
     collapsed: true,
     // theme: 'dark',
     // menuBackground: 'rgb(0,21,41)'
-      theme: 'light',
+     theme: this.props.DarkMode === "true" ? 'dark' : 'light',
     menuBackground: 'rgb(255,255,255)'
 
   };
 
-  onCollapse = collapsed => {
+
+    onCollapse = collapsed => {
     console.log(collapsed);
     this.setState({ collapsed });
   };
 
   changeTheme = value => {
+
+      this.props.handleChangeTheme(!value);
     this.setState({
       theme: value ? 'dark' : 'light',
       menuBackground: value ? 'rgb(0,21,41)' : 'rgb(255,255,255)'
