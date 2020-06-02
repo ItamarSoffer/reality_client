@@ -1,15 +1,9 @@
-import React from 'react';
 import axios from "axios";
 import {message} from 'antd';
 import moment from 'moment';
 
 const SystemName = 'NZT';
 const fileDownload = require('js-file-download');
-const options = {
-    headers: {
-        responseType: 'blob'
-    }
-};
 
 
 function DownloadExcel(timeline_url) {

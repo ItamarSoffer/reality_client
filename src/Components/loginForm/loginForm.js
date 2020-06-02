@@ -1,7 +1,6 @@
 import React from 'react';
-import {Form, Input, Button, Checkbox, Card, message} from 'antd';
+import {Form, Input, Button, Checkbox, Card} from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import axios from "axios";
 
 
 class LoginForm extends React.Component{

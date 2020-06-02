@@ -1,9 +1,8 @@
 import React from 'react';
 
-import { Menu, Button } from 'antd';
+import { Menu } from 'antd';
 import MenuIcons from '../Icons/MenuIcons';
 import DownloadExcel from '../Export/ToExcel';
-import { MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons';
 import CreateNewEvent from "../NewEvent/NewEventComponent";
 
 const { SubMenu } = Menu;

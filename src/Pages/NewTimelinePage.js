@@ -1,5 +1,4 @@
 import React from 'react';
-import SideMenu from '../Components/SideMenu/SideMenu';
 import {Layout} from "antd";
 import CreateNewTimeline from '../Components/NewTimeline/NewTimelineComponent';
 import SideMenuPage from "./sideMenuPage";
