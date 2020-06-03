@@ -12,7 +12,17 @@ class NewTimelinePage extends React.Component{
             <Layout style={{ minHeight: '100vh' }} >
                 <SideMenuPage url={this.props.match.params.timeline_url} />
                   <Layout>
+                      <div
+                      style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  position: 'absolute', left: '50%', top: '50%',
+                  transform: 'translate(-50%, -50%)'
+
+              }}>
                       <CreateNewTimeline loggedUser={this.props.loggedUser}/>
+                      </div>
                   </Layout>
         </Layout>
 

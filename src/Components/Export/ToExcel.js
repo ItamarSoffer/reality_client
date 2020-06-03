@@ -1,13 +1,15 @@
 import axios from "axios";
 import {message} from 'antd';
 import moment from 'moment';
+import {backendAPI} from "../../Structure/api";
 
-const SystemName = 'NZT';
+
+const SystemName = 'Story';
 const fileDownload = require('js-file-download');
 
 
 function DownloadExcel(timeline_url) {
-    const api_get_excel = `http://localhost:5005/api/timeline/${timeline_url}/get_xlsx`;
+    const api_get_excel = backendAPI.concat(`/timeline/${timeline_url}/get_xlsx`);
     const output_file_name = `${SystemName}_${timeline_url}_${moment().format('YYYYMMDD-hhmmss')}.xlsx`;
     axios({
     method:'GET',

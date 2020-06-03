@@ -5,6 +5,7 @@ import axios from "axios";
 import IconsSelect from '../Icons/IconsSelect';
 import ColorPicker from '../ColorPicker/ColorPicker';
 import MenuIcons from "../Icons/MenuIcons";
+import {backendAPI} from "../../Structure/api";
 import { Typography } from 'antd';
 
 const { Text } = Typography;
@@ -41,7 +42,7 @@ class CreateNewEvent extends React.Component {
   };
 
   onFinish = values => {
-      const api_add_event = `http://localhost:5005/api/timeline/${this.props.url}/add`;
+      const api_add_event = backendAPI.concat(`/timeline/${this.props.url}/add`);
       console.log("FINITO", values);
       console.log("SENDS TO", api_add_event);
       const hour = typeof values.hour !== "undefined" ? values.hour.format('hh:mm:ss'): "";

@@ -3,6 +3,7 @@ import {Form, Input, Button, message} from 'antd';
 import 'antd/dist/antd.css';
 import axios from "axios";
 import { withRouter } from "react-router-dom";
+import {api_create_timeline} from '../../Structure/api';
 
 const layout = {
   labelCol: { span: 8 },
@@ -11,8 +12,6 @@ const layout = {
 const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
-
-const api_create_timeline = "http://localhost:5005/api/create_timeline";
 
 
 class CreateNewTimeline extends React.Component {
@@ -34,8 +33,8 @@ class CreateNewTimeline extends React.Component {
     console.log('Received values from form: ', values);
      axios.post(api_create_timeline, {
              create_user: this.props.loggedUser,
-             description: values.timeline_description,
-             name: values.timeline_title,
+             description: values.description,
+             name: values.title,
              url: values.timeline_url
      })
 
@@ -92,7 +91,7 @@ class CreateNewTimeline extends React.Component {
                 <Form.Item
                     className="title-form"
                     label="Title"
-                    name="timeline_title"
+                    name="title"
                     rules={[{
                         required: true,
                         message: 'Timeline Title' }]}
@@ -115,7 +114,7 @@ class CreateNewTimeline extends React.Component {
                 <Form.Item
                     //className="link-form"
                     label="Description"
-                    name="timeline_description"
+                    name="description"
                     rules={[{
                         message: 'Timeline Description' }]}
                 >

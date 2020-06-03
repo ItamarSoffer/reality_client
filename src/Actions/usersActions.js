@@ -1,7 +1,6 @@
 import axios from 'axios';
 import {message} from "antd";
-
-const LoginApi = 'http://localhost:5005/api/login';
+import {LoginApi} from "../Structure/api";
 
 
 export const loginAction = (username, password) => {

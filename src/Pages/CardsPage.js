@@ -4,10 +4,8 @@ import CardsGrid from '../Components/RealityCard/CardsGrid'
 import axios from "axios";
 import LoadingPage from '../Components/LoadingComponent/LoadingPage';
 import SideMenuPage from "./sideMenuPage";
+import {apiGetAllNames} from "../Structure/api";
 
-
-
-const base_timelines_url = "http://localhost:5005/api/get_all_names";
 
 class CardsPage extends  React.Component {
     constructor(props){
@@ -19,8 +17,8 @@ class CardsPage extends  React.Component {
     }
 
     componentDidMount() {
-        console.log(base_timelines_url);
-        axios.get(base_timelines_url)
+        console.log(apiGetAllNames);
+        axios.get(apiGetAllNames)
             .then(res => res.data)
             .then((data) => {
                 this.setState({
