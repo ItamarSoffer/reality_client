@@ -49,8 +49,11 @@ class AppRouter extends React.Component{
                                   {/*<Route path="/login" component={LoginPage}/>*/}
                                   <Route path="/login" component={LoginPage}/>
 
-                                  <Route exact={true} path="/home" component={HomePage}/>
-                                  <Route exact={true} path="/" component={HomePage}/>
+                                  {/*<Route exact={true} path="/home" component={HomePage}/>*/}
+                                  {/*<Route exact={true} path="/" component={HomePage}/>*/}
+
+                                  <Route exact={true} path="/home" component={CardsPage}/>
+                                  <Route exact={true} path="/" component={CardsPage}/>
                               </div>
 
                       }

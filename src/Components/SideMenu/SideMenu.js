@@ -81,7 +81,7 @@ class SideMenu extends React.Component {
 
             </SubMenu>
 
-            <Menu.Item key="Home" icon={MenuIcons['piechart']}
+            <Menu.Item key="Home" icon={MenuIcons['home']}
                             onClick={() => {this.props.history.push({
             pathname: `/`,});
       }}>
@@ -104,9 +104,9 @@ class SideMenu extends React.Component {
             >New Timeline
             </Menu.Item>
 
-            <Menu.Item key="my_timelines" icon={MenuIcons['piechart']}
+            <Menu.Item disabled={true} key="my_timelines" icon={MenuIcons['user']}
             >
-              My Timelines
+              My Timelines- Coming!
             </Menu.Item>
 
 
