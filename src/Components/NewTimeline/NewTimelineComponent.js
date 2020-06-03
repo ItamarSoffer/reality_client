@@ -3,7 +3,11 @@ import {Form, Input, Button, message} from 'antd';
 import 'antd/dist/antd.css';
 import axios from "axios";
 import { withRouter } from "react-router-dom";
+
 import {api_create_timeline} from '../../Structure/api';
+import MenuIcons from "../Icons/MenuIcons";
+
+const { TextArea } = Input;
 
 const layout = {
   labelCol: { span: 8 },
@@ -118,7 +122,7 @@ class CreateNewTimeline extends React.Component {
                     rules={[{
                         message: 'Timeline Description' }]}
                 >
-                    <Input />
+                    <TextArea rows={3} placeholder={"Description"} prefix={MenuIcons["form"]}/>
                 </Form.Item>
 
                  <Form.Item {...tailLayout}>
