@@ -8,7 +8,7 @@ export const loginAction = (username, password) => {
         const userLoginApi = LoginApi.concat(`?username=${username}&password=${password}`);
     axios.get(userLoginApi)
                .then((response) => {
-  console.log("resp", response);
+  // console.log("resp", response);
   if (response.status === 201){
       message.warning(response.data)
   }

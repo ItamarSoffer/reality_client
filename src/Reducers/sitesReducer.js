@@ -15,7 +15,7 @@ const sitesReducer = (state = initState, action) => {
         break;
     }
 
-    console.log('Sites Reducers', state);
+    // console.log('Sites Reducers', state);
     return state;
 };
 

@@ -18,7 +18,7 @@ const usersReducer = (state = initState, action) => {
         break;
     }
 
-    console.log('Users Reducers', state);
+    // console.log('Users Reducers', state);
     return state;
 };
 

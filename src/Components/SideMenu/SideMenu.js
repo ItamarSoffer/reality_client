@@ -24,7 +24,7 @@ class SideMenu extends React.Component {
 
 
     onCollapse = collapsed => {
-    console.log(collapsed);
+    // console.log(collapsed);
     this.setState({ collapsed });
   };
 
@@ -38,7 +38,7 @@ class SideMenu extends React.Component {
   };
   handleLogout = () => {
       this.props.handlerLogout();
-      console.log("logged out")
+      // console.log("logged out")
   };
 
   render() {

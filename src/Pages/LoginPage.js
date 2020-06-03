@@ -10,7 +10,7 @@ import {loginAction} from '../Actions/usersActions';
 class LoginPage extends React.Component{
 
     componentWillMount() {
-        console.log("props",this.props);
+        // console.log("props",this.props);
         if(this.props.isLogged === true) {
             this.props.history.push({pathname: `/`,})
             // this.props.history.push('/');

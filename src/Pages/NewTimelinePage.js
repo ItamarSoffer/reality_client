@@ -7,7 +7,6 @@ import {connect} from "react-redux";
 
 class NewTimelinePage extends React.Component{
     render() {
-                console.log("props", this.props);
         return(
             <Layout style={{ minHeight: '100vh' }} >
                 <SideMenuPage url={this.props.match.params.timeline_url} />

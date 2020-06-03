@@ -11,7 +11,7 @@ import RealityPage from "../Pages/TimelinePage";
 import CardsPage from "../Pages/CardsPage";
 import CreateNewEvent from "../Components/NewEvent/NewEventComponent";
 import NewTimelinePage from "../Pages/NewTimelinePage";
-import HomePage from "../Pages/HomePage";
+// import HomePage from "../Pages/HomePage";
 
 
 class AppRouter extends React.Component{

@@ -27,15 +27,15 @@ class CreateNewEvent extends React.Component {
     });
   };
 
-  handleOk = e => {
-    console.log(e);
+  handleOk = () => {
+    // console.log(e);
     this.setState({
       visible: false,
     });
   };
 
-  handleCancel = e => {
-    console.log(e);
+  handleCancel = () => {
+    // console.log(e);
     this.setState({
       visible: false,
     });
@@ -43,8 +43,8 @@ class CreateNewEvent extends React.Component {
 
   onFinish = values => {
       const api_add_event = backendAPI.concat(`/timeline/${this.props.url}/add`);
-      console.log("FINITO", values);
-      console.log("SENDS TO", api_add_event);
+      // console.log("FINITO", values);
+      // console.log("SENDS TO", api_add_event);
       const hour = typeof values.hour !== "undefined" ? values.hour.format('hh:mm:ss'): "";
       axios.post(api_add_event, {
           "header": values.title,
@@ -57,7 +57,7 @@ class CreateNewEvent extends React.Component {
           "user": this.props.loggedUser
 })
          .then((response) => {
-  console.log("resp", response);
+  // console.log("resp", response);
   if (response.status === 201){
       message.warning(response.data)
   }

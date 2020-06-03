@@ -34,7 +34,7 @@ class CreateNewTimeline extends React.Component {
             message.error("URL must be al least 3 chars!")
         }
         else {
-    console.log('Received values from form: ', values);
+    // console.log('Received values from form: ', values);
      axios.post(api_create_timeline, {
              create_user: this.props.loggedUser,
              description: values.description,
@@ -43,7 +43,7 @@ class CreateNewTimeline extends React.Component {
      })
 
          .then((response) => {
-  console.log("resp", response);
+  // console.log("resp", response);
   if (response.status === 201){
       message.warning(response.data)
   }
@@ -59,19 +59,16 @@ class CreateNewTimeline extends React.Component {
 
   }
 }, (error) => {
-  console.log("error", error);
+  // console.log("error", error);
   message.error(error);
 });
      // remove later.
-    console.log(values.timeline_url);
-    console.log(values.timeline_title);
-    console.log(values.timeline_description);
-    console.log(this.props.loggedUser);
+
  }
   };
 
     onFinishFailed = errorInfo => {
-    console.log('Failed:', errorInfo);
+    // console.log('Failed:', errorInfo);
     message.error('Missing fields!')
   };
 

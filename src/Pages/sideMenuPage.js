@@ -11,7 +11,7 @@ class SideMenuPage extends React.Component{
 
     handlerLogout = () => {
         this.props.logout();
-        console.log("Logged Out");
+        // console.log("Logged Out");
         this.props.history.push('/login');
     };
 
@@ -21,7 +21,6 @@ class SideMenuPage extends React.Component{
     };
 
     render() {
-        console.log("side menu props", this.props);
         return (
             <SideMenu url={this.props.url}
                       darkMode={this.DarkMode}

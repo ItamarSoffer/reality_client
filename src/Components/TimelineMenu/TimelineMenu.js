@@ -13,7 +13,7 @@ class TimelineMenu extends React.Component {
   };
 
   handleClick = e => {
-    console.log('click ', e);
+    // console.log('click ', e);
     this.setState({
       current: e.key,
     });

@@ -28,19 +28,19 @@ class Timeline extends React.Component {
             .then(res => res.data[0])
             .then((data) => {
                 this.setState({
-                    basic_data:data})})
-                .then(() => {console.log("basic data", this.state.basic_data)});
+                    basic_data:data})});
+                // .then(() => {console.log("basic data", this.state.basic_data)});
 
 
         const apiGetEvents = base_url.concat(TimelineUrl);
-        console.log(apiGetEvents);
+        // console.log(apiGetEvents);
         axios.get(apiGetEvents)
             .then(res => res.data.events)
             .then((evs) => {
                 this.setState({
                     timeline_events:evs,
                     isLoaded: true})})
-                .then(() => {console.log("StateEvents:", this.state.timeline_events)});
+                // .then(() => {console.log("StateEvents:", this.state.timeline_events)});
 
 
     }

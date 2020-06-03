@@ -17,14 +17,14 @@ class CardsPage extends  React.Component {
     }
 
     componentDidMount() {
-        console.log(apiGetAllNames);
+        // console.log(apiGetAllNames);
         axios.get(apiGetAllNames)
             .then(res => res.data)
             .then((data) => {
                 this.setState({
                     timelines:data,
                     isLoaded: true})})
-                .then(() => {console.log("Timelines:", this.state.timelines)});
+                // .then(() => {console.log("Timelines:", this.state.timelines)});
     }
 
 
