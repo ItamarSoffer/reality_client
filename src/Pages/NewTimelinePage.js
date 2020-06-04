@@ -6,6 +6,9 @@ import {connect} from "react-redux";
 
 
 class NewTimelinePage extends React.Component{
+    componentDidMount() {
+        document.title = "New Story";
+    }
     render() {
         return(
             <Layout style={{ minHeight: '100vh' }} >

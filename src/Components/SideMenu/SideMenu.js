@@ -57,29 +57,29 @@ class SideMenu extends React.Component {
               defaultSelectedKeys={['1']}
               selectable={false}
           >
-            <SubMenu key="sub1" icon={MenuIcons['user']} title="Development">
-              <Menu.Item key="s1">
-				<Link to="/base_timeline"> Base Timeline </Link>
-              </Menu.Item>
+            {/*<SubMenu key="sub1" icon={MenuIcons['user']} title="Development">*/}
+            {/*  <Menu.Item key="s1">*/}
+			{/*	<Link to="/base_timeline"> Base Timeline </Link>*/}
+            {/*  </Menu.Item>*/}
 
-              <Menu.Item key="s2">
-                <Link to="/new_timeline"> Create New Timeline</Link>
-              </Menu.Item>
+            {/*  <Menu.Item key="s2">*/}
+            {/*    <Link to="/new_timeline"> Create New Timeline</Link>*/}
+            {/*  </Menu.Item>*/}
 
-              <Menu.Item key="s3">
-                <Link to="/login"> Login Form</Link>
-              </Menu.Item>
+            {/*  <Menu.Item key="s3">*/}
+            {/*    <Link to="/login"> Login Form</Link>*/}
+            {/*  </Menu.Item>*/}
 
-              <Menu.Item key="s4">
-                <Link to="/all"> All cards</Link>
-              </Menu.Item>
+            {/*  <Menu.Item key="s4">*/}
+            {/*    <Link to="/all"> All cards</Link>*/}
+            {/*  </Menu.Item>*/}
 
-              <Menu.Item key="s4">
-                <Link to="/New_Event"> New Event</Link>
-              </Menu.Item>
+            {/*  <Menu.Item key="s4">*/}
+            {/*    <Link to="/New_Event"> New Event</Link>*/}
+            {/*  </Menu.Item>*/}
 
 
-            </SubMenu>
+            {/*</SubMenu>*/}
 
             <Menu.Item key="Home" icon={MenuIcons['home']}
                             onClick={() => {this.props.history.push({
@@ -111,16 +111,16 @@ class SideMenu extends React.Component {
 
 
 
-              {this.props.url ?
-                  <SubMenu key="export" icon={MenuIcons['download']} title="Export">
-              <Menu.Item key="excel" icon={MenuIcons['excel']} onClick={() => DownloadExcel(this.props.url)}>
-                      Excel
-            </Menu.Item>
-            </SubMenu>
-        : null
-      }
+      {/*        {this.props.url ?*/}
+      {/*            <SubMenu key="export" icon={MenuIcons['download']} title="Export">*/}
+      {/*        <Menu.Item key="excel" icon={MenuIcons['excel']} onClick={() => DownloadExcel(this.props.url)}>*/}
+      {/*                Excel*/}
+      {/*      </Menu.Item>*/}
+      {/*      </SubMenu>*/}
+      {/*  : null*/}
+      {/*}*/}
       <Menu.Item key="logout" icon={MenuIcons['logout']} onClick={this.handleLogout}>
-              Logout- not
+              Logout
             </Menu.Item>
 
           </Menu>

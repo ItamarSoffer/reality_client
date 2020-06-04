@@ -12,7 +12,12 @@ import './main.css'
 
 
 class App extends React.Component{
-  render() {
+
+    componentDidMount() {
+        document.title = "Story";
+    }
+
+    render() {
 	  return (
 	  	<AppRouter isLogged={this.props.isLogged}/>
 

@@ -6,9 +6,11 @@ import 'react-vertical-timeline-component/style.min.css';
 import axios from 'axios';
 import DataEvent from '../DataEvent/dataEventComponent';
 import LoadingPage from '../LoadingComponent/LoadingPage';
+import {backendAPI} from "../../Structure/api";
 const { Title } = Typography;
 
-const base_url = "http://itsoffer:5005/api/timeline/";
+
+
 
 class Timeline extends React.Component {
 
@@ -22,7 +24,7 @@ class Timeline extends React.Component {
 
     componentDidMount() {
         const TimelineUrl = this.props.url;
-
+        const base_url = backendAPI.concat("/timeline/");
         const apiGetBasicData = base_url.concat(`${TimelineUrl}/basic_data`);
         axios.get(apiGetBasicData)
             .then(res => res.data[0])
