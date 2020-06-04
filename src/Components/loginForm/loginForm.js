@@ -1,6 +1,8 @@
 import React from 'react';
 import {Form, Input, Button, Checkbox, Card} from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { Typography } from 'antd';
+const { Title } = Typography;
 
 
 class LoginForm extends React.Component{
@@ -28,14 +30,18 @@ class LoginForm extends React.Component{
                       alignItems: 'center',
                       justifyContent: 'center',
                       borderRadius: '12px',
-                      borderColor: '#ddd'
+                      borderColor: '#ddd',
+                      minHeight: 300
 
                   }}>
+                  <Title level={1}>Tell Your Story </Title>
+
                   <Form
                       name="normal_login"
                       className="login-form"
                       initialValues={{remember: true}}
                       onFinish={this.onFinish}
+
                   >
                       <Form.Item
                           name="username"
@@ -53,21 +59,12 @@ class LoginForm extends React.Component{
                               placeholder="Password"
                           />
                       </Form.Item>
-                      <Form.Item>
-                          <Form.Item name="remember" valuePropName="checked" noStyle>
-                              <Checkbox>Remember me</Checkbox>
-                          </Form.Item>
-
-                          <a className="login-form-forgot" href=".">
-                              Forgot password
-                          </a>
-                      </Form.Item>
 
                       <Form.Item>
-                          <Button type="primary" htmlType="submit" className="login-form-button">
+                          <Button type="primary" htmlType="submit" className="login-form-button" style={{width: '250px'}}>
                               Log in
                           </Button>
-                          Or <a href=".">register now!</a>
+
                       </Form.Item>
                   </Form>
               </Card>
