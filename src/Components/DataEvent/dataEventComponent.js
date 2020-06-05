@@ -3,6 +3,9 @@ import { VerticalTimelineElement }  from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
 import TimelineIcons from '../Icons/Icons';
 import { Typography, ConfigProvider } from 'antd';
+import {EventDropdown} from "./eventDropdown";
+import {connect} from "react-redux";
+
 
 const { Paragraph, Title } = Typography;
 
@@ -26,6 +29,7 @@ class DataEvent extends React.Component {
             date={this.props.data.event_time}
 
           >
+
                 {!this.props.data.header ? null : <Title level={3}>{this.props.data.header}</Title> }
             {!this.props.data.text ? null :
                 <Paragraph ellipsis={{rows: 3, expandable: true}} style={{whiteSpace: "pre-line"}}>
@@ -33,6 +37,7 @@ class DataEvent extends React.Component {
                 </Paragraph>}
                 {!this.props.data.link ? null :
                     <div><a href={this.props.data.link}>{this.props.data.link}</a> <br/></div>}
+                {this.props.editMode? <EventDropdown/>: null}
 
           </VerticalTimelineElement>
             </ConfigProvider>
@@ -40,5 +45,16 @@ class DataEvent extends React.Component {
         );
     }
 }
+const mapStateToProps = state => {
+  return {
+      editMode: state.sitesReducer.editMode
 
-export default DataEvent
+  }
+};
+
+const mapDispatchToProps = dispatch => {
+
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(DataEvent);
+

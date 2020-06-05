@@ -24,24 +24,14 @@ class Timeline extends React.Component {
 
     componentDidMount() {
         const TimelineUrl = this.props.url;
-        const base_url = backendAPI.concat("/timeline/");
-        const apiGetBasicData = base_url.concat(`${TimelineUrl}/basic_data`);
-        axios.get(apiGetBasicData)
-            .then(res => res.data[0])
-            .then((data) => {
-                this.setState({
-                    basic_data:data})});
-                // .then(() => {console.log("basic data", this.state.basic_data)});
-
-
-        const apiGetEvents = base_url.concat(TimelineUrl);
+        const apiGetEvents = backendAPI.concat(`/timeline/${TimelineUrl}`);
         // console.log(apiGetEvents);
         axios.get(apiGetEvents)
             .then(res => res.data.events)
             .then((evs) => {
                 this.setState({
                     timeline_events:evs,
-                    isLoaded: true})})
+                    isLoaded: true})});
                 // .then(() => {console.log("StateEvents:", this.state.timeline_events)});
 
 
@@ -71,15 +61,14 @@ class Timeline extends React.Component {
                     //style={{backgroundColor: '#ccc'}}
                 >
 
-                    <Title level={1} style={{textAlign:'center'}}>{this.state.basic_data.name}</Title>
-                    <Title level={4} style={{textAlign:'center'}}>{this.state.basic_data.description}</Title>
-
+                    <Title level={1} style={{textAlign:'center'}}>{this.props.basicData.name}</Title>
+                    <Title level={4} style={{textAlign:'center'}}>{this.props.basicData.description}</Title>
                     <VerticalTimeline
-                        id={this.state.basic_data.id}
+                        id={this.props.basicData.id}
                         style={{background: '#f00'}}>
                         {this.state.timeline_events.map(
                             function(evt){
-                                return <DataEvent data={evt}/>
+                                return <DataEvent data={evt}  />
                             })}
                     </VerticalTimeline>
                 </div>

@@ -1,15 +1,19 @@
 const DarkModeLocalStorage = window.localStorage.getItem('DarkMode');
 
-const initState = {
-    DarkMode: (DarkModeLocalStorage !== null ? DarkModeLocalStorage : false)
+const siteInitState = {
+    DarkMode: (DarkModeLocalStorage !== null ? DarkModeLocalStorage : false),
+    editMode: false
 };
 
-const sitesReducer = (state = initState, action) => {
+const sitesReducer = (state = siteInitState, action) => {
 
     switch(action.type){
         case "SET_THEME":
             window.localStorage.setItem('DarkMode',action.payload);
             state = {...state, DarkMode: action.payload};
+        break;
+        case "EDIT_MODE":
+            state = {...state, editMode: action.payload};
         break;
         default:
         break;

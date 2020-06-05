@@ -15,7 +15,8 @@ import {
     PlusOutlined,
     LinkOutlined,
     FormOutlined,
-    HomeOutlined
+    HomeOutlined,
+    EditOutlined
 } from '@ant-design/icons';
 
 export const MenuIcons = {
@@ -34,7 +35,8 @@ export const MenuIcons = {
     "plus": <PlusOutlined />,
     "link": <LinkOutlined />,
     "form": <FormOutlined />,
-    "home": <HomeOutlined/>
+    "home": <HomeOutlined/>,
+    "edit": <EditOutlined />
 
 };
 export default MenuIcons;

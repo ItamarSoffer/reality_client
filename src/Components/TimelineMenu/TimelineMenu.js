@@ -4,6 +4,8 @@ import { Menu } from 'antd';
 import MenuIcons from '../Icons/MenuIcons';
 import DownloadExcel from '../Export/ToExcel';
 import CreateNewEvent from "../NewEvent/NewEventComponent";
+import {enableEditAction, disableEditAction} from "../../Actions/siteActions";
+import {connect} from "react-redux";
 
 const { SubMenu } = Menu;
 
@@ -39,6 +41,16 @@ class TimelineMenu extends React.Component {
             <Menu.Item disabled key="filter_by_word">By Word</Menu.Item>
         </SubMenu>
 
+          <SubMenu key="m_edit" icon={MenuIcons['edit']} title="Edit">
+              <Menu.Item key="m_enable_edit" onClick={() => this.props.enableEdit()}>
+                      Enable Edit
+            </Menu.Item>
+              <Menu.Item key="m_disable_edit" onClick={() => this.props.disableEdit()}>
+                      Disable Edit
+            </Menu.Item>
+          </SubMenu>
+
+
          <SubMenu key="export" icon={MenuIcons['download']} title="Export">
               <Menu.Item key="export_excel" icon={MenuIcons['excel']} onClick={() => DownloadExcel(this.props.url)}>
                       Excel
@@ -52,5 +64,21 @@ class TimelineMenu extends React.Component {
     );
   }
 }
+const mapStateToProps = state => {
+  return {
+    loggedUser: state.usersReducer.loggedUser,
+      DarkMode: state.sitesReducer.DarkMode,
+      editMode: state.sitesReducer.editMode
 
-export default TimelineMenu
+  }
+};
+
+const mapDispatchToProps = dispatch => {
+    return{
+        enableEdit: () => {dispatch(enableEditAction())},
+        disableEdit: () => {dispatch(disableEditAction())},
+    }
+
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TimelineMenu);

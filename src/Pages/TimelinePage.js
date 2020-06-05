@@ -8,6 +8,7 @@ import {backendAPI} from "../Structure/api";
 import axios from 'axios';
 import LoadingPage from "../Components/LoadingComponent/LoadingPage";
 import {NoPermissions} from "../Components/NoPermissions/noPermissions";
+import {enableEditAction, disableEditAction} from "../Actions/siteActions";
 
 const {Title} = Typography;
 
@@ -18,6 +19,7 @@ class RealityPage extends  React.Component {
             isPageLoaded: false,
             role: null
         }
+
     }
     componentWillMount() {
         const url = this.props.match.params.timeline_url;
@@ -40,8 +42,24 @@ class RealityPage extends  React.Component {
         })
     }
 
+    componentDidMount() {
+        const TimelineUrl = this.props.match.params.timeline_url;
+        const apiGetBasicData = backendAPI.concat(`/timeline/${TimelineUrl}/basic_data`);
+        axios.get(apiGetBasicData)
+            .then(res => res.data[0])
+            .then((data) => {
+                this.setState({
+                    timelineBasicData:data})});
 
+    }
 
+    handleEnableEdit(){
+        this.props.enableEdit()
+    }
+
+    handleDisableEdit(){
+        this.props.disableEdit()
+    }
 
     render() {
         if (!this.state.isPageLoaded) {
@@ -63,9 +81,13 @@ class RealityPage extends  React.Component {
 
                             :
                             <div>
-                                <TimelineMenu url={this.props.match.params.timeline_url} DarkMode={this.props.DarkMode}
-                                              loggedUser={this.props.loggedUser}/>
-                                <Timeline url={this.props.match.params.timeline_url}/>
+                                <TimelineMenu url={this.props.match.params.timeline_url}
+                                              loggedUser={this.props.loggedUser}
+                                              />
+
+                                <Timeline url={this.props.match.params.timeline_url}
+                                basicData={this.state.timelineBasicData}
+                                />
                             </div>
                         }
                     </Layout>
@@ -85,7 +107,7 @@ const mapStateToProps = state => {
   }
 };
 
-const mapDispatchToProps = disaptch => {
+const mapDispatchToProps = dispatch => {
 
 };
 

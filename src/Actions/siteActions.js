@@ -4,3 +4,17 @@ export const changeThemeAction = (isCurrentDark) => {
         payload: !isCurrentDark
     }
 };
+
+export const enableEditAction = () => {
+    return {
+        type: "EDIT_MODE",
+        payload: true
+    }
+};
+
+export const disableEditAction = () => {
+    return {
+        type: "EDIT_MODE",
+        payload: false
+    }
+};

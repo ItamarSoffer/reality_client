@@ -40,10 +40,10 @@ const mapStateToProps = state => {
     }
 };
 
-const mapDispatchToProps = disaptch => {
+const mapDispatchToProps = dispatch => {
     return {
         login: (email,password) => {
-            disaptch(loginAction(email,password));
+            dispatch(loginAction(email,password));
         }
     }
 };
