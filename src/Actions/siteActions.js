@@ -18,3 +18,18 @@ export const disableEditAction = () => {
         payload: false
     }
 };
+
+
+export const showModalAction = () => {
+    return {
+        type: "NEW_EVENT_MODAL_VIEW",
+        payload: true
+    }
+};
+
+export const hideModalAction = () => {
+    return {
+        type: "NEW_EVENT_MODAL_VIEW",
+        payload: false
+    }
+};

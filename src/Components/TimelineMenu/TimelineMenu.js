@@ -5,6 +5,7 @@ import MenuIcons from '../Icons/MenuIcons';
 import DownloadExcel from '../Export/ToExcel';
 import CreateNewEvent from "../NewEvent/NewEventComponent";
 import {enableEditAction, disableEditAction} from "../../Actions/siteActions";
+import {showModalAction, hideModalAction} from "../../Actions/siteActions";
 import {connect} from "react-redux";
 
 const { SubMenu } = Menu;
@@ -26,6 +27,7 @@ class TimelineMenu extends React.Component {
         const menuTheme = this.props.DarkMode === true ? "dark": "light";
         // console.log('Dark theme timeline', this.props.DarkMode);
     return (
+        <div>
       <Menu
           onClick={this.handleClick}
           mode="horizontal"
@@ -33,9 +35,10 @@ class TimelineMenu extends React.Component {
           selectable={false}
           theme={menuTheme}
       >
-          <Menu.Item key={"m_add"} >
-                     <CreateNewEvent url={this.props.url} loggedUser={this.props.loggedUser} />
+          <Menu.Item key={"m_add"} icon={MenuIcons["plus"]} onClick={() => this.props.showModal()}>
+                    add Event
              </Menu.Item>
+
         <SubMenu icon={MenuIcons["setting"]} title="Filter">
             <Menu.Item disabled key="filter_by_time" >By Date</Menu.Item>
             <Menu.Item disabled key="filter_by_word">By Word</Menu.Item>
@@ -57,10 +60,10 @@ class TimelineMenu extends React.Component {
             </Menu.Item>
 
             </SubMenu>
-
-
-
       </Menu>
+            <CreateNewEvent url={this.props.url} loggedUser={this.props.loggedUser} />
+
+            </div>
     );
   }
 }
@@ -77,6 +80,7 @@ const mapDispatchToProps = dispatch => {
     return{
         enableEdit: () => {dispatch(enableEditAction())},
         disableEdit: () => {dispatch(disableEditAction())},
+        showModal: () => {dispatch(showModalAction())},
     }
 
 };

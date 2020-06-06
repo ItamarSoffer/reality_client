@@ -37,7 +37,7 @@ class DataEvent extends React.Component {
                 </Paragraph>}
                 {!this.props.data.link ? null :
                     <div><a href={this.props.data.link}>{this.props.data.link}</a> <br/></div>}
-                {this.props.editMode? <EventDropdown/>: null}
+                {this.props.editMode? <EventDropdown eventId={this.props.data.event_id}/>: null}
 
           </VerticalTimelineElement>
             </ConfigProvider>

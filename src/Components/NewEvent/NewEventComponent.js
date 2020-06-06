@@ -7,13 +7,14 @@ import ColorPicker from '../ColorPicker/ColorPicker';
 import MenuIcons from "../Icons/MenuIcons";
 import {backendAPI} from "../../Structure/api";
 import { Typography } from 'antd';
+import {connect} from "react-redux";
+import {showModalAction, hideModalAction} from "../../Actions/siteActions";
 
 const { Text } = Typography;
 const { TextArea } = Input;
 
 
 class CreateNewEvent extends React.Component {
-  state = { visible: false };
 
   showModal = () => {
     this.setState({
@@ -22,6 +23,7 @@ class CreateNewEvent extends React.Component {
   };
 
   closeModal = () => {
+      this.props.hideModal();
     this.setState({
       visible: false,
     });
@@ -29,6 +31,7 @@ class CreateNewEvent extends React.Component {
 
   handleOk = () => {
     // console.log(e);
+  this.props.hideModal();
     this.setState({
       visible: false,
     });
@@ -36,6 +39,7 @@ class CreateNewEvent extends React.Component {
 
   handleCancel = () => {
     // console.log(e);
+            this.props.hideModal();
     this.setState({
       visible: false,
     });
@@ -92,14 +96,11 @@ class CreateNewEvent extends React.Component {
 
   render() {
     return (
-      <div>
-        <Text onClick={this.showModal} >
-            {MenuIcons['plus']}Add Event
-        </Text>
+
           <ConfigProvider direction={"rtl"}>
         <Modal
           title="אירוע חדש"
-          visible={this.state.visible}
+          visible={this.props.showNewEventModal}
           onOk={this.handleOk}
           onCancel={this.handleCancel}
             okText="צור אירוע"
@@ -194,10 +195,22 @@ class CreateNewEvent extends React.Component {
             </Form>
         </Modal>
           </ConfigProvider>
-      </div>
     );
   }
 }
 
+const mapStateToProps = state => {
+  return {
+      showNewEventModal: state.sitesReducer.showNewEventModal
 
-export default CreateNewEvent;
+  }
+};
+
+const mapDispatchToProps = dispatch => {
+    return{
+        hideModal: () => {dispatch(hideModalAction())}
+    }
+
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateNewEvent);

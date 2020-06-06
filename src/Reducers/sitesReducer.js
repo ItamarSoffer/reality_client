@@ -2,7 +2,8 @@ const DarkModeLocalStorage = window.localStorage.getItem('DarkMode');
 
 const siteInitState = {
     DarkMode: (DarkModeLocalStorage !== null ? DarkModeLocalStorage : false),
-    editMode: false
+    editMode: false,
+    showNewEventModal: false
 };
 
 const sitesReducer = (state = siteInitState, action) => {
@@ -14,6 +15,9 @@ const sitesReducer = (state = siteInitState, action) => {
         break;
         case "EDIT_MODE":
             state = {...state, editMode: action.payload};
+        break;
+        case "NEW_EVENT_MODAL_VIEW":
+            state = {...state, showNewEventModal: action.payload};
         break;
         default:
         break;
