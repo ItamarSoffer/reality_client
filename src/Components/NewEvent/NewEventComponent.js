@@ -6,11 +6,9 @@ import IconsSelect from '../Icons/IconsSelect';
 import ColorPicker from '../ColorPicker/ColorPicker';
 import MenuIcons from "../Icons/MenuIcons";
 import {backendAPI} from "../../Structure/api";
-import { Typography } from 'antd';
 import {connect} from "react-redux";
-import {showModalAction, hideModalAction} from "../../Actions/siteActions";
+import {hideNewEventModalAction} from "../../Actions/siteActions";
 
-const { Text } = Typography;
 const { TextArea } = Input;
 
 
@@ -23,7 +21,7 @@ class CreateNewEvent extends React.Component {
   };
 
   closeModal = () => {
-      this.props.hideModal();
+      this.props.hideNewEventModal();
     this.setState({
       visible: false,
     });
@@ -31,7 +29,7 @@ class CreateNewEvent extends React.Component {
 
   handleOk = () => {
     // console.log(e);
-  this.props.hideModal();
+  this.props.hideNewEventModal();
     this.setState({
       visible: false,
     });
@@ -39,7 +37,7 @@ class CreateNewEvent extends React.Component {
 
   handleCancel = () => {
     // console.log(e);
-            this.props.hideModal();
+            this.props.hideNewEventModal();
     this.setState({
       visible: false,
     });
@@ -122,7 +120,6 @@ class CreateNewEvent extends React.Component {
                 id={"add_event_form"}
                 onFinish={this.onFinish}
                 onFinishFailed={this.onFinishFailed}
-
 >
                 <Form.Item
                     className="title-form"
@@ -134,8 +131,6 @@ class CreateNewEvent extends React.Component {
                 >
                     <Input placeholder={"כותרת"} />
                 </Form.Item>
-
-
                 <Form.Item
                     className="link-form"
                     //label="תאריך"
@@ -144,14 +139,14 @@ class CreateNewEvent extends React.Component {
                         required: true,
                         message: 'Event date' }]}
                 >
-                    <DatePicker placeholder={"תאריך"} />
+                    <DatePicker autoComplete='off' placeholder={"תאריך"} />
                 </Form.Item>
                 <Form.Item
                     className="link-form"
                     //label="שעה"
                     name="hour"
                 >
-                    <TimePicker placeholder={"שעה"}/>
+                    <TimePicker autoComplete='off' placeholder={"שעה"}/>
                 </Form.Item>
                 <Form.Item
                     className="link-form"
@@ -173,7 +168,6 @@ class CreateNewEvent extends React.Component {
                 >
                     <TextArea rows={3} placeholder={"תוכן האירוע"} prefix={MenuIcons["form"]}/>
                 </Form.Item>
-
                 <Form.Item
                     className="link-form"
                     //label="אייקון"
@@ -208,7 +202,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return{
-        hideModal: () => {dispatch(hideModalAction())}
+        hideNewEventModal: () => {dispatch(hideNewEventModalAction())}
     }
 
 };

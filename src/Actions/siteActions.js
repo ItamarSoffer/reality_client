@@ -20,16 +20,30 @@ export const disableEditAction = () => {
 };
 
 
-export const showModalAction = () => {
+export const showNewEventModalAction = () => {
     return {
         type: "NEW_EVENT_MODAL_VIEW",
         payload: true
     }
 };
 
-export const hideModalAction = () => {
+export const hideNewEventModalAction = () => {
     return {
         type: "NEW_EVENT_MODAL_VIEW",
+        payload: false
+    }
+};
+
+export const showPermissionsModalAction = () => {
+    return {
+        type: "PERMISSIONS_MODAL_VIEW",
+        payload: true
+    }
+};
+
+export const hidePermissionsModalAction = () => {
+    return {
+        type: "PERMISSIONS_MODAL_VIEW",
         payload: false
     }
 };

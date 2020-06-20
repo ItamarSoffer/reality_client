@@ -1,5 +1,6 @@
 import React from 'react';
-import { Menu, Dropdown, Popconfirm, message } from 'antd';
+import { Menu, Dropdown, } from 'antd';
+// import { Popconfirm, message  } from 'antd';
 import MenuIcons from '../Icons/MenuIcons';
 
 export class EventDropdown extends React.Component{

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Layout, Typography} from "antd";
+import {Layout} from "antd";
 import Timeline from '../Components/Timelines/timeline';
 import TimelineMenu from "../Components/TimelineMenu/TimelineMenu";
 import SideMenuPage from './sideMenuPage'
@@ -8,9 +8,6 @@ import {backendAPI} from "../Structure/api";
 import axios from 'axios';
 import LoadingPage from "../Components/LoadingComponent/LoadingPage";
 import {NoPermissions} from "../Components/NoPermissions/noPermissions";
-import {enableEditAction, disableEditAction} from "../Actions/siteActions";
-
-const {Title} = Typography;
 
 class RealityPage extends  React.Component {
     constructor(props){
@@ -22,13 +19,14 @@ class RealityPage extends  React.Component {
 
     }
     componentWillMount() {
+        const permittedRoles = ['read', 'write', 'owner'];
         const url = this.props.match.params.timeline_url;
         const username = this.props.loggedUser;
-        const permissionsApi = backendAPI.concat(`/timeline/${url}/permissions?username=${username}`);
+        const permissionsApi = backendAPI.concat(`/timeline/${url}/check_permissions?username=${username}`);
          axios.get(permissionsApi)
         .then((response) => {
 
-            if (typeof response.data.role !== 'undefined') {
+            if (permittedRoles.indexOf(response.data.role) !== -1) {
                 this.setState( {
                     isPageLoaded: true,
                 role: response.data.role
@@ -83,6 +81,7 @@ class RealityPage extends  React.Component {
                             <div>
                                 <TimelineMenu url={this.props.match.params.timeline_url}
                                               loggedUser={this.props.loggedUser}
+                                              role={this.state.role}
                                               />
 
                                 <Timeline url={this.props.match.params.timeline_url}
@@ -108,6 +107,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
+    return {}
 
 };
 
