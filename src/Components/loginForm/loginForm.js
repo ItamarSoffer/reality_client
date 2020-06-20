@@ -34,8 +34,7 @@ class LoginForm extends React.Component{
                       minHeight: 300
 
                   }}>
-                  <Title level={1}>Tell Your Story </Title>
-
+                  <Title level={1} style={{textAlign:"center"}}>Tell Your Story </Title>
                   <Form
                       name="normal_login"
                       className="login-form"
@@ -61,7 +60,7 @@ class LoginForm extends React.Component{
                       </Form.Item>
 
                       <Form.Item>
-                          <Button type="primary" htmlType="submit" className="login-form-button" style={{width: '250px'}}>
+                          <Button type="primary" htmlType="submit" className="login-form-button" style={{width: '350px'}}>
                               Log in
                           </Button>
 
