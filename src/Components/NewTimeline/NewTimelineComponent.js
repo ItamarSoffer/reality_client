@@ -1,5 +1,5 @@
 import React from 'react';
-import {Form, Input, Button, message} from 'antd';
+import {Form, Input, Button, message, Card, Typography} from 'antd';
 import 'antd/dist/antd.css';
 import axios from "axios";
 import { withRouter } from "react-router-dom";
@@ -8,6 +8,7 @@ import {api_create_timeline} from '../../Structure/api';
 import MenuIcons from "../Icons/MenuIcons";
 
 const { TextArea } = Input;
+const {Title} = Typography;
 
 const layout = {
   labelCol: { span: 8 },
@@ -20,13 +21,13 @@ const tailLayout = {
 
 class CreateNewTimeline extends React.Component {
 
-    constructor(props){
-        super(props);
-        this.state = {
-            check: 1
-
-        }
-    }
+    // constructor(props){
+    //     super(props);
+    //     this.state = {
+    //         check: 1
+    //
+    //     }
+    // }
 
     onFinish = values => {
 
@@ -79,42 +80,53 @@ class CreateNewTimeline extends React.Component {
       style={{
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'center',
+          position: 'absolute', left: '50%', top: '30%',
+                  transform: 'translate(-50%, -50%)'
       }}>
+                <Card
+                  style={{
+                      width: 700,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      borderRadius: '12px',
+                      borderColor: '#ddd',
+                      minHeight: 300
+
+                  }}>
+                    <Title level={1} style={{textAlign:"center"}}>New Story</Title>
+
             <Form
-                {...layout}
                 onFinish={this.onFinish}
                 onFinishFailed={this.onFinishFailed}
+
 
 
             >
 
                 <Form.Item
                     className="title-form"
-                    label="Title"
                     name="title"
                     rules={[{
                         required: true,
                         message: 'Timeline Title' }]}
                 >
 
-                    <Input />
+                    <Input placeholder="Title"/>
                 </Form.Item>
 
                 <Form.Item
                     className="link-form"
-                    label="URL"
                     name="timeline_url"
                     rules={[{
                         required: true,
                         message: 'Uniq URL' }]}
                 >
-                    <Input />
+                    <Input placeholder="URL" />
                 </Form.Item>
 
                 <Form.Item
                     //className="link-form"
-                    label="Description"
                     name="description"
                     rules={[{
                         message: 'Timeline Description' }]}
@@ -122,14 +134,19 @@ class CreateNewTimeline extends React.Component {
                     <TextArea rows={3} placeholder={"Description"} prefix={MenuIcons["form"]}/>
                 </Form.Item>
 
-                 <Form.Item {...tailLayout}>
-                     <Button type="primary" htmlType="submit" >
+                 <Form.Item >
+                     <Button type="primary" htmlType="submit"
+                             style={{width:550,
+                                 background:'rgb(30,251,35)',
+                                 borderColor:'rgb(3,170,7)',
+                             color:'#000'}} >
                          Create
                      </Button>
 
                  </Form.Item>
 
             </Form>
+                </Card>
 
           </div>
         )

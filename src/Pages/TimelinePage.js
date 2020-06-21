@@ -78,7 +78,7 @@ class RealityPage extends  React.Component {
                             <NoPermissions />
 
                             :
-                            <div>
+                            <div >
                                 <TimelineMenu url={this.props.match.params.timeline_url}
                                               loggedUser={this.props.loggedUser}
                                               role={this.state.role}
