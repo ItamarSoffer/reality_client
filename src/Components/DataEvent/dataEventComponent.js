@@ -37,7 +37,9 @@ class DataEvent extends React.Component {
                 </Paragraph>}
                 {!this.props.data.link ? null :
                     <div><a href={this.props.data.link}>{this.props.data.link}</a> <br/></div>}
-                {this.props.editMode? <EventDropdown eventId={this.props.data.event_id}/>: null}
+                {!this.props.editMode? null:
+                    <EventDropdown eventId={this.props.data.event_id}
+                                   loggedUser={this.props.loggedUser}/>}
 
           </VerticalTimelineElement>
             </ConfigProvider>
@@ -47,7 +49,8 @@ class DataEvent extends React.Component {
 }
 const mapStateToProps = state => {
   return {
-      editMode: state.sitesReducer.editMode
+      editMode: state.sitesReducer.editMode,
+      loggedUser : state.usersReducer.loggedUser
 
   }
 };

@@ -1,11 +1,13 @@
 import React from 'react';
 import axois from 'axios';
-import {Form, Modal, Input, message, Button} from 'antd';
+import {Form, Modal, Input, message, Button, Typography} from 'antd';
 // import {AutoComplete} from 'antd';
 import {connect} from 'react-redux';
 import {hidePermissionsModalAction} from "../../Actions/siteActions";
 import RolesSelect from "./rolesSelect";
 import {backendAPI} from "../../Structure/api";
+
+const {Text} = Typography;
 
 
 
@@ -92,7 +94,6 @@ class PermissionsModal extends React.Component{
                   id={"permissions_form"}
                   onFinish={this.onFinish}
                   onFinishFailed={this.onFinishFailed}
-
                   >
 
                   <Form.Item
@@ -114,6 +115,8 @@ class PermissionsModal extends React.Component{
                     <RolesSelect handleRoleChange={this.onRoleChange}/>
                 </Form.Item>
               </Form>
+              <Text>for public story, add permissions to </Text>
+              <Text strong>public</Text>
 
           </Modal>
       )
