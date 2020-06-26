@@ -10,24 +10,16 @@ import MenuIcons from "../Icons/MenuIcons";
 const { TextArea } = Input;
 const {Title} = Typography;
 
-const layout = {
-  labelCol: { span: 8 },
-  wrapperCol: { span: 16 },
-};
-const tailLayout = {
-  wrapperCol: { offset: 8, span: 16 },
-};
+// const layout = {
+//   labelCol: { span: 8 },
+//   wrapperCol: { span: 16 },
+// };
+// const tailLayout = {
+//   wrapperCol: { offset: 8, span: 16 },
+// };
 
 
 class CreateNewTimeline extends React.Component {
-
-    // constructor(props){
-    //     super(props);
-    //     this.state = {
-    //         check: 1
-    //
-    //     }
-    // }
 
     onFinish = values => {
 
@@ -137,8 +129,8 @@ class CreateNewTimeline extends React.Component {
                  <Form.Item >
                      <Button type="primary" htmlType="submit"
                              style={{width:550,
-                                 background:'rgb(30,251,35)',
-                                 borderColor:'rgb(3,170,7)',
+                                 background:'#722ed1',
+                                 borderColor:'#b37feb',
                              color:'#000'}} >
                          Create
                      </Button>

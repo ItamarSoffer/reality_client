@@ -7,7 +7,7 @@ import ColorPicker from '../ColorPicker/ColorPicker';
 import MenuIcons from "../Icons/MenuIcons";
 import {backendAPI} from "../../Structure/api";
 import {connect} from "react-redux";
-import {hideNewEventModalAction} from "../../Actions/siteActions";
+import {hideNewEventModalAction, setReRenderTimelineAction} from "../../Actions/siteActions";
 
 const { TextArea } = Input;
 
@@ -67,9 +67,7 @@ class CreateNewEvent extends React.Component {
   message.success(response.data, 1.5)
 
       .then(() => {
-
-
-      return message.loading('redirecting', 1);
+          this.props.setReRenderTimeline(this.props.timelineRenderCount +    1);
   })
   }
   }).then(() => this.closeModal());
@@ -195,14 +193,16 @@ class CreateNewEvent extends React.Component {
 
 const mapStateToProps = state => {
   return {
-      showNewEventModal: state.sitesReducer.showNewEventModal
+      showNewEventModal: state.sitesReducer.showNewEventModal,
+      timelineRenderCount: state.sitesReducer.timelineRenderCount,
 
   }
 };
 
 const mapDispatchToProps = dispatch => {
     return{
-        hideNewEventModal: () => {dispatch(hideNewEventModalAction())}
+        hideNewEventModal: () => {dispatch(hideNewEventModalAction())},
+        setReRenderTimeline: (index) => {dispatch(setReRenderTimelineAction(index))}
     }
 
 };

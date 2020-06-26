@@ -47,3 +47,11 @@ export const hidePermissionsModalAction = () => {
         payload: false
     }
 };
+
+export const setReRenderTimelineAction = (index) => {
+    console.log("Changed rerender index to", index);
+    return {
+        type: "TIMELINE_RENDER_COUNT",
+        payload: index
+    }
+};

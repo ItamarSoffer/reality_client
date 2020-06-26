@@ -3,10 +3,12 @@ import {Menu, Dropdown, message} from 'antd';
 import axois from 'axios';
 // import { Popconfirm, message  } from 'antd';
 import MenuIcons from '../Icons/MenuIcons';
+import {setReRenderTimelineAction} from "../../Actions/siteActions";
+import {connect} from "react-redux";
 import {backendAPI} from "../../Structure/api";
 
 
-export class EventDropdown extends React.Component{
+class EventDropdown extends React.Component{
 
     handleDelete = () => {
         const delUrl = backendAPI.concat(`/timeline/del_event?username=${this.props.loggedUser}&event_id=${this.props.eventId}`);
@@ -17,7 +19,9 @@ export class EventDropdown extends React.Component{
                     message.warning(response.data)
                 }
                 else if (response.status === 200){
-                    message.success(response.data, 1.5)
+                    message.success(response.data, 1.5);
+                    this.props.setReRenderTimeline(1);
+
                 }
   });
 
@@ -46,3 +50,17 @@ export class EventDropdown extends React.Component{
         )
     }
 }
+
+const mapStateToProps = state => {
+  return {
+  }
+};
+
+const mapDispatchToProps = dispatch => {
+    return{
+        setReRenderTimeline: (index) => {dispatch(setReRenderTimelineAction(index))}
+    }
+
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(EventDropdown);

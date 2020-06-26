@@ -86,6 +86,7 @@ class RealityPage extends  React.Component {
 
                                 <Timeline url={this.props.match.params.timeline_url}
                                 basicData={this.state.timelineBasicData}
+                                          timelineRenderCount={this.props.timelineRenderCount}
                                 />
                             </div>
                         }
@@ -100,8 +101,9 @@ class RealityPage extends  React.Component {
 
 const mapStateToProps = state => {
   return {
-    loggedUser: state.usersReducer.loggedUser,
+      loggedUser: state.usersReducer.loggedUser,
       DarkMode: state.sitesReducer.DarkMode,
+      timelineRenderCount : state.sitesReducer.timelineRenderCount
 
   }
 };

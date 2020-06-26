@@ -7,6 +7,8 @@ import axios from 'axios';
 import DataEvent from '../DataEvent/dataEventComponent';
 import LoadingPage from '../LoadingComponent/LoadingPage';
 import {backendAPI} from "../../Structure/api";
+import {setReRenderTimelineAction} from "../../Actions/siteActions";
+import {connect} from "react-redux";
 const { Title } = Typography;
 
 
@@ -22,7 +24,7 @@ class Timeline extends React.Component {
         }
     }
 
-    componentDidMount() {
+    fetchData() {
         const TimelineUrl = this.props.url;
         const apiGetEvents = backendAPI.concat(`/timeline/${TimelineUrl}`);
         // console.log(apiGetEvents);
@@ -33,9 +35,21 @@ class Timeline extends React.Component {
                     timeline_events:evs,
                     isLoaded: true})});
                 // .then(() => {console.log("StateEvents:", this.state.timeline_events)});
+    }
 
+    componentDidMount() {
+        this.fetchData();
+    }
+
+    componentWillUpdate(nextProps, nextState, nextContext) {
+        if (nextProps.timelineRenderCount === 1) {
+            console.log("IN HERE, will update");
+            this.fetchData();
+            this.props.setReRenderTimeline(0);
+        }
 
     }
+
 
     render() {
         if (!this.state.isLoaded) {
@@ -77,5 +91,16 @@ class Timeline extends React.Component {
         }
     }
 }
+const mapStateToProps = state => {
+  return {
+  }
+};
 
-export default Timeline
+const mapDispatchToProps = dispatch => {
+    return{
+        setReRenderTimeline: (index) => {dispatch(setReRenderTimelineAction(index))}
+    }
+
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Timeline);
