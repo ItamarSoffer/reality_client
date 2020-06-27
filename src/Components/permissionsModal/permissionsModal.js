@@ -1,6 +1,6 @@
 import React from 'react';
 import axois from 'axios';
-import {Form, Modal, Input, message, Button, Typography} from 'antd';
+import {Form, Modal, Input, message, Button, Typography, Divider} from 'antd';
 // import {AutoComplete} from 'antd';
 import {connect} from 'react-redux';
 import {hidePermissionsModalAction} from "../../Actions/siteActions";
@@ -15,6 +15,14 @@ const {Text} = Typography;
 
 
 class PermissionsModal extends React.Component{
+
+    constructor(props){
+         super(props);
+         this.state = {
+             addedPermission: 0
+         }
+
+     }
 
     showModal = () => {
     this.setState({
@@ -35,7 +43,10 @@ class PermissionsModal extends React.Component{
       message.warning(response.data)
   }
   else if (response.status === 200){
-  message.success(response.data, 1.5)
+  message.success(response.data, 1.5);
+      this.setState({
+          addedPermission: this.state.addedPermission + 1
+      })
 
   }
   })
@@ -92,6 +103,7 @@ class PermissionsModal extends React.Component{
         </Button>
         ]}
               >
+              
               <Form
                   id={"permissions_form"}
                   onFinish={this.onFinish}
@@ -119,7 +131,8 @@ class PermissionsModal extends React.Component{
               </Form>
               <Text>for public story, add permissions to </Text>
               <Text strong>public</Text>
-              <PermissionsTable url={this.props.url}/>
+              <Divider> Current Permissions</Divider>
+              <PermissionsTable url={this.props.url} addedPermission={this.state.addedPermission}/>
 
           </Modal>
       )

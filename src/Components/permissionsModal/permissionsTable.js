@@ -36,6 +36,7 @@ class PermissionsTable extends React.Component{
     state={
                 isLoaded: false,
     };
+
     fetchData() {
                 const apiGetPermissions = backendAPI.concat(`/timeline/${this.props.url}/permitted_users`);
         axois.get(apiGetPermissions)
@@ -50,9 +51,20 @@ class PermissionsTable extends React.Component{
     }
 
     componentWillMount() {
+        this.setState({
+            addedPermission: this.props.addedPermission
+        });
         this.fetchData()
-
     }
+    componentWillUpdate(nextProps, nextState, nextContext) {
+        if (nextProps.addedPermission !== this.state.addedPermission){
+            this.fetchData();
+            this.setState({
+                addedPermission: this.props.addedPermission
+            })
+        }
+    }
+
 
 
     render() {
