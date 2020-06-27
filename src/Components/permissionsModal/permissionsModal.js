@@ -103,7 +103,7 @@ class PermissionsModal extends React.Component{
         </Button>
         ]}
               >
-              
+
               <Form
                   id={"permissions_form"}
                   onFinish={this.onFinish}

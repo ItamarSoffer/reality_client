@@ -30,7 +30,7 @@ class EventDropdown extends React.Component{
     render() {
         const menu = (
   <Menu>
-    <Menu.Item>
+    <Menu.Item disabled={true}>
         Edit
     </Menu.Item>
 
