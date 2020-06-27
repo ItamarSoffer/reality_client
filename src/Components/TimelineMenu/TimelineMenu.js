@@ -12,9 +12,15 @@ import {connect} from "react-redux";
 const { SubMenu } = Menu;
 
 class TimelineMenu extends React.Component {
-  state = {
-    current: 'mail',
-  };
+    constructor(props) {
+        super(props);
+        const darkCheck = (this.props.darkMode === "true") || (this.props.darkMode === true);
+        this.state = {
+            current: 'mail',
+            menuTheme: darkCheck ? "dark" : "light"
+
+        };
+    };
 
   handleClick = e => {
     // console.log('click ', e);

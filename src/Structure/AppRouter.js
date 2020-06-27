@@ -7,11 +7,11 @@ import {
 import LoginPage from "../Pages/LoginPage";
 import SideMenuDemo from "../Components/SideMenu/OriginalSideMenu";
 import BaseTimeline from "../Components/Timelines/base_timeline";
-import RealityPage from "../Pages/TimelinePage";
+import StoryPage from "../Pages/TimelinePage";
 import CardsPage from "../Pages/CardsPage";
 import CreateNewEvent from "../Components/NewEvent/NewEventComponent";
 import NewTimelinePage from "../Pages/NewTimelinePage";
-// import HomePage from "../Pages/HomePage";
+import HomePage from "../Pages/HomePage";
 
 
 class AppRouter extends React.Component{
@@ -38,7 +38,7 @@ class AppRouter extends React.Component{
 
                                   <Route path="/base_timeline" component={BaseTimeline}/>
 
-                                  <Route path="/timeline/:timeline_url" component={RealityPage}/>
+                                  <Route path="/timeline/:timeline_url" component={StoryPage}/>
 
                                   <Route path="/all" component={CardsPage}/>
 
@@ -49,11 +49,11 @@ class AppRouter extends React.Component{
                                   {/*<Route path="/login" component={LoginPage}/>*/}
                                   <Route path="/login" component={LoginPage}/>
 
-                                  {/*<Route exact={true} path="/home" component={HomePage}/>*/}
-                                  {/*<Route exact={true} path="/" component={HomePage}/>*/}
+                                  <Route exact={true} path="/home" component={HomePage}/>
+                                  <Route exact={true} path="/" component={HomePage}/>
 
-                                  <Route exact={true} path="/home" component={CardsPage}/>
-                                  <Route exact={true} path="/" component={CardsPage}/>
+                                  {/*<Route exact={true} path="/home" component={CardsPage}/>*/}
+                                  {/*<Route exact={true} path="/" component={CardsPage}/>*/}
                               </div>
 
                       }

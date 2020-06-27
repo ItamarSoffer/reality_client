@@ -5,6 +5,7 @@ import {Form, Modal, Input, message, Button, Typography} from 'antd';
 import {connect} from 'react-redux';
 import {hidePermissionsModalAction} from "../../Actions/siteActions";
 import RolesSelect from "./rolesSelect";
+import PermissionsTable from "./permissionsTable"
 import {backendAPI} from "../../Structure/api";
 
 const {Text} = Typography;
@@ -37,7 +38,8 @@ class PermissionsModal extends React.Component{
   message.success(response.data, 1.5)
 
   }
-  }).then(() => this.closeModal());
+  })
+            // .then(() => this.closeModal());
   };
 
       onFinishFailed = errorInfo => {
@@ -83,7 +85,7 @@ class PermissionsModal extends React.Component{
               onCancel={this.handleCancel}
               style={{borderRadius: '16px',}}
               footer={[<Button type="default"  key="close" onClick={this.handleCancel}>
-            Cancel
+            Close
         </Button>,
         <Button type="primary" form="permissions_form" key="submit" htmlType="submit">
             Set
@@ -117,6 +119,7 @@ class PermissionsModal extends React.Component{
               </Form>
               <Text>for public story, add permissions to </Text>
               <Text strong>public</Text>
+              <PermissionsTable url={this.props.url}/>
 
           </Modal>
       )

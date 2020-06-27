@@ -14,13 +14,13 @@ The Reality card will get a data as prop with the the following things:
 
 const cardStyle = {
             //height: '120px',
-  fontSize: '14px',
-     textAlign: 'center',
-  //lineHeight: '20px',
+    fontSize: '14px',
+    textAlign: 'center',
+  // lineHeight: '20px',
     minHeight: '130px',
+    borderRadius: '8px',
 
   //background: '#0092ff',
-  borderRadius: '8px',
         };
 
 
@@ -52,6 +52,12 @@ class RealityCard extends React.Component{
                 </div>
             }
       <Text >Created by: {this.props.cardData.create_user}</Text>
+      {/*      {! this.props.cardData.hasOwnProperty('role')? null:*/}
+      {/*      <div>*/}
+
+      {/*<Text >role: {this.props.cardData.role}</Text>*/}
+      {/*      </div>*/}
+      {/*      }*/}
         </Card>
 
 </div>

@@ -34,7 +34,9 @@ class NewTimelinePage extends React.Component{
 
 const mapStateToProps = state => {
   return {
-    loggedUser: state.usersReducer.loggedUser
+    loggedUser: state.usersReducer.loggedUser,
+      DarkMode: state.sitesReducer.DarkMode,
+
   }
 };
 
@@ -43,3 +45,6 @@ const mapDispatchToProps = disaptch => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewTimelinePage);
+
+
+

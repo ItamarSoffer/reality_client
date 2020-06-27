@@ -9,7 +9,7 @@ import axios from 'axios';
 import LoadingPage from "../Components/LoadingComponent/LoadingPage";
 import {NoPermissions} from "../Components/NoPermissions/noPermissions";
 
-class RealityPage extends  React.Component {
+class StoryPage extends  React.Component {
     constructor(props){
         super(props);
         this.state = {
@@ -51,13 +51,6 @@ class RealityPage extends  React.Component {
 
     }
 
-    handleEnableEdit(){
-        this.props.enableEdit()
-    }
-
-    handleDisableEdit(){
-        this.props.disableEdit()
-    }
 
     render() {
         if (!this.state.isPageLoaded) {
@@ -113,5 +106,5 @@ const mapDispatchToProps = dispatch => {
 
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(RealityPage);
+export default connect(mapStateToProps, mapDispatchToProps)(StoryPage);
 

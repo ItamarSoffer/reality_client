@@ -9,15 +9,21 @@ import MenuIcons from '../Icons/MenuIcons';
 const { Sider } = Layout;
 
 class SideMenu extends React.Component {
+    constructor(props){
+        super(props);
+        const darkCheck = (this.props.darkMode === "true") || (this.props.darkMode === true)  ;
+        this.state = {
+            collapsed: true,
+            theme: darkCheck ? 'dark' : 'light',
+            menuBackground: darkCheck ? 'rgb(0,21,41)' : 'rgb(255,255,255)'
 
-  state = {
-    collapsed: true,
-    // theme: 'dark',
-    // menuBackground: 'rgb(0,21,41)'
-     theme: this.props.DarkMode === "true" ? 'dark' : 'light',
-    menuBackground: 'rgb(255,255,255)'
 
-  };
+        };
+
+    }
+
+
+
 
 
     onCollapse = collapsed => {
@@ -54,29 +60,6 @@ class SideMenu extends React.Component {
               defaultSelectedKeys={['1']}
               selectable={false}
           >
-            {/*<SubMenu key="sub1" icon={MenuIcons['user']} title="Development">*/}
-            {/*  <Menu.Item key="s1">*/}
-			{/*	<Link to="/base_timeline"> Base Timeline </Link>*/}
-            {/*  </Menu.Item>*/}
-
-            {/*  <Menu.Item key="s2">*/}
-            {/*    <Link to="/new_timeline"> Create New Timeline</Link>*/}
-            {/*  </Menu.Item>*/}
-
-            {/*  <Menu.Item key="s3">*/}
-            {/*    <Link to="/login"> Login Form</Link>*/}
-            {/*  </Menu.Item>*/}
-
-            {/*  <Menu.Item key="s4">*/}
-            {/*    <Link to="/all"> All cards</Link>*/}
-            {/*  </Menu.Item>*/}
-
-            {/*  <Menu.Item key="s4">*/}
-            {/*    <Link to="/New_Event"> New Event</Link>*/}
-            {/*  </Menu.Item>*/}
-
-
-            {/*</SubMenu>*/}
 
             <Menu.Item key="Home" icon={MenuIcons['home']}
                             onClick={() => {this.props.history.push({

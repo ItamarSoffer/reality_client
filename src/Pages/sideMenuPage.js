@@ -21,9 +21,10 @@ class SideMenuPage extends React.Component{
     };
 
     render() {
+
         return (
             <SideMenu url={this.props.url}
-                      darkMode={this.DarkMode}
+                      darkMode={this.props.DarkMode}
                       handlerLogout={this.handlerLogout}
                       handleChangeTheme={this.handleChangeTheme}
             />

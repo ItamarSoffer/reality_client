@@ -1,7 +1,9 @@
 import React from 'react';
 import {Layout} from "antd";
-import Home from '../HomePage/ReactHome';
+import StoryHome from '../Components/HomePage/StoryHome';
+
 import SideMenuPage from './sideMenuPage';
+import {connect} from "react-redux";
 
 
 class HomePage extends  React.Component {
@@ -11,7 +13,7 @@ class HomePage extends  React.Component {
                   <SideMenuPage url={this.props.match.params.timeline_url} />
 
                   <Layout>
-                      <Home/>
+                      <StoryHome loggedUser={this.props.loggedUser}/>
                   </Layout>
         </Layout>
         )
@@ -20,4 +22,18 @@ class HomePage extends  React.Component {
 }
 
 
-export default HomePage
+const mapStateToProps = state => {
+  return {
+      loggedUser: state.usersReducer.loggedUser,
+      DarkMode: state.sitesReducer.DarkMode,
+      timelineRenderCount : state.sitesReducer.timelineRenderCount
+
+  }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {}
+
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

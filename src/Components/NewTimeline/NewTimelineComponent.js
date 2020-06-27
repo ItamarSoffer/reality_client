@@ -131,7 +131,7 @@ class CreateNewTimeline extends React.Component {
                              style={{width:550,
                                  background:'#722ed1',
                                  borderColor:'#b37feb',
-                             color:'#000'}} >
+                             }} >
                          Create
                      </Button>
 

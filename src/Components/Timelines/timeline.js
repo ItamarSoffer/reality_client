@@ -43,7 +43,6 @@ class Timeline extends React.Component {
 
     componentWillUpdate(nextProps, nextState, nextContext) {
         if (nextProps.timelineRenderCount === 1) {
-            console.log("IN HERE, will update");
             this.fetchData();
             this.props.setReRenderTimeline(0);
         }
