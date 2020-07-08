@@ -28,7 +28,10 @@ class Timeline extends React.Component {
         const TimelineUrl = this.props.url;
         const apiGetEvents = backendAPI.concat(`/timeline/${TimelineUrl}`);
         // console.log(apiGetEvents);
-        axios.get(apiGetEvents)
+        axios.post(apiGetEvents,
+            {
+                jwt_token: this.props.jwtToken,
+            })
             .then(res => res.data.events)
             .then((evs) => {
                 this.setState({
@@ -92,6 +95,7 @@ class Timeline extends React.Component {
 }
 const mapStateToProps = state => {
   return {
+      jwtToken: state.usersReducer.jwtToken,
   }
 };
 

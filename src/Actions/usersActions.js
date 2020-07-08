@@ -1,11 +1,12 @@
 import axios from 'axios';
 import {message} from "antd";
-import {LoginApi} from "../Structure/api";
+import {backendAPI} from "../Structure/api";
 
 
 export const loginAction = (username, password) => {
+
     return async (dispatch) =>{
-        const userLoginApi = LoginApi.concat(`?username=${username}&password=${password}`);
+        const userLoginApi = backendAPI.concat(`/login?username=${username}&password=${password}`);
     axios.get(userLoginApi)
                .then((response) => {
   // console.log("resp", response);

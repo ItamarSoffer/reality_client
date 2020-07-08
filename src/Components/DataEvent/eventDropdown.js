@@ -13,7 +13,9 @@ class EventDropdown extends React.Component{
     handleDelete = () => {
         const delUrl = backendAPI.concat(`/timeline/del_event?username=${this.props.loggedUser}&event_id=${this.props.eventId}`);
         console.log(delUrl);
-        axios.get(delUrl)
+        axios.post(delUrl, {
+            jwt_token: this.props.jwtToken,
+        })
             .then((response) => {
                 if (response.status === 201){
                     message.warning(response.data)
@@ -53,6 +55,7 @@ class EventDropdown extends React.Component{
 
 const mapStateToProps = state => {
   return {
+      jwtToken: state.usersReducer.jwtToken,
   }
 };
 

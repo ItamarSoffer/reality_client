@@ -2,6 +2,8 @@ import React from "react";
 import axios from 'axios'
 import {Table, Tag} from "antd";
 import {backendAPI} from "../../Structure/api";
+import {connect} from "react-redux";
+
 
 const colormap = {
     'read': 'geekblue',
@@ -39,7 +41,10 @@ class PermissionsTable extends React.Component{
 
     fetchData() {
                 const apiGetPermissions = backendAPI.concat(`/timeline/${this.props.url}/permitted_users`);
-        axios.get(apiGetPermissions)
+        axios.post(apiGetPermissions,
+            {
+                jwt_token: this.props.jwtToken,
+            })
             .then(res => res.data)
             .then( (data) => {
                 this.setState( {
@@ -87,4 +92,16 @@ class PermissionsTable extends React.Component{
     }
 }
 
-export default PermissionsTable
+const mapStateToProps = state => {
+  return {
+      jwtToken: state.usersReducer.jwtToken,
+
+  }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {}
+
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PermissionsTable);

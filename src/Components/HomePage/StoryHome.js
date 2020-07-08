@@ -4,10 +4,7 @@ import axios from 'axios';
 import {backendAPI} from "../../Structure/api";
 import LoadingPage from "../LoadingComponent/LoadingPage";
 import CardsGrid from '../RealityCard/CardsGrid';
-
-
-
-
+import {connect} from "react-redux";
 
 
 class StoryHome extends  React.Component {
@@ -21,7 +18,10 @@ class StoryHome extends  React.Component {
 
     componentDidMount() {
         const apiGetTimelines = backendAPI.concat(`/get_timelines_by_user?username=${this.props.loggedUser}`);
-        axios.get(apiGetTimelines)
+        axios.post(apiGetTimelines,
+            {
+                jwt_token: this.props.jwtToken,
+            })
             .then(res => res.data)
             .then( (data) => {
                 this.setState({
@@ -86,4 +86,17 @@ class StoryHome extends  React.Component {
         }
     }
 }
-export default StoryHome;
+
+const mapStateToProps = state => {
+  return {
+      jwtToken: state.usersReducer.jwtToken,
+
+  }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {}
+
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(StoryHome);

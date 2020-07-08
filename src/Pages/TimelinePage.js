@@ -23,7 +23,9 @@ class StoryPage extends  React.Component {
         const url = this.props.match.params.timeline_url;
         const username = this.props.loggedUser;
         const permissionsApi = backendAPI.concat(`/timeline/${url}/check_permissions?username=${username}`);
-         axios.get(permissionsApi)
+         axios.post(permissionsApi, {
+             jwt_token: this.props.jwtToken,
+         })
         .then((response) => {
 
             if (permittedRoles.indexOf(response.data.role) !== -1) {
@@ -43,7 +45,10 @@ class StoryPage extends  React.Component {
     componentDidMount() {
         const TimelineUrl = this.props.match.params.timeline_url;
         const apiGetBasicData = backendAPI.concat(`/timeline/${TimelineUrl}/basic_data`);
-        axios.get(apiGetBasicData)
+        axios.post(apiGetBasicData,
+            {
+                jwt_token: this.props.jwtToken,
+            })
             .then(res => res.data[0])
             .then((data) => {
                 this.setState({
@@ -96,7 +101,8 @@ const mapStateToProps = state => {
   return {
       loggedUser: state.usersReducer.loggedUser,
       DarkMode: state.sitesReducer.DarkMode,
-      timelineRenderCount : state.sitesReducer.timelineRenderCount
+      timelineRenderCount : state.sitesReducer.timelineRenderCount,
+      jwtToken: state.usersReducer.jwtToken,
 
   }
 };

@@ -68,7 +68,8 @@ class TimelineMenu extends React.Component {
 
 
          <SubMenu key="export" icon={MenuIcons['download']} title="Export">
-              <Menu.Item key="export_excel" icon={MenuIcons['excel']} onClick={() => DownloadExcel(this.props.url)}>
+              <Menu.Item key="export_excel" icon={MenuIcons['excel']}
+                         onClick={() => DownloadExcel(this.props.url, this.props.jwtToken)}>
                       Excel
             </Menu.Item>
 
@@ -85,7 +86,8 @@ const mapStateToProps = state => {
   return {
     loggedUser: state.usersReducer.loggedUser,
       DarkMode: state.sitesReducer.DarkMode,
-      editMode: state.sitesReducer.editMode
+      editMode: state.sitesReducer.editMode,
+      jwtToken: state.usersReducer.jwtToken,
 
   }
 };

@@ -4,18 +4,21 @@ import moment from 'moment';
 import {backendAPI} from "../../Structure/api";
 
 
+
 const SystemName = 'Story';
 const fileDownload = require('js-file-download');
 
 
-function DownloadExcel(timeline_url) {
-    const api_get_excel = backendAPI.concat(`/timeline/${timeline_url}/get_xlsx`);
+function DownloadExcel(timeline_url, jwtToken) {
+    const apiGetExcel = backendAPI.concat(`/timeline/${timeline_url}/get_xlsx`);
     const output_file_name = `${SystemName}_${timeline_url}_${moment().format('YYYYMMDD-hhmmss')}.xlsx`;
-    axios({
-    method:'GET',
-    url: api_get_excel,
-    responseType: 'blob'
-})
+    axios.post( apiGetExcel,{
+        jwt_token: jwtToken,
+        },
+        {
+        responseType: 'blob',
+}
+)
         .then((response) => {
             // console.log("resp", response);
             if (response.status !== 200){

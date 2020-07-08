@@ -4,8 +4,9 @@ import 'antd/dist/antd.css';
 import axios from "axios";
 import { withRouter } from "react-router-dom";
 
-import {api_create_timeline} from '../../Structure/api';
+import {backendAPI} from '../../Structure/api';
 import MenuIcons from "../Icons/MenuIcons";
+import {connect} from "react-redux";
 
 const { TextArea } = Input;
 const {Title} = Typography;
@@ -27,8 +28,9 @@ class CreateNewTimeline extends React.Component {
             message.error("URL must be al least 3 chars!")
         }
         else {
-    // console.log('Received values from form: ', values);
-     axios.post(api_create_timeline, {
+            const ApiCreateTimeline = backendAPI.concat("/create_timeline");
+     axios.post(ApiCreateTimeline, {
+            jwt_token: this.props.jwtToken,
              create_user: this.props.loggedUser,
              description: values.description,
              name: values.title,
@@ -146,4 +148,16 @@ class CreateNewTimeline extends React.Component {
 
 }
 
-export default withRouter(CreateNewTimeline)
+const mapStateToProps = state => {
+  return {
+      jwtToken: state.usersReducer.jwtToken,
+
+  }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {}
+
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(CreateNewTimeline));

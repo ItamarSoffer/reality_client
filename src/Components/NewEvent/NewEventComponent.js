@@ -49,6 +49,7 @@ class CreateNewEvent extends React.Component {
       // console.log("SENDS TO", api_add_event);
       const hour = typeof values.hour !== "undefined" ? values.hour.format('hh:mm:ss'): "";
       axios.post(api_add_event, {
+          "jwt_token": this.props.jwtToken,
           "header": values.title,
           "text": values.text,
           "date": values.date.format('YYYY-MM-DD'),
@@ -195,6 +196,7 @@ const mapStateToProps = state => {
   return {
       showNewEventModal: state.sitesReducer.showNewEventModal,
       timelineRenderCount: state.sitesReducer.timelineRenderCount,
+      jwtToken: state.usersReducer.jwtToken,
 
   }
 };

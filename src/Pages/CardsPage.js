@@ -4,7 +4,8 @@ import CardsGrid from '../Components/RealityCard/CardsGrid'
 import axios from "axios";
 import LoadingPage from '../Components/LoadingComponent/LoadingPage';
 import SideMenuPage from "./sideMenuPage";
-import {apiGetAllNames} from "../Structure/api";
+import {backendAPI} from "../Structure/api";
+import {connect} from "react-redux";
 
 
 class CardsPage extends  React.Component {
@@ -18,7 +19,10 @@ class CardsPage extends  React.Component {
 
     componentDidMount() {
         // console.log(apiGetAllNames);
-        axios.get(apiGetAllNames)
+        const apiGetAllNames = backendAPI.concat("/get_all_names");
+        axios.post(apiGetAllNames, {
+            "jwt_token": this.props.jwtToken
+        })
             .then(res => res.data)
             .then((data) => {
                 this.setState({
@@ -49,5 +53,16 @@ class CardsPage extends  React.Component {
 
 }
 
+const mapStateToProps = state => {
+  return {
+      jwtToken: state.usersReducer.jwtToken,
 
-export default CardsPage
+  }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {}
+
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CardsPage);

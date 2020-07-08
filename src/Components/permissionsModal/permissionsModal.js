@@ -34,6 +34,7 @@ class PermissionsModal extends React.Component{
         const apiSetPermissions = backendAPI.concat(`/timeline/${this.props.url}/set_permissions/`);
         console.log("VALS", values.username, values.role);
         axios.post(apiSetPermissions, {
+            "jwt_token": this.props.jwtToken,
             "username": values.username,
             "role": this.state.role,
             "adding_user": this.props.loggedUser
@@ -142,7 +143,8 @@ class PermissionsModal extends React.Component{
 
 const mapStateToProps = state => {
   return {
-      showPermissionsModal: state.sitesReducer.showPermissionsModal
+      showPermissionsModal: state.sitesReducer.showPermissionsModal,
+      jwtToken: state.usersReducer.jwtToken,
 
   }
 };
