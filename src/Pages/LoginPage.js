@@ -6,6 +6,7 @@ import {
 
 import LoginForm from '../Components/loginForm/loginForm';
 import {loginAction} from '../Actions/usersActions';
+import {checkJwt} from "../Actions/jwtActions";
 
 class LoginPage extends React.Component{
 
@@ -36,7 +37,8 @@ class LoginPage extends React.Component{
 
 const mapStateToProps = state => {
     return {
-        isLogged: state.usersReducer.isLogged
+        isLogged: checkJwt(state.usersReducer.jwtToken),
+
     }
 };
 

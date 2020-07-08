@@ -13,11 +13,12 @@ export const loginAction = (username, password) => {
       message.warning(response.data)
   }
   else if (response.status === 200){
-  message.success(response.data, 1.5);
+  message.success(`${username} logged in successfully`, 1.5);
   return dispatch({
       type: "LOGIN",
       payload: true,
-      loggedUser: username
+      loggedUser: username,
+      jwtToken: response.data
   })
   }
                })
@@ -29,6 +30,8 @@ export const loginAction = (username, password) => {
 export const logoutAction = () => {
     return {
         type: "LOGIN",
-        payload: false
+        payload: false,
+        loggedUser: '',
+        jwtToken: ''
     }
 };

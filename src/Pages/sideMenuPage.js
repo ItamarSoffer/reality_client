@@ -27,6 +27,7 @@ class SideMenuPage extends React.Component{
                       darkMode={this.props.DarkMode}
                       handlerLogout={this.handlerLogout}
                       handleChangeTheme={this.handleChangeTheme}
+                      jwtToken={this.props.jwtToken}
             />
         )
     }
@@ -38,8 +39,8 @@ class SideMenuPage extends React.Component{
 
 const mapStateToProps = state => {
     return {
-        isLogged: state.usersReducer.isLogged,
-        DarkMode: state.sitesReducer.DarkMode
+        DarkMode: state.sitesReducer.DarkMode,
+        jwtToken: state.usersReducer.jwtToken
 
     }
 };

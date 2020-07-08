@@ -5,6 +5,7 @@ import {
 } from "react-router-dom";
 
 import MenuIcons from '../Icons/MenuIcons';
+import {checkJwt} from "../../Actions/jwtActions";
 
 const { Sider } = Layout;
 
@@ -16,15 +17,8 @@ class SideMenu extends React.Component {
             collapsed: true,
             theme: darkCheck ? 'dark' : 'light',
             menuBackground: darkCheck ? 'rgb(0,21,41)' : 'rgb(255,255,255)'
-
-
         };
-
     }
-
-
-
-
 
     onCollapse = collapsed => {
     // console.log(collapsed);
@@ -41,8 +35,18 @@ class SideMenu extends React.Component {
   };
   handleLogout = () => {
       this.props.handlerLogout();
-      // console.log("logged out")
+
   };
+
+  handleJwtRefresh(){
+      if (!checkJwt(this.props.jwtToken)){
+          window.location.reload();
+
+      }
+      else{
+      }
+
+  }
 
   render() {
     return (
@@ -62,16 +66,24 @@ class SideMenu extends React.Component {
           >
 
             <Menu.Item key="Home" icon={MenuIcons['home']}
-                            onClick={() => {this.props.history.push({
-            pathname: `/`,});
-      }}>
+                            onClick={() => {
+                                this.props.history.push(
+                                    {pathname: `/`,}
+                                    );
+                                this.handleJwtRefresh() ;
+                            }
+                            }>
               Home
             </Menu.Item>
 
             <Menu.Item key="s4" icon={MenuIcons['appstore']}
-                            onClick={() => {this.props.history.push({
-            pathname: `/all/`,});
-      }}>
+                            onClick={() => {
+                                this.props.history.push(
+                                    {pathname: `/all/`,});
+
+                                this.handleJwtRefresh();
+                            }
+                            }>
                 All cards
             </Menu.Item>
 

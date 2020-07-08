@@ -7,6 +7,10 @@ import {connect} from "react-redux";
 
 
 class HomePage extends  React.Component {
+    componentWillMount() {
+        // window.location.reload();
+    }
+
     render() {
         return(
         <Layout style={{ minHeight: '100vh' }} >
