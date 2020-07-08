@@ -1,6 +1,6 @@
 import React from 'react';
 import {Menu, Dropdown, message} from 'antd';
-import axois from 'axios';
+import axios from 'axios';
 // import { Popconfirm, message  } from 'antd';
 import MenuIcons from '../Icons/MenuIcons';
 import {setReRenderTimelineAction} from "../../Actions/siteActions";
@@ -13,7 +13,7 @@ class EventDropdown extends React.Component{
     handleDelete = () => {
         const delUrl = backendAPI.concat(`/timeline/del_event?username=${this.props.loggedUser}&event_id=${this.props.eventId}`);
         console.log(delUrl);
-        axois.get(delUrl)
+        axios.get(delUrl)
             .then((response) => {
                 if (response.status === 201){
                     message.warning(response.data)

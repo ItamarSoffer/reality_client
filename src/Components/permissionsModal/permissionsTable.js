@@ -1,5 +1,5 @@
 import React from "react";
-import axois from 'axios'
+import axios from 'axios'
 import {Table, Tag} from "antd";
 import {backendAPI} from "../../Structure/api";
 
@@ -39,7 +39,7 @@ class PermissionsTable extends React.Component{
 
     fetchData() {
                 const apiGetPermissions = backendAPI.concat(`/timeline/${this.props.url}/permitted_users`);
-        axois.get(apiGetPermissions)
+        axios.get(apiGetPermissions)
             .then(res => res.data)
             .then( (data) => {
                 this.setState( {

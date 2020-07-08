@@ -1,6 +1,6 @@
 import React from 'react';
 import {Layout, Divider} from "antd";
-import axois from 'axios';
+import axios from 'axios';
 import {backendAPI} from "../../Structure/api";
 import LoadingPage from "../LoadingComponent/LoadingPage";
 import CardsGrid from '../RealityCard/CardsGrid';
@@ -21,7 +21,7 @@ class StoryHome extends  React.Component {
 
     componentDidMount() {
         const apiGetTimelines = backendAPI.concat(`/get_timelines_by_user?username=${this.props.loggedUser}`);
-        axois.get(apiGetTimelines)
+        axios.get(apiGetTimelines)
             .then(res => res.data)
             .then( (data) => {
                 this.setState({

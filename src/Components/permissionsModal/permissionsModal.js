@@ -1,5 +1,5 @@
 import React from 'react';
-import axois from 'axios';
+import axios from 'axios';
 import {Form, Modal, Input, message, Button, Typography, Divider} from 'antd';
 // import {AutoComplete} from 'antd';
 import {connect} from 'react-redux';
@@ -33,7 +33,7 @@ class PermissionsModal extends React.Component{
     onFinish = values => {
         const apiSetPermissions = backendAPI.concat(`/timeline/${this.props.url}/set_permissions/`);
         console.log("VALS", values.username, values.role);
-        axois.post(apiSetPermissions, {
+        axios.post(apiSetPermissions, {
             "username": values.username,
             "role": this.state.role,
             "adding_user": this.props.loggedUser
