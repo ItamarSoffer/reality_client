@@ -6,6 +6,7 @@ const siteInitState = {
     showNewEventModal: false,
     showPermissionsModal: false,
     timelineRenderCount: 0,
+    showDeleteTimelineModal: false
 };
 
 const sitesReducer = (state = siteInitState, action) => {
@@ -30,6 +31,10 @@ const sitesReducer = (state = siteInitState, action) => {
 
         case "TIMELINE_RENDER_COUNT":
             state = {...state, timelineRenderCount: action.payload};
+        break;
+
+        case "DELETE_TIMELINE_MODAL_VIEW":
+            state = {...state, showDeleteTimelineModal: action.payload};
         break;
 
         default:

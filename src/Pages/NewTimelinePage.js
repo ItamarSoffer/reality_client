@@ -19,7 +19,8 @@ class NewTimelinePage extends React.Component{
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  position: 'absolute', left: '50%', top: '40%',
+                  position: 'absolute',
+                          left: '50%', top: '40%',
                   transform: 'translate(-50%, -50%)'
 
               }}>

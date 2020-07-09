@@ -54,3 +54,17 @@ export const setReRenderTimelineAction = (index) => {
         payload: index
     }
 };
+
+export const showDeleteTimelineModalAction = () => {
+    return {
+        type: "DELETE_TIMELINE_MODAL_VIEW",
+        payload: true
+    }
+};
+
+export const hideDeleteTimelineModalAction = () => {
+    return {
+        type: "DELETE_TIMELINE_MODAL_VIEW",
+        payload: false
+    }
+};

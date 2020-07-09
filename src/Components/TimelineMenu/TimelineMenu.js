@@ -7,9 +7,10 @@ import DownloadExcel from '../Export/ToExcel';
 import CreateNewEvent from "../NewEvent/NewEventComponent";
 import PermissionsModal from "../permissionsModal/permissionsModal";
 import {enableEditAction, disableEditAction} from "../../Actions/siteActions";
-import {showNewEventModalAction, showPermissionsModalAction} from "../../Actions/siteActions";
+import {showNewEventModalAction, showPermissionsModalAction, showDeleteTimelineModalAction} from "../../Actions/siteActions";
 import {backendAPI} from "../../Structure/api";
 import {withRouter} from "react-router";
+import DeleteTimelineModal from '../DeleteTimeline/DeleteTimelineModal';
 
 const { SubMenu } = Menu;
 
@@ -19,7 +20,8 @@ class TimelineMenu extends React.Component {
         const darkCheck = (this.props.darkMode === "true") || (this.props.darkMode === true);
         this.state = {
             current: 'mail',
-            menuTheme: darkCheck ? "dark" : "light"
+            menuTheme: darkCheck ? "dark" : "light",
+            visiblePop: false
 
         };
     };
@@ -31,7 +33,7 @@ class TimelineMenu extends React.Component {
     });
   };
 
-  handleTimelineDelete = () => {
+  handleTimelineDelete1 = () => {
       const delTimelineUrl = backendAPI.concat(`/timeline/del_timeline?timeline_id=${this.props.timelineId}`);
       message.info("Get a backup on us :)");
       DownloadExcel(this.props.url, this.props.jwtToken);
@@ -54,6 +56,16 @@ class TimelineMenu extends React.Component {
 
 
   };
+
+  cancel = e => {
+  console.log(e);
+  message.error('Click on No');
+    };
+
+  confirm = e => {
+  console.log(e);
+  message.success('Click on Yes');
+    };
 
 
 
@@ -91,8 +103,10 @@ class TimelineMenu extends React.Component {
                   <Menu.Item key="m_disable_edit" onClick={() => this.props.disableEdit()}>
                       Disable Edit
                   </Menu.Item>
-                  <Menu.Item key="m_del_timeline" style={{color:"red"}} onClick={() => this.handleTimelineDelete()}>
-                      Delete Timeline
+                  <Menu.Item key="m_del_timeline" style={{color:"red"}} onClick={() => this.props.showDeleteTimelineModal()}>
+
+                      Delete Story
+
                   </Menu.Item>
               </SubMenu>
           }
@@ -109,6 +123,9 @@ class TimelineMenu extends React.Component {
       </Menu>
             <CreateNewEvent url={this.props.url} />
             <PermissionsModal url={this.props.url}/>
+            <DeleteTimelineModal
+                url={this.props.url}
+                timelineId={this.props.timelineId}/>
             </div>
     );
   }
@@ -128,9 +145,10 @@ const mapDispatchToProps = dispatch => {
         disableEdit: () => {dispatch(disableEditAction())},
         showNewEventModal: () => {dispatch(showNewEventModalAction())},
         showPermissionsModal: () => {dispatch(showPermissionsModalAction())},
+        showDeleteTimelineModal: () => {dispatch(showDeleteTimelineModalAction())},
 
     }
 
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(TimelineMenu));
+export default connect(mapStateToProps, mapDispatchToProps)(TimelineMenu);

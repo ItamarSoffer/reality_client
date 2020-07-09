@@ -76,7 +76,7 @@ class CreateNewTimeline extends React.Component {
       }}>
                 <Card
                   style={{
-                      width: 700,
+                      width: '200%',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',

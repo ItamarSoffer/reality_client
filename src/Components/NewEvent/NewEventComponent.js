@@ -161,7 +161,7 @@ class CreateNewEvent extends React.Component {
                     //label="תוכן"
                     name="text"
                     rules={[{
-                        required: true,
+                        // required: true,
                         message: 'Event content' }]}
                 >
                     <TextArea rows={3} placeholder={"תוכן האירוע"} prefix={MenuIcons["form"]}/>

@@ -10,10 +10,6 @@ import {backendAPI} from "../../Structure/api";
 
 const {Text} = Typography;
 
-
-
-
-
 class PermissionsModal extends React.Component{
 
     constructor(props){
@@ -21,14 +17,7 @@ class PermissionsModal extends React.Component{
          this.state = {
              addedPermission: 0
          }
-
      }
-
-    showModal = () => {
-    this.setState({
-      visible: true,
-    });
-  };
 
     onFinish = values => {
         const apiSetPermissions = backendAPI.concat(`/timeline/${this.props.url}/set_permissions/`);
