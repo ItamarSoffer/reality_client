@@ -21,6 +21,11 @@ class StoryPage extends  React.Component {
     }
     componentWillMount() {
         refreshByJwt(this.props.jwtToken);
+        this.getBasicData();
+        this.checkPermissions();
+    }
+
+    checkPermissions() {
         const permittedRoles = ['read', 'write', 'owner'];
         const url = this.props.match.params.timeline_url;
         const permissionsApi = backendAPI.concat(`/timeline/${url}/check_permissions`);
@@ -42,8 +47,7 @@ class StoryPage extends  React.Component {
             }
         })
     }
-
-    componentDidMount() {
+    getBasicData() {
         const TimelineUrl = this.props.match.params.timeline_url;
         const apiGetBasicData = backendAPI.concat(`/timeline/${TimelineUrl}/basic_data`);
         axios.post(apiGetBasicData,
@@ -54,9 +58,7 @@ class StoryPage extends  React.Component {
             .then((data) => {
                 this.setState({
                     timelineBasicData:data})});
-
     }
-
 
     render() {
         if (!this.state.isPageLoaded) {
@@ -81,6 +83,7 @@ class StoryPage extends  React.Component {
                                 <TimelineMenu url={this.props.match.params.timeline_url}
                                               loggedUser={this.props.loggedUser}
                                               role={this.state.role}
+                                              timelineId={this.state.timelineBasicData.id}
                                               />
 
                                 <Timeline url={this.props.match.params.timeline_url}

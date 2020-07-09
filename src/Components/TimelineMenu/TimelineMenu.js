@@ -1,13 +1,15 @@
 import React from 'react';
-
-import { Menu } from 'antd';
+import {connect} from "react-redux";
+import {Menu, message} from 'antd';
+import axios from 'axios';
 import MenuIcons from '../Icons/MenuIcons';
 import DownloadExcel from '../Export/ToExcel';
 import CreateNewEvent from "../NewEvent/NewEventComponent";
 import PermissionsModal from "../permissionsModal/permissionsModal";
 import {enableEditAction, disableEditAction} from "../../Actions/siteActions";
 import {showNewEventModalAction, showPermissionsModalAction} from "../../Actions/siteActions";
-import {connect} from "react-redux";
+import {backendAPI} from "../../Structure/api";
+import {withRouter} from "react-router";
 
 const { SubMenu } = Menu;
 
@@ -28,6 +30,31 @@ class TimelineMenu extends React.Component {
       current: e.key,
     });
   };
+
+  handleTimelineDelete = () => {
+      const delTimelineUrl = backendAPI.concat(`/timeline/del_timeline?timeline_id=${this.props.timelineId}`);
+      message.info("Get a backup on us :)");
+      DownloadExcel(this.props.url, this.props.jwtToken);
+      axios.post(delTimelineUrl, {
+            jwt_token: this.props.jwtToken,
+        })
+            .then((response) => {
+                if (response.status === 201){
+                    message.warning(response.data)
+                }
+                else if (response.status === 200){
+                    message.success(response.data, 1.5)
+                        .then(
+                            this.props.history.push({
+                                pathname: `/`,
+                            })
+                        )
+                }
+  });
+
+
+  };
+
 
 
     render() {
@@ -63,6 +90,9 @@ class TimelineMenu extends React.Component {
                   </Menu.Item>
                   <Menu.Item key="m_disable_edit" onClick={() => this.props.disableEdit()}>
                       Disable Edit
+                  </Menu.Item>
+                  <Menu.Item key="m_del_timeline" style={{color:"red"}} onClick={() => this.handleTimelineDelete()}>
+                      Delete Timeline
                   </Menu.Item>
               </SubMenu>
           }
@@ -103,4 +133,4 @@ const mapDispatchToProps = dispatch => {
 
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TimelineMenu);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(TimelineMenu));
