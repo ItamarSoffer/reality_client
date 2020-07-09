@@ -77,15 +77,14 @@ class TimelineMenu extends React.Component {
             </SubMenu>
 
       </Menu>
-            <CreateNewEvent url={this.props.url} loggedUser={this.props.loggedUser} />
-            <PermissionsModal url={this.props.url} loggedUser={this.props.loggedUser}/>
+            <CreateNewEvent url={this.props.url} />
+            <PermissionsModal url={this.props.url}/>
             </div>
     );
   }
 }
 const mapStateToProps = state => {
   return {
-    loggedUser: state.usersReducer.loggedUser,
       DarkMode: state.sitesReducer.DarkMode,
       editMode: state.sitesReducer.editMode,
       jwtToken: state.usersReducer.jwtToken,
