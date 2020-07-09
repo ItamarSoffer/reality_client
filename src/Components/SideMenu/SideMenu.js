@@ -5,7 +5,7 @@ import {
 } from "react-router-dom";
 
 import MenuIcons from '../Icons/MenuIcons';
-import {checkJwt} from "../../Actions/jwtActions";
+import {refreshByJwt} from "../../Actions/jwtActions";
 
 const { Sider } = Layout;
 
@@ -38,15 +38,6 @@ class SideMenu extends React.Component {
 
   };
 
-  handleJwtRefresh(){
-      if (!checkJwt(this.props.jwtToken)){
-          window.location.reload();
-
-      }
-      else{
-      }
-
-  }
 
   render() {
     return (
@@ -70,7 +61,7 @@ class SideMenu extends React.Component {
                                 this.props.history.push(
                                     {pathname: `/`,}
                                     );
-                                this.handleJwtRefresh() ;
+                                refreshByJwt(this.props.jwtToken);
                             }
                             }>
               Home
@@ -80,8 +71,7 @@ class SideMenu extends React.Component {
                             onClick={() => {
                                 this.props.history.push(
                                     {pathname: `/all/`,});
-
-                                this.handleJwtRefresh();
+                                refreshByJwt(this.props.jwtToken);
                             }
                             }>
                 All cards

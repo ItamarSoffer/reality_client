@@ -9,3 +9,13 @@ export const checkJwt = (jwtToken) => {
     // console.log("LEFT", tokenExpiration - dateNow.getTime()/1000);
     return (tokenExpiration > dateNow.getTime()/1000)
     };
+
+export const refreshByJwt = (jwtToken) => {
+      if (!checkJwt(jwtToken)){
+          window.location.reload();
+
+      }
+      else{
+      }
+
+  };

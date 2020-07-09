@@ -17,7 +17,7 @@ class StoryHome extends  React.Component {
     }
 
     componentDidMount() {
-        const apiGetTimelines = backendAPI.concat(`/get_timelines_by_user?username=${this.props.loggedUser}`);
+        const apiGetTimelines = backendAPI.concat(`/get_timelines_by_user`);
         axios.post(apiGetTimelines,
             {
                 jwt_token: this.props.jwtToken,

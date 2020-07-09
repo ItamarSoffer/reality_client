@@ -8,6 +8,7 @@ import {backendAPI} from "../Structure/api";
 import axios from 'axios';
 import LoadingPage from "../Components/LoadingComponent/LoadingPage";
 import {NoPermissions} from "../Components/NoPermissions/noPermissions";
+import {refreshByJwt} from "../Actions/jwtActions";
 
 class StoryPage extends  React.Component {
     constructor(props){
@@ -19,10 +20,10 @@ class StoryPage extends  React.Component {
 
     }
     componentWillMount() {
+        refreshByJwt(this.props.jwtToken);
         const permittedRoles = ['read', 'write', 'owner'];
         const url = this.props.match.params.timeline_url;
-        const username = this.props.loggedUser;
-        const permissionsApi = backendAPI.concat(`/timeline/${url}/check_permissions?username=${username}`);
+        const permissionsApi = backendAPI.concat(`/timeline/${url}/check_permissions`);
          axios.post(permissionsApi, {
              jwt_token: this.props.jwtToken,
          })
@@ -99,7 +100,6 @@ class StoryPage extends  React.Component {
 
 const mapStateToProps = state => {
   return {
-      loggedUser: state.usersReducer.loggedUser,
       DarkMode: state.sitesReducer.DarkMode,
       timelineRenderCount : state.sitesReducer.timelineRenderCount,
       jwtToken: state.usersReducer.jwtToken,

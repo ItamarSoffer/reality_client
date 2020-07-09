@@ -31,7 +31,7 @@ class CreateNewTimeline extends React.Component {
             const ApiCreateTimeline = backendAPI.concat("/create_timeline");
      axios.post(ApiCreateTimeline, {
             jwt_token: this.props.jwtToken,
-             create_user: this.props.loggedUser,
+             // create_user: this.props.loggedUser,
              description: values.description,
              name: values.title,
              url: values.timeline_url
