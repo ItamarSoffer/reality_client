@@ -51,7 +51,13 @@ class RealityCard extends React.Component{
                 < br />
                 </div>
             }
-      <Text >Created by: {this.props.cardData.create_user}</Text>
+            {!this.props.cardData.counter ? null :
+                <div>
+                <Text style={{color: '#222'}}>Events: {this.props.cardData.counter}</Text>
+                < br />
+                </div>
+            }
+            <Text >Created by: {this.props.cardData.create_user}</Text>
       {/*      {! this.props.cardData.hasOwnProperty('role')? null:*/}
       {/*      <div>*/}
 
