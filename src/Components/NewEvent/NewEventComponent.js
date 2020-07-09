@@ -57,7 +57,7 @@ class CreateNewEvent extends React.Component {
           "frame_color": this.state.color,
           "icon": this.state.icon,
           "link": values.link,
-          "user": this.props.loggedUser
+          // "user": this.props.loggedUser
 })
          .then((response) => {
   // console.log("resp", response);

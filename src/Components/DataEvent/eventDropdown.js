@@ -11,7 +11,7 @@ import {backendAPI} from "../../Structure/api";
 class EventDropdown extends React.Component{
 
     handleDelete = () => {
-        const delUrl = backendAPI.concat(`/timeline/del_event?username=${this.props.loggedUser}&event_id=${this.props.eventId}`);
+        const delUrl = backendAPI.concat(`/timeline/del_event?event_id=${this.props.eventId}`);
         console.log(delUrl);
         axios.post(delUrl, {
             jwt_token: this.props.jwtToken,

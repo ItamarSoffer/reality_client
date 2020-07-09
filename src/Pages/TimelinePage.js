@@ -22,7 +22,7 @@ class StoryPage extends  React.Component {
         const permittedRoles = ['read', 'write', 'owner'];
         const url = this.props.match.params.timeline_url;
         const username = this.props.loggedUser;
-        const permissionsApi = backendAPI.concat(`/timeline/${url}/check_permissions?username=${username}`);
+        const permissionsApi = backendAPI.concat(`/timeline/${url}/check_permissions`);
          axios.post(permissionsApi, {
              jwt_token: this.props.jwtToken,
          })
