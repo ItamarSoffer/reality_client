@@ -1,7 +1,9 @@
 import React from 'react';
-import { Typography, Table, ConfigProvider } from 'antd';
+import { Typography, Table, ConfigProvider, Button, Space, Input } from 'antd';
 import 'react-vertical-timeline-component/style.min.css';
 import {connect} from "react-redux";
+import Highlighter from 'react-highlight-words';
+import { SearchOutlined } from '@ant-design/icons';
 import {TableIcons} from '../Icons/Icons';
 
 
@@ -17,6 +19,10 @@ function handleText (text){
 }
 
 class StoryTable extends React.Component {
+      state = {
+    searchText: '',
+    searchedColumn: '',
+  };
     setColumns() {
         let columns =
             [
@@ -34,13 +40,18 @@ class StoryTable extends React.Component {
             dataIndex: 'event_time',
             key: 'event_time',
             align: 'center',
+            sorter: (a, b) => Date.parse(a.event_time) - Date.parse(b.event_time),
+            defaultSortOrder: 'descend',
+
         },
         {
             title: 'Title',
             dataIndex: 'header',
             key: 'header',
             align: 'center',
-            render: text => handleText(text)
+            render: text => handleText(text),
+            ...this.getColumnSearchProps('header'),
+
 
         },
         // {
@@ -56,7 +67,9 @@ class StoryTable extends React.Component {
             dataIndex: 'text',
             key: 'text',
             align: 'center',
-                        render: text => handleText(text)
+            render: text => handleText(text),
+            ...this.getColumnSearchProps('text'),
+
 
         })
         }
@@ -70,6 +83,69 @@ class StoryTable extends React.Component {
         return columns
 
     }
+
+    getColumnSearchProps = dataIndex => ({
+    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
+      <div style={{ padding: 8 }}>
+        <Input
+          ref={node => {
+            this.searchInput = node;
+          }}
+          placeholder={`Search ${dataIndex}`}
+          value={selectedKeys[0]}
+          onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+          onPressEnter={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
+          style={{ width: 188, marginBottom: 8, display: 'block' }}
+        />
+        <Space>
+          <Button
+            type="primary"
+            onClick={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
+            icon={<SearchOutlined />}
+            size="small"
+            style={{ width: 90 }}
+          >
+            Search
+          </Button>
+          <Button onClick={() => this.handleReset(clearFilters)} size="small" style={{ width: 90 }}>
+            Reset
+          </Button>
+        </Space>
+      </div>
+    ),
+    filterIcon: filtered => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
+    onFilter: (value, record) =>
+      record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
+    onFilterDropdownVisibleChange: visible => {
+      if (visible) {
+        setTimeout(() => this.searchInput.select());
+      }
+    },
+    render: text =>
+      this.state.searchedColumn === dataIndex ? (
+        <Highlighter
+          highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
+          searchWords={[this.state.searchText]}
+          autoEscape
+          textToHighlight={text.toString()}
+        />
+      ) : (
+        text
+      ),
+  });
+
+  handleSearch = (selectedKeys, confirm, dataIndex) => {
+    confirm();
+    this.setState({
+      searchText: selectedKeys[0],
+      searchedColumn: dataIndex,
+    });
+  };
+
+  handleReset = clearFilters => {
+    clearFilters();
+    this.setState({ searchText: '' });
+  };
 
     render() {
         const columns = this.setColumns();

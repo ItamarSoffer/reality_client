@@ -85,7 +85,7 @@ class StoryPage extends  React.Component {
                                               role={this.state.role}
                                               timelineId={this.state.timelineBasicData.id}
                                               />
-                                              
+
                                 <Timeline url={this.props.match.params.timeline_url}
                                           basicData={this.state.timelineBasicData}
                                           timelineRenderCount={this.props.timelineRenderCount}
