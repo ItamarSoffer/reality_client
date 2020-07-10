@@ -10,7 +10,7 @@ import {
 } from "react-icons/ai";
 
 import {Tag} from 'antd';
-import TimelineIcons from '../Icons/Icons'
+import {TimelineIcons} from '../Icons/Icons'
 import DataEvent from "../DataEvent/dataEventComponent";
 
 

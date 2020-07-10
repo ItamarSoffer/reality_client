@@ -9,6 +9,7 @@ import axios from 'axios';
 import LoadingPage from "../Components/LoadingComponent/LoadingPage";
 import {NoPermissions} from "../Components/NoPermissions/noPermissions";
 import {refreshByJwt} from "../Actions/jwtActions";
+import StoryTable from '../Components/StoryTable/StoryTable';
 
 class StoryPage extends  React.Component {
     constructor(props){
@@ -86,10 +87,16 @@ class StoryPage extends  React.Component {
                                               timelineId={this.state.timelineBasicData.id}
                                               />
 
+                                <StoryTable url={this.props.match.params.timeline_url}
+                                            basicData={this.state.timelineBasicData}
+                                            timelineRenderCount={this.props.timelineRenderCount}
+                                />
+
                                 <Timeline url={this.props.match.params.timeline_url}
-                                basicData={this.state.timelineBasicData}
+                                          basicData={this.state.timelineBasicData}
                                           timelineRenderCount={this.props.timelineRenderCount}
                                 />
+
                             </div>
                         }
                     </Layout>

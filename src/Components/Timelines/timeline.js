@@ -10,6 +10,7 @@ import {backendAPI} from "../../Structure/api";
 import {setReRenderTimelineAction} from "../../Actions/siteActions";
 import {connect} from "react-redux";
 const { Title } = Typography;
+import StoryTable from '../StoryTable/StoryTable';
 
 
 

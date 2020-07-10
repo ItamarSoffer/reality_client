@@ -1,6 +1,6 @@
 import React from 'react';
 import {Select} from "antd";
-import TimelineIcons from './Icons';
+import {TimelineIcons} from './Icons';
 
 const { Option } = Select;
 
