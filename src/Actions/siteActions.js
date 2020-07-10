@@ -68,3 +68,25 @@ export const hideDeleteTimelineModalAction = () => {
         payload: false
     }
 };
+
+export const storyModeTimelineAction = () => {
+    return {
+        type: "STORY_VIEW_MODE",
+        payload: 'timeline'
+    }
+};
+
+export const storyModeTableAction = () => {
+    return {
+        type: "STORY_VIEW_MODE",
+        payload: 'full_table'
+    }
+};
+
+export const storyModePrevTableAction = () => {
+    return {
+        type: "STORY_VIEW_MODE",
+        payload: 'preview_table'
+    }
+};
+

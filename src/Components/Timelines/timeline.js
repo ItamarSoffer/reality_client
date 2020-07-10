@@ -9,11 +9,10 @@ import LoadingPage from '../LoadingComponent/LoadingPage';
 import {backendAPI} from "../../Structure/api";
 import {setReRenderTimelineAction} from "../../Actions/siteActions";
 import {connect} from "react-redux";
-const { Title } = Typography;
 import StoryTable from '../StoryTable/StoryTable';
 
 
-
+const { Title } = Typography;
 
 class Timeline extends React.Component {
 
@@ -80,14 +79,21 @@ class Timeline extends React.Component {
 
                     <Title level={1} style={{textAlign:'center'}}>{this.props.basicData.name}</Title>
                     <Title level={4} style={{textAlign:'center'}}>{this.props.basicData.description}</Title>
-                    <VerticalTimeline
-                        id={this.props.basicData.id}
-                        style={{background: '#f00'}}>
-                        {this.state.timeline_events.map(
-                            function(evt){
-                                return <DataEvent data={evt}  />
-                            })}
-                    </VerticalTimeline>
+                    {this.props.storyViewMode !== 'timeline'?
+                    <StoryTable
+                        timeline_events={this.state.timeline_events.map(e => ({...e, iconAndColor: [e.icon, e.frame_color]}))
+
+                        }/> : null}
+                    {this.props.storyViewMode === 'timeline' ?
+                        <VerticalTimeline
+                            id={this.props.basicData.id}
+                            style={{background: '#f00'}}>
+                            {this.state.timeline_events.map(
+                                function (evt) {
+                                    return <DataEvent data={evt}/>
+                                })}
+                        </VerticalTimeline> : null
+                    }
                 </div>
 
             );
@@ -97,6 +103,7 @@ class Timeline extends React.Component {
 const mapStateToProps = state => {
   return {
       jwtToken: state.usersReducer.jwtToken,
+      storyViewMode: state.sitesReducer.storyViewMode
   }
 };
 

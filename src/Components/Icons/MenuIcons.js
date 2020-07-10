@@ -16,7 +16,10 @@ import {
     LinkOutlined,
     FormOutlined,
     HomeOutlined,
-    EditOutlined
+    EditOutlined,
+    EyeOutlined,
+    TableOutlined,
+    CompressOutlined
 } from '@ant-design/icons';
 
 export const MenuIcons = {
@@ -36,7 +39,10 @@ export const MenuIcons = {
     "link": <LinkOutlined />,
     "form": <FormOutlined />,
     "home": <HomeOutlined/>,
-    "edit": <EditOutlined />
+    "edit": <EditOutlined />,
+    'eye': <EyeOutlined />,
+    "table": <TableOutlined />,
+    "compress": <CompressOutlined />
 
 };
 export default MenuIcons;

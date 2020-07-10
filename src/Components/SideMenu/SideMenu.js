@@ -1,13 +1,20 @@
 import React from 'react';
 import { Layout, Menu, Switch } from 'antd';
+import {connect} from "react-redux";
 import {
     withRouter
 } from "react-router-dom";
 
 import MenuIcons from '../Icons/MenuIcons';
 import {refreshByJwt} from "../../Actions/jwtActions";
+import {storyModePrevTableAction,
+        storyModeTableAction,
+        storyModeTimelineAction
+} from "../../Actions/siteActions";
 
 const { Sider } = Layout;
+const { SubMenu } = Menu;
+
 
 class SideMenu extends React.Component {
     constructor(props){
@@ -21,21 +28,31 @@ class SideMenu extends React.Component {
     }
 
     onCollapse = collapsed => {
-    // console.log(collapsed);
     this.setState({ collapsed });
   };
 
   changeTheme = value => {
-
       this.props.handleChangeTheme(!value);
-    this.setState({
-      theme: value ? 'dark' : 'light',
-      menuBackground: value ? 'rgb(0,21,41)' : 'rgb(255,255,255)'
+      this.setState({
+        theme: value ? 'dark' : 'light',
+        menuBackground: value ? 'rgb(0,21,41)' : 'rgb(255,255,255)'
     });
   };
+
   handleLogout = () => {
       this.props.handlerLogout();
 
+  };
+
+  handleTimelineMode = () => {
+      this.props.storyModeTimelineAction();
+  };
+
+  handleTableMode = () => {
+      this.props.storyModeTableAction();
+  };
+  handlePreviewTableMode = () => {
+      this.props.storyModePrevTableAction();
   };
 
 
@@ -85,11 +102,28 @@ class SideMenu extends React.Component {
       }}
             >New Timeline
             </Menu.Item>
+              <SubMenu key="view" icon={MenuIcons['eye']} title="View Mode">
 
-            <Menu.Item disabled={true} key="my_timelines" icon={MenuIcons['user']}
-            >
-              My Timelines- Coming!
+                  <Menu.Item
+                      key="timeline_mode"
+                      icon={MenuIcons['nodeindex']}
+                      onClick={() => this.handleTimelineMode()}>
+              Timeline
             </Menu.Item>
+                  <Menu.Item
+                      key="prev_table_mode"
+                      icon={MenuIcons['compress']}
+                      onClick={() => this.handlePreviewTableMode()}>
+              Preview Table
+            </Menu.Item>
+
+            <Menu.Item
+                key="table_mode"
+                icon={MenuIcons['table']}
+                onClick={() => this.handleTableMode()}>
+              Full Table
+            </Menu.Item>
+              </SubMenu>
 
 
 
@@ -122,5 +156,19 @@ class SideMenu extends React.Component {
     );
   }
 }
+const mapStateToProps = state => {
+  return {
+  }
+};
 
-export default withRouter(SideMenu);
+const mapDispatchToProps = dispatch => {
+    return{
+        storyModeTimelineAction: () => {dispatch(storyModeTimelineAction())},
+        storyModeTableAction: () => {dispatch(storyModeTableAction())},
+        storyModePrevTableAction: () => {dispatch(storyModePrevTableAction())}
+    }
+
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SideMenu));
+
