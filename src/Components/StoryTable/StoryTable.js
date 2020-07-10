@@ -32,6 +32,8 @@ class StoryTable extends React.Component {
                     key: 'icon',
                     align: 'center',
                     width: 20,
+                    // filters: this.props.timeline_events.map(
+                    //     e => ({value: e.icon, text: TableIcons[e.icon]  })),
                     render: iconAndColor => <div style={{
                         color: iconAndColor[1]}}>{TableIcons[iconAndColor[0]]}</div>
         },
@@ -41,7 +43,7 @@ class StoryTable extends React.Component {
             key: 'event_time',
             align: 'center',
             sorter: (a, b) => Date.parse(a.event_time) - Date.parse(b.event_time),
-            defaultSortOrder: 'descend',
+            // defaultSortOrder: 'descend',
 
         },
         {
@@ -122,16 +124,16 @@ class StoryTable extends React.Component {
       }
     },
     render: text =>
-      this.state.searchedColumn === dataIndex ? (
+      this.state.searchedColumn === dataIndex ?
         <Highlighter
           highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
           searchWords={[this.state.searchText]}
           autoEscape
           textToHighlight={text.toString()}
         />
-      ) : (
-        text
-      ),
+       :
+        handleText(text)
+      ,
   });
 
   handleSearch = (selectedKeys, confirm, dataIndex) => {
@@ -160,11 +162,20 @@ class StoryTable extends React.Component {
             expandableConfig = {}
         }
         return (
+
             <Table
                 dataSource={this.props.timeline_events}
                 columns={columns}
                 rowKey={record => record.event_id}
                 expandable={expandableConfig}
+                style={{
+                      // width: 400,
+                      display: 'flex',
+                      justifyContent: 'center',
+                      // borderRadius: '30px',
+                      // borderColor: '#ddd',
+
+                  }}
             />
         );
     }
