@@ -1,9 +1,7 @@
 import React from 'react';
-import {Button, Divider, Form, Input, message, Modal, Typography} from "antd";
+import {Button, message, Modal, Typography} from "antd";
 import {hideDeleteTimelineModalAction} from "../../Actions/siteActions";
 import {connect} from "react-redux";
-import RolesSelect from "../permissionsModal/rolesSelect";
-import PermissionsTable from "../permissionsModal/permissionsTable";
 import {backendAPI} from "../../Structure/api";
 import axios from "axios";
 import DownloadExcel from "../Export/ToExcel";
@@ -11,10 +9,6 @@ import {withRouter} from "react-router";
 const {Text, Title} = Typography;
 
 class DeleteTimelineModal extends React.Component{
-    constructor(props){
-         super(props);
-     }
-
       handleTimelineDelete = () => {
           const delTimelineUrl = backendAPI.concat(`/timeline/del_timeline?timeline_id=${this.props.timelineId}`);
           message.info("Get a backup on us :)", 3);

@@ -9,7 +9,6 @@ import PermissionsModal from "../permissionsModal/permissionsModal";
 import {enableEditAction, disableEditAction} from "../../Actions/siteActions";
 import {showNewEventModalAction, showPermissionsModalAction, showDeleteTimelineModalAction} from "../../Actions/siteActions";
 import {backendAPI} from "../../Structure/api";
-import {withRouter} from "react-router";
 import DeleteTimelineModal from '../DeleteTimeline/DeleteTimelineModal';
 
 const { SubMenu } = Menu;
@@ -53,8 +52,6 @@ class TimelineMenu extends React.Component {
                         )
                 }
   });
-
-
   };
 
   cancel = e => {
@@ -66,8 +63,6 @@ class TimelineMenu extends React.Component {
   console.log(e);
   message.success('Click on Yes');
     };
-
-
 
     render() {
         const menuTheme = this.props.DarkMode === true ? "dark": "light";
@@ -146,9 +141,7 @@ const mapDispatchToProps = dispatch => {
         showNewEventModal: () => {dispatch(showNewEventModalAction())},
         showPermissionsModal: () => {dispatch(showPermissionsModalAction())},
         showDeleteTimelineModal: () => {dispatch(showDeleteTimelineModalAction())},
-
     }
-
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TimelineMenu);
