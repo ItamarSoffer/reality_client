@@ -16,8 +16,12 @@ class CardsPage extends  React.Component {
             timelines: []
         }
     }
+    componentWillMount() {
+        document.title = "Story: All";
+    }
 
     componentDidMount() {
+
         // console.log(apiGetAllNames);
         const apiGetAllNames = backendAPI.concat("/get_all_names");
         axios.post(apiGetAllNames, {

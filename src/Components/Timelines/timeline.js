@@ -41,6 +41,8 @@ class Timeline extends React.Component {
     }
 
     componentDidMount() {
+        document.title = `Story: ${this.props.basicData.name}`;
+
         this.fetchData();
     }
 

@@ -11,7 +11,7 @@ const { Paragraph } = Typography;
 
 function handleText (text){
     return <ConfigProvider direction={"rtl"} >
-                <Paragraph ellipsis={{rows: 2, expandable: true}} style={{whiteSpace: "pre-line"}}>
+                <Paragraph ellipsis={{rows: 2}} style={{whiteSpace: "pre-line"}}>
                     {text}
                 </Paragraph>
             </ConfigProvider>

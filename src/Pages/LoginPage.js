@@ -11,6 +11,7 @@ import {checkJwt} from "../Actions/jwtActions";
 class LoginPage extends React.Component{
 
     componentWillMount() {
+        document.title = "Story";
         // console.log("props",this.props);
         if(this.props.isLogged === true) {
             this.props.history.push({pathname: `/`,})

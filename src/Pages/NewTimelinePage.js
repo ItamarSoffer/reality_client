@@ -7,6 +7,7 @@ import {connect} from "react-redux";
 
 class NewTimelinePage extends React.Component{
     componentDidMount() {
+
         document.title = "New Story";
     }
     render() {

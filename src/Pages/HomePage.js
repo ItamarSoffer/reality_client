@@ -8,6 +8,8 @@ import {connect} from "react-redux";
 
 class HomePage extends  React.Component {
     componentWillMount() {
+        document.title = "Story: Home";
+
         // window.location.reload();
     }
 
