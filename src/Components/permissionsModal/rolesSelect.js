@@ -15,6 +15,7 @@ class RolesSelect extends React.Component{
                   >
                     <Option value={"read"}>Read</Option>
                     <Option value={"write"}>Write</Option>
+                    <Option value={"owner"}>Owner</Option>
                     <Option style={{color:'red'}} value={"none"}>Remove</Option>
                   </Select>
                         )

@@ -76,11 +76,11 @@ class TimelineMenu extends React.Component {
           selectable={false}
           theme={menuTheme}
       >
-          {(["write", "owner"].indexOf(this.props.role) === -1) ? null :
+          {(["write", "owner", "creator"].indexOf(this.props.role) === -1) ? null :
           <Menu.Item key={"m_add"} icon={MenuIcons["plus"]} onClick={() => this.props.showNewEventModal()}>
                     Add Event
          </Menu.Item>}
-          {(this.props.role !== 'owner')? null:
+          {(["owner", "creator"].indexOf(this.props.role) === -1)? null:
           <Menu.Item key={"m_permissions"} icon={MenuIcons["user"]}
                              onClick={() => this.props.showPermissionsModal()}>
                 Permissions
@@ -90,7 +90,7 @@ class TimelineMenu extends React.Component {
             <Menu.Item disabled key="filter_by_time" >By Date</Menu.Item>
             <Menu.Item disabled key="filter_by_word">By Word</Menu.Item>
         </SubMenu>
-          {(["write", "owner"].indexOf(this.props.role) === -1) ? null :
+          {(["write", "owner", "creator"].indexOf(this.props.role) === -1) ? null :
               <SubMenu key="m_edit" icon={MenuIcons['edit']} title="Edit">
                   <Menu.Item key="m_enable_edit" onClick={() => this.props.enableEdit()}>
                       Enable Edit

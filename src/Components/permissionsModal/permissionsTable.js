@@ -8,7 +8,8 @@ import {connect} from "react-redux";
 const colormap = {
     'read': 'geekblue',
     'write': 'volcano',
-    'owner': 'red'
+    'owner': 'red',
+    'creator': 'black'
 };
 
 

@@ -37,6 +37,9 @@ class StoryHome extends  React.Component {
             return <LoadingPage/>;
         } else
             {
+                const creatorPermissions = this.state.timelines.filter(
+                    function(card_data) {
+                        return card_data.role ==='creator'});
                 const ownedPermissions = this.state.timelines.filter(
                     function(card_data) {
                         return card_data.role ==='owner'});
@@ -55,6 +58,13 @@ class StoryHome extends  React.Component {
                         justifyContent: 'center',
                     }}>
                     <Layout>
+                        {
+                            creatorPermissions.length === 0? null :
+                            <div>
+                                    <Divider>Creator</Divider>
+                                    <CardsGrid cardsList={creatorPermissions}/>
+                            </div>
+                        }
                         {
                             ownedPermissions.length === 0? null :
                             <div>
