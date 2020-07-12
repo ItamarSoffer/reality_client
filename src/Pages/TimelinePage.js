@@ -9,13 +9,16 @@ import axios from 'axios';
 import LoadingPage from "../Components/LoadingComponent/LoadingPage";
 import {NoPermissions} from "../Components/NoPermissions/noPermissions";
 import {refreshByJwt} from "../Actions/jwtActions";
+import {NotExists} from "../Components/NotExists/notExists";
 
 class StoryPage extends  React.Component {
     constructor(props){
         super(props);
         this.state = {
             isPageLoaded: false,
-            role: null
+            role: null,
+            pageExists: false
+
         }
 
     }
@@ -33,6 +36,21 @@ class StoryPage extends  React.Component {
              jwt_token: this.props.jwtToken,
          })
         .then((response) => {
+            console.log(response.status);
+            if (response.status === 204){
+                console.log(204);
+                this.setState({
+                    pageExists: false,
+                    isPageLoaded: true,
+
+                })
+
+            }
+            else {
+                this.setState({
+                    pageExists: true,
+
+                });
 
             if (permittedRoles.indexOf(response.data.role) !== -1) {
                 this.setState( {
@@ -45,6 +63,8 @@ class StoryPage extends  React.Component {
 
             })
             }
+            }
+
         })
     }
     getBasicData() {
@@ -73,12 +93,16 @@ class StoryPage extends  React.Component {
                 >
                     <SideMenuPage url={this.props.match.params.timeline_url}/>
                     <Layout>
+                        {this.state.pageExists? null :
+                        <NotExists />
+                        }
 
-                        {!this.state.role ?
+                        {this.state.pageExists  && (!this.state.role) ?
 
                             <NoPermissions />
 
-                            :
+                            : null }
+                        {this.state.pageExists && this.state.role?
                             <div >
                                 <TimelineMenu url={this.props.match.params.timeline_url}
                                               loggedUser={this.props.loggedUser}
@@ -91,8 +115,7 @@ class StoryPage extends  React.Component {
                                           timelineRenderCount={this.props.timelineRenderCount}
                                 />
 
-                            </div>
-                        }
+                            </div> : null }
                     </Layout>
                 </Layout>
             )

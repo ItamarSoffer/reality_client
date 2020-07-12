@@ -169,7 +169,7 @@ class StoryTable extends React.Component {
                 rowKey={record => record.event_id}
                 expandable={expandableConfig}
                 style={{
-                      // width: 400,
+                      // width: '90%',
                       display: 'flex',
                       justifyContent: 'center',
                       // borderRadius: '30px',

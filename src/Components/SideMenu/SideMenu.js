@@ -57,6 +57,7 @@ class SideMenu extends React.Component {
 
 
   render() {
+      console.log(this.props.history.location);
     return (
 
         <Sider selectable={false}
@@ -101,7 +102,9 @@ class SideMenu extends React.Component {
             pathname: `/new_timeline/`,});
       }}
             >New Timeline
+
             </Menu.Item>
+                {!this.props.history.location.pathname.startsWith('/timeline/')? null :
               <SubMenu key="view" icon={MenuIcons['eye']} title="View Mode">
 
                   <Menu.Item
@@ -124,6 +127,7 @@ class SideMenu extends React.Component {
               Full Table
             </Menu.Item>
               </SubMenu>
+                }
 
 
 
