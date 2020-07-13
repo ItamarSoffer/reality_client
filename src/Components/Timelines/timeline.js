@@ -72,8 +72,8 @@ class Timeline extends React.Component {
             return (
                 <div>
 
-                <Title level={1} style={{textAlign:'center'}}>{this.props.url}</Title>
-                <Title level={2} style={{textAlign:'center'}}>Empty! Start add some events.</Title>
+                <Title level={1} style={{textAlign:'center'}}>{this.props.basicData.name}</Title>
+                <Title level={2} style={{textAlign:'center'}}>No events found.</Title>
 
                 </div>
             )

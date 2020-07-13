@@ -4,7 +4,7 @@ import moment from 'moment';
 import { withRouter } from "react-router-dom";
 import {setReRenderTimelineAction} from "../../Actions/siteActions";
 import {connect} from "react-redux";
-
+import {getQueryStringParams} from "../../Actions/queryStringActions";
 const { RangePicker } = DatePicker;
 
 class StoryRangePicker extends React.Component{
@@ -24,13 +24,24 @@ class StoryRangePicker extends React.Component{
     };
 
     render(){
+        const queryParams = getQueryStringParams(this.props.history.location.search);
+        let defaultPickerQueryValues = null;
+        if (queryParams.min_time && queryParams.max_time){
+            defaultPickerQueryValues = [moment(queryParams.min_time, "YYYY-MM-DD"), moment(queryParams.max_time, "YYYY-MM-DD")];
+        }
+
+
         return (
             <RangePicker
       ranges={{
-        Today: [moment(), moment()],
-        'This Month': [moment().startOf('month'), moment().endOf('month')],
+        'Day': [moment(), moment()],
+        'Week': [moment().startOf('week'), moment().endOf('week')],
+        'Month': [moment().startOf('month'), moment().endOf('month')],
+        'Year': [moment().startOf('year'), moment().endOf('year')],
       }}
       onChange={this.onChange}
+      defaultValue={defaultPickerQueryValues}
+
     />
 
         )
