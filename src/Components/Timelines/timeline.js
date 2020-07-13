@@ -2,7 +2,7 @@ import React from 'react';
 import { VerticalTimeline }  from 'react-vertical-timeline-component';
 import { Typography } from 'antd';
 import 'react-vertical-timeline-component/style.min.css';
-
+import { withRouter } from "react-router-dom";
 import axios from 'axios';
 import DataEvent from '../DataEvent/dataEventComponent';
 import LoadingPage from '../LoadingComponent/LoadingPage';
@@ -10,6 +10,7 @@ import {backendAPI} from "../../Structure/api";
 import {setReRenderTimelineAction} from "../../Actions/siteActions";
 import {connect} from "react-redux";
 import StoryTable from '../StoryTable/StoryTable';
+import {getQueryStringParams} from "../../Actions/queryStringActions";
 
 
 const { Title } = Typography;
@@ -27,10 +28,17 @@ class Timeline extends React.Component {
     fetchData() {
         const TimelineUrl = this.props.url;
         const apiGetEvents = backendAPI.concat(`/timeline/${TimelineUrl}`);
+        const queryParams = getQueryStringParams(this.props.history.location.search);
+
+        const minTime = queryParams.min_time? queryParams.min_time: null;
+        const maxTime = queryParams.max_time? queryParams.max_time: null;
+
         // console.log(apiGetEvents);
         axios.post(apiGetEvents,
             {
                 jwt_token: this.props.jwtToken,
+                min_time: minTime,
+                max_time: maxTime
             })
             .then(res => res.data.events)
             .then((evs) => {
@@ -51,7 +59,6 @@ class Timeline extends React.Component {
             this.fetchData();
             this.props.setReRenderTimeline(0);
         }
-
     }
 
 
@@ -116,4 +123,4 @@ const mapDispatchToProps = dispatch => {
 
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Timeline);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Timeline));

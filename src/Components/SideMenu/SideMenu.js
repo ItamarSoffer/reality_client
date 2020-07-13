@@ -57,7 +57,7 @@ class SideMenu extends React.Component {
 
 
   render() {
-      console.log(this.props.history.location);
+
     return (
 
         <Sider selectable={false}

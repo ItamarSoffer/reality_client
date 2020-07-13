@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {withRouter} from "react-router";
-
 import {logoutAction} from "../Actions/usersActions";
 import {changeThemeAction} from '../Actions/siteActions';
 import SideMenu from '../Components/SideMenu/SideMenu';
@@ -31,8 +30,6 @@ class SideMenuPage extends React.Component{
             />
         )
     }
-
-
 }
 
 

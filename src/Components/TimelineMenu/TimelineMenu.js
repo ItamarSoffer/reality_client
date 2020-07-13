@@ -10,6 +10,7 @@ import {enableEditAction, disableEditAction} from "../../Actions/siteActions";
 import {showNewEventModalAction, showPermissionsModalAction, showDeleteTimelineModalAction} from "../../Actions/siteActions";
 import {backendAPI} from "../../Structure/api";
 import DeleteTimelineModal from '../DeleteTimeline/DeleteTimelineModal';
+import StoryRangePicker from './StoryRangePicker';
 
 const { SubMenu } = Menu;
 
@@ -20,7 +21,7 @@ class TimelineMenu extends React.Component {
         this.state = {
             current: 'mail',
             menuTheme: darkCheck ? "dark" : "light",
-            visiblePop: false
+            visiblePop: false,
 
         };
     };
@@ -32,27 +33,6 @@ class TimelineMenu extends React.Component {
     });
   };
 
-  handleTimelineDelete1 = () => {
-      const delTimelineUrl = backendAPI.concat(`/timeline/del_timeline?timeline_id=${this.props.timelineId}`);
-      message.info("Get a backup on us :)");
-      DownloadExcel(this.props.url, this.props.jwtToken);
-      axios.post(delTimelineUrl, {
-            jwt_token: this.props.jwtToken,
-        })
-            .then((response) => {
-                if (response.status === 201){
-                    message.warning(response.data)
-                }
-                else if (response.status === 200){
-                    message.success(response.data, 1.5)
-                        .then(
-                            this.props.history.push({
-                                pathname: `/`,
-                            })
-                        )
-                }
-  });
-  };
 
   cancel = e => {
   console.log(e);
@@ -87,7 +67,10 @@ class TimelineMenu extends React.Component {
          </Menu.Item>}
 
         <SubMenu icon={MenuIcons["setting"]} title="Filter">
-            <Menu.Item disabled key="filter_by_time" >By Date</Menu.Item>
+            <Menu.Item disabled key="filter_by_time" >
+
+            <StoryRangePicker />
+            </Menu.Item>
             <Menu.Item disabled key="filter_by_word">By Word</Menu.Item>
         </SubMenu>
           {(["write", "owner", "creator"].indexOf(this.props.role) === -1) ? null :
@@ -121,6 +104,7 @@ class TimelineMenu extends React.Component {
             <DeleteTimelineModal
                 url={this.props.url}
                 timelineId={this.props.timelineId}/>
+
             </div>
     );
   }
