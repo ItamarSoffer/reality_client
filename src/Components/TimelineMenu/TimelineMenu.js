@@ -1,16 +1,15 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {Menu, message} from 'antd';
-import axios from 'axios';
 import MenuIcons from '../Icons/MenuIcons';
 import DownloadExcel from '../Export/ToExcel';
 import CreateNewEvent from "../NewEvent/NewEventComponent";
 import PermissionsModal from "../permissionsModal/permissionsModal";
 import {enableEditAction, disableEditAction} from "../../Actions/siteActions";
 import {showNewEventModalAction, showPermissionsModalAction, showDeleteTimelineModalAction} from "../../Actions/siteActions";
-import {backendAPI} from "../../Structure/api";
 import DeleteTimelineModal from '../DeleteTimeline/DeleteTimelineModal';
-import StoryRangePicker from './StoryRangePicker';
+import StoryRangePicker from './Search/StoryRangePicker';
+import StoryInSearch from './Search/StorySearch'
 
 const { SubMenu } = Menu;
 
@@ -71,7 +70,9 @@ class TimelineMenu extends React.Component {
 
             <StoryRangePicker />
             </Menu.Item>
-            <Menu.Item disabled key="filter_by_word">By Word</Menu.Item>
+            <Menu.Item disabled key="filter_by_word">
+                <StoryInSearch/>
+            </Menu.Item>
         </SubMenu>
           {(["write", "owner", "creator"].indexOf(this.props.role) === -1) ? null :
               <SubMenu key="m_edit" icon={MenuIcons['edit']} title="Edit">

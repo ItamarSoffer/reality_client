@@ -32,13 +32,15 @@ class Timeline extends React.Component {
 
         const minTime = queryParams.min_time? queryParams.min_time: null;
         const maxTime = queryParams.max_time? queryParams.max_time: null;
+        const searchString = queryParams.search_string? queryParams.search_string: null;
 
         // console.log(apiGetEvents);
         axios.post(apiGetEvents,
             {
                 jwt_token: this.props.jwtToken,
                 min_time: minTime,
-                max_time: maxTime
+                max_time: maxTime,
+                search_string: searchString
             })
             .then(res => res.data.events)
             .then((evs) => {

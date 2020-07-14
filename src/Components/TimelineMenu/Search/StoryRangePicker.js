@@ -2,23 +2,37 @@ import React from 'react';
 import { DatePicker } from 'antd';
 import moment from 'moment';
 import { withRouter } from "react-router-dom";
-import {setReRenderTimelineAction} from "../../Actions/siteActions";
+import {setReRenderTimelineAction} from "../../../Actions/siteActions";
 import {connect} from "react-redux";
-import {getQueryStringParams} from "../../Actions/queryStringActions";
+import {getQueryStringParams} from "../../../Actions/queryStringActions";
+import URLSearchParams from 'url-search-params';
 const { RangePicker } = DatePicker;
 
 class StoryRangePicker extends React.Component{
 
     onChange = (dates, dateStrings) => {
   const pathName = this.props.history.location.pathname;
+  let currentSearchQuery = getQueryStringParams(this.props.history.location.search);
         if (dates === null){
-            this.props.history.push(pathName);
+            delete currentSearchQuery['min_time'];
+            delete currentSearchQuery['max_time'];
+                        this.props.history.push(
+                {pathname: pathName,
+                    search: "?" + new URLSearchParams(
+                        {...currentSearchQuery}
+                        ).toString()
+            });
         }
         else{
+            currentSearchQuery['min_time'] = dateStrings[0];
+            currentSearchQuery['max_time'] = dateStrings[1];
+            this.props.history.push(
+                {pathname: pathName,
+                    search: "?" + new URLSearchParams(
+                        {...currentSearchQuery}
+                        ).toString()
 
-  // console.log('From: ', dates[0], ', to: ', dates[1]);
-  // console.log('From: ', dateStrings[0], ', to: ', dateStrings[1]);
-  this.props.history.push(pathName.concat(`?min_time=${dateStrings[0]}&max_time=${dateStrings[1]}`));
+            });
         }
   this.props.setReRenderTimeline(1);
     };

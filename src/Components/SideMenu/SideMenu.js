@@ -92,16 +92,16 @@ class SideMenu extends React.Component {
                                 refreshByJwt(this.props.jwtToken);
                             }
                             }>
-                All cards
+                All Stories
             </Menu.Item>
 
             <Menu.Item
                 key="new"
                 icon={MenuIcons['nodeindex']}
                 onClick={() => {this.props.history.push({
-            pathname: `/new_timeline/`,});
+            pathname: `/new_story/`,});
       }}
-            >New Timeline
+            >New Story
 
             </Menu.Item>
                 {!this.props.history.location.pathname.startsWith('/timeline/')? null :
