@@ -3,6 +3,7 @@ const siteInitState = {
     showNewEventModal: false,
     showPermissionsModal: false,
     showDeleteTimelineModal: false,
+    showUploadXlsxModal: false
 };
 
 const modalsReducer = (state = siteInitState, action) => {
@@ -19,11 +20,15 @@ const modalsReducer = (state = siteInitState, action) => {
         case "DELETE_TIMELINE_MODAL_VIEW":
             state = {...state, showDeleteTimelineModal: action.payload};
         break;
+
+        case "UPLOAD_XLSX_MODAL_VIEW":
+            state = {...state, showUploadXlsxModal: action.payload};
+        break;
+
         default:
         break;
     }
 
-    // console.log('Sites Reducers', state);
     return state;
 };
 

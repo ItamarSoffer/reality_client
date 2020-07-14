@@ -21,7 +21,8 @@ import {
     TableOutlined,
     CompressOutlined,
     MoreOutlined,
-    FilterOutlined
+    FilterOutlined,
+    UploadOutlined
 } from '@ant-design/icons';
 
 export const MenuIcons = {
@@ -46,7 +47,9 @@ export const MenuIcons = {
     "table": <TableOutlined />,
     "compress": <CompressOutlined />,
     "more": <MoreOutlined/>,
-    "filter": <FilterOutlined/>
+    "filter": <FilterOutlined/>,
+    "upload": <UploadOutlined/>
+
 
 };
 export default MenuIcons;

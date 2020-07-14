@@ -41,3 +41,16 @@ export const hideDeleteTimelineModalAction = () => {
     }
 };
 
+export const showUploadXlsxModalAction = () => {
+    return {
+        type: "UPLOAD_XLSX_MODAL_VIEW",
+        payload: true
+    }
+};
+
+export const hideUploadXlsxModalAction = () => {
+    return {
+        type: "UPLOAD_XLSX_MODAL_VIEW",
+        payload: false
+    }
+};

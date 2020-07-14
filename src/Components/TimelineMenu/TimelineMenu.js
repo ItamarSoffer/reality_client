@@ -6,10 +6,15 @@ import DownloadExcel from '../Export/ToExcel';
 import CreateNewEvent from "../NewEvent/NewEventComponent";
 import PermissionsModal from "../permissionsModal/permissionsModal";
 import {enableEditAction, disableEditAction} from "../../Actions/siteActions";
-import {showNewEventModalAction, showPermissionsModalAction, showDeleteTimelineModalAction} from "../../Actions/modalsActions";
+import {
+    showNewEventModalAction,
+    showPermissionsModalAction,
+    showDeleteTimelineModalAction,
+showUploadXlsxModalAction} from "../../Actions/modalsActions";
 import DeleteTimelineModal from '../DeleteTimeline/DeleteTimelineModal';
 import StoryRangePicker from './Search/StoryRangePicker';
-import StoryInSearch from './Search/StorySearch'
+import StoryInSearch from './Search/StorySearch';
+import UploadXlsxModal from './UploadXlsxModal/UploadXlsxModal';
 
 const { SubMenu } = Menu;
 
@@ -86,6 +91,11 @@ class TimelineMenu extends React.Component {
           }
 
          <SubMenu key="m_more" icon={MenuIcons['setting']} title="More">
+             {(["owner", "creator"].indexOf(this.props.role) === -1)? null:
+          <Menu.Item key={"m_permissions"} icon={MenuIcons["user"]}
+                             onClick={() => this.props.showPermissionsModal()}>
+                Permissions
+         </Menu.Item>}
 
          <SubMenu key="export" icon={MenuIcons['download']} title="Export">
               <Menu.Item key="export_excel" icon={MenuIcons['excel']}
@@ -94,10 +104,11 @@ class TimelineMenu extends React.Component {
             </Menu.Item>
 
             </SubMenu>
-                       {(["owner", "creator"].indexOf(this.props.role) === -1)? null:
-          <Menu.Item key={"m_permissions"} icon={MenuIcons["user"]}
-                             onClick={() => this.props.showPermissionsModal()}>
-                Permissions
+
+          {(["write", "owner", "creator"].indexOf(this.props.role) === -1)? null:
+          <Menu.Item key={"m_upload"} icon={MenuIcons["upload"]}
+                             onClick={() => this.props.showUploadXlsxModal()}>
+                Import
          </Menu.Item>}
          </SubMenu>
 
@@ -105,6 +116,9 @@ class TimelineMenu extends React.Component {
             <CreateNewEvent url={this.props.url} />
             <PermissionsModal url={this.props.url}/>
             <DeleteTimelineModal
+                url={this.props.url}
+                timelineId={this.props.timelineId}/>
+            <UploadXlsxModal
                 url={this.props.url}
                 timelineId={this.props.timelineId}/>
 
@@ -128,6 +142,8 @@ const mapDispatchToProps = dispatch => {
         showNewEventModal: () => {dispatch(showNewEventModalAction())},
         showPermissionsModal: () => {dispatch(showPermissionsModalAction())},
         showDeleteTimelineModal: () => {dispatch(showDeleteTimelineModalAction())},
+        showUploadXlsxModal: () => {dispatch(showUploadXlsxModalAction())},
+
     }
 };
 
