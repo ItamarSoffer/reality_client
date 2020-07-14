@@ -1,6 +1,5 @@
 import React from 'react';
 import { Input } from 'antd';
-import moment from 'moment';
 import { withRouter } from "react-router-dom";
 import {setReRenderTimelineAction} from "../../../Actions/siteActions";
 import {connect} from "react-redux";

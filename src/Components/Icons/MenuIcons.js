@@ -19,7 +19,9 @@ import {
     EditOutlined,
     EyeOutlined,
     TableOutlined,
-    CompressOutlined
+    CompressOutlined,
+    MoreOutlined,
+    FilterOutlined
 } from '@ant-design/icons';
 
 export const MenuIcons = {
@@ -42,7 +44,9 @@ export const MenuIcons = {
     "edit": <EditOutlined />,
     'eye': <EyeOutlined />,
     "table": <TableOutlined />,
-    "compress": <CompressOutlined />
+    "compress": <CompressOutlined />,
+    "more": <MoreOutlined/>,
+    "filter": <FilterOutlined/>
 
 };
 export default MenuIcons;

@@ -7,7 +7,8 @@ import ColorPicker from '../ColorPicker/ColorPicker';
 import MenuIcons from "../Icons/MenuIcons";
 import {backendAPI} from "../../Structure/api";
 import {connect} from "react-redux";
-import {hideNewEventModalAction, setReRenderTimelineAction} from "../../Actions/siteActions";
+import {setReRenderTimelineAction} from "../../Actions/siteActions";
+import {hideNewEventModalAction} from "../../Actions/modalsActions";
 
 const { TextArea } = Input;
 
@@ -193,7 +194,7 @@ class CreateNewEvent extends React.Component {
 
 const mapStateToProps = state => {
   return {
-      showNewEventModal: state.sitesReducer.showNewEventModal,
+      showNewEventModal: state.modalsReducer.showNewEventModal,
       timelineRenderCount: state.sitesReducer.timelineRenderCount,
       jwtToken: state.usersReducer.jwtToken,
 

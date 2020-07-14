@@ -26,7 +26,7 @@ function DownloadExcel(timeline_url, jwtToken) {
             }
             else if (response.status === 200){
                 fileDownload(new Blob([response.data]), output_file_name);
-                message.success("Downloaded Timeline Excel!", 1.5)
+                message.success("Downloaded Story Excel!", 1.5)
   }
   })
 }

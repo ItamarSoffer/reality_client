@@ -1,6 +1,6 @@
 import React from 'react';
 import {Button, message, Modal, Typography} from "antd";
-import {hideDeleteTimelineModalAction} from "../../Actions/siteActions";
+import {hideDeleteTimelineModalAction} from "../../Actions/modalsActions";
 import {connect} from "react-redux";
 import {backendAPI} from "../../Structure/api";
 import axios from "axios";
@@ -89,7 +89,7 @@ class DeleteTimelineModal extends React.Component{
 
 const mapStateToProps = state => {
   return {
-      showDeleteTimelineModal: state.sitesReducer.showDeleteTimelineModal,
+      showDeleteTimelineModal: state.modalsReducer.showDeleteTimelineModal,
       jwtToken: state.usersReducer.jwtToken,
 
   }

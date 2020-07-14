@@ -7,10 +7,10 @@ const { Option } = Select;
 // non used component
 class IconsSelect extends React.Component {
     handleChange(value) {
-  console.log(value); // { key: "lucy", label: "Lucy (101)" }
+  // console.log(value); // { key: "lucy", label: "Lucy (101)" }
 }
     onChange(value) {
-  console.log(`selected ${value}`);
+  // console.log(`selected ${value}`);
 }
 
 onBlur() {
@@ -22,7 +22,7 @@ onFocus() {
 }
 
 onSearch(val) {
-  console.log('search:', val);
+  // console.log('search:', val);
 }
 
     render() {

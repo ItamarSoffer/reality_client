@@ -6,7 +6,7 @@ import DownloadExcel from '../Export/ToExcel';
 import CreateNewEvent from "../NewEvent/NewEventComponent";
 import PermissionsModal from "../permissionsModal/permissionsModal";
 import {enableEditAction, disableEditAction} from "../../Actions/siteActions";
-import {showNewEventModalAction, showPermissionsModalAction, showDeleteTimelineModalAction} from "../../Actions/siteActions";
+import {showNewEventModalAction, showPermissionsModalAction, showDeleteTimelineModalAction} from "../../Actions/modalsActions";
 import DeleteTimelineModal from '../DeleteTimeline/DeleteTimelineModal';
 import StoryRangePicker from './Search/StoryRangePicker';
 import StoryInSearch from './Search/StorySearch'
@@ -59,13 +59,8 @@ class TimelineMenu extends React.Component {
           <Menu.Item key={"m_add"} icon={MenuIcons["plus"]} onClick={() => this.props.showNewEventModal()}>
                     Add Event
          </Menu.Item>}
-          {(["owner", "creator"].indexOf(this.props.role) === -1)? null:
-          <Menu.Item key={"m_permissions"} icon={MenuIcons["user"]}
-                             onClick={() => this.props.showPermissionsModal()}>
-                Permissions
-         </Menu.Item>}
 
-        <SubMenu icon={MenuIcons["setting"]} title="Filter">
+        <SubMenu icon={MenuIcons["filter"]} title="Filter">
             <Menu.Item disabled key="filter_by_time" >
 
             <StoryRangePicker />
@@ -90,6 +85,7 @@ class TimelineMenu extends React.Component {
               </SubMenu>
           }
 
+         <SubMenu key="m_more" icon={MenuIcons['setting']} title="More">
 
          <SubMenu key="export" icon={MenuIcons['download']} title="Export">
               <Menu.Item key="export_excel" icon={MenuIcons['excel']}
@@ -98,6 +94,12 @@ class TimelineMenu extends React.Component {
             </Menu.Item>
 
             </SubMenu>
+                       {(["owner", "creator"].indexOf(this.props.role) === -1)? null:
+          <Menu.Item key={"m_permissions"} icon={MenuIcons["user"]}
+                             onClick={() => this.props.showPermissionsModal()}>
+                Permissions
+         </Menu.Item>}
+         </SubMenu>
 
       </Menu>
             <CreateNewEvent url={this.props.url} />

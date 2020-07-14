@@ -3,7 +3,7 @@ import axios from 'axios';
 import {Form, Modal, Input, message, Button, Typography, Divider} from 'antd';
 // import {AutoComplete} from 'antd';
 import {connect} from 'react-redux';
-import {hidePermissionsModalAction} from "../../Actions/siteActions";
+import {hidePermissionsModalAction} from "../../Actions/modalsActions";
 import RolesSelect from "./rolesSelect";
 import PermissionsTable from "./permissionsTable"
 import {backendAPI} from "../../Structure/api";
@@ -21,7 +21,7 @@ class PermissionsModal extends React.Component{
 
     onFinish = values => {
         const apiSetPermissions = backendAPI.concat(`/timeline/${this.props.url}/set_permissions/`);
-        console.log("VALS", values.username, values.role);
+        // console.log("VALS", values.username, values.role);
         axios.post(apiSetPermissions, {
             "jwt_token": this.props.jwtToken,
             "username": values.username,
@@ -131,7 +131,7 @@ class PermissionsModal extends React.Component{
 
 const mapStateToProps = state => {
   return {
-      showPermissionsModal: state.sitesReducer.showPermissionsModal,
+      showPermissionsModal: state.modalsReducer.showPermissionsModal,
       jwtToken: state.usersReducer.jwtToken,
 
   }

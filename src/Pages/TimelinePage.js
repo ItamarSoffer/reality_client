@@ -36,9 +36,8 @@ class StoryPage extends  React.Component {
              jwt_token: this.props.jwtToken,
          })
         .then((response) => {
-            console.log(response.status);
             if (response.status === 204){
-                console.log(204);
+                // console.log(204);
                 this.setState({
                     pageExists: false,
                     isPageLoaded: true,
