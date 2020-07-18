@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import Highlighter from 'react-highlight-words';
 import { SearchOutlined } from '@ant-design/icons';
 import {TableIcons} from '../Icons/Icons';
-
+import TagsRenderer from '../Tags/TagsRenderer';
 
 const { Paragraph } = Typography;
 
@@ -80,6 +80,14 @@ class StoryTable extends React.Component {
             dataIndex: 'link',
             key: 'link',
             render: link => <a href={link}>{link}</a>,
+            align: 'center',
+        });
+        columns.push({
+            title: 'Tags',
+            dataIndex: 'tags',
+            key: 'tags',
+            width: 170 ,
+            render: tags => <TagsRenderer tags={tags}/>,
             align: 'center',
         });
         return columns

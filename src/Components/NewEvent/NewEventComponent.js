@@ -1,5 +1,5 @@
 import React from 'react';
-import {Form, Input, Button, Modal, DatePicker, TimePicker, ConfigProvider, message} from 'antd';
+import {Form, Input, Button, Modal, DatePicker, TimePicker, ConfigProvider, message, AutoComplete} from 'antd';
 import 'antd/dist/antd.css';
 import axios from "axios";
 import IconsSelect from '../Icons/IconsSelect';
@@ -9,13 +9,16 @@ import {backendAPI} from "../../Structure/api";
 import {connect} from "react-redux";
 import {setReRenderTimelineAction} from "../../Actions/siteActions";
 import {hideNewEventModalAction} from "../../Actions/modalsActions";
+import TagsSelect from './TagsSelect';
 
 const { TextArea } = Input;
 
 
 class CreateNewEvent extends React.Component {
 
-  showModal = () => {
+
+
+    showModal = () => {
     this.setState({
       visible: true,
     });
@@ -58,6 +61,7 @@ class CreateNewEvent extends React.Component {
           "frame_color": this.state.color,
           "icon": this.state.icon,
           "link": values.link,
+          "tags": this.state.tags
 })
          .then((response) => {
   // console.log("resp", response);
@@ -68,7 +72,7 @@ class CreateNewEvent extends React.Component {
   message.success(response.data, 1.5)
 
       .then(() => {
-          this.props.setReRenderTimeline(this.props.timelineRenderCount +    1);
+          this.props.setReRenderTimeline(this.props.timelineRenderCount + 1);
           // form.resetFields();
   })
   }
@@ -91,6 +95,14 @@ class CreateNewEvent extends React.Component {
           icon: newIcon
       })
   };
+
+  onTagsChange = (newTags) => {
+      console.log(newTags);
+      this.setState({
+          tags: newTags
+      })
+  };
+
 
   render() {
     return (
@@ -187,6 +199,15 @@ class CreateNewEvent extends React.Component {
                 >
                     <ColorPicker handleColorChange={this.onColorChange}/>
                 </Form.Item>
+                <Form.Item
+                    className="link-form"
+                    //label="צבע"
+                    name="tags"
+
+                >
+                <TagsSelect url={this.props.url} handleTagChange={this.onTagsChange}/>
+                </Form.Item>
+
             </Form>
         </Modal>
           </ConfigProvider>

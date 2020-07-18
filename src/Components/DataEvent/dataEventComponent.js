@@ -5,6 +5,7 @@ import {TimelineIcons} from '../Icons/Icons';
 import { Typography, ConfigProvider } from 'antd';
 import EventDropdown from "./eventDropdown";
 import {connect} from "react-redux";
+import TagsRenderer from '../Tags/TagsRenderer'
 
 
 const { Paragraph, Title } = Typography;
@@ -37,6 +38,7 @@ class DataEvent extends React.Component {
                 </Paragraph>}
                 {!this.props.data.link ? null :
                     <div><a href={this.props.data.link}>{this.props.data.link}</a> <br/></div>}
+                {this.props.data.tags.length > 0 ? <TagsRenderer tags={this.props.data.tags}/> : null}
                 {!this.props.editMode? null:
                     <EventDropdown eventId={this.props.data.event_id}
                                    loggedUser={this.props.loggedUser}/>}

@@ -43,7 +43,7 @@ class UploadXlsxModal extends React.Component {
 
     draggerProps = {
   name: `upfile`,
-  action: backendXlsxAPI.concat(`/${this.props.url}/upload_xlsx`),
+  action: backendXlsxAPI.concat(`/${this.props.urlAddress}/upload_xlsx`),
   accept:".xlsx",
   onChange(info) {
       console.log(info);
@@ -75,13 +75,7 @@ class UploadXlsxModal extends React.Component {
               onOk={this.handleOk}
               onCancel={this.handleCancel}
               style={{borderRadius: '16px',}}
-              footer={[<Button type="default"  key="close" onClick={this.handleCancel}>
-            Close
-        </Button>,
-        <Button type="primary" key="submit" onClick={() => this.handleXlsxUpload()}>
-            Upload
-        </Button>
-        ]}
+              footer={null}
               >
                <Title level={4} style={{textAlign: 'center'}}>Upload Your M.D table to story!</Title>
                <Divider/>

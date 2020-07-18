@@ -22,14 +22,15 @@ class TagsModal extends React.Component{
             storyTagsData: [],
         }
     }
-    componentWillMount() {
-        this.fetchStoryTags();
-    }
 
     onFinishFailed = errorInfo => {
         console.log('Failed:', errorInfo);
         message.error('Missing fields!')
       };
+
+    componentWillMount() {
+        this.fetchStoryTags();
+    }
 
     fetchStoryTags = () => {
           const addTagApi = backendAPI.concat(`/timeline/${this.props.url}/get_tags`);
@@ -46,6 +47,10 @@ class TagsModal extends React.Component{
     };
 
     handleAdd = (value) => {
+        if (value.length === 0){
+            message.warning("Empty tag");
+            return;
+        }
         const addTagApi = backendAPI.concat(`/timeline/${this.props.url}/add_tag`);
         axios.post(addTagApi, {
             jwt_token: this.props.jwtToken,
@@ -65,10 +70,10 @@ class TagsModal extends React.Component{
 
   }
   });
-        console.log(this.props.timelineId);
-        console.log(this.props.url);
-        console.log(value);
-        console.log(this.state.color);
+        // console.log(this.props.timelineId);
+        // console.log(this.props.url);
+        // console.log(value);
+        // console.log(this.state.color);
     };
 
     closeModal = () => {
@@ -109,6 +114,7 @@ class TagsModal extends React.Component{
               onOk={this.handleOk}
               onCancel={this.handleCancel}
               style={{borderRadius: '16px',}}
+              footer={null}
         //       footer={[<Button type="default"  key="close" onClick={this.handleCancel}>
         //     Close
         // </Button>,
@@ -117,7 +123,7 @@ class TagsModal extends React.Component{
         // </Button>
         // ]}
               >
-               <Title level={4} style={{textAlign: 'center'}}>Create New Tag</Title>
+               <Title level={4} style={{textAlign: 'center'}}>Create New</Title>
 
                <Form
                 id={"create_tag_form"}
@@ -127,15 +133,17 @@ class TagsModal extends React.Component{
                    <Form.Item
                     className="tag_name"
                     // label="כותרת"
-                    name="title"
+                    name="tag"
                     rules={[{
-                        required: true}]}
+                        required: true,
+                    message: 'Required, max 15 chars.'}]}
                 >
                        <Search
                            autoComplete='off'
                            placeholder={"Tag name"}
                            enterButton="Add"
                            onSearch={this.handleAdd}
+                           maxLength={15}
 
                        />
                    </Form.Item>
@@ -150,10 +158,12 @@ class TagsModal extends React.Component{
                    </Form.Item>
                </Form>
                <Divider/>
-               <Title level={4} style={{textAlign: 'center'}}>Existing tags:</Title>
+               <Title level={4} style={{textAlign: 'center'}}>Exists:</Title>
                {this.state.storyTagsData.map(
                         function(tagData){
-                            return (<Tag color={tagData.tag_color} id={tagData.tag_id}>
+                            return (<Tag
+                                // closable
+                                color={tagData.tag_color} id={tagData.tag_id}>
                                 {tagData.tag_name}
                             </Tag>)
                         }
