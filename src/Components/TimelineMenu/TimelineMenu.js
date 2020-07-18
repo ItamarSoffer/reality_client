@@ -125,9 +125,11 @@ class TimelineMenu extends React.Component {
                 url={this.props.url}
                 timelineId={this.props.timelineId}/>
             <UploadXlsxModal
-                url={this.props.url}
+                urlAddress={this.props.url}
                 timelineId={this.props.timelineId}/>
-            <TagsModal timelineId={this.props.timelineId}
+            <TagsModal
+                url={this.props.url}
+                timelineId={this.props.timelineId}
                        role={this.props.role}
             />
             </div>

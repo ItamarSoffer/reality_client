@@ -1,20 +1,29 @@
 import React from 'react';
-import {Button, Form, Input, message, Modal, Typography} from "antd";
+import {Button, Form, Input, message, Modal, Typography, Tag, Col, Row} from "antd";
 import {hideTagsModalAction} from "../../Actions/modalsActions";
 import {connect} from "react-redux";
-import {withRouter} from "react-router";
 import TagsColorPicker from "../ColorPicker/TagsColorPicker";
 import {Divider} from "antd/es";
+import {backendAPI} from "../../Structure/api";
+import axios from 'axios';
+import RealityCard from "../RealityCard/RealityCard";
 const {Text, Title} = Typography;
 const { Search } = Input;
+
+
 
 class TagsModal extends React.Component{
 
     constructor(props){
         super(props);
         this.state= {
-            color: "#f5222d"
+            color: "#f5222d",
+            isLoaded: false,
+            storyTagsData: [],
         }
+    }
+    componentWillMount() {
+        this.fetchStoryTags();
     }
 
     onFinishFailed = errorInfo => {
@@ -22,8 +31,42 @@ class TagsModal extends React.Component{
         message.error('Missing fields!')
       };
 
+    fetchStoryTags = () => {
+          const addTagApi = backendAPI.concat(`/timeline/${this.props.url}/get_tags`);
+        axios.post(addTagApi, {
+            jwt_token: this.props.jwtToken,
+        }).then(res => res.data)
+            .then(data => data.map(e => ({...e, nameAndColor: [e.tag_name, e.tag_color]})))
+            .then( (data) => {
+                this.setState( {
+                    storyTagsData: data,
+                    isLoaded: true,
+                });
+            })
+    };
+
     handleAdd = (value) => {
+        const addTagApi = backendAPI.concat(`/timeline/${this.props.url}/add_tag`);
+        axios.post(addTagApi, {
+            jwt_token: this.props.jwtToken,
+            tag_name : value,
+            tag_color: this.state.color
+        }).then((response) => {
+  // console.log("resp", response);
+  if (response.status === 201){
+      message.warning(response.data)
+  }
+  else if (response.status === 200){
+  message.success(response.data, 1);
+  this.fetchStoryTags();
+      // this.setState({
+      //     addedPermission: this.state.addedPermission + 1
+      // })
+
+  }
+  });
         console.log(this.props.timelineId);
+        console.log(this.props.url);
         console.log(value);
         console.log(this.state.color);
     };
@@ -108,6 +151,18 @@ class TagsModal extends React.Component{
                </Form>
                <Divider/>
                <Title level={4} style={{textAlign: 'center'}}>Existing tags:</Title>
+               {this.state.storyTagsData.map(
+                        function(tagData){
+                            return (<Tag color={tagData.tag_color} id={tagData.tag_id}>
+                                {tagData.tag_name}
+                            </Tag>)
+                        }
+                    )}
+
+
+
+
+               {/*{this.state.storyTagsData.map( tagData => (<Tag color={tagData[1]}> {tagData[0]}</Tag>}))}*/}
 
 
 
@@ -131,4 +186,4 @@ const mapDispatchToProps = dispatch => {
 
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(TagsModal));
+export default connect(mapStateToProps, mapDispatchToProps)(TagsModal);
