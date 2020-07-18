@@ -54,3 +54,17 @@ export const hideUploadXlsxModalAction = () => {
         payload: false
     }
 };
+
+export const showTagsModalAction = () => {
+    return {
+        type: "TAGS_MODAL_VIEW",
+        payload: true
+    }
+};
+
+export const hideTagsModalAction = () => {
+    return {
+        type: "TAGS_MODAL_VIEW",
+        payload: false
+    }
+};

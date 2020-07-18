@@ -3,7 +3,8 @@ const siteInitState = {
     showNewEventModal: false,
     showPermissionsModal: false,
     showDeleteTimelineModal: false,
-    showUploadXlsxModal: false
+    showUploadXlsxModal: false,
+    showTagsModal: false,
 };
 
 const modalsReducer = (state = siteInitState, action) => {
@@ -23,6 +24,10 @@ const modalsReducer = (state = siteInitState, action) => {
 
         case "UPLOAD_XLSX_MODAL_VIEW":
             state = {...state, showUploadXlsxModal: action.payload};
+        break;
+
+        case "TAGS_MODAL_VIEW":
+            state = {...state, showTagsModal: action.payload};
         break;
 
         default:

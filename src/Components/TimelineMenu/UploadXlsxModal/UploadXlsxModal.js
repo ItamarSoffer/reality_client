@@ -89,13 +89,13 @@ class UploadXlsxModal extends React.Component {
                <Paragraph>
                    <ul>
                        <li>xlsx file, not csv.</li>
-                       <li>First line is headers</li>
-                       <li>The Headers are: title, content, link, event_time, color, icon.</li>
+                       <li>First line is headers.</li>
+                       <li>The headers are: title, content, link, event_time, color, icon, create_user.</li>
                        <li><Text strong>Required headers: title, event_time.</Text></li>
                        <li>aAl headers in small letters.</li>
-                       <li>Time format: YYYY-mm-dd HH:MM:SS</li>
-                       <li>color is text in format: "rgb(233, 30, 99)" -(Red, Green, Blue), 1-255 </li>
-                       <li>Multi sheets is optional, only if they have the same headers.</li>
+                       <li>Time format: "YYYY-mm-dd HH:MM:SS".</li>
+                       <li>color is text in format: "rgb(233, 30, 99)" or "#FFFFFF".</li>
+                       <li>Multi sheets is optional- only if they have the same headers.</li>
                    </ul>
                </Paragraph>
 

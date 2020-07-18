@@ -10,11 +10,14 @@ import {
     showNewEventModalAction,
     showPermissionsModalAction,
     showDeleteTimelineModalAction,
-showUploadXlsxModalAction} from "../../Actions/modalsActions";
+    showTagsModalAction,
+    showUploadXlsxModalAction
+} from "../../Actions/modalsActions";
 import DeleteTimelineModal from '../DeleteTimeline/DeleteTimelineModal';
 import StoryRangePicker from './Search/StoryRangePicker';
 import StoryInSearch from './Search/StorySearch';
 import UploadXlsxModal from './UploadXlsxModal/UploadXlsxModal';
+import TagsModal from '../Tags/TagsModal';
 
 const { SubMenu } = Menu;
 
@@ -82,6 +85,9 @@ class TimelineMenu extends React.Component {
                   <Menu.Item key="m_disable_edit" onClick={() => this.props.disableEdit()}>
                       Disable Edit
                   </Menu.Item>
+                  <Menu.Item key="m_tags" onClick={() => this.props.showTagsModal()}>
+                      Tags
+                  </Menu.Item>
                   <Menu.Item key="m_del_timeline" style={{color:"red"}} onClick={() => this.props.showDeleteTimelineModal()}>
 
                       Delete Story
@@ -121,8 +127,12 @@ class TimelineMenu extends React.Component {
             <UploadXlsxModal
                 url={this.props.url}
                 timelineId={this.props.timelineId}/>
-
+            <TagsModal timelineId={this.props.timelineId}
+                       role={this.props.role}
+            />
             </div>
+
+
     );
   }
 }
@@ -143,6 +153,7 @@ const mapDispatchToProps = dispatch => {
         showPermissionsModal: () => {dispatch(showPermissionsModalAction())},
         showDeleteTimelineModal: () => {dispatch(showDeleteTimelineModalAction())},
         showUploadXlsxModal: () => {dispatch(showUploadXlsxModalAction())},
+        showTagsModal: () => {dispatch(showTagsModalAction())},
 
     }
 };

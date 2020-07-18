@@ -69,6 +69,7 @@ class CreateNewEvent extends React.Component {
 
       .then(() => {
           this.props.setReRenderTimeline(this.props.timelineRenderCount +    1);
+          // form.resetFields();
   })
   }
   }).then(() => this.closeModal());
@@ -116,6 +117,7 @@ class CreateNewEvent extends React.Component {
         }}
         >
             <Form
+
                 id={"add_event_form"}
                 onFinish={this.onFinish}
                 onFinishFailed={this.onFinishFailed}
@@ -128,7 +130,7 @@ class CreateNewEvent extends React.Component {
                         required: true,
                         message: 'Event Title' }]}
                 >
-                    <Input placeholder={"כותרת"} />
+                    <Input autoComplete='off' placeholder={"כותרת"} />
                 </Form.Item>
                 <Form.Item
                     className="link-form"
@@ -154,7 +156,7 @@ class CreateNewEvent extends React.Component {
                     rules={[{
                         message: 'Event link' }]}
                 >
-                    <Input placeholder={"קישור"}
+                    <Input autoComplete='off' placeholder={"קישור"}
                      prefix={MenuIcons["link"]}/>
                 </Form.Item>
                 <Form.Item

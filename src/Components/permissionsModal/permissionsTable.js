@@ -15,9 +15,14 @@ const colormap = {
 
 const columns = [
       {
-    title: 'User Name',
+    title: 'Username',
     dataIndex: 'username',
     key: 'username',
+  },
+    {
+    title: 'Name',
+    dataIndex: 'display_name',
+    key: 'display_name',
   },
   {
     title: 'Role',
