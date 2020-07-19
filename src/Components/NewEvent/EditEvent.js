@@ -119,13 +119,14 @@ class EditEvent extends React.Component {
 
 
   render() {
+      // this is the most important!!!! each one must have a unique formId
       const formId = `update_event_form_${this.props.eventId}`;
     return (
 
           <ConfigProvider direction={"rtl"}>
         <Modal
             key={"m_".concat(this.props.eventId)}
-          title={`Edit Event- ${this.props.eventId}`}
+          title={`Edit Event`}
           visible={this.props.showEditEventModal === this.props.eventId}
           onOk={this.handleOk}
           onCancel={this.handleCancel}

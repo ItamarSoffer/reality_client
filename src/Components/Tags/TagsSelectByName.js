@@ -8,7 +8,7 @@ import {connect} from "react-redux";
 const { Option } = Select;
 
 // non used component
-class TagsSelect extends React.Component {
+class TagsSelectByName extends React.Component {
     constructor(props){
         super(props);
         this.state = {
@@ -68,7 +68,7 @@ onSearch(val) {
                     {this.state.storyTags.map(
                         function (tagData) {
                             return (
-                                <Option value={tagData.tag_id}>
+                                <Option value={tagData.tag_name}>
                                 <Tag
                                 // closable
                                 color={tagData.tag_color} id={tagData.tag_id}>
@@ -97,4 +97,4 @@ const mapDispatchToProps = dispatch => {
 
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TagsSelect);
+export default connect(mapStateToProps, mapDispatchToProps)(TagsSelectByName);

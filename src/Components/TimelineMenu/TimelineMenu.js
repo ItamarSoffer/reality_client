@@ -18,6 +18,7 @@ import StoryRangePicker from './Search/StoryRangePicker';
 import StoryInSearch from './Search/StorySearch';
 import UploadXlsxModal from './UploadXlsxModal/UploadXlsxModal';
 import TagsModal from '../Tags/TagsModal';
+import TagsSearch from "./Search/TagsSearch";
 
 const { SubMenu } = Menu;
 
@@ -76,15 +77,20 @@ class TimelineMenu extends React.Component {
             <Menu.Item disabled key="filter_by_word">
                 <StoryInSearch/>
             </Menu.Item>
+            <Menu.Item disabled key="filter_by_tag">
+                <TagsSearch/>
+            </Menu.Item>
         </SubMenu>
           {(["write", "owner", "creator"].indexOf(this.props.role) === -1) ? null :
               <SubMenu key="m_edit" icon={MenuIcons['edit']} title="Edit">
+                  {!this.props.editMode?
                   <Menu.Item key="m_enable_edit" onClick={() => this.props.enableEdit()}>
                       Enable Edit
-                  </Menu.Item>
+                  </Menu.Item>:
                   <Menu.Item key="m_disable_edit" onClick={() => this.props.disableEdit()}>
                       Disable Edit
                   </Menu.Item>
+                  }
                   <Menu.Item key="m_tags" onClick={() => this.props.showTagsModal()}>
                       Tags
                   </Menu.Item>
