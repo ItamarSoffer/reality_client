@@ -84,11 +84,12 @@ class UploadXlsxModal extends React.Component {
                    <ul>
                        <li>xlsx file, not csv.</li>
                        <li>First line is headers.</li>
-                       <li>The headers are: title, content, link, event_time, color, icon, create_user.</li>
+                       <li>The headers are: title, content, link, event_time, color, icon, tags, create_user.</li>
                        <li><Text strong>Required headers: title, event_time.</Text></li>
                        <li>aAl headers in small letters.</li>
                        <li>Time format: "YYYY-mm-dd HH:MM:SS".</li>
-                       <li>color is text in format: "rgb(233, 30, 99)" or "#FFFFFF".</li>
+                       <li>Color is text in format: "rgb(233, 30, 99)" or "#FFFFFF".</li>
+                       <li>Tags: separated by commas.</li>
                        <li>Multi sheets is optional- only if they have the same headers.</li>
                    </ul>
                </Paragraph>
@@ -115,9 +116,6 @@ const mapStateToProps = state => {
   return {
       jwtToken: state.usersReducer.jwtToken,
       showUploadXlsxModal: state.modalsReducer.showUploadXlsxModal,
-
-
-
   }
 };
 
