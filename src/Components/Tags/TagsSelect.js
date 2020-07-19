@@ -1,5 +1,5 @@
 import React from 'react';
-import {Modal, Select, Tag} from "antd";
+import {Select, Tag} from "antd";
 import {backendAPI} from "../../Structure/api";
 import axios from "axios";
 import {hideTagsModalAction} from "../../Actions/modalsActions";
@@ -23,7 +23,6 @@ class TagsSelect extends React.Component {
 
     fetchTags = () => {
         const addTagApi = backendAPI.concat(`/timeline/${this.props.url}/get_tags`);
-        console.log(addTagApi);
         axios.post(addTagApi, {
             jwt_token: this.props.jwtToken,
         }).then(res => res.data)
@@ -54,11 +53,12 @@ onSearch(val) {
   // console.log('search:', val);
 };
     render() {
-        const {handleTagChange } = this.props;
+        const {handleTagChange, defaultValue } = this.props;
 
             return (
                 <Select
                     //labelInValue
+                    defaultValue={defaultValue}
                     placeholder={"Tags"}
                     style={{width: 300}}
                     onChange={value => handleTagChange(value)}

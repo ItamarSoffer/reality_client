@@ -1,13 +1,13 @@
 import React from 'react';
-import {Button, Form, Input, message, Modal, Typography, Tag, Col, Row} from "antd";
+import {Form, Input, message, Modal, Typography} from "antd";
 import {hideTagsModalAction} from "../../Actions/modalsActions";
 import {connect} from "react-redux";
 import TagsColorPicker from "../ColorPicker/TagsColorPicker";
 import {Divider} from "antd/es";
 import {backendAPI} from "../../Structure/api";
 import axios from 'axios';
-import RealityCard from "../RealityCard/RealityCard";
-const {Text, Title} = Typography;
+import TagsRenderer from "./TagsRenderer";
+const {Title} = Typography;
 const { Search } = Input;
 
 
@@ -159,15 +159,7 @@ class TagsModal extends React.Component{
                </Form>
                <Divider/>
                <Title level={4} style={{textAlign: 'center'}}>Exists:</Title>
-               {this.state.storyTagsData.map(
-                        function(tagData){
-                            return (<Tag
-                                // closable
-                                color={tagData.tag_color} id={tagData.tag_id}>
-                                {tagData.tag_name}
-                            </Tag>)
-                        }
-                    )}
+               <TagsRenderer tags={this.state.storyTagsData}/>
 
 
 

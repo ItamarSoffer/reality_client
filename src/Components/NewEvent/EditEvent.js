@@ -8,13 +8,22 @@ import MenuIcons from "../Icons/MenuIcons";
 import {backendAPI} from "../../Structure/api";
 import {connect} from "react-redux";
 import {setReRenderTimelineAction} from "../../Actions/siteActions";
-import {hideNewEventModalAction} from "../../Actions/modalsActions";
+import {hideEditEventModalAction} from "../../Actions/modalsActions";
 import TagsSelect from '../Tags/TagsSelect';
+import moment from 'moment';
 
 const { TextArea } = Input;
 
 
-class CreateNewEvent extends React.Component {
+class EditEvent extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            color: '',
+            icon: '',
+            tags: []
+        }
+    }
 
 
 
@@ -25,7 +34,7 @@ class CreateNewEvent extends React.Component {
   };
 
   closeModal = () => {
-      this.props.hideNewEventModal();
+      this.props.hideEditEventModal();
     this.setState({
       visible: false,
     });
@@ -33,7 +42,7 @@ class CreateNewEvent extends React.Component {
 
   handleOk = () => {
     // console.log(e);
-  this.props.hideNewEventModal();
+  this.props.hideEditEventModal();
     this.setState({
       visible: false,
     });
@@ -41,28 +50,35 @@ class CreateNewEvent extends React.Component {
 
   handleCancel = () => {
     // console.log(e);
-            this.props.hideNewEventModal();
+            this.props.hideEditEventModal();
     this.setState({
       visible: false,
     });
   };
 
+  // fine
   onFinish = values => {
       const api_add_event = backendAPI.concat(`/timeline/${this.props.url}/add`);
       // console.log("FINITO", values);
-      // console.log("SENDS TO", api_add_event);
       const hour = typeof values.hour !== "undefined" ? values.hour.format('hh:mm:ss'): "";
-      axios.post(api_add_event, {
+      const date = typeof values.date !== "undefined" ? values.date.format('YYYY-MM-DD'): "";
+      const color = this.state.color === '' ? this.props.eventData.frame_color: this.state.color ;
+      const icon = this.state.icon === ''?  this.props.eventData.icon: this.state.icon ;
+      const tags = this.state.tags === []?  this.props.eventData.tags: this.state.tags;
+
+      const postData = {
           "jwt_token": this.props.jwtToken,
+          "event_id": this.props.eventId,
           "header": values.title,
           "text": values.text,
-          "date": values.date.format('YYYY-MM-DD'),
+          "date": date,
           "hour":hour,
-          "frame_color": this.state.color,
-          "icon": this.state.icon,
+          "frame_color": color ,
+          "icon": icon,
           "link": values.link,
-          "tags": this.state.tags
-})
+          "tags": tags
+};
+      axios.post(api_add_event, postData)
          .then((response) => {
   // console.log("resp", response);
   if (response.status === 201){
@@ -70,7 +86,6 @@ class CreateNewEvent extends React.Component {
   }
   else if (response.status === 200){
   message.success(response.data, 1.5)
-
       .then(() => {
           this.props.setReRenderTimeline(this.props.timelineRenderCount + 1);
           // form.resetFields();
@@ -104,21 +119,23 @@ class CreateNewEvent extends React.Component {
 
 
   render() {
+      const formId = `update_event_form_${this.props.eventId}`;
     return (
 
           <ConfigProvider direction={"rtl"}>
         <Modal
-          title="אירוע חדש"
-          visible={this.props.showNewEventModal}
+            key={"m_".concat(this.props.eventId)}
+          title={`Edit Event- ${this.props.eventId}`}
+          visible={this.props.showEditEventModal === this.props.eventId}
           onOk={this.handleOk}
           onCancel={this.handleCancel}
-            okText="צור אירוע"
+          okText="צור אירוע"
           cancelText="בטל"
           footer={[<Button type="default"  key="close" onClick={this.handleCancel}>
             Cancel
         </Button>,
-        <Button type="primary" form="add_event_form" key="submit" htmlType="submit">
-            Add Event
+        <Button type="primary" form={formId} key="submit" htmlType="submit" onClick={this.onFinish}>
+            Update
         </Button>
 
 
@@ -129,7 +146,7 @@ class CreateNewEvent extends React.Component {
         >
             <Form
 
-                id={"add_event_form"}
+                id={formId}
                 onFinish={this.onFinish}
                 onFinishFailed={this.onFinishFailed}
 >
@@ -140,8 +157,9 @@ class CreateNewEvent extends React.Component {
                     rules={[{
                         required: true,
                         message: 'Event Title' }]}
+                    initialValue={this.props.eventData.header}
                 >
-                    <Input autoComplete='off' placeholder={"כותרת"} />
+                    <Input id={"add_event_form"} autoComplete='off' placeholder={"כותרת"}/>
                 </Form.Item>
                 <Form.Item
                     className="link-form"
@@ -150,6 +168,7 @@ class CreateNewEvent extends React.Component {
                     rules={[{
                         required: true,
                         message: 'Event date' }]}
+                    initialValue={moment(moment(this.props.eventData.event_time, "YYYY-MM-DD").format('YYYY-MM-DD'), "YYYY-MM-DD")}
                 >
                     <DatePicker autoComplete='off' placeholder={"תאריך"} />
                 </Form.Item>
@@ -157,6 +176,10 @@ class CreateNewEvent extends React.Component {
                     className="link-form"
                     //label="שעה"
                     name="hour"
+                    initialValue={
+                        moment(
+                            moment(this.props.eventData.event_time, "YYYY-MM-DD h:mm:ss").format("hh:mm:ss"), "hh:mm:ss")
+                    }
                 >
                     <TimePicker autoComplete='off' placeholder={"שעה"}/>
                 </Form.Item>
@@ -166,6 +189,7 @@ class CreateNewEvent extends React.Component {
                     name="link"
                     rules={[{
                         message: 'Event link' }]}
+                    initialValue={this.props.eventData.link}
                 >
                     <Input autoComplete='off' placeholder={"קישור"}
                      prefix={MenuIcons["link"]}/>
@@ -177,8 +201,10 @@ class CreateNewEvent extends React.Component {
                     rules={[{
                         // required: true,
                         message: 'Event content' }]}
+                    initialValue={this.props.eventData.text}
                 >
-                    <TextArea rows={3} placeholder={"תוכן האירוע"} prefix={MenuIcons["form"]}/>
+                    <TextArea rows={3} placeholder={"תוכן האירוע"} prefix={MenuIcons["form"]}
+                              />
                 </Form.Item>
                 <Form.Item
                     className="link-form"
@@ -187,7 +213,8 @@ class CreateNewEvent extends React.Component {
                     rules={[{
                         message: 'Event Icon' }]}
                 >
-                    <IconsSelect handleIconChange={this.onIconChange}/>
+                    <IconsSelect handleIconChange={this.onIconChange}
+                    defaultValue={this.props.eventData.icon}/>
                 </Form.Item>
                  <Form.Item
                     className="link-form"
@@ -196,7 +223,7 @@ class CreateNewEvent extends React.Component {
                     rules={[{
                         message: 'Event Color' }]}
                 >
-                    <ColorPicker handleColorChange={this.onColorChange}/>
+                    <ColorPicker handleColorChange={this.onColorChange} defaultValue={this.props.eventData.frame_color}/>
                 </Form.Item>
                 <Form.Item
                     className="link-form"
@@ -204,7 +231,10 @@ class CreateNewEvent extends React.Component {
                     name="tags"
 
                 >
-                <TagsSelect url={this.props.url} handleTagChange={this.onTagsChange}/>
+                <TagsSelect url={this.props.url}
+                            handleTagChange={this.onTagsChange}
+                            defaultValue={this.props.eventData.tags.map(obj => (obj.tag_id))}
+                />
                 </Form.Item>
 
             </Form>
@@ -216,7 +246,7 @@ class CreateNewEvent extends React.Component {
 
 const mapStateToProps = state => {
   return {
-      showNewEventModal: state.modalsReducer.showNewEventModal,
+      showEditEventModal: state.modalsReducer.showEditEventModal,
       timelineRenderCount: state.sitesReducer.timelineRenderCount,
       jwtToken: state.usersReducer.jwtToken,
 
@@ -225,10 +255,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return{
-        hideNewEventModal: () => {dispatch(hideNewEventModalAction())},
+        hideEditEventModal: () => {dispatch(hideEditEventModalAction())},
         setReRenderTimeline: (index) => {dispatch(setReRenderTimelineAction(index))}
     }
 
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateNewEvent);
+export default connect(mapStateToProps, mapDispatchToProps)(EditEvent);

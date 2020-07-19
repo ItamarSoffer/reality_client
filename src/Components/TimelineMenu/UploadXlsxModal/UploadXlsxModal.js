@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, message, Modal, Typography, Upload, Divider} from "antd";
+import {message, Modal, Typography, Upload, Divider} from "antd";
 import {connect} from "react-redux";
 import {hideUploadXlsxModalAction} from "../../../Actions/modalsActions";
 import {FileExcelOutlined} from '@ant-design/icons';

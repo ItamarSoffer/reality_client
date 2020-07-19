@@ -82,6 +82,7 @@ class StoryTable extends React.Component {
             render: link => <a href={link}>{link}</a>,
             align: 'center',
         });
+        if (this.props.storyViewMode === 'full_table'){
         columns.push({
             title: 'Tags',
             dataIndex: 'tags',
@@ -90,6 +91,7 @@ class StoryTable extends React.Component {
             render: tags => <TagsRenderer tags={tags}/>,
             align: 'center',
         });
+        }
         return columns
 
     }

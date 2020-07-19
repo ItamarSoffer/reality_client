@@ -26,11 +26,12 @@ onSearch(val) {
 }
 
     render() {
-        const {handleIconChange } = this.props;
+        const {handleIconChange, defaultValue}  = this.props;
 
         return(
 <Select
     //labelInValue
+    defaultValue={defaultValue}
     placeholder={"icon"}
     style={{ width: 80 }}
     onChange={value => handleIconChange(value)}

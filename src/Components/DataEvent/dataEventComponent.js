@@ -17,7 +17,7 @@ class DataEvent extends React.Component {
         return (
             <ConfigProvider direction={"rtl"} >
             <VerticalTimelineElement
-                id={this.props.data.event_id}
+                key={this.props.data.event_id}
             className="vertical-timeline-element--work"
             contentStyle={{
                 background: 'rgb(255, 255, 255)',
@@ -40,8 +40,14 @@ class DataEvent extends React.Component {
                     <div><a href={this.props.data.link}>{this.props.data.link}</a> <br/></div>}
                 {this.props.data.tags.length > 0 ? <TagsRenderer tags={this.props.data.tags}/> : null}
                 {!this.props.editMode? null:
-                    <EventDropdown eventId={this.props.data.event_id}
-                                   loggedUser={this.props.loggedUser}/>}
+                    <EventDropdown
+                        key={"menu_".concat(this.props.data.event_id)}
+                        data={this.props.data}
+                        eventId={this.props.data.event_id}
+                                   loggedUser={this.props.loggedUser}
+                                   selectedTags={this.props.data.tags}
+                                   url={this.props.url}
+                    />}
 
           </VerticalTimelineElement>
             </ConfigProvider>

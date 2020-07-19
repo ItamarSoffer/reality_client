@@ -16,8 +16,9 @@ class ColorPicker extends React.Component {
 
 
   render() {
-        const {handleColorChange } = this.props;
+        const {handleColorChange, defaultValue} = this.props;
     return <SwatchesPicker
+        defaultValue={defaultValue}
         colors={colorPalette}
         width={340}
         height={250}

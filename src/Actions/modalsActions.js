@@ -68,3 +68,29 @@ export const hideTagsModalAction = () => {
         payload: false
     }
 };
+
+export const showEditEventModalAction = (eventId) => {
+    // let visible = {};
+    // visible[eventId] = true;
+    // return {
+    //     type: "EDIT_EVENT_MODAL_VIEW",
+    //     payload: visible
+    // }
+    return {
+        type: "EDIT_EVENT_MODAL_VIEW",
+        payload: eventId
+    }
+};
+
+export const hideEditEventModalAction = (eventId) => {
+    // let visible = {};
+    // visible[eventId] = false;
+    // return {
+    //     type: "EDIT_EVENT_MODAL_VIEW",
+    //     payload: visible
+    // }
+    return {
+        type: "EDIT_EVENT_MODAL_VIEW",
+        payload: ''
+    }
+};

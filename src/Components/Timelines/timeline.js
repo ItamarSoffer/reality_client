@@ -83,6 +83,7 @@ class Timeline extends React.Component {
         else
             {
                 //returns the timeline.
+                const urlAddress = this.props.url;
             return (
                 <div
                     //style={{backgroundColor: '#ccc'}}
@@ -101,7 +102,7 @@ class Timeline extends React.Component {
                             style={{background: '#f00'}}>
                             {this.state.timeline_events.map(
                                 function (evt) {
-                                    return <DataEvent data={evt}/>
+                                    return <DataEvent data={evt} url={urlAddress} />
                                 })}
                         </VerticalTimeline> : null
                     }
