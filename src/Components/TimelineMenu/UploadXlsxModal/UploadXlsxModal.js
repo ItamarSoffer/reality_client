@@ -46,11 +46,10 @@ class UploadXlsxModal extends React.Component {
   action: backendXlsxAPI.concat(`/${this.props.urlAddress}/upload_xlsx`),
   accept:".xlsx",
   onChange(info) {
-      console.log(info);
-      console.log(123);
+      // console.log(info);
     const { status, response } = info.file;
     if (status !== 'uploading') {
-      console.log(info.file, info.fileList);
+      // console.log(info.file, info.fileList);
     }
     if (status === 'done') {
       message.success(`${info.file.name} file uploaded successfully.`);

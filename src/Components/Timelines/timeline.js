@@ -34,8 +34,8 @@ class Timeline extends React.Component {
         const maxTime = queryParams.max_time? queryParams.max_time: null;
         const searchString = queryParams.search_string? queryParams.search_string: null;
         const searchTags = queryParams.tags? queryParams.tags.split(","): null;
-        console.log(searchTags);
-        console.log(typeof searchTags);
+        // console.log(searchTags);
+        // console.log(typeof searchTags);
 
         // console.log(apiGetEvents);
         axios.post(apiGetEvents,
