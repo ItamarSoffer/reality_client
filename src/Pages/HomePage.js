@@ -4,7 +4,7 @@ import StoryHome from '../Components/HomePage/StoryHome';
 
 import SideMenuPage from './sideMenuPage';
 import {connect} from "react-redux";
-import CardsSearch from "../Components/RealityCard/Search/CardsSearch";
+import CardsSearch from "../Components/StoryCard/Search/CardsSearch";
 
 
 class HomePage extends  React.Component {

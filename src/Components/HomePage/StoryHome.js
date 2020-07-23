@@ -3,7 +3,7 @@ import {Layout, Divider} from "antd";
 import axios from 'axios';
 import {backendAPI} from "../../Structure/api";
 import LoadingPage from "../LoadingComponent/LoadingPage";
-import CardsGrid from '../RealityCard/CardsGrid';
+import CardsGrid from '../StoryCard/CardsGrid';
 import {connect} from "react-redux";
 import {setReRenderCardsAction} from "../../Actions/siteActions";
 import {withRouter} from "react-router";

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Col, Row } from 'antd';
-import RealityCard from './RealityCard';
+import StoryCard from './StoryCard';
 
 
 /*
@@ -17,7 +17,7 @@ class cardsGrid extends React.Component{
                     {this.props.cardsList.map(
                         function(card_data){
                             return (<Col span={8}>
-                                <RealityCard cardData={card_data}/>
+                                <StoryCard cardData={card_data}/>
                             </Col>)
                         }
                     )}

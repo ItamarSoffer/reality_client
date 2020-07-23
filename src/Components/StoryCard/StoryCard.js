@@ -24,7 +24,7 @@ const cardStyle = {
         };
 
 
-class RealityCard extends React.Component{
+class StoryCard extends React.Component{
      timeline_url = "/timeline/".concat(this.props.cardData.url);
 
 
@@ -72,4 +72,4 @@ class RealityCard extends React.Component{
 
 }
 
-export default RealityCard
+export default StoryCard

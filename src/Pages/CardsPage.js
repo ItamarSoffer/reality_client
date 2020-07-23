@@ -1,14 +1,14 @@
 import React from 'react';
 import { withRouter } from "react-router-dom";
 import {Layout} from "antd";
-import CardsGrid from '../Components/RealityCard/CardsGrid'
+import CardsGrid from '../Components/StoryCard/CardsGrid'
 import axios from "axios";
 import LoadingPage from '../Components/LoadingComponent/LoadingPage';
 import SideMenuPage from "./sideMenuPage";
 import {backendAPI} from "../Structure/api";
 import {connect} from "react-redux";
 import {getQueryStringParams} from "../Actions/queryStringActions";
-import CardsSearch from "../Components/RealityCard/Search/CardsSearch";
+import CardsSearch from "../Components/StoryCard/Search/CardsSearch";
 import {setReRenderCardsAction} from "../Actions/siteActions";
 
 
