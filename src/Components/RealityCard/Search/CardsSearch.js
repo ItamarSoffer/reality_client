@@ -48,7 +48,9 @@ class CardsSearch extends React.Component{
                 allowClear
                 placeholder="Search Stories"
                 onSearch={this.onSearch}
-                style={{ width: 700 }}
+                style={{ width: 700,
+                    borderRadius: '10px',
+                }}
                 // enterButton="Search"
                 defaultValue={defaultQueryValues}
     />
