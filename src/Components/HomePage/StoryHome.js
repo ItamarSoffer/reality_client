@@ -5,6 +5,9 @@ import {backendAPI} from "../../Structure/api";
 import LoadingPage from "../LoadingComponent/LoadingPage";
 import CardsGrid from '../RealityCard/CardsGrid';
 import {connect} from "react-redux";
+import {setReRenderCardsAction} from "../../Actions/siteActions";
+import {withRouter} from "react-router";
+import {getQueryStringParams} from "../../Actions/queryStringActions";
 
 
 class StoryHome extends  React.Component {
@@ -17,10 +20,18 @@ class StoryHome extends  React.Component {
     }
 
     componentDidMount() {
+            this.fetchData();
+    }
+
+    fetchData() {
+        const queryParams = getQueryStringParams(this.props.history.location.search);
+        const searchString = queryParams.search_string? queryParams.search_string: null;
         const apiGetTimelines = backendAPI.concat(`/get_timelines_by_user`);
         axios.post(apiGetTimelines,
             {
                 jwt_token: this.props.jwtToken,
+                "search_string": searchString
+
             })
             .then(res => res.data)
             .then( (data) => {
@@ -29,7 +40,15 @@ class StoryHome extends  React.Component {
                     isLoaded: true
                 }) }
             )
+    }
 
+    componentWillUpdate(nextProps, nextState, nextContext) {
+        if (nextProps.cardsRenderCount === 1) {
+            this.setState({
+                    isLoaded: false});
+            this.fetchData();
+            this.props.setReRenderCards(0);
+        }
     }
 
     render() {
@@ -100,13 +119,18 @@ class StoryHome extends  React.Component {
 const mapStateToProps = state => {
   return {
       jwtToken: state.usersReducer.jwtToken,
+      cardsRenderCount : state.sitesReducer.cardsRenderCount
+
 
   }
 };
 
 const mapDispatchToProps = dispatch => {
-    return {}
+    return {
+        setReRenderCards: (index) => {dispatch(setReRenderCardsAction(index))}
+
+    }
 
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(StoryHome);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(StoryHome));

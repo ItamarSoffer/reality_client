@@ -4,7 +4,8 @@ const siteInitState = {
     DarkMode: (DarkModeLocalStorage !== null ? DarkModeLocalStorage : false),
     editMode: false,
     timelineRenderCount: 0,
-    storyViewMode: 'timeline'
+    storyViewMode: 'timeline',
+    cardsRenderCount: 0
 };
 
 const sitesReducer = (state = siteInitState, action) => {
@@ -27,6 +28,11 @@ const sitesReducer = (state = siteInitState, action) => {
             state = {...state, storyViewMode: action.payload};
             // console.log(action.payload);
         break;
+
+        case "CARDS_RENDER_COUNT":
+        state = {...state, cardsRenderCount: action.payload};
+        break;
+
 
 
         default:

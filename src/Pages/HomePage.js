@@ -4,6 +4,7 @@ import StoryHome from '../Components/HomePage/StoryHome';
 
 import SideMenuPage from './sideMenuPage';
 import {connect} from "react-redux";
+import CardsSearch from "../Components/RealityCard/Search/CardsSearch";
 
 
 class HomePage extends  React.Component {
@@ -19,6 +20,13 @@ class HomePage extends  React.Component {
                   <SideMenuPage url={this.props.match.params.timeline_url} />
 
                   <Layout>
+                        <br/>
+                        <div style={{display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center'}}>
+                        <CardsSearch/>
+                        </div>
+                        <br/>
                       <StoryHome loggedUser={this.props.loggedUser}/>
                   </Layout>
         </Layout>

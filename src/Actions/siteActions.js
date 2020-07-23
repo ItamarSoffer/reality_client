@@ -47,3 +47,11 @@ export const storyModePrevTableAction = () => {
     }
 };
 
+export const setReRenderCardsAction = (index) => {
+    return {
+        type: "CARDS_RENDER_COUNT",
+        payload: index
+    }
+};
+
+
