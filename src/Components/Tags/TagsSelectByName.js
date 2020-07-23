@@ -53,7 +53,7 @@ onSearch(val) {
   // console.log('search:', val);
 };
     render() {
-        const {handleTagChange, defaultValue, allowClear, onSearch } = this.props;
+        const {handleTagChange, defaultValue, } = this.props;
 
             return (
                 <Select
