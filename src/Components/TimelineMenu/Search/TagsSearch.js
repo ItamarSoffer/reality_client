@@ -12,8 +12,9 @@ class TagsSearch extends React.Component{
     onSearch = (value) => {
         const pathName = this.props.history.location.pathname;
         let currentSearchQuery = getQueryStringParams(this.props.history.location.search);
-        if (value === null || value === ''){
+        if (value === null || value === ''|| value.length === 0){
             delete currentSearchQuery['tags'];
+            console.log("1",currentSearchQuery);
             this.props.history.push(
                 {pathname: pathName,
                     search: "?" + new URLSearchParams(
@@ -54,7 +55,7 @@ class TagsSearch extends React.Component{
         return (
             <TagsSelectByName
                 url={urlAddress}
-                allowClear={true}
+                allowClear
                 onSearch={this.onSearch}
                 defaultValue={defaultQueryValues}
                 handleTagChange={this.onSearch}

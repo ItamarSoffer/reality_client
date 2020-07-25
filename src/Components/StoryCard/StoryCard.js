@@ -17,8 +17,9 @@ const cardStyle = {
     fontSize: '14px',
     textAlign: 'center',
   // lineHeight: '20px',
-    minHeight: '130px',
+    minHeight: '160px',
     borderRadius: '8px',
+    borderColor: "#999999"
 
   //background: '#0092ff',
         };
@@ -35,7 +36,7 @@ class StoryCard extends React.Component{
         <Card
 
               bordered={true}
-              style={cardStyle}
+              style={{...cardStyle}}
           //     actions={[
           //   <SettingOutlined key="setting" />,
           //   <EditOutlined key="edit" />,

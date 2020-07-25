@@ -154,7 +154,14 @@ class TagsModal extends React.Component{
                     rules={[{
                         message: 'Event Color' }]}
                 >
+                       <div
+                       style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                    }}>
                        <TagsColorPicker handleColorChange={this.onColorChange}/>
+                       </div>
                    </Form.Item>
                </Form>
                <Divider/>
