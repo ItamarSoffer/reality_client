@@ -21,10 +21,9 @@ class EditEvent extends React.Component {
         this.state = {
             color: '',
             icon: '',
-            tags: []
+            tags: this.props.eventData.tags.map(tag => (tag.tag_id))
         }
     }
-
 
 
     showModal = () => {

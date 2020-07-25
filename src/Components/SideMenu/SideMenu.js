@@ -11,6 +11,8 @@ import {storyModePrevTableAction,
         storyModeTableAction,
         storyModeTimelineAction
 } from "../../Actions/siteActions";
+import {getQueryStringParams} from "../../Actions/queryStringActions";
+import URLSearchParams from "url-search-params";
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
@@ -46,13 +48,46 @@ class SideMenu extends React.Component {
 
   handleTimelineMode = () => {
       this.props.storyModeTimelineAction();
+      const pathName = this.props.history.location.pathname;
+      let currentSearchQuery = getQueryStringParams(this.props.history.location.search);
+      currentSearchQuery['view'] = 'timeline';
+      this.props.history.push(
+          {
+              pathname: pathName,
+              search: "?" + new URLSearchParams(
+                  {...currentSearchQuery}
+              ).toString()
+
+          });
   };
 
   handleTableMode = () => {
       this.props.storyModeTableAction();
+      const pathName = this.props.history.location.pathname;
+      let currentSearchQuery = getQueryStringParams(this.props.history.location.search);
+      currentSearchQuery['view'] = 'full_table';
+      this.props.history.push(
+          {
+              pathname: pathName,
+              search: "?" + new URLSearchParams(
+                  {...currentSearchQuery}
+              ).toString()
+
+          });
   };
   handlePreviewTableMode = () => {
       this.props.storyModePrevTableAction();
+      const pathName = this.props.history.location.pathname;
+      let currentSearchQuery = getQueryStringParams(this.props.history.location.search);
+      currentSearchQuery['view'] = 'preview_table';
+      this.props.history.push(
+          {
+              pathname: pathName,
+              search: "?" + new URLSearchParams(
+                  {...currentSearchQuery}
+              ).toString()
+
+          });
   };
 
 

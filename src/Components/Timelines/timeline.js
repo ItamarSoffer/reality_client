@@ -54,7 +54,7 @@ class Timeline extends React.Component {
                 // .then(() => {console.log("StateEvents:", this.state.timeline_events)});
     }
 
-    componentDidMount() {
+    componentWillMount() {
         document.title = `Story: ${this.props.basicData.name}`;
 
         this.fetchData();
@@ -88,6 +88,12 @@ class Timeline extends React.Component {
             {
                 //returns the timeline.
                 const urlAddress = this.props.url;
+                // extracts the view mode from url.
+                const queryParams = getQueryStringParams(this.props.history.location.search);
+                let viewMode = this.props.storyViewMode;
+                if (queryParams.view){
+                    viewMode = queryParams.view;
+                }
             return (
                 <div
                     //style={{backgroundColor: '#ccc'}}
@@ -95,12 +101,14 @@ class Timeline extends React.Component {
 
                     <Title level={1} style={{textAlign:'center'}}>{this.props.basicData.name}</Title>
                     <Title level={4} style={{textAlign:'center'}}>{this.props.basicData.description}</Title>
-                    {this.props.storyViewMode !== 'timeline'?
+                    {viewMode !== 'timeline'?
                     <StoryTable
+                        viewMode={viewMode}
+                        url={urlAddress}
                         timeline_events={this.state.timeline_events.map(e => ({...e, iconAndColor: [e.icon, e.frame_color]}))
 
                         }/> : null}
-                    {this.props.storyViewMode === 'timeline' ?
+                    {viewMode === 'timeline' ?
                         <VerticalTimeline
                             id={this.props.basicData.id}
                             style={{background: '#f00'}}>

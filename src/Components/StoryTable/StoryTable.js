@@ -1,17 +1,22 @@
 import React from 'react';
-import { Typography, Table, ConfigProvider, Button, Space, Input } from 'antd';
+import {Typography, Table, ConfigProvider, Button, Space, Input, message} from 'antd';
 import 'react-vertical-timeline-component/style.min.css';
 import {connect} from "react-redux";
 import Highlighter from 'react-highlight-words';
 import { SearchOutlined } from '@ant-design/icons';
 import {TableIcons} from '../Icons/Icons';
 import TagsRenderer from '../Tags/TagsRenderer';
+import {showEditEventModalAction} from "../../Actions/modalsActions";
+import {setReRenderTimelineAction} from "../../Actions/siteActions";
+import {backendAPI} from "../../Structure/api";
+import axios from "axios";
+import EditEvent from "../NewEvent/EditEvent";
 
 const { Paragraph } = Typography;
 
 function handleText (text){
     return <ConfigProvider direction={"rtl"} >
-                <Paragraph ellipsis={{rows: 2}} style={{whiteSpace: "pre-line"}}>
+                <Paragraph style={{whiteSpace: "pre-line"}}>
                     {text}
                 </Paragraph>
             </ConfigProvider>
@@ -32,8 +37,6 @@ class StoryTable extends React.Component {
                     key: 'icon',
                     align: 'center',
                     width: 20,
-                    // filters: this.props.timeline_events.map(
-                    //     e => ({value: e.icon, text: TableIcons[e.icon]  })),
                     render: iconAndColor => <div style={{
                         color: iconAndColor[1]}}>{TableIcons[iconAndColor[0]]}</div>
         },
@@ -63,7 +66,7 @@ class StoryTable extends React.Component {
         //     align: 'center',
         // },
 ];
-        if (this.props.storyViewMode === 'full_table'){
+        if (this.props.viewMode === 'full_table'){
             columns.push(                {
             title: 'Content',
             dataIndex: 'text',
@@ -82,7 +85,7 @@ class StoryTable extends React.Component {
             render: link => <a href={link}>{link}</a>,
             align: 'center',
         });
-        if (this.props.storyViewMode === 'full_table'){
+        if (this.props.viewMode  === 'full_table'){
         columns.push({
             title: 'Tags',
             dataIndex: 'tags',
@@ -92,9 +95,53 @@ class StoryTable extends React.Component {
             align: 'center',
         });
         }
-        return columns
+        if (this.props.editMode){
+           columns.push({
+            title: 'Actions',
+            key: 'actions',
+            width: 150 ,
+            align: ' center',
+            render: (_, record)=><div>
+                <Space>
+                <Button size={"small"}
+                        onClick={() => this.props.showEditEventModal(record.event_id)}
+                        // onClick={() => {console.log("edit", record)}}
+                > Edit</Button>
+                <Button danger size={"small"}
+                        onClick={() => this.handleDelete(record.event_id)}
+                    // onClick={() => {console.log("DEL", record)}}
+                > Delete</Button>
+                </Space>
+                <EditEvent
+                    key={record.event_id}
+                    eventData={record}
+                    eventId={record.event_id}
+                    url={this.props.url}
 
+                />
+                </div>
+        });
+        }
+        return columns
     }
+
+    handleDelete = (eventId) => {
+    const delUrl = backendAPI.concat(`/timeline/del_event?event_id=${eventId}`);
+    axios.post(delUrl, {
+        jwt_token: this.props.jwtToken,
+    })
+        .then((response) => {
+            if (response.status === 201){
+                message.warning(response.data)
+            }
+            else if (response.status === 200){
+                message.success(response.data, 1.5);
+                this.props.setReRenderTimeline(1);
+            }
+    });
+    };
+
+
 
     getColumnSearchProps = dataIndex => ({
     filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
@@ -192,12 +239,18 @@ class StoryTable extends React.Component {
 }
 const mapStateToProps = state => {
   return {
-      storyViewMode: state.sitesReducer.storyViewMode,
+      editMode: state.sitesReducer.editMode,
+      jwtToken: state.usersReducer.jwtToken,
+
+
   }
 };
 
 const mapDispatchToProps = dispatch => {
     return{
+        showEditEventModal: (eventId) => {dispatch(showEditEventModalAction(eventId))},
+        setReRenderTimeline: (index) => {dispatch(setReRenderTimelineAction(index))},
+
     }
 
 };
