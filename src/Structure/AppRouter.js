@@ -29,7 +29,7 @@ class AppRouter extends React.Component{
                               <div>
 
 
-                                  <Route path="/login" component={LoginPage}/>
+                                  {/*<Route exact={true} path="/login" component={LoginPage}/>*/}
                                   <Route path="/" component={LoginPage}/>
                               </div> :
                               <div>

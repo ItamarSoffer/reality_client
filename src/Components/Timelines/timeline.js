@@ -1,6 +1,6 @@
 import React from 'react';
 import { VerticalTimeline }  from 'react-vertical-timeline-component';
-import { Typography } from 'antd';
+import { Typography, BackTop } from 'antd';
 import 'react-vertical-timeline-component/style.min.css';
 import { withRouter } from "react-router-dom";
 import axios from 'axios';
@@ -118,6 +118,8 @@ class Timeline extends React.Component {
                                 })}
                         </VerticalTimeline> : null
                     }
+                    <BackTop />
+
                 </div>
 
             );
