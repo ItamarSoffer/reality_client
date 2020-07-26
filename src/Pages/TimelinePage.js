@@ -16,6 +16,7 @@ class StoryPage extends  React.Component {
         super(props);
         this.state = {
             isPageLoaded: false,
+            basicDataLoaded: false,
             role: null,
             pageExists: false
 
@@ -76,11 +77,12 @@ class StoryPage extends  React.Component {
             .then(res => res.data[0])
             .then((data) => {
                 this.setState({
-                    timelineBasicData:data})});
+                    timelineBasicData:data,
+                    basicDataLoaded: true})});
     }
 
     render() {
-        if (!this.state.isPageLoaded) {
+        if (!( this.state.isPageLoaded && this.state.basicDataLoaded)) {
             // if Not Loaded:
 
             return <LoadingPage/>;
