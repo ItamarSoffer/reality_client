@@ -7,7 +7,6 @@ import AppRouter from './Structure/AppRouter';
 
 import './App.css';
 import 'antd/dist/antd.css';
-//import './login/adds_atnd.css'
 import './main.css'
 import {checkJwt} from "./Actions/jwtActions";
 
