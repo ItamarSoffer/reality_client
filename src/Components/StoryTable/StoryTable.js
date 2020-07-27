@@ -209,7 +209,7 @@ class StoryTable extends React.Component {
     render() {
         const columns = this.setColumns();
         let expandableConfig = {};
-        if (this.props.storyViewMode === 'preview_table'){
+        if (this.props.viewMode === 'preview_table'){
             expandableConfig = {
                     expandedRowRender: record => handleText(record.text),
                     rowExpandable: record => record.text !== null && record.text.length > 0,
