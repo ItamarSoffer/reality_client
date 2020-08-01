@@ -16,7 +16,8 @@ export class NotExists extends React.Component{
 
               }}>
                <Result
-    title="This page does not exists!"
+                    status="404"
+    title="This page does not exist."
 
   />
             </div>

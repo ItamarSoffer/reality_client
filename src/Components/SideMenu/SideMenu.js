@@ -1,5 +1,6 @@
 import React from 'react';
-import { Layout, Menu, Switch } from 'antd';
+import { Layout, Menu } from 'antd';
+// import { Switch } from 'antd';
 import {connect} from "react-redux";
 import {
     withRouter
@@ -181,13 +182,16 @@ class SideMenu extends React.Component {
           </Menu>
             <br/>
             <br/>
-            <Switch
-                id={"theme_switch"}
-          checked={this.state.theme === 'dark'}
-          onChange={this.changeTheme}
-          checkedChildren="Dark"
-          unCheckedChildren="Light"
-        />
+
+        {/*    // DARK MODE SWITCH*/}
+        {/*    <Switch*/}
+        {/*        id={"theme_switch"}*/}
+        {/*  checked={this.state.theme === 'dark'}*/}
+        {/*  onChange={this.changeTheme}*/}
+        {/*  checkedChildren="Dark"*/}
+        {/*  unCheckedChildren="Light"*/}
+        {/*/>*/}
+
 
         </Sider>
 

@@ -12,7 +12,6 @@ const {Title, Text, Paragraph} = Typography;
 
 class UploadXlsxModal extends React.Component {
 
-
     onFinishFailed = errorInfo => {
         console.log('Failed:', errorInfo);
         message.error('Missing fields!')
@@ -35,10 +34,11 @@ class UploadXlsxModal extends React.Component {
 
     handleCancel = () => {
         // console.log(e);
-                this.props.hideUploadXlsxModalAction();
+        this.props.hideUploadXlsxModalAction();
         this.setState({
           visible: false,
         });
+        this.props.setReRenderTimeline(1);
       };
 
     draggerProps = {
@@ -54,10 +54,11 @@ class UploadXlsxModal extends React.Component {
     if (status === 'done') {
       message.success(`${info.file.name} file uploaded successfully.`);
       if (response.code === 200){
-          message.success(response.message, 3)
+          message.success(response.message, 3);
+
       }
       else if (response.code === 201){
-          message.warning(response.message, 3)
+          message.warning(response.message, 3);
       }
 
     } else if (status === 'error') {
@@ -85,15 +86,13 @@ class UploadXlsxModal extends React.Component {
                        <li>First line is headers.</li>
                        <li>The headers are: title, content, link, event_time, color, icon, tags, create_user.</li>
                        <li><Text strong>Required headers: title, event_time.</Text></li>
-                       <li>aAl headers in small letters.</li>
+                       <li>All headers in small letters.</li>
                        <li>Time format: "YYYY-mm-dd HH:MM:SS".</li>
                        <li>Color is text in format: "rgb(233, 30, 99)" or "#FFFFFF".</li>
                        <li>Tags: separated by commas.</li>
                        <li>Multi sheets is optional- only if they have the same headers.</li>
                    </ul>
                </Paragraph>
-
-               <Title level={4} >if upload is success: refresh the page.</Title>
                <Dragger {...this.draggerProps}>
     <p className="ant-upload-drag-icon">
       <FileExcelOutlined />

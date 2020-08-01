@@ -1,5 +1,9 @@
 import React from 'react';
-import {Typography} from "antd";
+import {Typography, Result} from "antd";
+import {
+    AiFillCloseCircle
+} from "react-icons/ai";
+
 
 const {Title} = Typography;
 
@@ -18,7 +22,10 @@ export class NoPermissions extends React.Component{
               }}>
 
         <Title level={1} style={{textAlign:'center'}}>No Permissions to view this story!</Title>
-        <Title level={2} style={{textAlign:'center'}}>Ask from the owner.</Title>
+               <Result
+    icon={<AiFillCloseCircle style={{color: 'red'}} size={150} />}
+    title="Ask from the owner."
+  />
             </div>
         )
     }
