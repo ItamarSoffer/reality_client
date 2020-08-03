@@ -1,16 +1,13 @@
 import React from 'react';
-import {Typography, Table, ConfigProvider, Button, Space, Input, message} from 'antd';
+import {Typography, Table, ConfigProvider, Button, Space, Input} from 'antd';
 import 'react-vertical-timeline-component/style.min.css';
 import {connect} from "react-redux";
 import Highlighter from 'react-highlight-words';
 import { SearchOutlined } from '@ant-design/icons';
 import {TableIcons} from '../Icons/Icons';
 import TagsRenderer from '../Tags/TagsRenderer';
-import {showEditEventModalAction} from "../../Actions/modalsActions";
 import {setReRenderTimelineAction} from "../../Actions/siteActions";
-import {backendAPI} from "../../Structure/api";
-import axios from "axios";
-import EditEvent from "../NewEvent/EditEvent";
+import EventEditOptions from "../DataEvent/EventEditOptions";
 
 const { Paragraph } = Typography;
 
@@ -101,46 +98,21 @@ class StoryTable extends React.Component {
             key: 'actions',
             width: 150 ,
             align: ' center',
-            render: (_, record)=><div>
-                <Space>
-                <Button size={"small"}
-                        onClick={() => this.props.showEditEventModal(record.event_id)}
-                        // onClick={() => {console.log("edit", record)}}
-                > Edit</Button>
-                <Button danger size={"small"}
-                        onClick={() => this.handleDelete(record.event_id)}
-                    // onClick={() => {console.log("DEL", record)}}
-                > Delete</Button>
-                </Space>
-                <EditEvent
-                    key={record.event_id}
-                    eventData={record}
-                    eventId={record.event_id}
-                    url={this.props.url}
+            render: (_, record)=>
+                <div>
+                                   <EventEditOptions
+                              key={"t_menu_".concat(record.event_id)}
+                        data={record}
+                        eventId={record.event_id}
+                        url={this.props.url}
+                              />
 
-                />
                 </div>
+
         });
         }
         return columns
     }
-
-    handleDelete = (eventId) => {
-    const delUrl = backendAPI.concat(`/timeline/del_event?event_id=${eventId}`);
-    axios.post(delUrl, {
-        jwt_token: this.props.jwtToken,
-    })
-        .then((response) => {
-            if (response.status === 201){
-                message.warning(response.data)
-            }
-            else if (response.status === 200){
-                message.success(response.data, 1.5);
-                this.props.setReRenderTimeline(1);
-            }
-    });
-    };
-
 
 
     getColumnSearchProps = dataIndex => ({
@@ -248,7 +220,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return{
-        showEditEventModal: (eventId) => {dispatch(showEditEventModalAction(eventId))},
         setReRenderTimeline: (index) => {dispatch(setReRenderTimelineAction(index))},
 
     }

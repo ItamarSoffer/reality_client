@@ -3,7 +3,7 @@ import { VerticalTimelineElement }  from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
 import {TimelineIcons} from '../Icons/Icons';
 import { Typography, ConfigProvider } from 'antd';
-import EventDropdown from "./eventDropdown";
+import EventEditOptions from "./EventEditOptions";
 import {connect} from "react-redux";
 import TagsRenderer from '../Tags/TagsRenderer'
 
@@ -40,14 +40,16 @@ class DataEvent extends React.Component {
                     <div><a href={this.props.data.link}>{this.props.data.link}</a> <br/></div>}
                 {this.props.data.tags.length > 0 ? <TagsRenderer tags={this.props.data.tags}/> : null}
                 {!this.props.editMode? null:
-                    <EventDropdown
+                    <div>
+                    <br/>
+                    <EventEditOptions
                         key={"menu_".concat(this.props.data.event_id)}
                         data={this.props.data}
                         eventId={this.props.data.event_id}
-                                   loggedUser={this.props.loggedUser}
-                                   selectedTags={this.props.data.tags}
-                                   url={this.props.url}
-                    />}
+                        url={this.props.url}
+                    />
+                    </div>
+                    }
 
           </VerticalTimelineElement>
             </ConfigProvider>

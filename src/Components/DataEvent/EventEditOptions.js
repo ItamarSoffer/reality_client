@@ -1,7 +1,7 @@
 import React from 'react';
-import {Menu, Dropdown, message} from 'antd';
+import {message, Space, Button} from 'antd';
 import axios from 'axios';
-import MenuIcons from '../Icons/MenuIcons';
+// import MenuIcons from '../Icons/MenuIcons';
 import {setReRenderTimelineAction} from "../../Actions/siteActions";
 import {connect} from "react-redux";
 import {backendAPI} from "../../Structure/api";
@@ -10,7 +10,7 @@ import EditEvent from "../NewEvent/EditEvent";
 
 
 
-class EventDropdown extends React.Component{
+class EventEditOptions extends React.Component{
 
     onTagsChange = (newTags) => {
       this.setState({
@@ -37,24 +37,18 @@ class EventDropdown extends React.Component{
     };
 
     render() {
-        const menu = (
-  <Menu>
-      <Menu.Item onClick={() => this.props.showEditEventModal(this.props.data.event_id)}>
-        Edit
-      </Menu.Item>
-
-      <Menu.Item onClick={this.handleDelete} style={{color:"red"}}>
-        Delete
-      </Menu.Item>
-
-  </Menu>
-);
         return(
             <div>
-
-<Dropdown.Button size="small" overlay={menu} icon={MenuIcons["edit"]} placement="bottomRight">
-
-  </Dropdown.Button>
+                <Space>
+                <Button size={"small"}
+                        onClick={() => this.props.showEditEventModal(this.props.data.event_id)}
+                        // onClick={() => {console.log("edit", record)}}
+                > Edit</Button>
+                <Button danger size={"small"}
+                        onClick={this.handleDelete}
+                    // onClick={() => {console.log("DEL", record)}}
+                > Delete</Button>
+                </Space>
                 <EditEvent
                     key={this.props.data.event_id}
                     eventData={this.props.data}
@@ -62,7 +56,7 @@ class EventDropdown extends React.Component{
                     url={this.props.url}
 
                 />
-            </div>
+                </div>
         )
     }
 }
@@ -83,4 +77,4 @@ const mapDispatchToProps = dispatch => {
 
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(EventDropdown);
+export default connect(mapStateToProps, mapDispatchToProps)(EventEditOptions);
