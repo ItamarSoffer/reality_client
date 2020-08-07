@@ -233,7 +233,7 @@ class EditEvent extends React.Component {
                 >
                 <TagsSelectByName url={this.props.url}
                             handleTagChange={this.onTagsChange}
-                            defaultValue={this.props.eventData.tags.map(obj => (obj.tag_id))}
+                            defaultValue={this.props.eventData.tags.map(obj => (obj.tag_name))}
                 />
                 </Form.Item>
 
