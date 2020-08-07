@@ -7,7 +7,8 @@ import {Divider} from "antd/es";
 import {backendAPI} from "../../Structure/api";
 import axios from 'axios';
 import TagsRenderer from "./TagsRenderer";
-const {Title} = Typography;
+import {setReRenderTimelineAction} from "../../Actions/siteActions";
+const {Title, Text} = Typography;
 const { Search } = Input;
 
 
@@ -105,6 +106,24 @@ class TagsModal extends React.Component{
       })
   };
 
+    tagCloseHandler = (tagId) => {
+        const delTagApi = backendAPI.concat(`/timeline/${this.props.url}/del_tag`);
+        axios.post(delTagApi, {
+            jwt_token: this.props.jwtToken,
+            "tag_id": tagId
+        })
+            .then((response) => {
+                if (response.status === 201) {
+                    message.warning(response.data)
+                } else if (response.status === 200) {
+                    message.success(response.data, 1.5);
+                    this.props.setReRenderTimeline(1);
+
+                }
+            }
+        )
+    };
+
 
     render(){
         return(
@@ -166,7 +185,10 @@ class TagsModal extends React.Component{
                </Form>
                <Divider/>
                <Title level={4} style={{textAlign: 'center'}}>Exists:</Title>
-               <TagsRenderer tags={this.state.storyTagsData}/>
+               <TagsRenderer tags={this.state.storyTagsData} deletable={true} handleTagClose={this.tagCloseHandler}/>
+
+               {!this.props.editMode? null:
+                   <div><br/><Text type="danger">Closing a tag will delete it from all events.</Text></div>}
 
 
 
@@ -184,13 +206,17 @@ const mapStateToProps = state => {
   return {
       showTagsModal: state.modalsReducer.showTagsModal,
       jwtToken: state.usersReducer.jwtToken,
+      editMode: state.sitesReducer.editMode,
+
 
   }
 };
 
 const mapDispatchToProps = dispatch => {
     return{
-        hideTagsModalAction: () => {dispatch(hideTagsModalAction())}
+        hideTagsModalAction: () => {dispatch(hideTagsModalAction())},
+        setReRenderTimeline: (index) => {dispatch(setReRenderTimelineAction(index))}
+
     }
 
 };

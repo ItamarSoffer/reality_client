@@ -14,7 +14,6 @@ class TagsSearch extends React.Component{
         let currentSearchQuery = getQueryStringParams(this.props.history.location.search);
         if (value === null || value === ''|| value.length === 0){
             delete currentSearchQuery['tags'];
-            console.log("1",currentSearchQuery);
             this.props.history.push(
                 {pathname: pathName,
                     search: "?" + new URLSearchParams(

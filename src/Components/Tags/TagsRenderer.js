@@ -1,8 +1,33 @@
 import React from 'react';
 import {Tag, Badge} from "antd";
+import {connect} from "react-redux";
 
 
 class TagsRenderer extends React.Component{
+    onTagClose = (tagData) => {
+        this.props.handleTagClose(tagData.tag_id);
+    };
+
+    renderTag = tagData => {
+      if (this.props.deletable && this.props.editMode) {
+          return (
+              <Tag
+                  color={tagData.tag_color}
+                  id={tagData.tag_id}
+                  closable={true}
+                  onClose={() => {this.onTagClose(tagData)}}>
+                  {tagData.tag_name}
+              </Tag>
+          )
+      }
+      else {
+          return (
+              <Tag color={tagData.tag_color} id={tagData.tag_id}>
+                                {tagData.tag_name}
+                            </Tag>
+          )
+      }
+    };
 
 
     render() {
@@ -29,17 +54,24 @@ class TagsRenderer extends React.Component{
 
         return (
             <div>
-           {this.props.tags.map(
-                        function(tagData){
-                            return (<Tag color={tagData.tag_color} id={tagData.tag_id}>
-                                {tagData.tag_name}
-                            </Tag>)
-                        }
-                    )}
+           {this.props.tags.map(tagData => this.renderTag(tagData))}
             </div>
 
         )
         }
     }
 }
-export default TagsRenderer;
+
+const mapStateToProps = state => {
+  return {
+      editMode: state.sitesReducer.editMode,
+
+  }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {}
+
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TagsRenderer);

@@ -41,6 +41,7 @@ class StoryTable extends React.Component {
             title: 'Time',
             dataIndex: 'event_time',
             key: 'event_time',
+            width: 120,
             align: 'center',
             sorter: (a, b) => Date.parse(a.event_time) - Date.parse(b.event_time),
             // defaultSortOrder: 'descend',
@@ -92,6 +93,16 @@ class StoryTable extends React.Component {
             render: tags => <TagsRenderer tags={tags}/>,
             align: 'center',
         });
+        columns.push(
+            {
+            title: ' Modify Time',
+            dataIndex: 'modify_time',
+            key: 'modify_time',
+            width: 120,
+            align: 'center',
+            sorter: (a, b) => Date.parse(a.event_time) - Date.parse(b.event_time),
+        }
+        )
         }
         if (this.props.editMode){
            columns.push({
@@ -182,6 +193,11 @@ class StoryTable extends React.Component {
     render() {
         const columns = this.setColumns();
         let expandableConfig = {};
+        const paginationConfig= {
+            total: this.props.timeline_events.length,
+            showSizeChanger: true,
+            showTotal: (total, range) => `${range[0]}-${range[1]} מתוך ${total}`
+        };
         if (this.props.viewMode === 'preview_table'){
             expandableConfig = {
                     expandedRowRender: record => handleText(record.text),
@@ -198,6 +214,7 @@ class StoryTable extends React.Component {
                 columns={columns}
                 rowKey={record => record.event_id}
                 expandable={expandableConfig}
+                pagination={paginationConfig}
                 style={{
                       // width: '90%',
                       display: 'flex',

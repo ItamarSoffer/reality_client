@@ -21,7 +21,7 @@ class EditEvent extends React.Component {
         this.state = {
             color: '',
             icon: '',
-            tags: this.props.eventData.tags.map(tag => (tag.tag_id))
+            tags: this.props.eventData.tags.map(tag => (tag.tag_name))
         }
     }
 
