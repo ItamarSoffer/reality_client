@@ -63,7 +63,7 @@ onSearch(val) {
                     style={{width: 300}}
                     onChange={value => handleTagChange(value)}
                     // onChange={value => console.log(value)}
-                    mode="tags"
+                    mode="multiple"
                 >
                     {this.state.storyTags.map(
                         function (tagData) {

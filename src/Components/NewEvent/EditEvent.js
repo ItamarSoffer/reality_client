@@ -9,8 +9,8 @@ import {backendAPI} from "../../Structure/api";
 import {connect} from "react-redux";
 import {setReRenderTimelineAction} from "../../Actions/siteActions";
 import {hideEditEventModalAction} from "../../Actions/modalsActions";
-import TagsSelect from '../Tags/TagsSelect';
 import moment from 'moment';
+import TagsSelectByName from "../Tags/TagsSelectByName";
 
 const { TextArea } = Input;
 
@@ -59,7 +59,7 @@ class EditEvent extends React.Component {
   onFinish = values => {
       const api_add_event = backendAPI.concat(`/timeline/${this.props.url}/add`);
       // console.log("FINITO", values);
-      const hour = typeof values.hour !== "undefined" ? values.hour.format('hh:mm:ss'): "";
+      const hour = typeof values.hour !== "undefined" ? values.hour.format('HH:mm:ss'): "";
       const date = typeof values.date !== "undefined" ? values.date.format('YYYY-MM-DD'): "";
       const color = this.state.color === '' ? this.props.eventData.frame_color: this.state.color ;
       const icon = this.state.icon === ''?  this.props.eventData.icon: this.state.icon ;
@@ -231,7 +231,7 @@ class EditEvent extends React.Component {
                     name="tags"
 
                 >
-                <TagsSelect url={this.props.url}
+                <TagsSelectByName url={this.props.url}
                             handleTagChange={this.onTagsChange}
                             defaultValue={this.props.eventData.tags.map(obj => (obj.tag_id))}
                 />

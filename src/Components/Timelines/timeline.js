@@ -1,6 +1,6 @@
 import React from 'react';
 import { VerticalTimeline }  from 'react-vertical-timeline-component';
-import { Typography, BackTop } from 'antd';
+import {Typography, BackTop, ConfigProvider} from 'antd';
 import 'react-vertical-timeline-component/style.min.css';
 import { withRouter } from "react-router-dom";
 import axios from 'axios';
@@ -98,9 +98,10 @@ class Timeline extends React.Component {
                 <div
                     //style={{backgroundColor: '#ccc'}}
                 >
-
+                    <ConfigProvider direction='rtl>'>
                     <Title level={1} style={{textAlign:'center'}}>{this.props.basicData.name}</Title>
                     <Title level={4} style={{textAlign:'center'}}>{this.props.basicData.description}</Title>
+                    </ConfigProvider>
                     {viewMode !== 'timeline'?
                     <StoryTable
                         viewMode={viewMode}

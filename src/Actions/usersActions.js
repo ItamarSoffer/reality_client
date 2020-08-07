@@ -6,8 +6,12 @@ import {backendAPI} from "../Structure/api";
 export const loginAction = (username, password) => {
 
     return async (dispatch) =>{
-        const userLoginApi = backendAPI.concat(`/login?username=${username}&password=${password}`);
-    axios.get(userLoginApi)
+        const userLoginApi = backendAPI.concat(`/login`);
+    axios.post(userLoginApi,
+        {
+            "username": username,
+            "password": password
+        })
                .then((response) => {
   // console.log("resp", response);
   if (response.status === 201){

@@ -79,6 +79,7 @@ class StoryTable extends React.Component {
             title: 'Link',
             dataIndex: 'link',
             key: 'link',
+            width: 150,
             render: link => <a href={link}>{link}</a>,
             align: 'center',
         });
@@ -191,7 +192,7 @@ class StoryTable extends React.Component {
             expandableConfig = {}
         }
         return (
-
+            <ConfigProvider direction='rtl'>
             <Table
                 dataSource={this.props.timeline_events}
                 columns={columns}
@@ -206,6 +207,7 @@ class StoryTable extends React.Component {
 
                   }}
             />
+            </ConfigProvider>
         );
     }
 }

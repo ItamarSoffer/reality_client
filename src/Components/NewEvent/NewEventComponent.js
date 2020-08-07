@@ -9,7 +9,7 @@ import {backendAPI} from "../../Structure/api";
 import {connect} from "react-redux";
 import {setReRenderTimelineAction} from "../../Actions/siteActions";
 import {hideNewEventModalAction} from "../../Actions/modalsActions";
-import TagsSelect from '../Tags/TagsSelect';
+import TagsSelectByName from "../Tags/TagsSelectByName";
 
 const { TextArea } = Input;
 
@@ -51,7 +51,7 @@ class CreateNewEvent extends React.Component {
       const api_add_event = backendAPI.concat(`/timeline/${this.props.url}/add`);
       // console.log("FINITO", values);
       // console.log("SENDS TO", api_add_event);
-      const hour = typeof values.hour !== "undefined" ? values.hour.format('hh:mm:ss'): "";
+      const hour = typeof values.hour !== "undefined" ? values.hour.format('HH:mm:ss'): "";
       axios.post(api_add_event, {
           "jwt_token": this.props.jwtToken,
           "header": values.title,
@@ -204,7 +204,7 @@ class CreateNewEvent extends React.Component {
                     name="tags"
 
                 >
-                <TagsSelect url={this.props.url} handleTagChange={this.onTagsChange}/>
+                <TagsSelectByName url={this.props.url} handleTagChange={this.onTagsChange}/>
                 </Form.Item>
 
             </Form>

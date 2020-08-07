@@ -1,7 +1,12 @@
 import React from 'react';
 import {Card } from 'antd';
 import { Link } from "react-router-dom";
-import { Typography } from 'antd';
+import { Typography, Space } from 'antd';
+import {
+    UserOutlined,
+    ClockCircleOutlined,
+    DeploymentUnitOutlined
+} from '@ant-design/icons';
 
 const { Title, Text } = Typography;
 /*
@@ -46,19 +51,34 @@ class StoryCard extends React.Component{
 				<Link to={this.timeline_url}>
                      <Title level={4} style={{color: '#1890ff'}}>{this.props.cardData.name} </Title>
 				</Link>
-            {!this.props.cardData.description ? null :
-                <div>
-                <Text strong style={{color: '#222'}}>{this.props.cardData.description}</Text>
-                < br />
-                </div>
-            }
+            {/*{!this.props.cardData.description ? null :*/}
+            {/*    <div>*/}
+            {/*    <Text strong style={{color: '#222'}}>{this.props.cardData.description}</Text>*/}
+            {/*    < br />*/}
+            {/*    </div>*/}
+            {/*}*/}
             {!this.props.cardData.counter ? null :
                 <div>
-                <Text style={{color: '#222'}}>Events: {this.props.cardData.counter}</Text>
+                    <Space>
+                    <DeploymentUnitOutlined/>
+                    {this.props.cardData.counter === 1 ?
+
+                        <Text style={{color: '#222'}}>{this.props.cardData.counter} Event</Text> :
+                        <Text style={{color: '#222'}}>{this.props.cardData.counter} Events</Text>
+                    }
+                    </Space>
                 < br />
                 </div>
             }
-            <Text >Created by: {this.props.cardData.create_user}</Text>
+            <Space>
+                <UserOutlined/>
+            <Text style={{color: '#222'}}>{this.props.cardData.create_user}</Text>
+            </Space>
+            <br/>
+            <Space>
+                <ClockCircleOutlined/>
+                <Text style={{color: '#222'}}>{this.props.cardData.last_modify}</Text>
+            </Space>
       {/*      {! this.props.cardData.hasOwnProperty('role')? null:*/}
       {/*      <div>*/}
 
