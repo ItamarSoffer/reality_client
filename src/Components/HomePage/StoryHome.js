@@ -1,5 +1,5 @@
 import React from 'react';
-import {Layout, Divider} from "antd";
+import {Layout, Divider, message} from "antd";
 import axios from 'axios';
 import {backendAPI} from "../../Structure/api";
 import LoadingPage from "../LoadingComponent/LoadingPage";
@@ -33,13 +33,17 @@ class StoryHome extends  React.Component {
                 "search_string": searchString
 
             })
-            .then(res => res.data)
-            .then( (data) => {
-                this.setState({
-                    timelines: data,
-                    isLoaded: true
-                }) }
-            )
+            .then((response) => {
+                if (response.status === 201) {
+                    message.warning(response.data)
+                } else if (response.status === 200) {
+                    this.setState({
+                    timelines:response.data,
+                    isLoaded: true});
+                }
+            }
+        )
+
     }
 
     componentWillUpdate(nextProps, nextState, nextContext) {

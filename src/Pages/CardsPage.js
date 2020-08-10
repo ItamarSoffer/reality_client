@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter } from "react-router-dom";
-import {Layout} from "antd";
+import {Layout, message} from "antd";
 import CardsGrid from '../Components/StoryCard/CardsGrid'
 import axios from "axios";
 import LoadingPage from '../Components/LoadingComponent/LoadingPage';
@@ -38,12 +38,16 @@ class CardsPage extends  React.Component {
             "jwt_token": this.props.jwtToken,
             "search_string": searchString
         })
-            .then(res => res.data)
-            .then((data) => {
-                this.setState({
-                    timelines:data,
-                    isLoaded: true})})
-                // .then(() => {console.log("Timelines:", this.state.timelines)});
+                        .then((response) => {
+                if (response.status === 201) {
+                    message.warning(response.data)
+                } else if (response.status === 200) {
+                    this.setState({
+                    timelines:response.data,
+                    isLoaded: true});
+                }
+            }
+        )
 }
 
 componentWillUpdate(nextProps, nextState, nextContext) {

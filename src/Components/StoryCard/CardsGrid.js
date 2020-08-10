@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Row } from 'antd';
+import { List } from 'antd';
 import StoryCard from './StoryCard';
 
 
@@ -13,15 +13,17 @@ class cardsGrid extends React.Component{
 
         return(
             <div>
-                <Row gutter={[24, 24]}>
-                    {this.props.cardsList.map(
-                        function(card_data){
-                            return (<Col span={8}>
-                                <StoryCard cardData={card_data}/>
-                            </Col>)
-                        }
-                    )}
-                </Row>
+                <List
+                grid={{gutter: 24, column: 4}}
+                dataSource={this.props.cardsList}
+                renderItem={
+                    card_data => (
+                        <List.Item>
+                            <StoryCard cardData={card_data}/>
+                        </List.Item>
+                    )
+                }
+                />
             </div>
         )
     }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { VerticalTimeline }  from 'react-vertical-timeline-component';
-import {Typography, BackTop, ConfigProvider} from 'antd';
+import {Typography, BackTop, ConfigProvider, message} from 'antd';
 import 'react-vertical-timeline-component/style.min.css';
 import { withRouter } from "react-router-dom";
 import axios from 'axios';
@@ -46,12 +46,18 @@ class Timeline extends React.Component {
                 search_string: searchString,
                 tags: searchTags
             })
-            .then(res => res.data.events)
-            .then((evs) => {
-                this.setState({
-                    timeline_events:evs,
-                    isLoaded: true})});
-                // .then(() => {console.log("StateEvents:", this.state.timeline_events)});
+
+            .then((response) => {
+                if (response.status === 201) {
+                    message.warning(response.data)
+                } else if (response.status === 200) {
+                    this.setState({
+                    timeline_events:response.data.events,
+                    isLoaded: true});
+                }
+            }
+        )
+
     }
 
     componentWillMount() {
