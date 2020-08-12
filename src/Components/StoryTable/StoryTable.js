@@ -100,7 +100,7 @@ class StoryTable extends React.Component {
             key: 'modify_time',
             width: 120,
             align: 'center',
-            sorter: (a, b) => Date.parse(a.event_time) - Date.parse(b.event_time),
+            sorter: (a, b) => Date.parse(a.modify_time) - Date.parse(b.modify_time),
         }
         )
         }
