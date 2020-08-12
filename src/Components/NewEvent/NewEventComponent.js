@@ -15,7 +15,12 @@ const { TextArea } = Input;
 
 
 class CreateNewEvent extends React.Component {
+    formRef = React.createRef();
 
+    onReset = () => {
+        console.log("RESET");
+    this.formRef.current.resetFields();
+    };
 
 
     showModal = () => {
@@ -29,6 +34,7 @@ class CreateNewEvent extends React.Component {
     this.setState({
       visible: false,
     });
+
   };
 
   handleOk = () => {
@@ -76,7 +82,10 @@ class CreateNewEvent extends React.Component {
           // form.resetFields();
   })
   }
-  }).then(() => this.closeModal());
+  }).then(() => {
+      this.onReset();
+      this.closeModal()
+  });
   };
 
   onFinishFailed = errorInfo => {
@@ -132,7 +141,9 @@ class CreateNewEvent extends React.Component {
                 id={"add_event_form"}
                 onFinish={this.onFinish}
                 onFinishFailed={this.onFinishFailed}
->
+                ref={this.formRef}
+
+            >
                 <Form.Item
                     className="title-form"
                     // label="כותרת"
