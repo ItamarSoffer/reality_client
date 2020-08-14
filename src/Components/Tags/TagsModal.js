@@ -1,5 +1,5 @@
 import React from 'react';
-import {Form, Input, message, Modal, Typography} from "antd";
+import {Form, Input, message, Modal, Typography, Tabs, Button, } from "antd";
 import {hideTagsModalAction} from "../../Actions/modalsActions";
 import {connect} from "react-redux";
 import TagsColorPicker from "../ColorPicker/TagsColorPicker";
@@ -8,12 +8,17 @@ import {backendAPI} from "../../Structure/api";
 import axios from 'axios';
 import TagsRenderer from "./TagsRenderer";
 import {setReRenderTimelineAction} from "../../Actions/siteActions";
+import TagsEditSelectByName from "./TagsEditSelectByName";
+
 const {Title, Text} = Typography;
 const { Search } = Input;
+const { TabPane } = Tabs;
 
 
 
 class TagsModal extends React.Component{
+        editTagFormRef = React.createRef();
+
 
     constructor(props){
         super(props);
@@ -21,6 +26,8 @@ class TagsModal extends React.Component{
             color: "#f5222d",
             isLoaded: false,
             storyTagsData: [],
+            tagChangeColor: null,
+            tagChangeName: ''
         }
     }
 
@@ -125,7 +132,45 @@ class TagsModal extends React.Component{
     };
 
 
+     // edit tag functions:
+
+    onTagChangeColorChange = (newColor) => {
+      this.setState({
+          tagChangeColor: newColor
+      });
+        console.log(newColor);
+  };
+
+
+      onEditTagChange = (selectedTag) => {
+      console.log("Edit Tags", selectedTag);
+          this.setState({
+          targetTag: selectedTag
+      })
+  };
+
+        handleEditTagNameChange = (e) => {
+                console.log("NewTagName", e.target.value);
+          this.setState({
+          tagChangeName: e.target.value
+      })
+      };
+
+        handleUpdateTag = () => {
+          console.log("Handles Update Tag. data", this.state.targetTag, this.state.tagChangeName, this.state.tagChangeColor );
+          // if success:
+          this.editTagFormRef.current.resetFields();
+          this.fetchStoryTags();
+
+        };
+
+
     render(){
+        let defaultTag = "1";
+        if (this.props.editMode){
+            defaultTag = "2"
+        }
+
         return(
            <Modal
               title="Story Tags"
@@ -134,14 +179,9 @@ class TagsModal extends React.Component{
               onCancel={this.handleCancel}
               style={{borderRadius: '16px',}}
               footer={null}
-        //       footer={[<Button type="default"  key="close" onClick={this.handleCancel}>
-        //     Close
-        // </Button>,
-        // <Button type="danger" key="submit" form="create_tag_form" onClick={() => this.handleTimelineDelete()}>
-        //     Delete for good
-        // </Button>
-        // ]}
               >
+               <Tabs defaultActiveKey={defaultTag}>
+                   <TabPane tab="Create" key="1">
                <Title level={4} style={{textAlign: 'center'}}>Create New</Title>
 
                <Form
@@ -185,18 +225,61 @@ class TagsModal extends React.Component{
                </Form>
                <Divider/>
                <Title level={4} style={{textAlign: 'center'}}>Exists:</Title>
-               <TagsRenderer tags={this.state.storyTagsData} deletable={true} handleTagClose={this.tagCloseHandler}/>
+               <TagsRenderer tags={this.state.storyTagsData} handleTagClose={this.tagCloseHandler}/>
+                   </TabPane>
 
-               {!this.props.editMode? null:
-                   <div><br/><Text type="danger">Closing a tag will delete it from all events.</Text></div>}
+               {
+                   !this.props.editMode? null:
+                    <TabPane tab="Edit" key="2">
 
+                       <Title level={4} style={{textAlign: 'center'}}>Edit Tags</Title>
+                       <Form
+                            id={"edit_tag_form"}
+                            onFinishFailed={this.onFinishFailed}
+                            ref={this.editTagFormRef}
+                        >
+                           <Form.Item
+                               className="link-form"
+                               // label="Tag"
+                               name="target_Tag">
+                       <TagsEditSelectByName handleTagChange={this.onEditTagChange} tags={this.state.storyTagsData}/>
+                           </Form.Item>
+                       <Form.Item
+                               className="link-form"
+                               // label="New Name"
+                               name="new_name">
+                       <Input autoComplete='off' placeholder={"New Tag Name"}
+                               onChange={this.handleEditTagNameChange}
+                              style={{width: 200}}
+                              />
+                       </Form.Item>
+                      <Form.Item
+                       className="link-form"
+                       // label="New Color"
+                       name="new_color">
+                          <TagsColorPicker handleColorChange={this.onTagChangeColorChange}/>
+                      </Form.Item>
+                           <Form.Item
+                       className="link-form"
+                       // label="New Color"
+                       name="submit">
+                          <Button type="primary" onClick={this.handleUpdateTag} >
+                              Update Tag
+                          </Button>
+                      </Form.Item>
+                       </Form>
+                       <Divider/>
 
+                       <Title level={4} style={{textAlign: 'center'}}>Delete Tags</Title>
+                       <Text type="danger">Closing a tag will delete it from all events.</Text>
+                       <br/>
+                       <br/>
+                       <TagsRenderer tags={this.state.storyTagsData} deletable={this.props.editMode} handleTagClose={this.tagCloseHandler}/>
 
+                   </TabPane>
+                       }
 
-               {/*{this.state.storyTagsData.map( tagData => (<Tag color={tagData[1]}> {tagData[0]}</Tag>}))}*/}
-
-
-
+            </Tabs>
            </Modal>
         )
     }

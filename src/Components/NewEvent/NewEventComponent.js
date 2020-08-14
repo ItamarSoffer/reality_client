@@ -18,7 +18,7 @@ class CreateNewEvent extends React.Component {
     formRef = React.createRef();
 
     onReset = () => {
-        console.log("RESET");
+        // console.log("RESET");
     this.formRef.current.resetFields();
     };
 
