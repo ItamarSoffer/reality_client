@@ -9,7 +9,7 @@ class TagsRenderer extends React.Component{
     };
 
     renderTag = tagData => {
-      if (this.props.deletable && this.props.editMode) {
+      if (this.props.deletable) {
           return (
               <Tag
                   color={tagData.tag_color}
