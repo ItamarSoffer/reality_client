@@ -6,6 +6,7 @@ import { Typography, ConfigProvider } from 'antd';
 import EventEditOptions from "./EventEditOptions";
 import {connect} from "react-redux";
 import TagsRenderer from '../Tags/TagsRenderer'
+import ExtraData from "./ExtraData/ExtraData";
 
 
 const { Paragraph, Title } = Typography;
@@ -39,6 +40,12 @@ class DataEvent extends React.Component {
                 {!this.props.data.link ? null :
                     <div><a href={this.props.data.link}>{this.props.data.link}</a> <br/></div>}
                 {this.props.data.tags.length > 0 ? <TagsRenderer tags={this.props.data.tags}/> : null}
+                {this.props.data.extra_data?
+                    <div>
+                        <br/>
+                        <ExtraData key={"extra_".concat(this.props.data.event_id)} data={this.props.data.extra_data}/>
+                </div>
+                        : null}
                 {!this.props.editMode? null:
                     <div>
                     <br/>
@@ -50,6 +57,7 @@ class DataEvent extends React.Component {
                     />
                     </div>
                     }
+
 
           </VerticalTimelineElement>
             </ConfigProvider>
