@@ -21,7 +21,9 @@ class Timeline extends React.Component {
         super(props);
         this.state={
             isLoaded: false,
-            timeline_events: []
+            timeline_events: [],
+            storyName: this.props.basicData.name,
+            storyDescription: this.props.basicData.description
         }
     }
 
@@ -61,7 +63,7 @@ class Timeline extends React.Component {
     }
 
     componentWillMount() {
-        document.title = `Story: ${this.props.basicData.name}`;
+        document.title = `Story: ${this.state.storyName}`;
 
         this.fetchData();
     }
@@ -71,7 +73,54 @@ class Timeline extends React.Component {
             this.fetchData();
             this.props.setReRenderTimeline(0);
         }
+        if (nextState.storyName !== this.state.storyName){
+                    document.title = `Story: ${nextState.storyName}`;
+
+        }
     }
+
+    handleNameChange =(str) => {
+        // console.log("new name", str);
+        if (str.length === 0){
+            message.warning("Name can not be empty!");
+            return
+        }
+
+        const editPropertyApi = backendAPI.concat(`/timeline/${this.props.url}/edit_property`);
+        axios.post(editPropertyApi, {
+            jwt_token: this.props.jwtToken,
+            new_name: str
+        }).then((response) => {
+            if (response.status === 201){
+                message.warning(response.data)
+            }
+            else if (response.status === 200){
+                message.success(response.data, 1);
+                this.setState({storyName: str});
+            }
+        }
+        );
+    };
+
+    handleDescriptionChange =(str) => {
+        // console.log("new Description", str);
+
+        const editPropertyApi = backendAPI.concat(`/timeline/${this.props.url}/edit_property`);
+        axios.post(editPropertyApi, {
+            jwt_token: this.props.jwtToken,
+            new_description: str
+        }).then((response) => {
+            if (response.status === 201){
+                message.warning(response.data)
+            }
+            else if (response.status === 200){
+                message.success(response.data, 1);
+                this.setState({storyDescription: str});
+            }
+        }
+        );
+    };
+
 
 
     render() {
@@ -100,13 +149,20 @@ class Timeline extends React.Component {
                 if (queryParams.view){
                     viewMode = queryParams.view;
                 }
+                let nameOnChange = false;
+                let descriptionOnChange = false;
+                if (this.props.editMode){
+                    nameOnChange = { onChange: (str) => this.handleNameChange(str)};
+                    descriptionOnChange = { onChange: (str) => (this.handleDescriptionChange(str)) };
+
+                }
             return (
                 <div
                     //style={{backgroundColor: '#ccc'}}
                 >
                     <ConfigProvider direction='rtl>'>
-                    <Title level={1} style={{textAlign:'center'}}>{this.props.basicData.name}</Title>
-                    <Title level={4} style={{textAlign:'center'}}>{this.props.basicData.description}</Title>
+                    <Title level={1} editable={nameOnChange} style={{textAlign:'center'}}>{this.state.storyName}</Title>
+                    <Title level={4} editable={descriptionOnChange} style={{textAlign:'center'}}>{this.state.storyDescription}</Title>
                     </ConfigProvider>
                     {viewMode !== 'timeline'?
                     <StoryTable
@@ -136,7 +192,8 @@ class Timeline extends React.Component {
 const mapStateToProps = state => {
   return {
       jwtToken: state.usersReducer.jwtToken,
-      storyViewMode: state.sitesReducer.storyViewMode
+      storyViewMode: state.sitesReducer.storyViewMode,
+      editMode: state.sitesReducer.editMode,
   }
 };
 
