@@ -159,6 +159,10 @@ class TagsModal extends React.Component{
                   this.editTagFormRef.current.resetFields();
                   this.fetchStoryTags();
                   this.props.setReRenderTimeline(1);
+                  this.setState({
+                      tagChangeColor: null,
+                      tagChangeName: ''
+                  })
               }
               });
         };
