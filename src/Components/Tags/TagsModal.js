@@ -250,6 +250,8 @@ class TagsModal extends React.Component{
                        <Input autoComplete='off' placeholder={"New Tag Name"}
                                onChange={this.handleEditTagNameChange}
                               style={{width: 200}}
+                              maxLength={15}
+
                               />
                        </Form.Item>
                       <Form.Item
