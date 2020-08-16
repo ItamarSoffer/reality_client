@@ -8,6 +8,7 @@ import {TableIcons} from '../Icons/Icons';
 import TagsRenderer from '../Tags/TagsRenderer';
 import {setReRenderTimelineAction} from "../../Actions/siteActions";
 import EventEditOptions from "../DataEvent/EventEditOptions";
+import ExtraData from "../DataEvent/ExtraData/ExtraData";
 
 const { Paragraph } = Typography;
 
@@ -69,6 +70,7 @@ class StoryTable extends React.Component {
             title: 'Content',
             dataIndex: 'text',
             key: 'text',
+            width: 280,
             align: 'center',
             render: text => handleText(text),
             ...this.getColumnSearchProps('text'),
@@ -83,6 +85,7 @@ class StoryTable extends React.Component {
             width: 150,
             render: link => <a href={link}>{link}</a>,
             align: 'center',
+
         });
         if (this.props.viewMode  === 'full_table'){
         columns.push({
@@ -198,14 +201,37 @@ class StoryTable extends React.Component {
             showSizeChanger: true,
             showTotal: (total, range) => `${range[0]}-${range[1]} מתוך ${total}`
         };
+        expandableConfig = {};
         if (this.props.viewMode === 'preview_table'){
             expandableConfig = {
-                    expandedRowRender: record => handleText(record.text),
-                    rowExpandable: record => record.text !== null && record.text.length > 0,
+                    expandedRowRender: record =>
+                        <div>
+                        {handleText(record.text)}
+                        {record.extra_data?
+                            <div>
+                                <br/>
+                                <ExtraData key={"t_extra_".concat(record.event_id)} data={record.extra_data}/>
+                            </div>
+                        : null}
+
+                        </div>,
+                    rowExpandable: record => (record.text !== null && record.text.length > 0) || record.extra_data
                 }
         }
         else {
-            expandableConfig = {}
+            expandableConfig = {
+                    expandedRowRender: record =>
+                        <div>
+                        {record.extra_data?
+                            <div>
+                                <br/>
+                                <ExtraData key={"t_extra_".concat(record.event_id)} data={record.extra_data} startsOpen/>
+                            </div>
+                        : null}
+
+                        </div>,
+                    rowExpandable: record => (record.extra_data && true)
+                }
         }
         return (
             <ConfigProvider direction='rtl'>

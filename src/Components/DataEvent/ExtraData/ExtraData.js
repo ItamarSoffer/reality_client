@@ -19,8 +19,8 @@ class ExtraData extends React.Component{
     constructor(props){
         super(props);
         this.state= {
-            visible: false,
-            buttonText: 'Open More'
+            visible: !!this.props.startsOpen,
+            buttonText: this.props.startsOpen ? 'close': 'Open More'
         }
     }
 
