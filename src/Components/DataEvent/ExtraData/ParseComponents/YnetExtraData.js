@@ -10,11 +10,12 @@ class YnetExtraData extends React.Component{
                 <Card
                     size="small"
                     headStyle={{backgroundColor: this.props.data.color}}
-                    title={this.props.data.type}
-                    extra={<UserOutlined/>}
+                    title={this.props.data.content.title}
+                    extra={<div>{this.props.data.type} <UserOutlined/></div>}
                 >
-                    {this.props.data.content.author}
-                    {this.props.data.content.date}
+                    {this.props.data.content.datetime}
+                    <br/>
+                    {this.props.data.content.text}
             </Card>
             )
 

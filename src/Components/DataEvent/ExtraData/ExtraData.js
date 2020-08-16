@@ -33,8 +33,8 @@ class ExtraData extends React.Component{
 
     render() {
         const showButton = <Button size='small' onClick={this.handleButtonClick}>
-                    {this.state.buttonText}
-                </Button>;
+                                {this.state.buttonText}
+                           </Button>;
         let extraDataComponent = <DefaultExtraData data={this.props.data}/>;
         if (this.props.data.type === 'ynet'){
             extraDataComponent = <YnetExtraData data={this.props.data}/>

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Card} from "antd";
-import { UserOutlined } from '@ant-design/icons';
+import { PaperClipOutlined } from '@ant-design/icons';
 
 
 class DefaultExtraData extends React.Component{
@@ -11,7 +11,7 @@ class DefaultExtraData extends React.Component{
                     size="small"
                     headStyle={{backgroundColor: this.props.data.color}}
                     title={this.props.data.type}
-                    extra={<UserOutlined/>}
+                    extra={<div><PaperClipOutlined /></div>}
                 >
                     THERE IS NOT ANY MATCHING COMPONENT EXISTS FOR THIS TYPE.
             </Card>

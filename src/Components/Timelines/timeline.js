@@ -27,7 +27,7 @@ class Timeline extends React.Component {
         }
     }
 
-    fetchData() {
+    fetchData(fetchExtraData=true) {
         const TimelineUrl = this.props.url;
         const apiGetEvents = backendAPI.concat(`/timeline/${TimelineUrl}`);
         const queryParams = getQueryStringParams(this.props.history.location.search);
@@ -36,19 +36,19 @@ class Timeline extends React.Component {
         const maxTime = queryParams.max_time? queryParams.max_time: null;
         const searchString = queryParams.search_string? queryParams.search_string: null;
         const searchTags = queryParams.tags? queryParams.tags.split(","): null;
-        // console.log(searchTags);
-        // console.log(typeof searchTags);
 
-        // console.log(apiGetEvents);
-        axios.post(apiGetEvents,
-            {
+        let postData = {
                 jwt_token: this.props.jwtToken,
                 min_time: minTime,
                 max_time: maxTime,
                 search_string: searchString,
                 tags: searchTags
-            })
+        };
+        if (fetchExtraData){
+            postData['extra_data'] = true;
+        }
 
+        axios.post(apiGetEvents, postData)
             .then((response) => {
                 if (response.status === 201) {
                     message.warning(response.data)
@@ -64,7 +64,10 @@ class Timeline extends React.Component {
 
     componentWillMount() {
         document.title = `Story: ${this.state.storyName}`;
+        this.fetchData(false);
+    }
 
+    componentDidMount() {
         this.fetchData();
     }
 
