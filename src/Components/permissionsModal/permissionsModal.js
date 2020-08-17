@@ -1,12 +1,13 @@
 import React from 'react';
 import axios from 'axios';
-import {Form, Modal, Input, message, Button, Typography, Divider} from 'antd';
-// import {AutoComplete} from 'antd';
+import {Form, Modal, message, Button, Typography, Divider} from 'antd';
+// import {Input} from 'antd';
 import {connect} from 'react-redux';
 import {hidePermissionsModalAction} from "../../Actions/modalsActions";
 import RolesSelect from "./rolesSelect";
 import PermissionsTable from "./permissionsTable"
 import {backendAPI} from "../../Structure/api";
+import UsersSelect from "./UsersSelect";
 
 const {Text} = Typography;
 
@@ -24,7 +25,7 @@ class PermissionsModal extends React.Component{
         // console.log("VALS", values.username, values.role);
         axios.post(apiSetPermissions, {
             "jwt_token": this.props.jwtToken,
-            "username": values.username,
+            "username": this.state.selectedUser,
             "role": this.state.role,
         }).then((response) => {
   // console.log("resp", response);
@@ -76,6 +77,15 @@ class PermissionsModal extends React.Component{
       })
   };
 
+  onUserChange = (selectedUsers) => {
+      this.setState(
+          {
+              selectedUser: selectedUsers
+          }
+      )
+
+  };
+
   render(){
       return (
           <Modal
@@ -102,11 +112,12 @@ class PermissionsModal extends React.Component{
                   <Form.Item
                     className="username-form"
                     name="username"
+                    value={this.state.selectedUser}
                     rules={[{
-                        required: true,
                         message: 'Enter Username' }]}
                 >
-                    <Input autoComplete='off' placeholder={"Username"} />
+                      <UsersSelect handleUserChange={this.onUserChange}/>
+                    {/*<Input autoComplete='off' placeholder={"Username"} />*/}
                 </Form.Item>
 
                   <Form.Item

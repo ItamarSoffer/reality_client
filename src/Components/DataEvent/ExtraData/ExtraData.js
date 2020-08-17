@@ -41,7 +41,7 @@ class ExtraData extends React.Component{
         }
 
         return (
-            <div>
+            <div >
                 {this.state.visible? extraDataComponent: null}
                 {showButton}
             </div>
