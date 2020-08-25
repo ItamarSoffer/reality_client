@@ -14,6 +14,8 @@ import {storyModePrevTableAction,
 } from "../../Actions/siteActions";
 import {getQueryStringParams} from "../../Actions/queryStringActions";
 import URLSearchParams from "url-search-params";
+import {controlAboutsModalAction} from "../../Actions/modalsActions";
+import AboutModal from "../AboutModal/AboutModal";
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
@@ -47,48 +49,32 @@ class SideMenu extends React.Component {
 
   };
 
-  handleTimelineMode = () => {
-      this.props.storyModeTimelineAction();
+  setUrlParam = (key, value) => {
       const pathName = this.props.history.location.pathname;
       let currentSearchQuery = getQueryStringParams(this.props.history.location.search);
-      currentSearchQuery['view'] = 'timeline';
+      currentSearchQuery[key] = value;
       this.props.history.push(
           {
               pathname: pathName,
               search: "?" + new URLSearchParams(
                   {...currentSearchQuery}
               ).toString()
-
           });
+  };
+
+  handleTimelineMode = () => {
+      this.props.storyModeTimelineAction();
+      this.setUrlParam('view', 'timeline');
   };
 
   handleTableMode = () => {
       this.props.storyModeTableAction();
-      const pathName = this.props.history.location.pathname;
-      let currentSearchQuery = getQueryStringParams(this.props.history.location.search);
-      currentSearchQuery['view'] = 'full_table';
-      this.props.history.push(
-          {
-              pathname: pathName,
-              search: "?" + new URLSearchParams(
-                  {...currentSearchQuery}
-              ).toString()
-
-          });
+      this.setUrlParam('view', 'full_table');
   };
+
   handlePreviewTableMode = () => {
       this.props.storyModePrevTableAction();
-      const pathName = this.props.history.location.pathname;
-      let currentSearchQuery = getQueryStringParams(this.props.history.location.search);
-      currentSearchQuery['view'] = 'preview_table';
-      this.props.history.push(
-          {
-              pathname: pathName,
-              search: "?" + new URLSearchParams(
-                  {...currentSearchQuery}
-              ).toString()
-
-          });
+      this.setUrlParam('view', 'preview_table');
   };
 
 
@@ -164,18 +150,13 @@ class SideMenu extends React.Component {
             </Menu.Item>
               </SubMenu>
                 }
+            <Menu.Item key="m_about" icon={MenuIcons['info']} onClick={() => this.props.showAboutModalAction()}>
 
+                  About
 
+              </Menu.Item>
 
-      {/*        {this.props.url ?*/}
-      {/*            <SubMenu key="export" icon={MenuIcons['download']} title="Export">*/}
-      {/*        <Menu.Item key="excel" icon={MenuIcons['excel']} onClick={() => DownloadExcel(this.props.url)}>*/}
-      {/*                Excel*/}
-      {/*      </Menu.Item>*/}
-      {/*      </SubMenu>*/}
-      {/*  : null*/}
-      {/*}*/}
-      <Menu.Item key="logout" icon={MenuIcons['logout']} onClick={this.handleLogout}>
+            <Menu.Item key="logout" icon={MenuIcons['logout']} onClick={this.handleLogout}>
               Logout
             </Menu.Item>
 
@@ -192,7 +173,7 @@ class SideMenu extends React.Component {
         {/*  unCheckedChildren="Light"*/}
         {/*/>*/}
 
-
+        <AboutModal/>
         </Sider>
 
 
@@ -208,7 +189,9 @@ const mapDispatchToProps = dispatch => {
     return{
         storyModeTimelineAction: () => {dispatch(storyModeTimelineAction())},
         storyModeTableAction: () => {dispatch(storyModeTableAction())},
-        storyModePrevTableAction: () => {dispatch(storyModePrevTableAction())}
+        storyModePrevTableAction: () => {dispatch(storyModePrevTableAction())},
+        showAboutModalAction: () => {dispatch(controlAboutsModalAction(true))},
+
     }
 
 };

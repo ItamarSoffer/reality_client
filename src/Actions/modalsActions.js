@@ -69,6 +69,14 @@ export const hideTagsModalAction = () => {
     }
 };
 
+export const controlAboutsModalAction = (val) => {
+    return {
+        type: "ABOUT_MODAL_VIEW",
+        payload: val
+    }
+};
+
+
 export const showEditEventModalAction = (eventId) => {
     // let visible = {};
     // visible[eventId] = true;

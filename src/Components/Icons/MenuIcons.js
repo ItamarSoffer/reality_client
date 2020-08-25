@@ -22,7 +22,8 @@ import {
     CompressOutlined,
     MoreOutlined,
     FilterOutlined,
-    UploadOutlined
+    UploadOutlined,
+    InfoCircleOutlined
 } from '@ant-design/icons';
 
 export const MenuIcons = {
@@ -48,7 +49,8 @@ export const MenuIcons = {
     "compress": <CompressOutlined />,
     "more": <MoreOutlined/>,
     "filter": <FilterOutlined/>,
-    "upload": <UploadOutlined/>
+    "upload": <UploadOutlined/>,
+    "info": <InfoCircleOutlined />
 
 
 };

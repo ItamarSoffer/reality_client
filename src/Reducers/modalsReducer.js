@@ -5,7 +5,8 @@ const siteInitState = {
     showDeleteTimelineModal: false,
     showUploadXlsxModal: false,
     showTagsModal: false,
-    showEditEventModal: {}
+    showEditEventModal: {},
+    showAboutModal: false
 };
 
 const modalsReducer = (state = siteInitState, action) => {
@@ -29,6 +30,10 @@ const modalsReducer = (state = siteInitState, action) => {
 
         case "TAGS_MODAL_VIEW":
             state = {...state, showTagsModal: action.payload};
+        break;
+
+        case "ABOUT_MODAL_VIEW":
+            state = {...state, showAboutModal: action.payload};
         break;
 
         case "EDIT_EVENT_MODAL_VIEW":
