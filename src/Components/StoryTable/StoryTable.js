@@ -83,7 +83,7 @@ class StoryTable extends React.Component {
             dataIndex: 'link',
             key: 'link',
             width: 150,
-            render: link => <a href={link}>{link}</a>,
+            render: link => <a href={link} onClick={(event) => {event.preventDefault(); window.open(link);}}>{link}</a>,
             align: 'center',
 
         });

@@ -21,9 +21,12 @@ class EditEvent extends React.Component {
         this.state = {
             color: '',
             icon: '',
-            tags: this.props.eventData.tags.map(tag => (tag.tag_name))
+            tags: this.props.eventData.tags.map(tag => (tag.tag_id)),
+            time: moment(this.props.eventData.event_time, "YYYY-MM-DD h:mm:ss").format("HH:mm")
         }
+    console.log(this.state.time);
     }
+
 
 
     showModal = () => {
@@ -59,7 +62,6 @@ class EditEvent extends React.Component {
   onFinish = values => {
       const api_add_event = backendAPI.concat(`/timeline/${this.props.url}/add`);
       // console.log("FINITO", values);
-      const hour = typeof values.hour !== "undefined" ? values.hour.format('HH:mm:ss'): "";
       const date = typeof values.date !== "undefined" ? values.date.format('YYYY-MM-DD'): "";
       const color = this.state.color === '' ? this.props.eventData.frame_color: this.state.color ;
       const icon = this.state.icon === ''?  this.props.eventData.icon: this.state.icon ;
@@ -71,7 +73,7 @@ class EditEvent extends React.Component {
           "header": values.title,
           "text": values.text,
           "date": date,
-          "hour":hour,
+          "hour":this.state.time,
           "frame_color": color ,
           "icon": icon,
           "link": values.link,
@@ -116,6 +118,16 @@ class EditEvent extends React.Component {
       })
   };
 
+  onTimeChange = (newTime) => {
+      if (newTime === null){
+          this.setState({time: ''});
+      }
+      else {
+          this.setState({
+              time: newTime.format('HH:mm')
+          })
+      }
+};
 
   render() {
       // this is the most important!!!! each one must have a unique formId
@@ -178,10 +190,10 @@ class EditEvent extends React.Component {
                     name="hour"
                     initialValue={
                         moment(
-                            moment(this.props.eventData.event_time, "YYYY-MM-DD h:mm:ss").format("hh:mm:ss"), "hh:mm:ss")
+                            this.state.time, "HH:mm")
                     }
                 >
-                    <TimePicker autoComplete='off' placeholder={"שעה"}/>
+                    <TimePicker autoComplete='off' placeholder={"שעה"} format='HH:mm' onChange={this.onTimeChange}/>
                 </Form.Item>
                 <Form.Item
                     className="link-form"

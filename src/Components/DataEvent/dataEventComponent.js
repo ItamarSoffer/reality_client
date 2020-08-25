@@ -38,7 +38,7 @@ class DataEvent extends React.Component {
                     {this.props.data.text}
                 </Paragraph>}
                 {!this.props.data.link ? null :
-                    <div><a href={this.props.data.link}>{this.props.data.link}</a> <br/></div>}
+                    <div><a href={this.props.data.link} onClick={(event) => {event.preventDefault(); window.open(this.props.data.link);}}>{this.props.data.link}</a> <br/></div>}
                 {this.props.data.tags.length > 0 ? <TagsRenderer tags={this.props.data.tags}/> : null}
                 {this.props.data.extra_data?
                     <div>
