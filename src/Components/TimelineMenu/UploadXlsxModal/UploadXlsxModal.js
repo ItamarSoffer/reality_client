@@ -1,7 +1,7 @@
 import React from 'react';
 import {message, Modal, Typography, Upload, Divider} from "antd";
 import {connect} from "react-redux";
-import {hideUploadXlsxModalAction} from "../../../Actions/modalsActions";
+import {controlUploadXlsxModalAction} from "../../../Actions/modalsActions";
 import {FileExcelOutlined} from '@ant-design/icons';
 import {backendXlsxAPI} from "../../../Structure/api";
 import {setReRenderTimelineAction} from "../../../Actions/siteActions";
@@ -119,7 +119,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return{
-                hideUploadXlsxModalAction: () => {dispatch(hideUploadXlsxModalAction())},
+                hideUploadXlsxModalAction: () => {dispatch(controlUploadXlsxModalAction(false))},
                 setReRenderTimeline: (index) => {dispatch(setReRenderTimelineAction(index))}
 
 

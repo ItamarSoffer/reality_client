@@ -3,7 +3,7 @@ import axios from 'axios';
 import {Form, Modal, message, Button, Typography, Divider} from 'antd';
 // import {Input} from 'antd';
 import {connect} from 'react-redux';
-import {hidePermissionsModalAction} from "../../Actions/modalsActions";
+import {controlPermissionsModalAction} from "../../Actions/modalsActions";
 import RolesSelect from "./rolesSelect";
 import PermissionsTable from "./permissionsTable"
 import {backendAPI} from "../../Structure/api";
@@ -150,7 +150,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return{
-        hidePermissionsModal: () => {dispatch(hidePermissionsModalAction())}
+        hidePermissionsModal: () => {dispatch(controlPermissionsModalAction(false))}
     }
 
 };

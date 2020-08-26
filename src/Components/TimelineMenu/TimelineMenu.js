@@ -7,11 +7,11 @@ import CreateNewEvent from "../NewEvent/NewEventComponent";
 import PermissionsModal from "../permissionsModal/permissionsModal";
 import {enableEditAction, disableEditAction} from "../../Actions/siteActions";
 import {
-    showNewEventModalAction,
-    showPermissionsModalAction,
-    showDeleteTimelineModalAction,
-    showTagsModalAction,
-    showUploadXlsxModalAction
+    controlNewEventModalAction,
+    controlPermissionsModalAction,
+    controlDeleteTimelineModalAction,
+    controlTagsModalAction,
+    controlUploadXlsxModalAction
 } from "../../Actions/modalsActions";
 import DeleteTimelineModal from '../DeleteTimeline/DeleteTimelineModal';
 import StoryRangePicker from './Search/StoryRangePicker';
@@ -157,11 +157,11 @@ const mapDispatchToProps = dispatch => {
     return{
         enableEdit: () => {dispatch(enableEditAction())},
         disableEdit: () => {dispatch(disableEditAction())},
-        showNewEventModal: () => {dispatch(showNewEventModalAction())},
-        showPermissionsModal: () => {dispatch(showPermissionsModalAction())},
-        showDeleteTimelineModal: () => {dispatch(showDeleteTimelineModalAction())},
-        showUploadXlsxModal: () => {dispatch(showUploadXlsxModalAction())},
-        showTagsModal: () => {dispatch(showTagsModalAction())},
+        showNewEventModal: () => {dispatch(controlNewEventModalAction(true))},
+        showPermissionsModal: () => {dispatch(controlPermissionsModalAction(true))},
+        showDeleteTimelineModal: () => {dispatch(controlDeleteTimelineModalAction(true))},
+        showUploadXlsxModal: () => {dispatch(controlUploadXlsxModalAction(true))},
+        showTagsModal: () => {dispatch(controlTagsModalAction(true))},
 
     }
 };

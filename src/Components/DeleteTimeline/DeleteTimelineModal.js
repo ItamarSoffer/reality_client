@@ -1,6 +1,6 @@
 import React from 'react';
 import {Button, message, Modal, Typography} from "antd";
-import {hideDeleteTimelineModalAction} from "../../Actions/modalsActions";
+import {controlDeleteTimelineModalAction} from "../../Actions/modalsActions";
 import {connect} from "react-redux";
 import {backendAPI} from "../../Structure/api";
 import axios from "axios";
@@ -20,7 +20,7 @@ class DeleteTimelineModal extends React.Component{
                   if (response.status === 201) {
                       message.warning(response.data)
                   } else if (response.status === 200) {
-                      this.props.hideDeleteTimelineModalAction();
+                      this.props.hideDeleteTimelineModal();
                       message.success(response.data, 3)
                           .then(
                               this.props.history.push({
@@ -37,7 +37,7 @@ class DeleteTimelineModal extends React.Component{
       };
 
         closeModal = () => {
-          this.props.hideDeleteTimelineModalAction();
+          this.props.hideDeleteTimelineModal();
         this.setState({
           visible: false,
         });
@@ -45,7 +45,7 @@ class DeleteTimelineModal extends React.Component{
 
     handleOk = () => {
         // console.log(e);
-      this.props.hideDeleteTimelineModalAction();
+      this.props.hideDeleteTimelineModal();
         this.setState({
           visible: false,
         });
@@ -53,7 +53,7 @@ class DeleteTimelineModal extends React.Component{
 
     handleCancel = () => {
         // console.log(e);
-                this.props.hideDeleteTimelineModalAction();
+                this.props.hideDeleteTimelineModal();
         this.setState({
           visible: false,
         });
@@ -97,7 +97,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return{
-        hideDeleteTimelineModalAction: () => {dispatch(hideDeleteTimelineModalAction())}
+        hideDeleteTimelineModal: () => {dispatch(controlDeleteTimelineModalAction(false))}
     }
 
 };

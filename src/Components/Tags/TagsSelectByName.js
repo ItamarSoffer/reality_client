@@ -2,7 +2,6 @@ import React from 'react';
 import {Select, Tag} from "antd";
 import {backendAPI} from "../../Structure/api";
 import axios from "axios";
-import {hideTagsModalAction} from "../../Actions/modalsActions";
 import {connect} from "react-redux";
 
 const { Option } = Select;
@@ -35,64 +34,63 @@ class TagsSelectByName extends React.Component {
             })
     };
     handleChange(value) {
-  // console.log(value); // { key: "lucy", label: "Lucy (101)" }
-}
+        // console.log(value); // { key: "lucy", label: "Lucy (101)" }
+    }
     onChange(value) {
-  // console.log(`selected ${value}`);
-}
+        // console.log(`selected ${value}`);
+    }
 
-onBlur() {
-  console.log('blur');
-}
+    onBlur() {
+        console.log('blur');
+    }
 
-onFocus() {
-  console.log('focus');
-}
+    onFocus() {
+        console.log('focus');
+    }
 
-onSearch(val) {
-  // console.log('search:', val);
-};
+    onSearch(val) {
+        // console.log('search:', val);
+    };
     render() {
         const {handleTagChange, defaultValue, } = this.props;
 
-            return (
-                <Select
-                    //labelInValue
-                    defaultValue={defaultValue}
-                    placeholder={"Tags"}
-                    style={{width: 300}}
-                    onChange={value => handleTagChange(value)}
-                    // onChange={value => console.log(value)}
-                    mode="multiple"
-                >
-                    {this.state.storyTags.map(
-                        function (tagData) {
-                            return (
-                                <Option value={tagData.tag_name}>
+        return (
+            <Select
+                //labelInValue
+                defaultValue={defaultValue}
+                placeholder={"Tags"}
+                style={{width: 300}}
+                onChange={value => handleTagChange(value)}
+                // onChange={value => console.log(value)}
+                mode="multiple"
+            >
+                {this.state.storyTags.map(
+                    function (tagData) {
+                        return (
+                            <Option value={tagData.tag_name}>
                                 <Tag
-                                // closable
-                                color={tagData.tag_color} id={tagData.tag_id}>
-                                {tagData.tag_name}
-                            </Tag>
+                                    // closable
+                                    color={tagData.tag_color} id={tagData.tag_id}>
+                                    {tagData.tag_name}
+                                </Tag>
                             </Option>)
-                        }
-                    )}
-                </Select>
-            )
+                    }
+                )}
+            </Select>
+        )
 
     }
 };
 
 const mapStateToProps = state => {
-  return {
-      jwtToken: state.usersReducer.jwtToken,
+    return {
+        jwtToken: state.usersReducer.jwtToken,
 
-  }
+    }
 };
 
 const mapDispatchToProps = dispatch => {
     return{
-        hideTagsModalAction: () => {dispatch(hideTagsModalAction())}
     }
 
 };

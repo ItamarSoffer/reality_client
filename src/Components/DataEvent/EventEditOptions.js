@@ -5,7 +5,7 @@ import axios from 'axios';
 import {setReRenderTimelineAction} from "../../Actions/siteActions";
 import {connect} from "react-redux";
 import {backendAPI} from "../../Structure/api";
-import {showEditEventModalAction} from "../../Actions/modalsActions";
+import {controlEditEventModalAction} from "../../Actions/modalsActions";
 import EditEvent from "../NewEvent/EditEvent";
 
 
@@ -13,9 +13,9 @@ import EditEvent from "../NewEvent/EditEvent";
 class EventEditOptions extends React.Component{
 
     onTagsChange = (newTags) => {
-      this.setState({
-          tags: newTags
-      })
+        this.setState({
+            tags: newTags
+        })
     };
 
     handleDelete = () => {
@@ -32,7 +32,7 @@ class EventEditOptions extends React.Component{
                     this.props.setReRenderTimeline(1);
 
                 }
-  });
+            });
 
     };
 
@@ -40,14 +40,14 @@ class EventEditOptions extends React.Component{
         return(
             <div>
                 <Space>
-                <Button size={"small"}
-                        onClick={() => this.props.showEditEventModal(this.props.data.event_id)}
+                    <Button size={"small"}
+                            onClick={() => this.props.showEditEventModal(this.props.data.event_id)}
                         // onClick={() => {console.log("edit", record)}}
-                > Edit</Button>
-                <Button danger size={"small"}
-                        onClick={this.handleDelete}
-                    // onClick={() => {console.log("DEL", record)}}
-                > Delete</Button>
+                    > Edit</Button>
+                    <Button danger size={"small"}
+                            onClick={this.handleDelete}
+                        // onClick={() => {console.log("DEL", record)}}
+                    > Delete</Button>
                 </Space>
                 <EditEvent
                     key={this.props.data.event_id}
@@ -56,22 +56,22 @@ class EventEditOptions extends React.Component{
                     url={this.props.url}
 
                 />
-                </div>
+            </div>
         )
     }
 }
 
 const mapStateToProps = state => {
-  return {
-      jwtToken: state.usersReducer.jwtToken,
+    return {
+        jwtToken: state.usersReducer.jwtToken,
 
-  }
+    }
 };
 
 const mapDispatchToProps = dispatch => {
     return{
         setReRenderTimeline: (index) => {dispatch(setReRenderTimelineAction(index))},
-        showEditEventModal: (eventId) => {dispatch(showEditEventModalAction(eventId))},
+        showEditEventModal: (eventId) => {dispatch(controlEditEventModalAction(eventId))},
 
     }
 

@@ -63,11 +63,6 @@ class AboutModal extends React.Component{
                 onClose={this.handleCancel}
                 placement="right"
                 width={500}
-                // title="About"
-                // visible={this.props.showAboutModal}
-                // onCancel={this.handleCancel}
-                // style={{borderRadius: '16px',}}
-                // footer={null}
             >
                 <Tabs tabPosition={'top'} >
                     <TabPane tab="Story" key="1_about">
@@ -80,17 +75,17 @@ class AboutModal extends React.Component{
                             You can use the names when uploading XLSX file.
                         </Text>
                         <List
-                        size="small"
-                        bordered
-                        dataSource={Object.keys(AboutTableIcons)}
-                        renderItem = {item => (
-                            <List.Item>
-                                <List.Item.Meta
-                                    avatar={AboutTableIcons[item]}
-                                    title={item}
-                                />
-                            </List.Item>
-                        )}/>
+                            size="small"
+                            bordered
+                            dataSource={Object.keys(AboutTableIcons)}
+                            renderItem = {item => (
+                                <List.Item>
+                                    <List.Item.Meta
+                                        avatar={AboutTableIcons[item]}
+                                        title={item}
+                                    />
+                                </List.Item>
+                            )}/>
 
                     </TabPane>
 

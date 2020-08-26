@@ -8,7 +8,7 @@ import MenuIcons from "../Icons/MenuIcons";
 import {backendAPI} from "../../Structure/api";
 import {connect} from "react-redux";
 import {setReRenderTimelineAction} from "../../Actions/siteActions";
-import {hideNewEventModalAction} from "../../Actions/modalsActions";
+import {controlNewEventModalAction} from "../../Actions/modalsActions";
 import TagsSelectByName from "../Tags/TagsSelectByName";
 
 const { TextArea } = Input;
@@ -236,7 +236,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return{
-        hideNewEventModal: () => {dispatch(hideNewEventModalAction())},
+        hideNewEventModal: () => {dispatch(controlNewEventModalAction(false))},
         setReRenderTimeline: (index) => {dispatch(setReRenderTimelineAction(index))}
     }
 
