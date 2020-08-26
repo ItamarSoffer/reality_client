@@ -1,5 +1,5 @@
 import React from 'react';
-import {Form, Input, message, Modal, Typography, Tabs, Button, Drawer, Table, List} from "antd";
+import {Form, Input, message, Modal, Typography, Tabs, Button, Drawer, Table, List, ConfigProvider} from "antd";
 import {controlAboutsModalAction} from "../../Actions/modalsActions";
 import {connect} from "react-redux";
 // import {Divider} from "antd/es";
@@ -66,7 +66,16 @@ class AboutModal extends React.Component{
             >
                 <Tabs tabPosition={'top'} >
                     <TabPane tab="Story" key="1_about">
-                        <Title level={4} style={{textAlign: 'center'}}>Story the best thing ever</Title>
+                        <Title level={4} >Story</Title>
+                        <ConfigProvider direction={'rtl'}>
+                        <Text>
+                        סטורי היא מערכת מבוססת אירועים, המיועדת לתיעוד ושימור ידע.
+                        ייעודה היא להתממשק עם מרבית מערכות היחידה, על מנת לאפשר ריכוז כלל המידע במערכת אחת.
+                        המערכת נכתבה ע"י איתמר סופר ממרכז דאטא
+
+                        </Text>
+                        </ConfigProvider>
+
 
                     </TabPane>
 
@@ -90,15 +99,27 @@ class AboutModal extends React.Component{
                     </TabPane>
 
                     <TabPane tab="Features" key="3_features">
-                        <Title level={4} style={{textAlign: 'center'}}>all icons</Title>
-
-                        <Title level={4} style={{textAlign: 'center'}}>Contact </Title>
+                        - פתיחת ציר
+                        - הוספת אירועים
+                        - תגיות
+                        - הרשאות
+                        - מצבי צפייה
+                        - ייצוא
+                        - ייבוא
+                        - אינטגרציות
+                        - דברים שכתבתי במייל
 
                     </TabPane>
 
                     <TabPane tab="Contact" key="4_contact">
 
                         <Title level={4} style={{textAlign: 'center'}}>Contact </Title>
+                        - דיווח על בעיה
+                        - הרשאות לשותפים
+                        - בקשה לפיצ'רים נוספים
+                        - בקשת ממשוק עם מערכת
+                        - כל דבר אחר
+                        מוזמן לפנות:
 
                     </TabPane>
 
