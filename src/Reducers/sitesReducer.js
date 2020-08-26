@@ -14,29 +14,29 @@ const sitesReducer = (state = siteInitState, action) => {
         case "SET_THEME":
             window.localStorage.setItem('DarkMode',action.payload);
             state = {...state, DarkMode: action.payload};
-        break;
+            break;
 
         case "EDIT_MODE":
             state = {...state, editMode: action.payload};
-        break;
+            break;
 
         case "TIMELINE_RENDER_COUNT":
             state = {...state, timelineRenderCount: action.payload};
-        break;
+            break;
 
         case "STORY_VIEW_MODE":
             state = {...state, storyViewMode: action.payload};
             // console.log(action.payload);
-        break;
+            break;
 
         case "CARDS_RENDER_COUNT":
-        state = {...state, cardsRenderCount: action.payload};
-        break;
+            state = {...state, cardsRenderCount: action.payload};
+            break;
 
 
 
         default:
-        break;
+            break;
     }
 
     // console.log('Sites Reducers', state);

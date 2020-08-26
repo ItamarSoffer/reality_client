@@ -30,7 +30,7 @@ class CardsPage extends  React.Component {
     }
 
     fetchData() {
-                // console.log(apiGetAllNames);
+        // console.log(apiGetAllNames);
         const queryParams = getQueryStringParams(this.props.history.location.search);
         const searchString = queryParams.search_string? queryParams.search_string: null;
         const apiGetAllNames = backendAPI.concat("/get_all_names");
@@ -38,22 +38,22 @@ class CardsPage extends  React.Component {
             "jwt_token": this.props.jwtToken,
             "search_string": searchString
         })
-                        .then((response) => {
-                if (response.status === 201) {
-                    message.warning(response.data)
-                } else if (response.status === 200) {
-                    this.setState({
-                    timelines:response.data,
-                    isLoaded: true});
+            .then((response) => {
+                    if (response.status === 201) {
+                        message.warning(response.data)
+                    } else if (response.status === 200) {
+                        this.setState({
+                            timelines:response.data,
+                            isLoaded: true});
+                    }
                 }
-            }
-        )
-}
+            )
+    }
 
-componentWillUpdate(nextProps, nextState, nextContext) {
+    componentWillUpdate(nextProps, nextState, nextContext) {
         if (nextProps.cardsRenderCount === 1) {
             this.setState({
-                    isLoaded: false});
+                isLoaded: false});
             this.fetchData();
             this.props.setReRenderCards(0);
         }
@@ -61,38 +61,38 @@ componentWillUpdate(nextProps, nextState, nextContext) {
 
     render() {
         return (
-                <Layout style={{minHeight: '100vh'}}>
-                    <SideMenuPage url={this.props.match.params.timeline_url} />
+            <Layout style={{minHeight: '100vh'}}>
+                <SideMenuPage url={this.props.match.params.timeline_url} />
 
-                    <Layout>
-                        <br/>
-                        <div style={{display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center'}}>
+                <Layout>
+                    <br/>
+                    <div style={{display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'}}>
                         <CardsSearch/>
-                        </div>
-                        <br/>
-                        {!this.state.isLoaded?
-                            <LoadingPage/>:
+                    </div>
+                    <br/>
+                    {!this.state.isLoaded?
+                        <LoadingPage/>:
                         <CardsGrid cardsList={this.state.timelines}/>
-                        }
-                    </Layout>
+                    }
                 </Layout>
-            )
-        }
+            </Layout>
+        )
+    }
 }
 
 const mapStateToProps = state => {
-  return {
-      jwtToken: state.usersReducer.jwtToken,
-      cardsRenderCount : state.sitesReducer.cardsRenderCount
+    return {
+        jwtToken: state.usersReducer.jwtToken,
+        cardsRenderCount : state.sitesReducer.cardsRenderCount
 
-  }
+    }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-                setReRenderCards: (index) => {dispatch(setReRenderCardsAction(index))}
+        setReRenderCards: (index) => {dispatch(setReRenderCardsAction(index))}
 
     }
 

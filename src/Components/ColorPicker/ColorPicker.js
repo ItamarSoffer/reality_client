@@ -15,15 +15,15 @@ const colorPalette = [
 class ColorPicker extends React.Component {
 
 
-  render() {
+    render() {
         const {handleColorChange, defaultValue} = this.props;
-    return <SwatchesPicker
-        defaultValue={defaultValue}
-        colors={colorPalette}
-        width={340}
-        height={250}
-        onChange={color => handleColorChange(color.hex)}/>;
-  }
+        return <SwatchesPicker
+            defaultValue={defaultValue}
+            colors={colorPalette}
+            width={340}
+            height={250}
+            onChange={color => handleColorChange(color.hex)}/>;
+    }
 }
 
 export default ColorPicker;

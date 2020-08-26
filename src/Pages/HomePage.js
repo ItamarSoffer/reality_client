@@ -16,20 +16,20 @@ class HomePage extends  React.Component {
 
     render() {
         return(
-        <Layout style={{ minHeight: '100vh' }} >
-                  <SideMenuPage url={this.props.match.params.timeline_url} />
+            <Layout style={{ minHeight: '100vh' }} >
+                <SideMenuPage url={this.props.match.params.timeline_url} />
 
-                  <Layout>
-                        <br/>
-                        <div style={{display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center'}}>
+                <Layout>
+                    <br/>
+                    <div style={{display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'}}>
                         <CardsSearch/>
-                        </div>
-                        <br/>
-                      <StoryHome loggedUser={this.props.loggedUser}/>
-                  </Layout>
-        </Layout>
+                    </div>
+                    <br/>
+                    <StoryHome loggedUser={this.props.loggedUser}/>
+                </Layout>
+            </Layout>
         )
     }
 
@@ -37,12 +37,12 @@ class HomePage extends  React.Component {
 
 
 const mapStateToProps = state => {
-  return {
-      loggedUser: state.usersReducer.loggedUser,
-      DarkMode: state.sitesReducer.DarkMode,
-      timelineRenderCount : state.sitesReducer.timelineRenderCount
+    return {
+        loggedUser: state.usersReducer.loggedUser,
+        DarkMode: state.sitesReducer.DarkMode,
+        timelineRenderCount : state.sitesReducer.timelineRenderCount
 
-  }
+    }
 };
 
 const mapDispatchToProps = dispatch => {

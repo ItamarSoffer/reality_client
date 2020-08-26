@@ -17,19 +17,19 @@ class App extends React.Component{
     }
 
     render() {
-	  return (
-	  	<AppRouter
-            isLogged={checkJwt(this.props.jwtToken)}
-        />
+        return (
+            <AppRouter
+                isLogged={checkJwt(this.props.jwtToken)}
+            />
 
-	  );
-  }
+        );
+    }
 }
 
 const mapStateToProps = state => {
-  return {
-      jwtToken: state.usersReducer.jwtToken
-  }
+    return {
+        jwtToken: state.usersReducer.jwtToken
+    }
 };
 
 const mapDispatchToProps = disaptch => {

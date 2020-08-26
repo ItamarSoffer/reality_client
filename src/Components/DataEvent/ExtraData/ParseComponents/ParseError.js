@@ -5,14 +5,14 @@ const {Title} = Typography;
 class ParseError extends React.Component{
 
     render() {
-            return (
-                <Title
-                    level={2}
-                    type={'danger'}
-                >
-                    Parse Error
+        return (
+            <Title
+                level={2}
+                type={'danger'}
+            >
+                Parse Error
             </Title>
-            )
+        )
 
     }
 }

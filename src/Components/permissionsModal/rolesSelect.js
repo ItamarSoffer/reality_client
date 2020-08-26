@@ -8,18 +8,18 @@ class RolesSelect extends React.Component{
         const {handleRoleChange } = this.props;
 
         return(
-                <Select
-                    placeholder={"Role"}
-                    style={{ width: 80 }}
-                    onChange={value => handleRoleChange(value)}
-                  >
-                    <Option value={"read"}>Read</Option>
-                    <Option value={"write"}>Write</Option>
-                    <Option value={"owner"}>Owner</Option>
-                    <Option style={{color:'red'}} value={"none"}>Remove</Option>
-                  </Select>
-                        )
-                    }
+            <Select
+                placeholder={"Role"}
+                style={{ width: 80 }}
+                onChange={value => handleRoleChange(value)}
+            >
+                <Option value={"read"}>Read</Option>
+                <Option value={"write"}>Write</Option>
+                <Option value={"owner"}>Owner</Option>
+                <Option style={{color:'red'}} value={"none"}>Remove</Option>
+            </Select>
+        )
+    }
 
 };
 export default  RolesSelect

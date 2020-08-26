@@ -15,39 +15,39 @@ class AppRouter extends React.Component{
 
     render() {
         return(
-             <Router>
+            <Router>
 
-			  <div>
+                <div>
 
-				  <Switch>
-                      {
-                          !this.props.isLogged ?
+                    <Switch>
+                        {
+                            !this.props.isLogged ?
 
-                              <div>
-                                  <Route path="/" component={LoginPage}/>
-                              </div> :
-                              <div>
+                                <div>
+                                    <Route path="/" component={LoginPage}/>
+                                </div> :
+                                <div>
 
-                                  <Route path="/timeline/:timeline_url" component={StoryPage}/>
+                                    <Route path="/timeline/:timeline_url" component={StoryPage}/>
 
-                                  <Route path="/all" component={CardsPage}/>
+                                    <Route path="/all" component={CardsPage}/>
 
-                                  <Route path="/new_story" component={NewTimelinePage}/>
+                                    <Route path="/new_story" component={NewTimelinePage}/>
 
-                                  <Route path="/login" component={LoginPage}/>
+                                    <Route path="/login" component={LoginPage}/>
 
-                                  <Route exact={true} path="/home" component={HomePage}/>
-                                  <Route exact={true} path="/" component={HomePage}/>
+                                    <Route exact={true} path="/home" component={HomePage}/>
+                                    <Route exact={true} path="/" component={HomePage}/>
 
-                              </div>
+                                </div>
 
-                      }
+                        }
 
 
-				  </Switch>
+                    </Switch>
 
-			  </div>
-		  </Router>
+                </div>
+            </Router>
         )
     }
 }

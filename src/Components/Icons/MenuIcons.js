@@ -23,7 +23,10 @@ import {
     MoreOutlined,
     FilterOutlined,
     UploadOutlined,
-    InfoCircleOutlined
+    InfoCircleOutlined,
+    StarOutlined,
+    StarFilled
+
 } from '@ant-design/icons';
 
 export const MenuIcons = {
@@ -50,7 +53,9 @@ export const MenuIcons = {
     "more": <MoreOutlined/>,
     "filter": <FilterOutlined/>,
     "upload": <UploadOutlined/>,
-    "info": <InfoCircleOutlined />
+    "info": <InfoCircleOutlined />,
+    "star": <StarOutlined />,
+    "star_filled": <StarFilled />
 
 
 };

@@ -38,11 +38,11 @@ class Timeline extends React.Component {
         const searchTags = queryParams.tags? queryParams.tags.split(","): null;
 
         let postData = {
-                jwt_token: this.props.jwtToken,
-                min_time: minTime,
-                max_time: maxTime,
-                search_string: searchString,
-                tags: searchTags
+            jwt_token: this.props.jwtToken,
+            min_time: minTime,
+            max_time: maxTime,
+            search_string: searchString,
+            tags: searchTags
         };
         if (fetchExtraData){
             postData['extra_data'] = true;
@@ -50,15 +50,15 @@ class Timeline extends React.Component {
 
         axios.post(apiGetEvents, postData)
             .then((response) => {
-                if (response.status === 201) {
-                    message.warning(response.data)
-                } else if (response.status === 200) {
-                    this.setState({
-                    timeline_events:response.data.events,
-                    isLoaded: true});
+                    if (response.status === 201) {
+                        message.warning(response.data)
+                    } else if (response.status === 200) {
+                        this.setState({
+                            timeline_events:response.data.events,
+                            isLoaded: true});
+                    }
                 }
-            }
-        )
+            )
 
     }
 
@@ -77,7 +77,7 @@ class Timeline extends React.Component {
             this.props.setReRenderTimeline(0);
         }
         if (nextState.storyName !== this.state.storyName){
-                    document.title = `Story: ${nextState.storyName}`;
+            document.title = `Story: ${nextState.storyName}`;
 
         }
     }
@@ -94,14 +94,14 @@ class Timeline extends React.Component {
             jwt_token: this.props.jwtToken,
             new_name: str
         }).then((response) => {
-            if (response.status === 201){
-                message.warning(response.data)
+                if (response.status === 201){
+                    message.warning(response.data)
+                }
+                else if (response.status === 200){
+                    message.success(response.data, 1);
+                    this.setState({storyName: str});
+                }
             }
-            else if (response.status === 200){
-                message.success(response.data, 1);
-                this.setState({storyName: str});
-            }
-        }
         );
     };
 
@@ -113,14 +113,14 @@ class Timeline extends React.Component {
             jwt_token: this.props.jwtToken,
             new_description: str
         }).then((response) => {
-            if (response.status === 201){
-                message.warning(response.data)
+                if (response.status === 201){
+                    message.warning(response.data)
+                }
+                else if (response.status === 200){
+                    message.success(response.data, 1);
+                    this.setState({storyDescription: str});
+                }
             }
-            else if (response.status === 200){
-                message.success(response.data, 1);
-                this.setState({storyDescription: str});
-            }
-        }
         );
     };
 
@@ -136,44 +136,44 @@ class Timeline extends React.Component {
             return (
                 <div>
 
-                <Title level={1} style={{textAlign:'center'}}>{this.props.basicData.name}</Title>
-                <Title level={2} style={{textAlign:'center'}}>No events found.</Title>
+                    <Title level={1} style={{textAlign:'center'}}>{this.props.basicData.name}</Title>
+                    <Title level={2} style={{textAlign:'center'}}>No events found.</Title>
 
                 </div>
             )
         }
         else
-            {
-                //returns the timeline.
-                const urlAddress = this.props.url;
-                // extracts the view mode from url.
-                const queryParams = getQueryStringParams(this.props.history.location.search);
-                let viewMode = this.props.storyViewMode;
-                if (queryParams.view){
-                    viewMode = queryParams.view;
-                }
-                let nameOnChange = false;
-                let descriptionOnChange = false;
-                if (this.props.editMode){
-                    nameOnChange = { onChange: (str) => this.handleNameChange(str)};
-                    descriptionOnChange = { onChange: (str) => (this.handleDescriptionChange(str)) };
+        {
+            //returns the timeline.
+            const urlAddress = this.props.url;
+            // extracts the view mode from url.
+            const queryParams = getQueryStringParams(this.props.history.location.search);
+            let viewMode = this.props.storyViewMode;
+            if (queryParams.view){
+                viewMode = queryParams.view;
+            }
+            let nameOnChange = false;
+            let descriptionOnChange = false;
+            if (this.props.editMode){
+                nameOnChange = { onChange: (str) => this.handleNameChange(str)};
+                descriptionOnChange = { onChange: (str) => (this.handleDescriptionChange(str)) };
 
-                }
+            }
             return (
                 <div
                     //style={{backgroundColor: '#ccc'}}
                 >
                     <ConfigProvider direction='rtl>'>
-                    <Title level={1} editable={nameOnChange} style={{textAlign:'center'}}>{this.state.storyName}</Title>
-                    <Title level={4} editable={descriptionOnChange} style={{textAlign:'center'}}>{this.state.storyDescription}</Title>
+                        <Title level={1} editable={nameOnChange} style={{textAlign:'center'}}>{this.state.storyName}</Title>
+                        <Title level={4} editable={descriptionOnChange} style={{textAlign:'center'}}>{this.state.storyDescription}</Title>
                     </ConfigProvider>
                     {viewMode !== 'timeline'?
-                    <StoryTable
-                        viewMode={viewMode}
-                        url={urlAddress}
-                        timeline_events={this.state.timeline_events.map(e => ({...e, iconAndColor: [e.icon, e.frame_color]}))
+                        <StoryTable
+                            viewMode={viewMode}
+                            url={urlAddress}
+                            timeline_events={this.state.timeline_events.map(e => ({...e, iconAndColor: [e.icon, e.frame_color]}))
 
-                        }/> : null}
+                            }/> : null}
                     {viewMode === 'timeline' ?
                         <VerticalTimeline
                             id={this.props.basicData.id}
@@ -193,11 +193,11 @@ class Timeline extends React.Component {
     }
 }
 const mapStateToProps = state => {
-  return {
-      jwtToken: state.usersReducer.jwtToken,
-      storyViewMode: state.sitesReducer.storyViewMode,
-      editMode: state.sitesReducer.editMode,
-  }
+    return {
+        jwtToken: state.usersReducer.jwtToken,
+        storyViewMode: state.sitesReducer.storyViewMode,
+        editMode: state.sitesReducer.editMode,
+    }
 };
 
 const mapDispatchToProps = dispatch => {

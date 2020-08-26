@@ -18,8 +18,8 @@ class TagsSearch extends React.Component{
                 {pathname: pathName,
                     search: "?" + new URLSearchParams(
                         {...currentSearchQuery}
-                        ).toString()
-            });
+                    ).toString()
+                });
         }
         else{
             currentSearchQuery['tags'] = value;
@@ -27,18 +27,18 @@ class TagsSearch extends React.Component{
                 {pathname: pathName,
                     search: "?" + new URLSearchParams(
                         {...currentSearchQuery}
-                        ).toString()
+                    ).toString()
 
-            });
+                });
         }
-  this.props.setReRenderTimeline(1);
+        this.props.setReRenderTimeline(1);
     };
 
     onTagsChange = (newTags) => {
-      this.setState({
-          tags: newTags
-      })
-  };
+        this.setState({
+            tags: newTags
+        })
+    };
 
 
     render(){
@@ -64,8 +64,8 @@ class TagsSearch extends React.Component{
     }
 }
 const mapStateToProps = state => {
-  return {
-  }
+    return {
+    }
 };
 
 const mapDispatchToProps = dispatch => {

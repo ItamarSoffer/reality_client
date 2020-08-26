@@ -9,64 +9,64 @@ class TagsRenderer extends React.Component{
     };
 
     renderTag = tagData => {
-      if (this.props.deletable) {
-          return (
-              <Tag
-                  color={tagData.tag_color}
-                  id={tagData.tag_id}
-                  closable={true}
-                  onClose={() => {this.onTagClose(tagData)}}>
-                  {tagData.tag_name}
-              </Tag>
-          )
-      }
-      else {
-          return (
-              <Tag color={tagData.tag_color} id={tagData.tag_id}>
-                                {tagData.tag_name}
-                            </Tag>
-          )
-      }
+        if (this.props.deletable) {
+            return (
+                <Tag
+                    color={tagData.tag_color}
+                    id={tagData.tag_id}
+                    closable={true}
+                    onClose={() => {this.onTagClose(tagData)}}>
+                    {tagData.tag_name}
+                </Tag>
+            )
+        }
+        else {
+            return (
+                <Tag color={tagData.tag_color} id={tagData.tag_id}>
+                    {tagData.tag_name}
+                </Tag>
+            )
+        }
     };
 
 
     render() {
         if (this.props.withBadge) {
-         return (
-            <div>
-           {this.props.tags.map(
+            return (
+                <div>
+                    {this.props.tags.map(
                         function(tagData){
                             return (
-                            <Badge count={tagData.counter}>
-                                <Tag color={tagData.tag_color} id={tagData.tag_id}>
-                                {tagData.tag_name}
-                            </Tag>
-                            </Badge>
+                                <Badge count={tagData.counter}>
+                                    <Tag color={tagData.tag_color} id={tagData.tag_id}>
+                                        {tagData.tag_name}
+                                    </Tag>
+                                </Badge>
 
                             )
                         }
                     )}
-            </div>
+                </div>
 
-        )
+            )
         }
         else {
 
-        return (
-            <div>
-           {this.props.tags.map(tagData => this.renderTag(tagData))}
-            </div>
+            return (
+                <div>
+                    {this.props.tags.map(tagData => this.renderTag(tagData))}
+                </div>
 
-        )
+            )
         }
     }
 }
 
 const mapStateToProps = state => {
-  return {
-      editMode: state.sitesReducer.editMode,
+    return {
+        editMode: state.sitesReducer.editMode,
 
-  }
+    }
 };
 
 const mapDispatchToProps = dispatch => {

@@ -32,60 +32,60 @@ class UsersSelect extends React.Component {
             })
     };
     handleChange(value) {
-  // console.log(value); // { key: "lucy", label: "Lucy (101)" }
-}
+        // console.log(value); // { key: "lucy", label: "Lucy (101)" }
+    }
     onChange(value) {
-  // console.log(`selected ${value}`);
-}
+        // console.log(`selected ${value}`);
+    }
 
-onBlur() {
-  console.log('blur');
-}
+    onBlur() {
+        console.log('blur');
+    }
 
-onFocus() {
-  console.log('focus');
-}
+    onFocus() {
+        console.log('focus');
+    }
 
-onSearch(val) {
-  // console.log('search:', val);
-};
+    onSearch(val) {
+        // console.log('search:', val);
+    };
     render() {
         const {handleUserChange, } = this.props;
 
-            return (
-                <Select
-                    //labelInValue
-                    placeholder={"User Select"}
-                    style={{width: 300}}
-                    onChange={value => handleUserChange(value)}
-                    // onChange={value => console.log(value)}
-                    mode="multiple"
-                    optionFilterProp='displayName'
-                    allowClear={true}
-                >
-                    <Option value={'public'} displayName={'Public'}>
-                        {'Public'}
-                    </Option>
+        return (
+            <Select
+                //labelInValue
+                placeholder={"User Select"}
+                style={{width: 300}}
+                onChange={value => handleUserChange(value)}
+                // onChange={value => console.log(value)}
+                mode="multiple"
+                optionFilterProp='displayName'
+                allowClear={true}
+            >
+                <Option value={'public'} displayName={'Public'}>
+                    {'Public'}
+                </Option>
 
-                    {this.state.storyUsers.map(
-                        function (userData) {
-                            return (
-                                <Option value={userData[0]} displayName={userData[1]}>
-                                    {userData[1]}
+                {this.state.storyUsers.map(
+                    function (userData) {
+                        return (
+                            <Option value={userData[0]} displayName={userData[1]}>
+                                {userData[1]}
                             </Option>)
-                        }
-                    )}
-                </Select>
-            )
+                    }
+                )}
+            </Select>
+        )
 
     }
 };
 
 const mapStateToProps = state => {
-  return {
-      jwtToken: state.usersReducer.jwtToken,
+    return {
+        jwtToken: state.usersReducer.jwtToken,
 
-  }
+    }
 };
 
 const mapDispatchToProps = dispatch => {

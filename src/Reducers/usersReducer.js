@@ -17,9 +17,9 @@ const usersReducer = (state = initState, action) => {
                 loggedUser: action.loggedUser,
                 jwtToken: action.jwtToken,
             };
-        break;
+            break;
         default:
-        break;
+            break;
     }
 
     return state;

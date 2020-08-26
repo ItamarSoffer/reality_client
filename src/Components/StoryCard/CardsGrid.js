@@ -14,15 +14,15 @@ class cardsGrid extends React.Component{
         return(
             <div>
                 <List
-                grid={{gutter: 24, column: 4}}
-                dataSource={this.props.cardsList}
-                renderItem={
-                    card_data => (
-                        <List.Item>
-                            <StoryCard cardData={card_data}/>
-                        </List.Item>
-                    )
-                }
+                    grid={{gutter: 24, column: 4}}
+                    dataSource={this.props.cardsList}
+                    renderItem={
+                        card_data => (
+                            <List.Item>
+                                <StoryCard cardData={card_data}/>
+                            </List.Item>
+                        )
+                    }
                 />
             </div>
         )

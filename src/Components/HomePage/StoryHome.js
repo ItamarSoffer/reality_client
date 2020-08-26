@@ -11,7 +11,7 @@ import {getQueryStringParams} from "../../Actions/queryStringActions";
 
 
 class StoryHome extends  React.Component {
-        constructor(props){
+    constructor(props){
         super(props);
         this.state = {
             isLoaded: false,
@@ -20,7 +20,7 @@ class StoryHome extends  React.Component {
     }
 
     componentDidMount() {
-            this.fetchData();
+        this.fetchData();
     }
 
     fetchData() {
@@ -34,22 +34,22 @@ class StoryHome extends  React.Component {
 
             })
             .then((response) => {
-                if (response.status === 201) {
-                    message.warning(response.data)
-                } else if (response.status === 200) {
-                    this.setState({
-                    timelines:response.data,
-                    isLoaded: true});
+                    if (response.status === 201) {
+                        message.warning(response.data)
+                    } else if (response.status === 200) {
+                        this.setState({
+                            timelines:response.data,
+                            isLoaded: true});
+                    }
                 }
-            }
-        )
+            )
 
     }
 
     componentWillUpdate(nextProps, nextState, nextContext) {
         if (nextProps.cardsRenderCount === 1) {
             this.setState({
-                    isLoaded: false});
+                isLoaded: false});
             this.fetchData();
             this.props.setReRenderCards(0);
         }
@@ -59,19 +59,19 @@ class StoryHome extends  React.Component {
         if (!this.state.isLoaded) {
             return <LoadingPage/>;
         } else
-            {
-                const creatorPermissions = this.state.timelines.filter(
-                    function(card_data) {
-                        return card_data.role ==='creator'});
-                const ownedPermissions = this.state.timelines.filter(
-                    function(card_data) {
-                        return card_data.role ==='owner'});
-                const writePermissions = this.state.timelines.filter(
-                    function(card_data) {
-                        return card_data.role ==='write'});
-                const readPermissions = this.state.timelines.filter(
-                    function(card_data) {
-                        return card_data.role ==='read'});
+        {
+            const creatorPermissions = this.state.timelines.filter(
+                function(card_data) {
+                    return card_data.role ==='creator'});
+            const ownedPermissions = this.state.timelines.filter(
+                function(card_data) {
+                    return card_data.role ==='owner'});
+            const writePermissions = this.state.timelines.filter(
+                function(card_data) {
+                    return card_data.role ==='write'});
+            const readPermissions = this.state.timelines.filter(
+                function(card_data) {
+                    return card_data.role ==='read'});
             return (
                 <div
 
@@ -83,36 +83,36 @@ class StoryHome extends  React.Component {
                     <Layout>
                         {
                             creatorPermissions.length === 0? null :
-                            <div>
+                                <div>
                                     <Divider>Creator</Divider>
                                     <CardsGrid cardsList={creatorPermissions}/>
-                            </div>
+                                </div>
                         }
                         {
                             ownedPermissions.length === 0? null :
-                            <div>
+                                <div>
                                     <Divider>Owned</Divider>
                                     <CardsGrid cardsList={ownedPermissions}/>
-                            </div>
+                                </div>
                         }
 
                         {
                             writePermissions.length === 0 ? null :
-                            <div>
+                                <div>
                                     <Divider >Write Permissions</Divider>
                                     <CardsGrid cardsList={writePermissions}/>
-                            </div>
+                                </div>
                         }
                         {
                             readPermissions.length === 0 ? null :
-                            <div>
-                    <Divider >Read Permissions</Divider>
-                    <CardsGrid cardsList={readPermissions}/>
-                            </div>
+                                <div>
+                                    <Divider >Read Permissions</Divider>
+                                    <CardsGrid cardsList={readPermissions}/>
+                                </div>
                         }
                         <Divider  orientation="left">
-                                    Logged as: {this.props.loggedUser}
-                                </Divider>
+                            Logged as: {this.props.loggedUser}
+                        </Divider>
                     </Layout>
                 </div>
             );
@@ -121,12 +121,12 @@ class StoryHome extends  React.Component {
 }
 
 const mapStateToProps = state => {
-  return {
-      jwtToken: state.usersReducer.jwtToken,
-      cardsRenderCount : state.sitesReducer.cardsRenderCount
+    return {
+        jwtToken: state.usersReducer.jwtToken,
+        cardsRenderCount : state.sitesReducer.cardsRenderCount
 
 
-  }
+    }
 };
 
 const mapDispatchToProps = dispatch => {

@@ -14,14 +14,14 @@ const colorPalette = [
 class TagsColorPicker extends React.Component {
 
 
-  render() {
+    render() {
         const {handleColorChange } = this.props;
-    return <CirclePicker
-        colors={colorPalette}
-        width={450}
-        circleSize={20}
-        onChange={color => handleColorChange(color.hex)}/>;
-  }
+        return <CirclePicker
+            colors={colorPalette}
+            width={450}
+            circleSize={20}
+            onChange={color => handleColorChange(color.hex)}/>;
+    }
 }
 
 export default TagsColorPicker;

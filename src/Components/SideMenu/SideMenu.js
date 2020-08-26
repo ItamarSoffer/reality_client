@@ -82,6 +82,10 @@ class SideMenu extends React.Component {
                         All Stories
                     </Menu.Item>
 
+                    <Menu.Item disabled key="m_favorited" icon={MenuIcons['star']} onClick={() => console.log("COMING SOON")}>
+                        Favorites
+                    </Menu.Item>
+
                     <Menu.Item
                         key="new"
                         icon={MenuIcons['nodeindex']}
@@ -89,12 +93,10 @@ class SideMenu extends React.Component {
                             pathname: `/new_story/`,});
                         }}
                     >New Story
-
                     </Menu.Item>
+
                     <Menu.Item key="m_about" icon={MenuIcons['info']} onClick={() => this.props.showAboutModalAction()}>
-
                         About
-
                     </Menu.Item>
 
                     <Menu.Item key="logout" icon={MenuIcons['logout']} onClick={this.handleLogout}>

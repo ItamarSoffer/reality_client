@@ -14,27 +14,27 @@ const modalsReducer = (state = siteInitState, action) => {
     switch(action.type){
         case "NEW_EVENT_MODAL_VIEW":
             state = {...state, showNewEventModal: action.payload};
-        break;
+            break;
 
         case "PERMISSIONS_MODAL_VIEW":
             state = {...state, showPermissionsModal: action.payload};
-        break;
+            break;
 
         case "DELETE_TIMELINE_MODAL_VIEW":
             state = {...state, showDeleteTimelineModal: action.payload};
-        break;
+            break;
 
         case "UPLOAD_XLSX_MODAL_VIEW":
             state = {...state, showUploadXlsxModal: action.payload};
-        break;
+            break;
 
         case "TAGS_MODAL_VIEW":
             state = {...state, showTagsModal: action.payload};
-        break;
+            break;
 
         case "ABOUT_MODAL_VIEW":
             state = {...state, showAboutModal: action.payload};
-        break;
+            break;
 
         case "EDIT_EVENT_MODAL_VIEW":
             // let visibleUpdate = state["showEditEventModal"];
@@ -44,10 +44,10 @@ const modalsReducer = (state = siteInitState, action) => {
             //
             // state = {...state, showEditEventModal: visibleUpdate};
             state = {...state, showEditEventModal: action.payload};
-        break;
+            break;
 
         default:
-        break;
+            break;
     }
 
     return state;
