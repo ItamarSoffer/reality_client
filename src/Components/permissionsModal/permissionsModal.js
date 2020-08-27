@@ -1,13 +1,12 @@
 import React from 'react';
-import axios from 'axios';
 import {Form, Modal, message, Button, Typography, Divider} from 'antd';
 // import {Input} from 'antd';
 import {connect} from 'react-redux';
 import {controlPermissionsModalAction} from "../../Actions/modalsActions";
 import RolesSelect from "./rolesSelect";
 import PermissionsTable from "./permissionsTable"
-import {backendAPI} from "../../Structure/api";
 import UsersSelect from "./UsersSelect";
+import {apiSetPermissions} from "../../Actions/apiActions";
 
 const {Text} = Typography;
 
@@ -21,13 +20,8 @@ class PermissionsModal extends React.Component{
     }
 
     onFinish = values => {
-        const apiSetPermissions = backendAPI.concat(`/timeline/${this.props.url}/set_permissions/`);
-        // console.log("VALS", values.username, values.role);
-        axios.post(apiSetPermissions, {
-            "jwt_token": this.props.jwtToken,
-            "username": this.state.selectedUser,
-            "role": this.state.role,
-        }).then((response) => {
+        apiSetPermissions(this.props.jwtToken, this.props.url, this.state.selectedUser, this.state.role)
+            .then((response) => {
             // console.log("resp", response);
             if (response.status === 201){
                 message.warning(response.data)

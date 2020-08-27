@@ -1,20 +1,27 @@
 import React from 'react';
 import {Form, Input, Button, Modal, DatePicker, TimePicker, ConfigProvider, message} from 'antd';
 import 'antd/dist/antd.css';
-import axios from "axios";
 import IconsSelect from '../Icons/IconsSelect';
 import ColorPicker from '../ColorPicker/ColorPicker';
 import MenuIcons from "../Icons/MenuIcons";
-import {backendAPI} from "../../Structure/api";
 import {connect} from "react-redux";
 import {setReRenderTimelineAction} from "../../Actions/siteActions";
 import {controlNewEventModalAction} from "../../Actions/modalsActions";
 import TagsSelectByName from "../Tags/TagsSelectByName";
+import {apiNewEvent} from "../../Actions/apiActions";
 
 const { TextArea } = Input;
 
 
 class CreateNewEvent extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            color: null,
+            icon: null,
+            tags: []
+        }
+    }
     formRef = React.createRef();
 
     onReset = () => {
@@ -54,21 +61,22 @@ class CreateNewEvent extends React.Component {
     };
 
     onFinish = values => {
-        const api_add_event = backendAPI.concat(`/timeline/${this.props.url}/add`);
-        // console.log("FINITO", values);
+        // const api_add_event = backendAPI.concat(`/timeline/${this.props.url}/add`);
+        console.log("FINITO", values);
         // console.log("SENDS TO", api_add_event);
-        const hour = typeof values.hour !== "undefined" ? values.hour.format('HH:mm:ss'): "";
-        axios.post(api_add_event, {
-            "jwt_token": this.props.jwtToken,
-            "header": values.title,
-            "text": values.text,
-            "date": values.date.format('YYYY-MM-DD'),
-            "hour":hour,
-            "frame_color": this.state.color,
-            "icon": this.state.icon,
-            "link": values.link,
-            "tags": this.state.tags
-        })
+        const hour = typeof values.hour !== "undefined" ? values.hour.format('HH:mm'): "";
+        apiNewEvent(
+            this.props.jwtToken,
+            this.props.url,
+            values.title,
+            values.text,
+            values.date.format('YYYY-MM-DD'),
+            hour,
+            this.state.color,
+            this.state.icon,
+            values.link,
+            this.state.tags
+        )
             .then((response) => {
                 // console.log("resp", response);
                 if (response.status === 201){
@@ -79,6 +87,11 @@ class CreateNewEvent extends React.Component {
 
                         .then(() => {
                             this.props.setReRenderTimeline(this.props.timelineRenderCount + 1);
+                            this.setState({
+                                color: null,
+                                icon: null,
+                                tags: []
+                            })
                             // form.resetFields();
                         })
                 }

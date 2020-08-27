@@ -1,16 +1,15 @@
 import React from 'react';
 import {Form, Input, Button, Modal, DatePicker, TimePicker, ConfigProvider, message} from 'antd';
 import 'antd/dist/antd.css';
-import axios from "axios";
 import IconsSelect from '../Icons/IconsSelect';
 import ColorPicker from '../ColorPicker/ColorPicker';
 import MenuIcons from "../Icons/MenuIcons";
-import {backendAPI} from "../../Structure/api";
 import {connect} from "react-redux";
 import {setReRenderTimelineAction} from "../../Actions/siteActions";
 import {controlEditEventModalAction} from "../../Actions/modalsActions";
 import moment from 'moment';
 import TagsSelectByName from "../Tags/TagsSelectByName";
+import {apiEditEvent} from "../../Actions/apiActions";
 
 const { TextArea } = Input;
 
@@ -60,26 +59,24 @@ class EditEvent extends React.Component {
 
     // fine
     onFinish = values => {
-        const api_add_event = backendAPI.concat(`/timeline/${this.props.url}/add`);
         // console.log("FINITO", values);
         const date = typeof values.date !== "undefined" ? values.date.format('YYYY-MM-DD'): "";
         const color = this.state.color === '' ? this.props.eventData.frame_color: this.state.color ;
         const icon = this.state.icon === ''?  this.props.eventData.icon: this.state.icon ;
         const tags = this.state.tags === []?  this.props.eventData.tags: this.state.tags;
 
-        const postData = {
-            "jwt_token": this.props.jwtToken,
-            "event_id": this.props.eventId,
-            "header": values.title,
-            "text": values.text,
-            "date": date,
-            "hour":this.state.time,
-            "frame_color": color ,
-            "icon": icon,
-            "link": values.link,
-            "tags": tags
-        };
-        axios.post(api_add_event, postData)
+        apiEditEvent(
+            this.props.jwtToken,
+            this.props.url,
+            this.props.eventId,
+            values.title,
+            values.text,
+            date,
+            this.state.time,
+            color,
+            icon,
+            values.link,
+            tags)
             .then((response) => {
                 // console.log("resp", response);
                 if (response.status === 201){

@@ -1,12 +1,10 @@
 import React from 'react';
 import {message, Space, Button} from 'antd';
-import axios from 'axios';
-// import MenuIcons from '../Icons/MenuIcons';
 import {setReRenderTimelineAction} from "../../Actions/siteActions";
 import {connect} from "react-redux";
-import {backendAPI} from "../../Structure/api";
 import {controlEditEventModalAction} from "../../Actions/modalsActions";
 import EditEvent from "../NewEvent/EditEvent";
+import {apiDelEvent} from "../../Actions/apiActions";
 
 
 
@@ -19,10 +17,7 @@ class EventEditOptions extends React.Component{
     };
 
     handleDelete = () => {
-        const delUrl = backendAPI.concat(`/timeline/del_event?event_id=${this.props.eventId}`);
-        axios.post(delUrl, {
-            jwt_token: this.props.jwtToken,
-        })
+        apiDelEvent(this.props.jwtToken, this.props.eventId)
             .then((response) => {
                 if (response.status === 201){
                     message.warning(response.data)

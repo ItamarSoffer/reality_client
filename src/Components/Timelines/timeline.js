@@ -3,14 +3,13 @@ import { VerticalTimeline }  from 'react-vertical-timeline-component';
 import {Typography, BackTop, ConfigProvider, message} from 'antd';
 import 'react-vertical-timeline-component/style.min.css';
 import { withRouter } from "react-router-dom";
-import axios from 'axios';
 import DataEvent from '../DataEvent/dataEventComponent';
 import LoadingPage from '../LoadingComponent/LoadingPage';
-import {backendAPI} from "../../Structure/api";
 import {setReRenderTimelineAction} from "../../Actions/siteActions";
 import {connect} from "react-redux";
 import StoryTable from '../StoryTable/StoryTable';
 import {getQueryStringParams} from "../../Actions/queryStringActions";
+import {apiEditStoryDescription, apiEditStoryName, apiGetEvents} from "../../Actions/apiActions";
 
 
 const { Title } = Typography;
@@ -28,8 +27,7 @@ class Timeline extends React.Component {
     }
 
     fetchData(fetchExtraData=true) {
-        const TimelineUrl = this.props.url;
-        const apiGetEvents = backendAPI.concat(`/timeline/${TimelineUrl}`);
+        const storyUrl = this.props.url;
         const queryParams = getQueryStringParams(this.props.history.location.search);
 
         const minTime = queryParams.min_time? queryParams.min_time: null;
@@ -37,18 +35,7 @@ class Timeline extends React.Component {
         const searchString = queryParams.search_string? queryParams.search_string: null;
         const searchTags = queryParams.tags? queryParams.tags.split(","): null;
 
-        let postData = {
-            jwt_token: this.props.jwtToken,
-            min_time: minTime,
-            max_time: maxTime,
-            search_string: searchString,
-            tags: searchTags
-        };
-        if (fetchExtraData){
-            postData['extra_data'] = true;
-        }
-
-        axios.post(apiGetEvents, postData)
+        apiGetEvents(this.props.jwtToken, storyUrl, minTime, maxTime, searchString, searchTags, fetchExtraData )
             .then((response) => {
                     if (response.status === 201) {
                         message.warning(response.data)
@@ -82,43 +69,37 @@ class Timeline extends React.Component {
         }
     }
 
-    handleNameChange =(str) => {
-        // console.log("new name", str);
-        if (str.length === 0){
+    handleNameChange =(newName) => {
+        // console.log("new name", newName);
+        if (newName.length === 0){
             message.warning("Name can not be empty!");
             return
         }
 
-        const editPropertyApi = backendAPI.concat(`/timeline/${this.props.url}/edit_property`);
-        axios.post(editPropertyApi, {
-            jwt_token: this.props.jwtToken,
-            new_name: str
-        }).then((response) => {
+        apiEditStoryName(this.props.jwtToken, this.props.url, newName)
+            .then((response) => {
                 if (response.status === 201){
                     message.warning(response.data)
                 }
                 else if (response.status === 200){
                     message.success(response.data, 1);
-                    this.setState({storyName: str});
+                    this.setState({storyName: newName});
                 }
             }
         );
     };
 
-    handleDescriptionChange =(str) => {
+    handleDescriptionChange =(newDescription) => {
         // console.log("new Description", str);
 
-        const editPropertyApi = backendAPI.concat(`/timeline/${this.props.url}/edit_property`);
-        axios.post(editPropertyApi, {
-            jwt_token: this.props.jwtToken,
-            new_description: str
-        }).then((response) => {
+        apiEditStoryDescription(this.props.jwtToken, this.props.url, newDescription)
+            .then((response) => {
                 if (response.status === 201){
                     message.warning(response.data)
                 }
                 else if (response.status === 200){
                     message.success(response.data, 1);
-                    this.setState({storyDescription: str});
+                    this.setState({storyDescription: newDescription});
                 }
             }
         );

@@ -1,39 +1,18 @@
 import React from 'react';
-import {Form, Input, message, Modal, Typography, Tabs, Button, Drawer, Table, List, ConfigProvider} from "antd";
+import {message, Typography, Tabs, Drawer, List, ConfigProvider} from "antd";
+// import {Input, Form, Input, Button} from "antd";
 import {controlAboutsModalAction} from "../../Actions/modalsActions";
 import {connect} from "react-redux";
 // import {Divider} from "antd/es";
-// import {backendAPI} from "../../Structure/api";
-// import axios from 'axios';
 import {setReRenderTimelineAction} from "../../Actions/siteActions";
 import {AboutTableIcons} from "../Icons/Icons";
 
 const {Title, Text} = Typography;
-const { Search } = Input;
 const { TabPane } = Tabs;
 
 
 
 class AboutModal extends React.Component{
-
-    columns = [
-        {
-            title: 'Icon',
-            dataIndex: 'icon',
-            key: 'icon',
-            align: 'center',
-            render: (icon) => AboutTableIcons[icon]
-        },
-        {
-            title: 'Name',
-            dataIndex: 'iconName',
-            key: 'roleName',
-            align: 'center',
-            render: (text) => <Text strong >{text}</Text>
-
-
-        }];
-
 
     onFinishFailed = errorInfo => {
         console.log('Failed:', errorInfo);
@@ -82,7 +61,9 @@ class AboutModal extends React.Component{
                     <TabPane tab="Icons" key="2_icons">
                         <Text> This are the available icons in Story.
                             You can use the names when uploading XLSX file.
+                            If you want a specific icon- request for it.
                         </Text>
+
                         <List
                             size="small"
                             bordered

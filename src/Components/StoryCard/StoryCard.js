@@ -40,6 +40,7 @@ class StoryCard extends React.Component{
             <div>
                 <Card
 
+
                     bordered={true}
                     style={{...cardStyle}}
                     //     actions={[

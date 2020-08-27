@@ -2,14 +2,13 @@ import React from 'react';
 import { withRouter } from "react-router-dom";
 import {Layout, message} from "antd";
 import CardsGrid from '../Components/StoryCard/CardsGrid'
-import axios from "axios";
 import LoadingPage from '../Components/LoadingComponent/LoadingPage';
 import SideMenuPage from "./sideMenuPage";
-import {backendAPI} from "../Structure/api";
 import {connect} from "react-redux";
 import {getQueryStringParams} from "../Actions/queryStringActions";
 import CardsSearch from "../Components/StoryCard/Search/CardsSearch";
 import {setReRenderCardsAction} from "../Actions/siteActions";
+import {apiGetAllCards} from "../Actions/apiActions";
 
 
 class CardsPage extends  React.Component {
@@ -33,11 +32,7 @@ class CardsPage extends  React.Component {
         // console.log(apiGetAllNames);
         const queryParams = getQueryStringParams(this.props.history.location.search);
         const searchString = queryParams.search_string? queryParams.search_string: null;
-        const apiGetAllNames = backendAPI.concat("/get_all_names");
-        axios.post(apiGetAllNames, {
-            "jwt_token": this.props.jwtToken,
-            "search_string": searchString
-        })
+        apiGetAllCards(this.props.jwtToken, searchString)
             .then((response) => {
                     if (response.status === 201) {
                         message.warning(response.data)

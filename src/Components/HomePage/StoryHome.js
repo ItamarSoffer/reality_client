@@ -1,13 +1,12 @@
 import React from 'react';
 import {Layout, Divider, message} from "antd";
-import axios from 'axios';
-import {backendAPI} from "../../Structure/api";
 import LoadingPage from "../LoadingComponent/LoadingPage";
 import CardsGrid from '../StoryCard/CardsGrid';
 import {connect} from "react-redux";
 import {setReRenderCardsAction} from "../../Actions/siteActions";
 import {withRouter} from "react-router";
 import {getQueryStringParams} from "../../Actions/queryStringActions";
+import {apiGetTimelinesByUser} from "../../Actions/apiActions";
 
 
 class StoryHome extends  React.Component {
@@ -26,13 +25,7 @@ class StoryHome extends  React.Component {
     fetchData() {
         const queryParams = getQueryStringParams(this.props.history.location.search);
         const searchString = queryParams.search_string? queryParams.search_string: null;
-        const apiGetTimelines = backendAPI.concat(`/get_timelines_by_user`);
-        axios.post(apiGetTimelines,
-            {
-                jwt_token: this.props.jwtToken,
-                "search_string": searchString
-
-            })
+        apiGetTimelinesByUser(this.props.jwtToken, searchString)
             .then((response) => {
                     if (response.status === 201) {
                         message.warning(response.data)

@@ -4,12 +4,11 @@ import Timeline from '../Components/Timelines/timeline';
 import TimelineMenu from "../Components/TimelineMenu/TimelineMenu";
 import SideMenuPage from './sideMenuPage'
 import {connect} from "react-redux";
-import {backendAPI} from "../Structure/api";
-import axios from 'axios';
 import LoadingPage from "../Components/LoadingComponent/LoadingPage";
 import {NoPermissions} from "../Components/NoPermissions/noPermissions";
 import {refreshByJwt} from "../Actions/jwtActions";
 import {NotExists} from "../Components/NotExists/notExists";
+import {apiCheckPermission, apiGetBasicData} from "../Actions/apiActions";
 
 class StoryPage extends  React.Component {
     constructor(props){
@@ -32,26 +31,19 @@ class StoryPage extends  React.Component {
     checkPermissions() {
         const permittedRoles = ['read', 'write', 'owner', 'creator'];
         const url = this.props.match.params.timeline_url;
-        const permissionsApi = backendAPI.concat(`/timeline/${url}/check_permissions`);
-        axios.post(permissionsApi, {
-            jwt_token: this.props.jwtToken,
-        })
+        apiCheckPermission(this.props.jwtToken, url)
             .then((response) => {
                 if (response.status === 204){
                     // console.log(204);
                     this.setState({
                         pageExists: false,
                         isPageLoaded: true,
-
                     })
-
                 }
                 else {
                     this.setState({
                         pageExists: true,
-
                     });
-
                     if (permittedRoles.indexOf(response.data.role) !== -1) {
                         this.setState( {
                             isPageLoaded: true,
@@ -60,21 +52,14 @@ class StoryPage extends  React.Component {
                     else {
                         this.setState( {
                             isPageLoaded: true,
-
                         })
                     }
                 }
-
             })
     }
     getBasicData() {
-        const TimelineUrl = this.props.match.params.timeline_url;
-        const apiGetBasicData = backendAPI.concat(`/timeline/${TimelineUrl}/basic_data`);
-        axios.post(apiGetBasicData,
-            {
-                jwt_token: this.props.jwtToken,
-            })
-            .then(res => res.data[0])
+        const storyUrl = this.props.match.params.timeline_url;
+        apiGetBasicData(this.props.jwtToken, storyUrl)
             .then((data) => {
                 this.setState({
                     timelineBasicData:data,

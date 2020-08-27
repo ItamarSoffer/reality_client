@@ -2,20 +2,16 @@ import React from 'react';
 import {Button, message, Modal, Typography} from "antd";
 import {controlDeleteTimelineModalAction} from "../../Actions/modalsActions";
 import {connect} from "react-redux";
-import {backendAPI} from "../../Structure/api";
-import axios from "axios";
 import DownloadExcel from "../Export/ToExcel";
 import {withRouter} from "react-router";
+import {apiDeleteStory} from "../../Actions/apiActions";
 const {Text, Title} = Typography;
 
 class DeleteTimelineModal extends React.Component{
     handleTimelineDelete = () => {
-        const delTimelineUrl = backendAPI.concat(`/timeline/del_timeline?timeline_id=${this.props.timelineId}`);
         message.info("Get a backup on us :)", 3);
         DownloadExcel(this.props.url, this.props.jwtToken);
-        axios.post(delTimelineUrl, {
-            jwt_token: this.props.jwtToken,
-        })
+        apiDeleteStory(this.props.jwtToken, this.props.timelineId )
             .then((response) => {
                 if (response.status === 201) {
                     message.warning(response.data)

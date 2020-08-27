@@ -1,12 +1,10 @@
 import React from 'react';
 import {Form, Input, Button, message, Card, Typography} from 'antd';
 import 'antd/dist/antd.css';
-import axios from "axios";
 import { withRouter } from "react-router-dom";
-
-import {backendAPI} from '../../Structure/api';
 import MenuIcons from "../Icons/MenuIcons";
 import {connect} from "react-redux";
+import {apiCreateStory} from "../../Actions/apiActions";
 
 const { TextArea } = Input;
 const {Title} = Typography;
@@ -28,15 +26,7 @@ class CreateNewTimeline extends React.Component {
             message.error("URL must be al least 3 chars!")
         }
         else {
-            const ApiCreateTimeline = backendAPI.concat("/create_timeline");
-            axios.post(ApiCreateTimeline, {
-                jwt_token: this.props.jwtToken,
-                // create_user: this.props.loggedUser,
-                description: values.description,
-                name: values.title,
-                url: values.timeline_url
-            })
-
+            apiCreateStory(this.props.jwtToken, values.title, values.description, values.timeline_url)
                 .then((response) => {
                     // console.log("resp", response);
                     if (response.status === 201){

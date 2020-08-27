@@ -21,8 +21,8 @@ class TagsEditSelectByName extends React.Component {
     }
 
     fetchTags = () => {
-        const addTagApi = backendAPI.concat(`/timeline/${this.props.url}/get_tags`);
-        axios.post(addTagApi, {
+        const fetchTagsApi = backendAPI.concat(`/timeline/${this.props.url}/get_tags`);
+        axios.post(fetchTagsApi, {
             jwt_token: this.props.jwtToken,
         }).then(res => res.data)
             .then(data => data.map(e => ({...e, nameAndColor: [e.tag_name, e.tag_color]})))

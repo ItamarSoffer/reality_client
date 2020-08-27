@@ -1,8 +1,7 @@
 import React from 'react';
 import {Select} from "antd";
-import {backendAPI} from "../../Structure/api";
-import axios from "axios";
 import {connect} from "react-redux";
+import {apiGetUsers} from "../../Actions/apiActions";
 
 const { Option } = Select;
 
@@ -20,10 +19,7 @@ class UsersSelect extends React.Component {
     }
 
     fetchTags = () => {
-        const getUsersApi = backendAPI.concat(`/get_permitted_users`);
-        axios.post(getUsersApi, {
-            jwt_token: this.props.jwtToken,
-        }).then(res => res.data)
+        apiGetUsers(this.props.jwtToken)
             .then( (data) => {
                 this.setState( {
                     storyUsers: data,

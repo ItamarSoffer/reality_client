@@ -1,11 +1,10 @@
 import React from "react";
-import axios from 'axios'
 import {Button, ConfigProvider, Input, Space, Table, Tag} from "antd";
-import {backendAPI} from "../../Structure/api";
 import {connect} from "react-redux";
 import Highlighter from "react-highlight-words";
 import { SearchOutlined } from '@ant-design/icons';
 import {Typography} from "antd";
+import {apiGetPermissions} from "../../Actions/apiActions";
 const {Paragraph} = Typography;
 
 
@@ -33,11 +32,7 @@ class PermissionsTable extends React.Component{
     };
 
     fetchData() {
-        const apiGetPermissions = backendAPI.concat(`/timeline/${this.props.url}/permitted_users`);
-        axios.post(apiGetPermissions,
-            {
-                jwt_token: this.props.jwtToken,
-            })
+        apiGetPermissions(this.props.jwtToken, this.props.url)
             .then(res => res.data)
             .then( (data) => {
                 this.setState( {
@@ -45,8 +40,8 @@ class PermissionsTable extends React.Component{
                     isLoaded: true,
                 });
             })
-
     }
+
     setColumns() {
 
         const columns = [
