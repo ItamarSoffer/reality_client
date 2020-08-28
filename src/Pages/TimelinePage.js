@@ -99,6 +99,7 @@ class StoryPage extends  React.Component {
                                 <Timeline url={this.props.match.params.timeline_url}
                                           basicData={this.state.timelineBasicData}
                                           timelineRenderCount={this.props.timelineRenderCount}
+                                          events={this.props.events}
                                 />
 
                             </div> : null }
@@ -116,6 +117,8 @@ const mapStateToProps = state => {
         DarkMode: state.sitesReducer.DarkMode,
         timelineRenderCount : state.sitesReducer.timelineRenderCount,
         jwtToken: state.usersReducer.jwtToken,
+        events: state.eventsReducer.events
+
 
     }
 };

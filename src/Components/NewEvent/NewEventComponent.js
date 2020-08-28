@@ -9,6 +9,7 @@ import {setReRenderTimelineAction} from "../../Actions/siteActions";
 import {controlNewEventModalAction} from "../../Actions/modalsActions";
 import TagsSelectByName from "../Tags/TagsSelectByName";
 import {apiNewEvent} from "../../Actions/apiActions";
+import {updateEventAction} from "../../Actions/eventsActions";
 
 const { TextArea } = Input;
 
@@ -27,6 +28,11 @@ class CreateNewEvent extends React.Component {
     onReset = () => {
         // console.log("RESET");
         this.formRef.current.resetFields();
+        this.setState({
+            color: null,
+            icon: null,
+            tags: []
+        })
     };
 
 
@@ -62,7 +68,6 @@ class CreateNewEvent extends React.Component {
 
     onFinish = values => {
         // const api_add_event = backendAPI.concat(`/timeline/${this.props.url}/add`);
-        console.log("FINITO", values);
         // console.log("SENDS TO", api_add_event);
         const hour = typeof values.hour !== "undefined" ? values.hour.format('HH:mm'): "";
         apiNewEvent(
@@ -83,15 +88,12 @@ class CreateNewEvent extends React.Component {
                     message.warning(response.data)
                 }
                 else if (response.status === 200){
-                    message.success(response.data, 1.5)
+                    message.success(response.data.message, 1.5)
 
                         .then(() => {
-                            this.props.setReRenderTimeline(this.props.timelineRenderCount + 1);
-                            this.setState({
-                                color: null,
-                                icon: null,
-                                tags: []
-                            })
+                            // this.props.setReRenderTimeline(this.props.timelineRenderCount + 1);
+                            this.props.updateEventAction(response.data.eventData)
+
                             // form.resetFields();
                         })
                 }
@@ -250,7 +252,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return{
         hideNewEventModal: () => {dispatch(controlNewEventModalAction(false))},
-        setReRenderTimeline: (index) => {dispatch(setReRenderTimelineAction(index))}
+        setReRenderTimeline: (index) => {dispatch(setReRenderTimelineAction(index))},
+        updateEventAction: (event) => {dispatch(updateEventAction(event))},
     }
 
 };
