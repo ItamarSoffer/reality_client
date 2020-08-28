@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import {controlEditEventModalAction} from "../../Actions/modalsActions";
 import EditEvent from "../NewEvent/EditEvent";
 import {apiDelEvent} from "../../Actions/apiActions";
+import {deleteEvent} from "../../Actions/eventsActions";
 
 
 
@@ -24,7 +25,8 @@ class EventEditOptions extends React.Component{
                 }
                 else if (response.status === 200){
                     message.success(response.data, 1.5);
-                    this.props.setReRenderTimeline(1);
+                    // this.props.setReRenderTimeline(1);
+                    this.props.deleteEvent(this.props.eventId);
 
                 }
             });
@@ -37,11 +39,9 @@ class EventEditOptions extends React.Component{
                 <Space>
                     <Button size={"small"}
                             onClick={() => this.props.showEditEventModal(this.props.data.event_id)}
-                        // onClick={() => {console.log("edit", record)}}
                     > Edit</Button>
                     <Button danger size={"small"}
                             onClick={this.handleDelete}
-                        // onClick={() => {console.log("DEL", record)}}
                     > Delete</Button>
                 </Space>
                 <EditEvent
@@ -67,6 +67,8 @@ const mapDispatchToProps = dispatch => {
     return{
         setReRenderTimeline: (index) => {dispatch(setReRenderTimelineAction(index))},
         showEditEventModal: (eventId) => {dispatch(controlEditEventModalAction(eventId))},
+        deleteEvent: (eventId) => {dispatch(deleteEvent(eventId))},
+
 
     }
 

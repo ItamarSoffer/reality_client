@@ -10,6 +10,7 @@ import {controlEditEventModalAction} from "../../Actions/modalsActions";
 import moment from 'moment';
 import TagsSelectByName from "../Tags/TagsSelectByName";
 import {apiEditEvent} from "../../Actions/apiActions";
+import {updateEventAction} from "../../Actions/eventsActions";
 
 const { TextArea } = Input;
 
@@ -23,7 +24,6 @@ class EditEvent extends React.Component {
             tags: this.props.eventData.tags.map(tag => (tag.tag_id)),
             time: moment(this.props.eventData.event_time, "YYYY-MM-DD h:mm:ss").format("HH:mm")
         }
-        console.log(this.state.time);
     }
 
 
@@ -78,14 +78,14 @@ class EditEvent extends React.Component {
             values.link,
             tags)
             .then((response) => {
-                // console.log("resp", response);
                 if (response.status === 201){
                     message.warning(response.data)
                 }
                 else if (response.status === 200){
-                    message.success(response.data, 1.5)
+                    message.success(response.data.message, 1.5)
                         .then(() => {
-                            this.props.setReRenderTimeline(this.props.timelineRenderCount + 1);
+                            // this.props.setReRenderTimeline(this.props.timelineRenderCount + 1);
+                            this.props.updateEventAction(response.data.eventData)
                             // form.resetFields();
                         })
                 }
@@ -265,7 +265,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return{
         hideEditEventModal: () => {dispatch(controlEditEventModalAction(''))},
-        setReRenderTimeline: (index) => {dispatch(setReRenderTimelineAction(index))}
+        setReRenderTimeline: (index) => {dispatch(setReRenderTimelineAction(index))},
+        updateEventAction: (event) => {dispatch(updateEventAction(event))},
+
     }
 
 };

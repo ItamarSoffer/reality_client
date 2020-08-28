@@ -10,6 +10,7 @@ import {connect} from "react-redux";
 import StoryTable from '../StoryTable/StoryTable';
 import {getQueryStringParams} from "../../Actions/queryStringActions";
 import {apiEditStoryDescription, apiEditStoryName, apiGetEvents} from "../../Actions/apiActions";
+import {getStoryEventsAction, eventsCompareSorter} from "../../Actions/eventsActions";
 
 
 const { Title } = Typography;
@@ -20,7 +21,6 @@ class Timeline extends React.Component {
         super(props);
         this.state={
             isLoaded: false,
-            timeline_events: [],
             storyName: this.props.basicData.name,
             storyDescription: this.props.basicData.description
         }
@@ -41,8 +41,8 @@ class Timeline extends React.Component {
                         message.warning(response.data)
                     } else if (response.status === 200) {
                         this.setState({
-                            timeline_events:response.data.events,
                             isLoaded: true});
+                        this.props.getStoryEvents(response.data.events)
                     }
                 }
             )
@@ -65,7 +65,6 @@ class Timeline extends React.Component {
         }
         if (nextState.storyName !== this.state.storyName){
             document.title = `Story: ${nextState.storyName}`;
-
         }
     }
 
@@ -113,7 +112,7 @@ class Timeline extends React.Component {
 
             return <LoadingPage/>;
         }
-        else if (this.state.timeline_events.length === 0){
+        else if (this.props.events.length === 0){
             return (
                 <div>
 
@@ -152,14 +151,13 @@ class Timeline extends React.Component {
                         <StoryTable
                             viewMode={viewMode}
                             url={urlAddress}
-                            timeline_events={this.state.timeline_events.map(e => ({...e, iconAndColor: [e.icon, e.frame_color]}))
-
-                            }/> : null}
+                            timeline_events={Object.values(this.props.events).sort(eventsCompareSorter)}
+                            /> : null}
                     {viewMode === 'timeline' ?
                         <VerticalTimeline
                             id={this.props.basicData.id}
                             style={{background: '#f00'}}>
-                            {this.state.timeline_events.map(
+                            {Object.values(this.props.events).sort(eventsCompareSorter).map(
                                 function (evt) {
                                     return <DataEvent data={evt} url={urlAddress} />
                                 })}
@@ -183,7 +181,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return{
-        setReRenderTimeline: (index) => {dispatch(setReRenderTimelineAction(index))}
+        setReRenderTimeline: (index) => {dispatch(setReRenderTimelineAction(index))},
+        getStoryEvents: (events) => {dispatch(getStoryEventsAction(events))},
     }
 
 };

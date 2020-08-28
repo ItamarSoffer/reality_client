@@ -27,11 +27,11 @@ class StoryHome extends  React.Component {
         const searchString = queryParams.search_string? queryParams.search_string: null;
         apiGetTimelinesByUser(this.props.jwtToken, searchString)
             .then((response) => {
-                    if (response.status === 201) {
+                        if (response.status === 201) {
                         message.warning(response.data)
                     } else if (response.status === 200) {
                         this.setState({
-                            timelines:response.data,
+                            timelines:response.data.results,
                             isLoaded: true});
                     }
                 }
