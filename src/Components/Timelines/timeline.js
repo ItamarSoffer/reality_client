@@ -149,7 +149,7 @@ class Timeline extends React.Component {
                     </ConfigProvider>
                     {viewMode !== 'timeline'?
                         <StoryTable
-                            viewMode={viewMode}
+                            expandMode={this.props.storyExpandMode}
                             url={urlAddress}
                             timeline_events={Object.values(this.props.events).sort(eventsCompareSorter)}
                             /> : null}
@@ -159,7 +159,9 @@ class Timeline extends React.Component {
                             style={{background: '#f00'}}>
                             {Object.values(this.props.events).sort(eventsCompareSorter).map(
                                 function (evt) {
-                                    return <DataEvent data={evt} url={urlAddress} />
+                                    return <DataEvent
+                                        data={evt}
+                                        url={urlAddress} />
                                 })}
                         </VerticalTimeline> : null
                     }
@@ -175,7 +177,9 @@ const mapStateToProps = state => {
     return {
         jwtToken: state.usersReducer.jwtToken,
         storyViewMode: state.sitesReducer.storyViewMode,
+        storyExpandMode: state.sitesReducer.storyExpandMode,
         editMode: state.sitesReducer.editMode,
+
     }
 };
 

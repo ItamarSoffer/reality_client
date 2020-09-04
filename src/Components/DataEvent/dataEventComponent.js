@@ -33,29 +33,38 @@ class DataEvent extends React.Component {
                 >
 
                     {!this.props.data.header ? null : <Title level={3}>{this.props.data.header}</Title> }
-                    {!this.props.data.text ? null :
-                        <Paragraph ellipsis={{rows: 3, expandable: true}} style={{whiteSpace: "pre-line"}}>
-                            {this.props.data.text}
-                        </Paragraph>}
-                    {!this.props.data.link ? null :
-                        <div><a href={this.props.data.link} onClick={(event) => {event.preventDefault(); window.open(this.props.data.link);}}>{this.props.data.link}</a> <br/></div>}
-                    {this.props.data.tags.length > 0 ? <TagsRenderer tags={this.props.data.tags}/> : null}
-                    {this.props.data.extra_data?
+
+                    {this.props.storyExpandMode?
                         <div>
-                            <br/>
-                            <ExtraData key={"extra_".concat(this.props.data.event_id)} data={this.props.data.extra_data}/>
+                            {!this.props.data.text ? null :
+                                <Paragraph ellipsis={{rows: 3, expandable: true}} style={{whiteSpace: "pre-line"}}>
+                                    {this.props.data.text}
+                                </Paragraph>}
+                            {!this.props.data.link ? null :
+                                <div><a href={this.props.data.link} onClick={(event) => {
+                                    event.preventDefault();
+                                    window.open(this.props.data.link);
+                                }}>{this.props.data.link}</a> <br/></div>}
+                            {this.props.data.tags.length > 0 ? <TagsRenderer tags={this.props.data.tags}/> : null}
+                            {this.props.data.extra_data?
+                                <div>
+                                    <br/>
+                                    <ExtraData key={"extra_".concat(this.props.data.event_id)} data={this.props.data.extra_data}/>
+                                </div>
+                                : null}
+                            {!this.props.editMode? null:
+                                <div>
+                                    <br/>
+                                    <EventEditOptions
+                                        key={"menu_".concat(this.props.data.event_id)}
+                                        data={this.props.data}
+                                        eventId={this.props.data.event_id}
+                                        url={this.props.url}
+                                    />
+                                </div>
+                            }
                         </div>
-                        : null}
-                    {!this.props.editMode? null:
-                        <div>
-                            <br/>
-                            <EventEditOptions
-                                key={"menu_".concat(this.props.data.event_id)}
-                                data={this.props.data}
-                                eventId={this.props.data.event_id}
-                                url={this.props.url}
-                            />
-                        </div>
+                        : null
                     }
 
 
@@ -68,7 +77,8 @@ class DataEvent extends React.Component {
 const mapStateToProps = state => {
     return {
         editMode: state.sitesReducer.editMode,
-        loggedUser : state.usersReducer.loggedUser
+        loggedUser : state.usersReducer.loggedUser,
+        storyExpandMode: state.sitesReducer.storyExpandMode,
 
     }
 };

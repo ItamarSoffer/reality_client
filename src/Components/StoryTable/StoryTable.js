@@ -65,7 +65,7 @@ class StoryTable extends React.Component {
                 //     align: 'center',
                 // },
             ];
-        if (this.props.viewMode === 'full_table'){
+        if (this.props.expandMode){
             columns.push(                {
                 title: 'Content',
                 dataIndex: 'text',
@@ -87,7 +87,7 @@ class StoryTable extends React.Component {
             align: 'center',
 
         });
-        if (this.props.viewMode  === 'full_table'){
+        if (this.props.expandMode){
             columns.push({
                 title: 'Tags',
                 dataIndex: 'tags',
@@ -201,7 +201,7 @@ class StoryTable extends React.Component {
             showTotal: (total, range) => `${range[0]}-${range[1]} מתוך ${total}`
         };
         expandableConfig = {};
-        if (this.props.viewMode === 'preview_table'){
+        if (!this.props.expandMode){
             expandableConfig = {
                 expandedRowRender: record =>
                     <div>

@@ -28,22 +28,22 @@ export const setReRenderTimelineAction = (index) => {
 
 export const storyModeTimelineAction = () => {
     return {
-        type: "STORY_VIEW_MODE",
+        type: "STORY_TYPE_MODE",
         payload: 'timeline'
     }
 };
 
 export const storyModeTableAction = () => {
     return {
-        type: "STORY_VIEW_MODE",
-        payload: 'full_table'
+        type: "STORY_TYPE_MODE",
+        payload: 'table'
     }
 };
 
-export const storyModePrevTableAction = () => {
+export const storyExpandModeAction = (val) => {
     return {
-        type: "STORY_VIEW_MODE",
-        payload: 'preview_table'
+        type: "STORY_EXPAND_MODE",
+        payload: val
     }
 };
 

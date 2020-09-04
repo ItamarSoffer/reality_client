@@ -5,7 +5,8 @@ const siteInitState = {
     editMode: false,
     timelineRenderCount: 0,
     storyViewMode: 'timeline',
-    cardsRenderCount: 0
+    cardsRenderCount: 0,
+    storyExpandMode: true
 };
 
 const sitesReducer = (state = siteInitState, action) => {
@@ -24,8 +25,13 @@ const sitesReducer = (state = siteInitState, action) => {
             state = {...state, timelineRenderCount: action.payload};
             break;
 
-        case "STORY_VIEW_MODE":
+        case "STORY_TYPE_MODE":
             state = {...state, storyViewMode: action.payload};
+            // console.log(action.payload);
+            break;
+
+        case "STORY_EXPAND_MODE":
+            state = {...state, storyExpandMode: action.payload};
             // console.log(action.payload);
             break;
 

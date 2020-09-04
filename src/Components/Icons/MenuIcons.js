@@ -25,7 +25,8 @@ import {
     UploadOutlined,
     InfoCircleOutlined,
     StarOutlined,
-    StarFilled
+    StarFilled,
+    ExpandAltOutlined,
 
 } from '@ant-design/icons';
 
@@ -55,7 +56,8 @@ export const MenuIcons = {
     "upload": <UploadOutlined/>,
     "info": <InfoCircleOutlined />,
     "star": <StarOutlined />,
-    "star_filled": <StarFilled />
+    "star_filled": <StarFilled />,
+    "expand": <ExpandAltOutlined />
 
 
 };

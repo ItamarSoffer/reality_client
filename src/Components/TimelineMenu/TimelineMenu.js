@@ -9,7 +9,8 @@ import {
     enableEditAction,
     disableEditAction,
     storyModeTimelineAction,
-    storyModeTableAction, storyModePrevTableAction
+    storyModeTableAction,
+    storyExpandModeAction
 } from "../../Actions/siteActions";
 import {
     controlNewEventModalAction,
@@ -60,14 +61,19 @@ class TimelineMenu extends React.Component {
 
     handleTableMode = () => {
         this.props.storyModeTableAction();
-        this.setUrlParam('view', 'full_table');
+        this.setUrlParam('view', 'table');
     };
 
-    handlePreviewTableMode = () => {
-        this.props.storyModePrevTableAction();
-        this.setUrlParam('view', 'preview_table');
+
+    handleCollapseMode = () => {
+        this.props.storyCollapseModeAction();
+        this.setUrlParam('expand', 'false');
     };
 
+    handleExpandMode = () => {
+        this.props.storyExpandModeAction();
+        this.setUrlParam('expand', 'true');
+    };
 
     cancel = e => {
         console.log(e);
@@ -81,6 +87,13 @@ class TimelineMenu extends React.Component {
 
     render() {
         const menuTheme = this.props.DarkMode === true ? "dark": "light";
+        const queryParams = getQueryStringParams(this.props.history.location.search);
+        let expandMode = this.props.storyExpandMode;
+            if (queryParams.expand){
+                // the query param will be "true" or "false"
+                expandMode = queryParams.expand === 'true';
+            }
+
         // console.log('Dark theme timeline', this.props.DarkMode);
         return (
             <div>
@@ -116,19 +129,31 @@ class TimelineMenu extends React.Component {
                             onClick={() => this.handleTimelineMode()}>
                             Timeline
                         </Menu.Item>
-                        <Menu.Item
-                            key="prev_table_mode"
-                            icon={MenuIcons['compress']}
-                            onClick={() => this.handlePreviewTableMode()}>
-                            Preview Table
-                        </Menu.Item>
 
                         <Menu.Item
                             key="table_mode"
                             icon={MenuIcons['table']}
                             onClick={() => this.handleTableMode()}>
-                            Full Table
+                            Table
                         </Menu.Item>
+                        {/*# TODO: by state */}
+                        {expandMode?
+                        <Menu.Item
+                            key="expand_collapse_mode"
+                            icon={MenuIcons['compress']}
+                            onClick={() => this.handleCollapseMode()}>
+                            Compress
+                        </Menu.Item>:
+                            <Menu.Item
+                            key="expand_collapse_mode"
+                            icon={MenuIcons['expand']}
+                            onClick={() => this.handleExpandMode()}>
+                            Expand
+                        </Menu.Item>
+
+                        }
+
+
 
                     </SubMenu>
                     {(["write", "owner", "creator"].indexOf(this.props.role) === -1) ? null :
@@ -199,6 +224,7 @@ const mapStateToProps = state => {
         DarkMode: state.sitesReducer.DarkMode,
         editMode: state.sitesReducer.editMode,
         jwtToken: state.usersReducer.jwtToken,
+        storyExpandMode: state.sitesReducer.storyExpandMode
 
     }
 };
@@ -214,7 +240,9 @@ const mapDispatchToProps = dispatch => {
         showTagsModal: () => {dispatch(controlTagsModalAction(true))},
         storyModeTimelineAction: () => {dispatch(storyModeTimelineAction())},
         storyModeTableAction: () => {dispatch(storyModeTableAction())},
-        storyModePrevTableAction: () => {dispatch(storyModePrevTableAction())},
+        // storyModePrevTableAction: () => {dispatch(storyModePrevTableAction())},
+        storyExpandModeAction: () => {dispatch(storyExpandModeAction(true))},
+        storyCollapseModeAction: () => {dispatch(storyExpandModeAction(false))},
 
     }
 };

@@ -8,7 +8,6 @@ import {
     DeploymentUnitOutlined,
     StarOutlined,
     StarFilled,
-    StarTwoTone
 } from '@ant-design/icons';
 import {apiAddFavorites, apiDellFavorites} from "../../Actions/apiActions";
 import {connect} from "react-redux";
@@ -148,12 +147,6 @@ class StoryCard extends React.Component{
                         <Text style={{color: '#222'}}>{this.props.cardData.last_modify}</Text>
                     </Space>
                     {!this.props.cardData.counter ? <div><br/></div>:null}
-                    {/*      {! this.props.cardData.hasOwnProperty('role')? null:*/}
-                    {/*      <div>*/}
-
-                    {/*<Text >role: {this.props.cardData.role}</Text>*/}
-                    {/*      </div>*/}
-                    {/*      }*/}
 
                     <div style={{    textAlign: 'center',}}>
                         {favButton}
