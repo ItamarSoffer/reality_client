@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Menu } from 'antd';
+import {Layout, Menu, message} from 'antd';
 // import { Switch } from 'antd';
 import {connect} from "react-redux";
 import {
@@ -10,9 +10,11 @@ import MenuIcons from '../Icons/MenuIcons';
 import {refreshByJwt} from "../../Actions/jwtActions";
 import {controlAboutsModalAction} from "../../Actions/modalsActions";
 import AboutModal from "../AboutModal/AboutModal";
+import {setUserFavorites} from "../../Actions/favoritesActions";
+import {apiGetFavorites} from "../../Actions/apiActions";
 
 const { Sider } = Layout;
-// const { SubMenu } = Menu;
+const { SubMenu } = Menu;
 
 
 class SideMenu extends React.Component {
@@ -25,6 +27,24 @@ class SideMenu extends React.Component {
             menuBackground: darkCheck ? 'rgb(0,21,41)' : 'rgb(255,255,255)'
         };
     }
+    fetchFavorites(){
+        if (this.props.favorites === ''){
+            console.log("FETCHING");
+            apiGetFavorites(this.props.jwtToken)
+                .then((response) => {
+                        if (response.status === 201) {
+                            message.warning(response.data)
+                        } else if (response.status === 200) {
+                            this.props.setFavorites(response.data);
+                        }
+                    }
+                )
+        }
+    }
+    componentWillMount() {
+        this.fetchFavorites();
+    }
+
 
     onCollapse = collapsed => {
         this.setState({ collapsed });
@@ -43,10 +63,10 @@ class SideMenu extends React.Component {
 
     };
 
+
     render() {
-
+        const localAddress = window.location.href.split('/')[0] +'//'+ window.location.href.split('/')[2];
         return (
-
             <Sider selectable={false}
                    collapsible
                    collapsed={this.state.collapsed}
@@ -81,10 +101,28 @@ class SideMenu extends React.Component {
                                }>
                         All Stories
                     </Menu.Item>
+                    {
+                        !this.props.favorites.length > 0 ? null :
 
-                    <Menu.Item disabled key="m_favorited" icon={MenuIcons['star']} onClick={() => console.log("COMING SOON")}>
-                        Favorites
-                    </Menu.Item>
+                            <SubMenu key="m_favorites" title="Favorites" icon={MenuIcons['star']}>
+                                {this.props.favorites.map(
+                                    function (favItem) {
+                                        return (
+                                            <Menu.Item
+                                                value={`fav_${favItem.story_id}`}
+                                                icon={MenuIcons['star_filled']}
+                                                onClick={() => {
+                                                    window.open(`${localAddress}/timeline/${favItem.url}`)
+                                                }}
+                                            >
+
+                                                {favItem.name}
+                                            </Menu.Item>)
+                                    }
+                                )}
+                            </SubMenu>
+                    }
+
 
                     <Menu.Item
                         key="new"
@@ -131,6 +169,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return{
         showAboutModalAction: () => {dispatch(controlAboutsModalAction(true))},
+        setFavorites: (jwtToken) => {dispatch(setUserFavorites(jwtToken))},
 
     }
 

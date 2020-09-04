@@ -1,4 +1,3 @@
-
 const loggedUserLocalStorage = window.localStorage.getItem('loggedUser');
 const jwtTokenLocalStorage = window.localStorage.getItem('jwtToken');
 
@@ -17,6 +16,11 @@ const usersReducer = (state = initState, action) => {
                 loggedUser: action.loggedUser,
                 jwtToken: action.jwtToken,
             };
+            // logout- reset favorites
+            if (action.jwtToken === ''){
+                console.log("DELS favorites");
+                window.localStorage.removeItem('favorites');
+            }
             break;
         default:
             break;

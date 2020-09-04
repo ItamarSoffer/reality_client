@@ -49,7 +49,6 @@ export const apiGetTimelinesByUser= (jwtToken, searchString) => {
 
 export const apiNewEvent = (jwtToken, storyUrl, title, text, date, hour, color=null, icon, link, tags) => {
     const api_add_event = backendAPI.concat(`/timeline/${storyUrl}/add`);
-    console.log(" IN HERE");
     return axios.post(api_add_event, {
         "jwt_token": jwtToken,
         "header": title,
@@ -218,7 +217,6 @@ export const apiEditStoryDescription = (jwtToken, storyUrl, newDescription) => {
 
 
 export const apiGetAllCards = (jwtToken, searchString) => {
-    console.log(searchString, typeof searchString);
     const apiGetAllNames = backendAPI.concat("/get_all_names");
     return axios.post(apiGetAllNames, {
         "jwt_token": jwtToken,
@@ -244,4 +242,32 @@ export const apiGetBasicData = (jwtToken, storyUrl) => {
             jwt_token: jwtToken,
         })
         .then(res => res.data[0])
+};
+
+export const apiGetFavorites = (jwtToken) =>{
+    const apiGetFavoritesLink = backendAPI.concat('/get_favorites');
+    return axios.post(apiGetFavoritesLink,
+        {
+            jwt_token: jwtToken,
+        })
+
+};
+
+export const apiAddFavorites = (jwtToken, storyUrl) =>{
+    const apiAddFavoritesLink = backendAPI.concat(`/timeline/${storyUrl}/add_favorite`);
+    return axios.post(apiAddFavoritesLink,
+        {
+            jwt_token: jwtToken,
+        })
+
+};
+
+
+export const apiDellFavorites = (jwtToken, storyUrl) =>{
+    const apiDellFavoritesLink = backendAPI.concat(`/timeline/${storyUrl}/dell_favorite`);
+    return axios.post(apiDellFavoritesLink,
+        {
+            jwt_token: jwtToken,
+        })
+
 };

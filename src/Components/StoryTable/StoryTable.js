@@ -129,7 +129,6 @@ class StoryTable extends React.Component {
         return columns
     }
 
-
     getColumnSearchProps = dataIndex => ({
         filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
             <div style={{ padding: 8 }}>

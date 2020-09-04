@@ -5,6 +5,7 @@ import sitesReducer from './Reducers/sitesReducer';
 import usersReducer from './Reducers/usersReducer';
 import modalsReducer from './Reducers/modalsReducer';
 import eventsReducer from './Reducers/eventsReducer';
+import favoritesReducer from './Reducers/favoritesReducer';
 
 
 const store = createStore(
@@ -12,7 +13,8 @@ const store = createStore(
         sitesReducer,
         usersReducer,
         modalsReducer,
-        eventsReducer
+        eventsReducer,
+        favoritesReducer
     }),
     {},
     applyMiddleware(thunk)

@@ -6,6 +6,7 @@ import {changeThemeAction} from '../Actions/siteActions';
 import SideMenu from '../Components/SideMenu/SideMenu';
 
 
+
 class SideMenuPage extends React.Component{
 
     handlerLogout = () => {
@@ -27,6 +28,8 @@ class SideMenuPage extends React.Component{
                       handlerLogout={this.handlerLogout}
                       handleChangeTheme={this.handleChangeTheme}
                       jwtToken={this.props.jwtToken}
+                      favorites={this.props.favorites}
+
             />
         )
     }
@@ -37,17 +40,19 @@ class SideMenuPage extends React.Component{
 const mapStateToProps = state => {
     return {
         DarkMode: state.sitesReducer.DarkMode,
-        jwtToken: state.usersReducer.jwtToken
+        jwtToken: state.usersReducer.jwtToken,
+        favorites: state.favoritesReducer.favorites
 
     }
 };
 
-const mapDispatchToProps = disaptch => {
+const mapDispatchToProps = dispatch => {
     return {
         logout: () => {
-            disaptch(logoutAction());
+            dispatch(logoutAction());
         },
-        changeTheme : (isDark) => {disaptch(changeThemeAction(isDark));}
+        changeTheme : (isDark) => {dispatch(changeThemeAction(isDark));},
+
     }
 };
 
