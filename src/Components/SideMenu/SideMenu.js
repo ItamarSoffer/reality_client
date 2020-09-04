@@ -10,8 +10,8 @@ import MenuIcons from '../Icons/MenuIcons';
 import {refreshByJwt} from "../../Actions/jwtActions";
 import {controlAboutsModalAction} from "../../Actions/modalsActions";
 import AboutModal from "../AboutModal/AboutModal";
-import {setUserFavorites} from "../../Actions/favoritesActions";
-import {apiGetFavorites} from "../../Actions/apiActions";
+import {setReRenderFavorites, setUserFavorites, clearFavorites} from "../../Actions/favoritesActions";
+import {apiGetFavorites,} from "../../Actions/apiActions";
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
@@ -28,21 +28,29 @@ class SideMenu extends React.Component {
         };
     }
     fetchFavorites(){
-        if (this.props.favorites === ''){
-            console.log("FETCHING");
-            apiGetFavorites(this.props.jwtToken)
-                .then((response) => {
-                        if (response.status === 201) {
-                            message.warning(response.data)
-                        } else if (response.status === 200) {
-                            this.props.setFavorites(response.data);
-                        }
+        // console.log("FETCHING");
+        apiGetFavorites(this.props.jwtToken)
+            .then((response) => {
+                    if (response.status === 201) {
+                        message.warning(response.data)
+                    } else if (response.status === 200) {
+                        this.props.setFavorites(response.data);
                     }
-                )
+                }
+            )
+    }
+
+    componentWillMount() {
+        if (this.props.favorites === '') {
+            this.fetchFavorites();
         }
     }
-    componentWillMount() {
-        this.fetchFavorites();
+
+    componentWillUpdate(nextProps, nextState, nextContext) {
+        if (nextProps.favoritesRerender === true){
+            this.fetchFavorites();
+            this.props.afterRerenderFavorites();
+        }
     }
 
 
@@ -60,6 +68,7 @@ class SideMenu extends React.Component {
 
     handleLogout = () => {
         this.props.handlerLogout();
+        this.props.clearFavorites();
 
     };
 
@@ -163,6 +172,7 @@ class SideMenu extends React.Component {
 }
 const mapStateToProps = state => {
     return {
+        favoritesRerender: state.favoritesReducer.favoritesRerender
     }
 };
 
@@ -170,6 +180,8 @@ const mapDispatchToProps = dispatch => {
     return{
         showAboutModalAction: () => {dispatch(controlAboutsModalAction(true))},
         setFavorites: (jwtToken) => {dispatch(setUserFavorites(jwtToken))},
+        afterRerenderFavorites: () => {dispatch(setReRenderFavorites(false))},
+        clearFavorites: () => {dispatch(clearFavorites())},
 
     }
 

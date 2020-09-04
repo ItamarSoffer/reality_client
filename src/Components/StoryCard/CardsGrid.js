@@ -1,6 +1,7 @@
 import React from 'react';
 import { List } from 'antd';
 import StoryCard from './StoryCard';
+import {connect} from "react-redux";
 
 
 /*
@@ -10,7 +11,6 @@ class cardsGrid extends React.Component{
 
 
     render(){
-
         return(
             <div>
                 <List
@@ -29,5 +29,17 @@ class cardsGrid extends React.Component{
     }
 
 }
+const mapStateToProps = state => {
+    return {
+    }
+};
 
-export default cardsGrid
+const mapDispatchToProps = dispatch => {
+    return {
+
+
+    }
+
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(cardsGrid);

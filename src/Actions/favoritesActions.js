@@ -7,19 +7,15 @@ export const setUserFavorites = (favoritesList) => {
         favoritesList: favoritesList
     }
 };
+export const setReRenderFavorites = (val) => {
+    return {
+        type: "FAVORITES_RERENDER",
+        payload: val
+    }
+};
 
-export const getUserFavorites1 = (jwtToken) => {
-    apiGetFavorites(jwtToken)
-
-        .then((response) => {
-                    if (response.status === 201) {
-                        message.warning(response.data)
-                    } else if (response.status === 200) {
-                        return {
-                            type: "FAVORITES_GET",
-                            favoritesList: response.data
-                        }
-                    }
-                }
-            )
+export const clearFavorites = () => {
+    return {
+        type: "FAVORITES_CLEAR",
+    }
 };

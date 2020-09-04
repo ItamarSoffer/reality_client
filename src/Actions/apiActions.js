@@ -264,7 +264,7 @@ export const apiAddFavorites = (jwtToken, storyUrl) =>{
 
 
 export const apiDellFavorites = (jwtToken, storyUrl) =>{
-    const apiDellFavoritesLink = backendAPI.concat(`/timeline/${storyUrl}/dell_favorite`);
+    const apiDellFavoritesLink = backendAPI.concat(`/timeline/${storyUrl}/del_favorite`);
     return axios.post(apiDellFavoritesLink,
         {
             jwt_token: jwtToken,

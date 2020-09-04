@@ -18,8 +18,6 @@ const usersReducer = (state = initState, action) => {
             };
             // logout- reset favorites
             if (action.jwtToken === ''){
-                console.log("DELS favorites");
-                window.localStorage.removeItem('favorites');
             }
             break;
         default:

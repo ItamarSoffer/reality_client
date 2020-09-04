@@ -113,7 +113,6 @@ class TagsModal extends React.Component{
     };
 
     onEditTagChange = (selectedTag) => {
-        console.log("Edit Tags", selectedTag);
         this.setState({
             targetTag: selectedTag
         })
