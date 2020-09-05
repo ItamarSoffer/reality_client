@@ -154,6 +154,7 @@ class RealityPage extends  React.Component {
                                 <Timeline url={this.props.match.params.timeline_url}
                                 basicData={this.state.timelineBasicData}
                                           timelineRenderCount={this.props.timelineRenderCount}
+                                          events={this.props.events}
                                 />
 <<<<<<< HEAD
                             </div>
@@ -173,6 +174,7 @@ class RealityPage extends  React.Component {
 
 
 const mapStateToProps = state => {
+<<<<<<< HEAD
   return {
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -187,6 +189,16 @@ const mapStateToProps = state => {
 >>>>>>> da2bd71... add auto update after change (add or delete event)
 
   }
+=======
+    return {
+        DarkMode: state.sitesReducer.DarkMode,
+        timelineRenderCount : state.sitesReducer.timelineRenderCount,
+        jwtToken: state.usersReducer.jwtToken,
+        events: state.eventsReducer.events
+
+
+    }
+>>>>>>> 8a372ee... add, edit and del event dont fetch all
 };
 
 const mapDispatchToProps = dispatch => {

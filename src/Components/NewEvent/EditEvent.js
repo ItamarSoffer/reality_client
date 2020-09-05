@@ -11,6 +11,11 @@ import {setReRenderTimelineAction} from "../../Actions/siteActions";
 import {hideEditEventModalAction} from "../../Actions/modalsActions";
 import moment from 'moment';
 import TagsSelectByName from "../Tags/TagsSelectByName";
+<<<<<<< HEAD
+=======
+import {apiEditEvent} from "../../Actions/apiActions";
+import {updateEventAction} from "../../Actions/eventsActions";
+>>>>>>> 8a372ee... add, edit and del event dont fetch all
 
 const { TextArea } = Input;
 
@@ -65,6 +70,7 @@ class EditEvent extends React.Component {
       const icon = this.state.icon === ''?  this.props.eventData.icon: this.state.icon ;
       const tags = this.state.tags === []?  this.props.eventData.tags: this.state.tags;
 
+<<<<<<< HEAD
       const postData = {
           "jwt_token": this.props.jwtToken,
           "event_id": this.props.eventId,
@@ -92,6 +98,34 @@ class EditEvent extends React.Component {
   }
   }).then(() => this.closeModal());
   };
+=======
+        apiEditEvent(
+            this.props.jwtToken,
+            this.props.url,
+            this.props.eventId,
+            values.title,
+            values.text,
+            date,
+            this.state.time,
+            color,
+            icon,
+            values.link,
+            tags)
+            .then((response) => {
+                if (response.status === 201){
+                    message.warning(response.data)
+                }
+                else if (response.status === 200){
+                    message.success(response.data.message, 1.5)
+                        .then(() => {
+                            // this.props.setReRenderTimeline(this.props.timelineRenderCount + 1);
+                            this.props.updateEventAction(response.data.eventData)
+                            // form.resetFields();
+                        })
+                }
+            }).then(() => this.closeModal());
+    };
+>>>>>>> 8a372ee... add, edit and del event dont fetch all
 
   onFinishFailed = errorInfo => {
     console.log('Failed:', errorInfo);
@@ -255,8 +289,15 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return{
+<<<<<<< HEAD
         hideEditEventModal: () => {dispatch(hideEditEventModalAction())},
         setReRenderTimeline: (index) => {dispatch(setReRenderTimelineAction(index))}
+=======
+        hideEditEventModal: () => {dispatch(controlEditEventModalAction(''))},
+        setReRenderTimeline: (index) => {dispatch(setReRenderTimelineAction(index))},
+        updateEventAction: (event) => {dispatch(updateEventAction(event))},
+
+>>>>>>> 8a372ee... add, edit and del event dont fetch all
     }
 
 };

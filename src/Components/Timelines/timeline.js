@@ -11,7 +11,16 @@ import LoadingPage from '../LoadingComponent/LoadingPage';
 import {backendAPI} from "../../Structure/api";
 import {setReRenderTimelineAction} from "../../Actions/siteActions";
 import {connect} from "react-redux";
+<<<<<<< HEAD
 >>>>>>> da2bd71... add auto update after change (add or delete event)
+=======
+import StoryTable from '../StoryTable/StoryTable';
+import {getQueryStringParams} from "../../Actions/queryStringActions";
+import {apiEditStoryDescription, apiEditStoryName, apiGetEvents} from "../../Actions/apiActions";
+import {getStoryEventsAction, eventsCompareSorter} from "../../Actions/eventsActions";
+
+
+>>>>>>> 8a372ee... add, edit and del event dont fetch all
 const { Title } = Typography;
 
 const base_url = "http://itsoffer:5005/api/timeline/";
@@ -22,7 +31,12 @@ class Timeline extends React.Component {
         super(props);
         this.state={
             isLoaded: false,
+<<<<<<< HEAD
             timeline_events: []
+=======
+            storyName: this.props.basicData.name,
+            storyDescription: this.props.basicData.description
+>>>>>>> 8a372ee... add, edit and del event dont fetch all
         }
     }
 
@@ -42,6 +56,7 @@ class Timeline extends React.Component {
         const minTime = queryParams.min_time? queryParams.min_time: null;
         const maxTime = queryParams.max_time? queryParams.max_time: null;
         const searchString = queryParams.search_string? queryParams.search_string: null;
+<<<<<<< HEAD
 >>>>>>> df262e5... add string and date filters
 
 
@@ -75,6 +90,27 @@ class Timeline extends React.Component {
 <<<<<<< HEAD
 >>>>>>> 31ed3bc... add edit mode option to timeline
 =======
+=======
+        const searchTags = queryParams.tags? queryParams.tags.split(","): null;
+
+        apiGetEvents(this.props.jwtToken, storyUrl, minTime, maxTime, searchString, searchTags, fetchExtraData )
+            .then((response) => {
+                    if (response.status === 201) {
+                        message.warning(response.data)
+                    } else if (response.status === 200) {
+                        this.setState({
+                            isLoaded: true});
+                        this.props.getStoryEvents(response.data.events)
+                    }
+                }
+            )
+
+    }
+
+    componentWillMount() {
+        document.title = `Story: ${this.state.storyName}`;
+        this.fetchData(false);
+>>>>>>> 8a372ee... add, edit and del event dont fetch all
     }
 >>>>>>> da2bd71... add auto update after change (add or delete event)
 
@@ -88,7 +124,13 @@ class Timeline extends React.Component {
             this.fetchData();
             this.props.setReRenderTimeline(0);
         }
+<<<<<<< HEAD
 
+=======
+        if (nextState.storyName !== this.state.storyName){
+            document.title = `Story: ${nextState.storyName}`;
+        }
+>>>>>>> 8a372ee... add, edit and del event dont fetch all
     }
 
 
@@ -98,7 +140,7 @@ class Timeline extends React.Component {
 
             return <LoadingPage/>;
         }
-        else if (this.state.timeline_events.length === 0){
+        else if (this.props.events.length === 0){
             return (
                 <div>
 
@@ -115,6 +157,30 @@ class Timeline extends React.Component {
                 <div
                     //style={{backgroundColor: '#ccc'}}
                 >
+<<<<<<< HEAD
+=======
+                    <ConfigProvider direction='rtl>'>
+                        <Title level={1} editable={nameOnChange} style={{textAlign:'center'}}>{this.state.storyName}</Title>
+                        <Title level={4} editable={descriptionOnChange} style={{textAlign:'center'}}>{this.state.storyDescription}</Title>
+                    </ConfigProvider>
+                    {viewMode !== 'timeline'?
+                        <StoryTable
+                            viewMode={viewMode}
+                            url={urlAddress}
+                            timeline_events={Object.values(this.props.events).sort(eventsCompareSorter)}
+                            /> : null}
+                    {viewMode === 'timeline' ?
+                        <VerticalTimeline
+                            id={this.props.basicData.id}
+                            style={{background: '#f00'}}>
+                            {Object.values(this.props.events).sort(eventsCompareSorter).map(
+                                function (evt) {
+                                    return <DataEvent data={evt} url={urlAddress} />
+                                })}
+                        </VerticalTimeline> : null
+                    }
+                    <BackTop />
+>>>>>>> 8a372ee... add, edit and del event dont fetch all
 
                     <Title level={1} style={{textAlign:'center'}}>{this.props.basicData.name}</Title>
                     <Title level={4} style={{textAlign:'center'}}>{this.props.basicData.description}</Title>
@@ -139,7 +205,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return{
-        setReRenderTimeline: (index) => {dispatch(setReRenderTimelineAction(index))}
+        setReRenderTimeline: (index) => {dispatch(setReRenderTimelineAction(index))},
+        getStoryEvents: (events) => {dispatch(getStoryEventsAction(events))},
     }
 
 };

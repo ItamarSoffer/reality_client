@@ -17,6 +17,7 @@ class StoryHome extends  React.Component {
     }
 
     componentDidMount() {
+<<<<<<< HEAD
         const apiGetTimelines = backendAPI.concat(`/get_timelines_by_user`);
         axios.post(apiGetTimelines,
             {
@@ -28,6 +29,24 @@ class StoryHome extends  React.Component {
                     timelines: data,
                     isLoaded: true
                 }) }
+=======
+        this.fetchData();
+    }
+
+    fetchData() {
+        const queryParams = getQueryStringParams(this.props.history.location.search);
+        const searchString = queryParams.search_string? queryParams.search_string: null;
+        apiGetTimelinesByUser(this.props.jwtToken, searchString)
+            .then((response) => {
+                        if (response.status === 201) {
+                        message.warning(response.data)
+                    } else if (response.status === 200) {
+                        this.setState({
+                            timelines:response.data.results,
+                            isLoaded: true});
+                    }
+                }
+>>>>>>> 8a372ee... add, edit and del event dont fetch all
             )
 
     }

@@ -11,16 +11,25 @@ import { Typography } from 'antd';
 =======
 import {connect} from "react-redux";
 <<<<<<< HEAD
+<<<<<<< HEAD
 import {hideNewEventModalAction} from "../../Actions/siteActions";
 >>>>>>> 79aa366... add permissions control
 =======
 import {hideNewEventModalAction, setReRenderTimelineAction} from "../../Actions/siteActions";
 >>>>>>> da2bd71... add auto update after change (add or delete event)
+=======
+import {setReRenderTimelineAction} from "../../Actions/siteActions";
+import {controlNewEventModalAction} from "../../Actions/modalsActions";
+import TagsSelectByName from "../Tags/TagsSelectByName";
+import {apiNewEvent} from "../../Actions/apiActions";
+import {updateEventAction} from "../../Actions/eventsActions";
+>>>>>>> 8a372ee... add, edit and del event dont fetch all
 
 const { TextArea } = Input;
 
 
 class CreateNewEvent extends React.Component {
+<<<<<<< HEAD
   state = { visible: false };
 
   showModal = () => {
@@ -151,6 +160,143 @@ class CreateNewEvent extends React.Component {
                     rules={[{
                         required: true,
                         message: 'Event Title' }]}
+=======
+    constructor(props){
+        super(props);
+        this.state = {
+            color: null,
+            icon: null,
+            tags: []
+        }
+    }
+    formRef = React.createRef();
+
+    onReset = () => {
+        // console.log("RESET");
+        this.formRef.current.resetFields();
+        this.setState({
+            color: null,
+            icon: null,
+            tags: []
+        })
+    };
+
+
+    showModal = () => {
+        this.setState({
+            visible: true,
+        });
+    };
+
+    closeModal = () => {
+        this.props.hideNewEventModal();
+        this.setState({
+            visible: false,
+        });
+
+    };
+
+    handleOk = () => {
+        // console.log(e);
+        this.props.hideNewEventModal();
+        this.setState({
+            visible: false,
+        });
+    };
+
+    handleCancel = () => {
+        // console.log(e);
+        this.props.hideNewEventModal();
+        this.setState({
+            visible: false,
+        });
+    };
+
+    onFinish = values => {
+        // const api_add_event = backendAPI.concat(`/timeline/${this.props.url}/add`);
+        // console.log("SENDS TO", api_add_event);
+        const hour = typeof values.hour !== "undefined" ? values.hour.format('HH:mm'): "";
+        apiNewEvent(
+            this.props.jwtToken,
+            this.props.url,
+            values.title,
+            values.text,
+            values.date.format('YYYY-MM-DD'),
+            hour,
+            this.state.color,
+            this.state.icon,
+            values.link,
+            this.state.tags
+        )
+            .then((response) => {
+                // console.log("resp", response);
+                if (response.status === 201){
+                    message.warning(response.data)
+                }
+                else if (response.status === 200){
+                    message.success(response.data.message, 1.5)
+
+                        .then(() => {
+                            // this.props.setReRenderTimeline(this.props.timelineRenderCount + 1);
+                            this.props.updateEventAction(response.data.eventData)
+
+                            // form.resetFields();
+                        })
+                }
+            }).then(() => {
+            this.onReset();
+            this.closeModal()
+        });
+    };
+
+    onFinishFailed = errorInfo => {
+        console.log('Failed:', errorInfo);
+        message.error('Missing fields!')
+    };
+
+    onColorChange = (newColor) => {
+        this.setState({
+            color: newColor
+        })
+    };
+
+    onIconChange = (newIcon) => {
+        this.setState({
+            icon: newIcon
+        })
+    };
+
+    onTagsChange = (newTags) => {
+        this.setState({
+            tags: newTags
+        })
+    };
+
+
+    render() {
+        return (
+
+            <ConfigProvider direction={"rtl"}>
+                <Modal
+                    title="אירוע חדש"
+                    visible={this.props.showNewEventModal}
+                    onOk={this.handleOk}
+                    onCancel={this.handleCancel}
+                    okText="צור אירוע"
+                    cancelText="בטל"
+                    footer={[<Button type="default"  key="close" onClick={this.handleCancel}>
+                        Cancel
+                    </Button>,
+                        <Button type="primary" form="add_event_form" key="submit" htmlType="submit">
+                            Add Event
+                        </Button>
+
+
+                    ]}
+                    style={{
+                        borderRadius: '16px',
+                    }}
+>>>>>>> 8a372ee... add, edit and del event dont fetch all
                 >
                     <Input placeholder={"כותרת"} />
                 </Form.Item>
@@ -229,8 +375,14 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return{
+<<<<<<< HEAD
         hideNewEventModal: () => {dispatch(hideNewEventModalAction())},
         setReRenderTimeline: (index) => {dispatch(setReRenderTimelineAction(index))}
+=======
+        hideNewEventModal: () => {dispatch(controlNewEventModalAction(false))},
+        setReRenderTimeline: (index) => {dispatch(setReRenderTimelineAction(index))},
+        updateEventAction: (event) => {dispatch(updateEventAction(event))},
+>>>>>>> 8a372ee... add, edit and del event dont fetch all
     }
 
 };
