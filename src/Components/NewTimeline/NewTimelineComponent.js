@@ -9,17 +9,18 @@ import MenuIcons from "../Icons/MenuIcons";
 
 const { TextArea } = Input;
 
-const layout = {
-  labelCol: { span: 8 },
-  wrapperCol: { span: 16 },
-};
-const tailLayout = {
-  wrapperCol: { offset: 8, span: 16 },
-};
+// const layout = {
+//   labelCol: { span: 8 },
+//   wrapperCol: { span: 16 },
+// };
+// const tailLayout = {
+//   wrapperCol: { offset: 8, span: 16 },
+// };
 
 
 class CreateNewTimeline extends React.Component {
 
+<<<<<<< HEAD
     constructor(props){
         super(props);
         this.state = {
@@ -28,6 +29,8 @@ class CreateNewTimeline extends React.Component {
         }
     }
 
+=======
+>>>>>>> da2bd71... add auto update after change (add or delete event)
     onFinish = values => {
 
         if (values.timeline_url.length <= 3){
@@ -125,8 +128,17 @@ class CreateNewTimeline extends React.Component {
                     <TextArea rows={3} placeholder={"Description"} prefix={MenuIcons["form"]}/>
                 </Form.Item>
 
+<<<<<<< HEAD
                  <Form.Item {...tailLayout}>
                      <Button type="primary" htmlType="submit" >
+=======
+                 <Form.Item >
+                     <Button type="primary" htmlType="submit"
+                             style={{width:550,
+                                 background:'#722ed1',
+                                 borderColor:'#b37feb',
+                             color:'#000'}} >
+>>>>>>> da2bd71... add auto update after change (add or delete event)
                          Create
                      </Button>
 

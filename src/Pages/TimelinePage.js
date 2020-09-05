@@ -109,6 +109,7 @@ class RealityPage extends  React.Component {
 
                                 <Timeline url={this.props.match.params.timeline_url}
                                 basicData={this.state.timelineBasicData}
+                                          timelineRenderCount={this.props.timelineRenderCount}
                                 />
                             </div>
                         }
@@ -124,8 +125,14 @@ class RealityPage extends  React.Component {
 
 const mapStateToProps = state => {
   return {
+<<<<<<< HEAD
     loggedUser: state.usersReducer.loggedUser,
       DarkMode: state.sitesReducer.DarkMode
+=======
+      loggedUser: state.usersReducer.loggedUser,
+      DarkMode: state.sitesReducer.DarkMode,
+      timelineRenderCount : state.sitesReducer.timelineRenderCount
+>>>>>>> da2bd71... add auto update after change (add or delete event)
 
   }
 };

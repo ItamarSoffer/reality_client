@@ -10,8 +10,12 @@ import {backendAPI} from "../../Structure/api";
 import { Typography } from 'antd';
 =======
 import {connect} from "react-redux";
+<<<<<<< HEAD
 import {hideNewEventModalAction} from "../../Actions/siteActions";
 >>>>>>> 79aa366... add permissions control
+=======
+import {hideNewEventModalAction, setReRenderTimelineAction} from "../../Actions/siteActions";
+>>>>>>> da2bd71... add auto update after change (add or delete event)
 
 const { TextArea } = Input;
 
@@ -85,9 +89,7 @@ class CreateNewEvent extends React.Component {
   message.success(response.data, 1.5)
 
       .then(() => {
-
-
-      return message.loading('redirecting', 1);
+          this.props.setReRenderTimeline(this.props.timelineRenderCount +    1);
   })
   }
   }).then(() => this.closeModal());
@@ -219,14 +221,16 @@ class CreateNewEvent extends React.Component {
 =======
 const mapStateToProps = state => {
   return {
-      showNewEventModal: state.sitesReducer.showNewEventModal
+      showNewEventModal: state.sitesReducer.showNewEventModal,
+      timelineRenderCount: state.sitesReducer.timelineRenderCount,
 
   }
 };
 
 const mapDispatchToProps = dispatch => {
     return{
-        hideNewEventModal: () => {dispatch(hideNewEventModalAction())}
+        hideNewEventModal: () => {dispatch(hideNewEventModalAction())},
+        setReRenderTimeline: (index) => {dispatch(setReRenderTimelineAction(index))}
     }
 
 };

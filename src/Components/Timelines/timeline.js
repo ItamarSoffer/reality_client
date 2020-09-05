@@ -6,6 +6,12 @@ import 'react-vertical-timeline-component/style.min.css';
 import axios from 'axios';
 import DataEvent from '../DataEvent/dataEventComponent';
 import LoadingPage from '../LoadingComponent/LoadingPage';
+<<<<<<< HEAD
+=======
+import {backendAPI} from "../../Structure/api";
+import {setReRenderTimelineAction} from "../../Actions/siteActions";
+import {connect} from "react-redux";
+>>>>>>> da2bd71... add auto update after change (add or delete event)
 const { Title } = Typography;
 
 const base_url = "http://itsoffer:5005/api/timeline/";
@@ -20,7 +26,7 @@ class Timeline extends React.Component {
         }
     }
 
-    componentDidMount() {
+    fetchData() {
         const TimelineUrl = this.props.url;
 <<<<<<< HEAD
 
@@ -50,10 +56,25 @@ class Timeline extends React.Component {
 =======
                     isLoaded: true})});
                 // .then(() => {console.log("StateEvents:", this.state.timeline_events)});
+<<<<<<< HEAD
 >>>>>>> 31ed3bc... add edit mode option to timeline
+=======
+    }
+>>>>>>> da2bd71... add auto update after change (add or delete event)
 
+    componentDidMount() {
+        this.fetchData();
+    }
+
+    componentWillUpdate(nextProps, nextState, nextContext) {
+        if (nextProps.timelineRenderCount === 1) {
+            console.log("IN HERE, will update");
+            this.fetchData();
+            this.props.setReRenderTimeline(0);
+        }
 
     }
+
 
     render() {
         if (!this.state.isLoaded) {
@@ -95,5 +116,16 @@ class Timeline extends React.Component {
         }
     }
 }
+const mapStateToProps = state => {
+  return {
+  }
+};
 
-export default Timeline
+const mapDispatchToProps = dispatch => {
+    return{
+        setReRenderTimeline: (index) => {dispatch(setReRenderTimelineAction(index))}
+    }
+
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Timeline);

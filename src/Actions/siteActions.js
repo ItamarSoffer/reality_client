@@ -49,4 +49,15 @@ export const hidePermissionsModalAction = () => {
         payload: false
     }
 };
+<<<<<<< HEAD
 >>>>>>> 79aa366... add permissions control
+=======
+
+export const setReRenderTimelineAction = (index) => {
+    console.log("Changed rerender index to", index);
+    return {
+        type: "TIMELINE_RENDER_COUNT",
+        payload: index
+    }
+};
+>>>>>>> da2bd71... add auto update after change (add or delete event)
