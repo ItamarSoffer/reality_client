@@ -123,16 +123,6 @@ class CreateNewEvent extends React.Component {
                 onFinishFailed={this.onFinishFailed}
 
 >
-                {/*<Form.Item*/}
-                {/*    className="title-form"*/}
-                {/*    // label="כותרת"*/}
-                {/*    name="url"*/}
-                {/*    rules={[{*/}
-                {/*        required: true,*/}
-                {/*        message: 'Event Title' }]}*/}
-                {/*>*/}
-                {/*    <Input placeholder={"url"} />*/}
-                {/*</Form.Item>*/}
                 <Form.Item
                     className="title-form"
                     // label="כותרת"

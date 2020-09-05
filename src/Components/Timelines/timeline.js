@@ -22,6 +22,7 @@ class Timeline extends React.Component {
 
     componentDidMount() {
         const TimelineUrl = this.props.url;
+<<<<<<< HEAD
 
         const apiGetBasicData = base_url.concat(`${TimelineUrl}/basic_data`);
         axios.get(apiGetBasicData)
@@ -34,13 +35,22 @@ class Timeline extends React.Component {
 
         const apiGetEvents = base_url.concat(TimelineUrl);
         console.log(apiGetEvents);
+=======
+        const apiGetEvents = backendAPI.concat(`/timeline/${TimelineUrl}`);
+        // console.log(apiGetEvents);
+>>>>>>> 31ed3bc... add edit mode option to timeline
         axios.get(apiGetEvents)
             .then(res => res.data.events)
             .then((evs) => {
                 this.setState({
                     timeline_events:evs,
+<<<<<<< HEAD
                     isLoaded: true})})
                 .then(() => {console.log("StateEvents:", this.state.timeline_events)});
+=======
+                    isLoaded: true})});
+                // .then(() => {console.log("StateEvents:", this.state.timeline_events)});
+>>>>>>> 31ed3bc... add edit mode option to timeline
 
 
     }
@@ -69,15 +79,14 @@ class Timeline extends React.Component {
                     //style={{backgroundColor: '#ccc'}}
                 >
 
-                    <Title level={1} style={{textAlign:'center'}}>{this.state.basic_data.name}</Title>
-                    <Title level={4} style={{textAlign:'center'}}>{this.state.basic_data.description}</Title>
-
+                    <Title level={1} style={{textAlign:'center'}}>{this.props.basicData.name}</Title>
+                    <Title level={4} style={{textAlign:'center'}}>{this.props.basicData.description}</Title>
                     <VerticalTimeline
-                        id={this.state.basic_data.id}
+                        id={this.props.basicData.id}
                         style={{background: '#f00'}}>
                         {this.state.timeline_events.map(
                             function(evt){
-                                return <DataEvent data={evt}/>
+                                return <DataEvent data={evt}  />
                             })}
                     </VerticalTimeline>
                 </div>
