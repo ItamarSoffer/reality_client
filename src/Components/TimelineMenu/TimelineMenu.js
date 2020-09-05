@@ -13,19 +13,32 @@ import PermissionsModal from "../permissionsModal/permissionsModal";
 import {enableEditAction, disableEditAction} from "../../Actions/siteActions";
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import {showNewEventModalAction, showPermissionsModalAction} from "../../Actions/siteActions";
 >>>>>>> 79aa366... add permissions control
 import {connect} from "react-redux";
 =======
 import {showNewEventModalAction, showPermissionsModalAction, showDeleteTimelineModalAction} from "../../Actions/siteActions";
+=======
+import {
+    showNewEventModalAction,
+    showPermissionsModalAction,
+    showDeleteTimelineModalAction,
+showUploadXlsxModalAction} from "../../Actions/modalsActions";
+>>>>>>> 452b362... add option to upload xlsx file
 import DeleteTimelineModal from '../DeleteTimeline/DeleteTimelineModal';
 <<<<<<< HEAD
 >>>>>>> 10be633... delete non necessary lines
 =======
 import StoryRangePicker from './Search/StoryRangePicker';
+<<<<<<< HEAD
 import StoryInSearch from './Search/StorySearch'
 >>>>>>> df262e5... add string and date filters
+=======
+import StoryInSearch from './Search/StorySearch';
+import UploadXlsxModal from './UploadXlsxModal/UploadXlsxModal';
+>>>>>>> 452b362... add option to upload xlsx file
 
 const { SubMenu } = Menu;
 
@@ -131,6 +144,15 @@ class TimelineMenu extends React.Component {
               </SubMenu>
           }
 
+<<<<<<< HEAD
+=======
+         <SubMenu key="m_more" icon={MenuIcons['setting']} title="More">
+             {(["owner", "creator"].indexOf(this.props.role) === -1)? null:
+          <Menu.Item key={"m_permissions"} icon={MenuIcons["user"]}
+                             onClick={() => this.props.showPermissionsModal()}>
+                Permissions
+         </Menu.Item>}
+>>>>>>> 452b362... add option to upload xlsx file
 
          <SubMenu key="export" icon={MenuIcons['download']} title="Export">
               <Menu.Item key="export_excel" icon={MenuIcons['excel']} onClick={() => DownloadExcel(this.props.url)}>
@@ -138,9 +160,29 @@ class TimelineMenu extends React.Component {
             </Menu.Item>
 
             </SubMenu>
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 
+=======
+
+          {(["write", "owner", "creator"].indexOf(this.props.role) === -1)? null:
+          <Menu.Item key={"m_upload"} icon={MenuIcons["upload"]}
+                             onClick={() => this.props.showUploadXlsxModal()}>
+                Import
+         </Menu.Item>}
+         </SubMenu>
+
+      </Menu>
+            <CreateNewEvent url={this.props.url} />
+            <PermissionsModal url={this.props.url}/>
+            <DeleteTimelineModal
+                url={this.props.url}
+                timelineId={this.props.timelineId}/>
+            <UploadXlsxModal
+                url={this.props.url}
+                timelineId={this.props.timelineId}/>
+>>>>>>> 452b362... add option to upload xlsx file
 
       </Menu>
 =======
@@ -174,7 +216,12 @@ const mapDispatchToProps = dispatch => {
 >>>>>>> 79aa366... add permissions control
 =======
         showDeleteTimelineModal: () => {dispatch(showDeleteTimelineModalAction())},
+<<<<<<< HEAD
 >>>>>>> 10be633... delete non necessary lines
+=======
+        showUploadXlsxModal: () => {dispatch(showUploadXlsxModalAction())},
+
+>>>>>>> 452b362... add option to upload xlsx file
     }
 };
 
