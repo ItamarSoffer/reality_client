@@ -116,17 +116,21 @@ class SideMenu extends React.Component {
                                 refreshByJwt(this.props.jwtToken);
                             }
                             }>
+<<<<<<< HEAD
 >>>>>>> e914983... completed JWT authentication
                 All cards
+=======
+                All Stories
+>>>>>>> df262e5... add string and date filters
             </Menu.Item>
 
             <Menu.Item
                 key="new"
                 icon={MenuIcons['nodeindex']}
                 onClick={() => {this.props.history.push({
-            pathname: `/new_timeline/`,});
+            pathname: `/new_story/`,});
       }}
-            >New Timeline
+            >New Story
 
             </Menu.Item>
 <<<<<<< HEAD

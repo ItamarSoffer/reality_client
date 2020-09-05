@@ -30,6 +30,7 @@ class Timeline extends React.Component {
         const TimelineUrl = this.props.url;
 <<<<<<< HEAD
 
+<<<<<<< HEAD
         const apiGetBasicData = base_url.concat(`${TimelineUrl}/basic_data`);
         axios.get(apiGetBasicData)
             .then(res => res.data[0])
@@ -37,6 +38,11 @@ class Timeline extends React.Component {
                 this.setState({
                     basic_data:data})})
                 .then(() => {console.log("basic data", this.state.basic_data)});
+=======
+        const minTime = queryParams.min_time? queryParams.min_time: null;
+        const maxTime = queryParams.max_time? queryParams.max_time: null;
+        const searchString = queryParams.search_string? queryParams.search_string: null;
+>>>>>>> df262e5... add string and date filters
 
 
         const apiGetEvents = base_url.concat(TimelineUrl);
@@ -44,8 +50,18 @@ class Timeline extends React.Component {
 =======
         const apiGetEvents = backendAPI.concat(`/timeline/${TimelineUrl}`);
         // console.log(apiGetEvents);
+<<<<<<< HEAD
 >>>>>>> 31ed3bc... add edit mode option to timeline
         axios.get(apiGetEvents)
+=======
+        axios.post(apiGetEvents,
+            {
+                jwt_token: this.props.jwtToken,
+                min_time: minTime,
+                max_time: maxTime,
+                search_string: searchString
+            })
+>>>>>>> df262e5... add string and date filters
             .then(res => res.data.events)
             .then((evs) => {
                 this.setState({

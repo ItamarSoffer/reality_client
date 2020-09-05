@@ -44,7 +44,7 @@ class AppRouter extends React.Component{
 
                                   <Route path="/new_event" component={CreateNewEvent}/>
 
-                                  <Route path="/new_timeline" component={NewTimelinePage}/>
+                                  <Route path="/new_story" component={NewTimelinePage}/>
 
                                   {/*<Route path="/login" component={LoginPage}/>*/}
                                   <Route path="/login" component={LoginPage}/>

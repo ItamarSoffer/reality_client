@@ -1,6 +1,11 @@
 import React from 'react';
+<<<<<<< HEAD
 
 import { Menu } from 'antd';
+=======
+import {connect} from "react-redux";
+import {Menu, message} from 'antd';
+>>>>>>> df262e5... add string and date filters
 import MenuIcons from '../Icons/MenuIcons';
 import DownloadExcel from '../Export/ToExcel';
 import CreateNewEvent from "../NewEvent/NewEventComponent";
@@ -14,9 +19,13 @@ import {showNewEventModalAction, showPermissionsModalAction} from "../../Actions
 import {connect} from "react-redux";
 =======
 import {showNewEventModalAction, showPermissionsModalAction, showDeleteTimelineModalAction} from "../../Actions/siteActions";
-import {backendAPI} from "../../Structure/api";
 import DeleteTimelineModal from '../DeleteTimeline/DeleteTimelineModal';
+<<<<<<< HEAD
 >>>>>>> 10be633... delete non necessary lines
+=======
+import StoryRangePicker from './Search/StoryRangePicker';
+import StoryInSearch from './Search/StorySearch'
+>>>>>>> df262e5... add string and date filters
 
 const { SubMenu } = Menu;
 
@@ -98,8 +107,18 @@ class TimelineMenu extends React.Component {
 
 >>>>>>> 79aa366... add permissions control
         <SubMenu icon={MenuIcons["setting"]} title="Filter">
+<<<<<<< HEAD
             <Menu.Item disabled key="filter_by_time" >By Date</Menu.Item>
             <Menu.Item disabled key="filter_by_word">By Word</Menu.Item>
+=======
+            <Menu.Item disabled key="filter_by_time" >
+
+            <StoryRangePicker />
+            </Menu.Item>
+            <Menu.Item disabled key="filter_by_word">
+                <StoryInSearch/>
+            </Menu.Item>
+>>>>>>> df262e5... add string and date filters
         </SubMenu>
           {(["write", "owner"].indexOf(this.props.role) === -1) ? null :
               <SubMenu key="m_edit" icon={MenuIcons['edit']} title="Edit">
