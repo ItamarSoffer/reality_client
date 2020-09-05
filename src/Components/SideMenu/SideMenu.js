@@ -5,6 +5,10 @@ import {
 } from "react-router-dom";
 
 import MenuIcons from '../Icons/MenuIcons';
+<<<<<<< HEAD
+=======
+import {refreshByJwt} from "../../Actions/jwtActions";
+>>>>>>> e914983... completed JWT authentication
 
 const { Sider } = Layout;
 
@@ -38,6 +42,10 @@ class SideMenu extends React.Component {
       console.log("logged out")
   };
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> e914983... completed JWT authentication
   render() {
     return (
 
@@ -79,16 +87,35 @@ class SideMenu extends React.Component {
             </SubMenu>
 
             <Menu.Item key="Home" icon={MenuIcons['home']}
+<<<<<<< HEAD
                             onClick={() => {this.props.history.push({
             pathname: `/`,});
       }}>
+=======
+                            onClick={() => {
+                                this.props.history.push(
+                                    {pathname: `/`,}
+                                    );
+                                refreshByJwt(this.props.jwtToken);
+                            }
+                            }>
+>>>>>>> e914983... completed JWT authentication
               Home
             </Menu.Item>
 
             <Menu.Item key="s4" icon={MenuIcons['appstore']}
+<<<<<<< HEAD
                             onClick={() => {this.props.history.push({
             pathname: `/all/`,});
       }}>
+=======
+                            onClick={() => {
+                                this.props.history.push(
+                                    {pathname: `/all/`,});
+                                refreshByJwt(this.props.jwtToken);
+                            }
+                            }>
+>>>>>>> e914983... completed JWT authentication
                 All cards
             </Menu.Item>
 

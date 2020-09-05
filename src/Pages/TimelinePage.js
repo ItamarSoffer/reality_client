@@ -11,8 +11,12 @@ import axios from 'axios';
 import LoadingPage from "../Components/LoadingComponent/LoadingPage";
 import {NoPermissions} from "../Components/NoPermissions/noPermissions";
 <<<<<<< HEAD
+<<<<<<< HEAD
 import {enableEditAction, disableEditAction} from "../Actions/siteActions";
 >>>>>>> 31ed3bc... add edit mode option to timeline
+=======
+import {refreshByJwt} from "../Actions/jwtActions";
+>>>>>>> e914983... completed JWT authentication
 
 =======
 >>>>>>> 79aa366... add permissions control
@@ -42,11 +46,19 @@ class RealityPage extends  React.Component {
 
     }
     componentWillMount() {
+        refreshByJwt(this.props.jwtToken);
         const permittedRoles = ['read', 'write', 'owner'];
         const url = this.props.match.params.timeline_url;
+<<<<<<< HEAD
         const username = this.props.loggedUser;
         const permissionsApi = backendAPI.concat(`/timeline/${url}/check_permissions?username=${username}`);
          axios.get(permissionsApi)
+=======
+        const permissionsApi = backendAPI.concat(`/timeline/${url}/check_permissions`);
+         axios.post(permissionsApi, {
+             jwt_token: this.props.jwtToken,
+         })
+>>>>>>> e914983... completed JWT authentication
         .then((response) => {
 
             if (permittedRoles.indexOf(response.data.role) !== -1) {
@@ -126,10 +138,13 @@ class RealityPage extends  React.Component {
 const mapStateToProps = state => {
   return {
 <<<<<<< HEAD
+<<<<<<< HEAD
     loggedUser: state.usersReducer.loggedUser,
       DarkMode: state.sitesReducer.DarkMode
 =======
       loggedUser: state.usersReducer.loggedUser,
+=======
+>>>>>>> e914983... completed JWT authentication
       DarkMode: state.sitesReducer.DarkMode,
       timelineRenderCount : state.sitesReducer.timelineRenderCount
 >>>>>>> da2bd71... add auto update after change (add or delete event)

@@ -37,9 +37,16 @@ class CreateNewTimeline extends React.Component {
             message.error("URL must be al least 3 chars!")
         }
         else {
+<<<<<<< HEAD
     console.log('Received values from form: ', values);
      axios.post(api_create_timeline, {
              create_user: this.props.loggedUser,
+=======
+            const ApiCreateTimeline = backendAPI.concat("/create_timeline");
+     axios.post(ApiCreateTimeline, {
+            jwt_token: this.props.jwtToken,
+             // create_user: this.props.loggedUser,
+>>>>>>> e914983... completed JWT authentication
              description: values.description,
              name: values.title,
              url: values.timeline_url

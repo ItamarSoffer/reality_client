@@ -25,7 +25,7 @@ class PermissionsModal extends React.Component{
         axois.post(apiSetPermissions, {
             "username": values.username,
             "role": this.state.role,
-            "adding_user": this.props.loggedUser
+            // "adding_user": this.props.loggedUser
         }).then((response) => {
   // console.log("resp", response);
   if (response.status === 201){

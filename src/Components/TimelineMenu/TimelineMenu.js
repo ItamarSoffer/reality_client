@@ -39,13 +39,17 @@ class TimelineMenu extends React.Component {
           theme={menuTheme}
       >
 <<<<<<< HEAD
+<<<<<<< HEAD
           <Menu.Item key={"m_add"} >
                      <CreateNewEvent url={this.props.url} loggedUser={this.props.loggedUser} />
              </Menu.Item>
 =======
+=======
+          {(["write", "owner"].indexOf(this.props.role) === -1) ? null :
+>>>>>>> e914983... completed JWT authentication
           <Menu.Item key={"m_add"} icon={MenuIcons["plus"]} onClick={() => this.props.showNewEventModal()}>
                     Add Event
-         </Menu.Item>
+         </Menu.Item>}
           {(this.props.role !== 'owner')? null:
           <Menu.Item key={"m_permissions"} icon={MenuIcons["user"]}
                              onClick={() => this.props.showPermissionsModal()}>

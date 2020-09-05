@@ -19,7 +19,7 @@ class EventDropdown extends React.Component{
 <<<<<<< HEAD
 =======
     handleDelete = () => {
-        const delUrl = backendAPI.concat(`/timeline/del_event?username=${this.props.loggedUser}&event_id=${this.props.eventId}`);
+        const delUrl = backendAPI.concat(`/timeline/del_event?event_id=${this.props.eventId}`);
         console.log(delUrl);
         axois.get(delUrl)
             .then((response) => {
