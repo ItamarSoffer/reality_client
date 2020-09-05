@@ -121,7 +121,7 @@ class SideMenu extends React.Component {
                                                 value={`fav_${favItem.story_id}`}
                                                 icon={MenuIcons['star_filled']}
                                                 onClick={() => {
-                                                    window.open(`${localAddress}/timeline/${favItem.url}`)
+                                                    window.open(`${localAddress}/story/${favItem.url}`)
                                                 }}
                                             >
 

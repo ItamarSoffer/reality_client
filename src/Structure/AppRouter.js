@@ -9,6 +9,7 @@ import StoryPage from "../Pages/TimelinePage";
 import CardsPage from "../Pages/CardsPage";
 import NewTimelinePage from "../Pages/NewTimelinePage";
 import HomePage from "../Pages/HomePage";
+import {NotExists} from "../Components/NotExists/notExists";
 
 
 class AppRouter extends React.Component{
@@ -28,7 +29,7 @@ class AppRouter extends React.Component{
                                 </div> :
                                 <div>
 
-                                    <Route path="/timeline/:timeline_url" component={StoryPage}/>
+                                    <Route path="/story/:timeline_url" component={StoryPage}/>
 
                                     <Route path="/all" component={CardsPage}/>
 

@@ -36,7 +36,7 @@ const cardStyle = {
 
 
 class StoryCard extends React.Component{
-    timeline_url = "/timeline/".concat(this.props.cardData.url);
+    timeline_url = "/story/".concat(this.props.cardData.url);
 
     handleAddFavorite = () => {
         apiAddFavorites(this.props.jwtToken, this.props.cardData.url)
