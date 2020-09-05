@@ -12,8 +12,20 @@ const usersReducer = (state = initState, action) => {
         case "LOGIN":
             window.localStorage.setItem('isLogged',action.payload);
             window.localStorage.setItem('loggedUser',action.loggedUser);
+<<<<<<< HEAD
             state = {...state, isLogged: action.payload, loggedUser: action.loggedUser};
         break;
+=======
+            window.localStorage.setItem('jwtToken',action.jwtToken);
+            state = {...state,
+                loggedUser: action.loggedUser,
+                jwtToken: action.jwtToken,
+            };
+            // logout- reset favorites
+            if (action.jwtToken === ''){
+            }
+            break;
+>>>>>>> 5b098b5... completely added favorites
         default:
         break;
     }

@@ -8,11 +8,19 @@ import MenuIcons from '../Icons/MenuIcons';
 <<<<<<< HEAD
 =======
 import {refreshByJwt} from "../../Actions/jwtActions";
+<<<<<<< HEAD
 >>>>>>> e914983... completed JWT authentication
+=======
+import {controlAboutsModalAction} from "../../Actions/modalsActions";
+import AboutModal from "../AboutModal/AboutModal";
+import {setReRenderFavorites, setUserFavorites, clearFavorites} from "../../Actions/favoritesActions";
+import {apiGetFavorites,} from "../../Actions/apiActions";
+>>>>>>> 5b098b5... completely added favorites
 
 const { Sider } = Layout;
 
 class SideMenu extends React.Component {
+<<<<<<< HEAD
 
   state = {
     collapsed: true,
@@ -153,6 +161,71 @@ class SideMenu extends React.Component {
 >>>>>>> 8e9378c... add non exist page
 
             <Menu.Item disabled={true} key="my_timelines" icon={MenuIcons['user']}
+=======
+    constructor(props){
+        super(props);
+        const darkCheck = (this.props.darkMode === "true") || (this.props.darkMode === true)  ;
+        this.state = {
+            collapsed: true,
+            theme: darkCheck ? 'dark' : 'light',
+            menuBackground: darkCheck ? 'rgb(0,21,41)' : 'rgb(255,255,255)'
+        };
+    }
+    fetchFavorites(){
+        // console.log("FETCHING");
+        apiGetFavorites(this.props.jwtToken)
+            .then((response) => {
+                    if (response.status === 201) {
+                        message.warning(response.data)
+                    } else if (response.status === 200) {
+                        this.props.setFavorites(response.data);
+                    }
+                }
+            )
+    }
+
+    componentWillMount() {
+        if (this.props.favorites === '') {
+            this.fetchFavorites();
+        }
+    }
+
+    componentWillUpdate(nextProps, nextState, nextContext) {
+        if (nextProps.favoritesRerender === true){
+            this.fetchFavorites();
+            this.props.afterRerenderFavorites();
+        }
+    }
+
+
+    onCollapse = collapsed => {
+        this.setState({ collapsed });
+    };
+
+    changeTheme = value => {
+        this.props.handleChangeTheme(!value);
+        this.setState({
+            theme: value ? 'dark' : 'light',
+            menuBackground: value ? 'rgb(0,21,41)' : 'rgb(255,255,255)'
+        });
+    };
+
+    handleLogout = () => {
+        this.props.handlerLogout();
+        this.props.clearFavorites();
+
+    };
+
+
+    render() {
+        const localAddress = window.location.href.split('/')[0] +'//'+ window.location.href.split('/')[2];
+        return (
+            <Sider selectable={false}
+                   collapsible
+                   collapsed={this.state.collapsed}
+                   onCollapse={this.onCollapse}
+                   style={{background: this.state.menuBackground,}}
+>>>>>>> 5b098b5... completely added favorites
             >
               My Timelines- Coming!
             </Menu.Item>
@@ -193,5 +266,26 @@ class SideMenu extends React.Component {
     );
   }
 }
+<<<<<<< HEAD
+=======
+const mapStateToProps = state => {
+    return {
+        favoritesRerender: state.favoritesReducer.favoritesRerender
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return{
+        showAboutModalAction: () => {dispatch(controlAboutsModalAction(true))},
+        setFavorites: (jwtToken) => {dispatch(setUserFavorites(jwtToken))},
+        afterRerenderFavorites: () => {dispatch(setReRenderFavorites(false))},
+        clearFavorites: () => {dispatch(clearFavorites())},
+
+    }
+
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SideMenu));
+>>>>>>> 5b098b5... completely added favorites
 
 export default withRouter(SideMenu);

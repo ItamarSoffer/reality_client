@@ -1,6 +1,12 @@
 import React from 'react';
+<<<<<<< HEAD:src/Components/RealityCard/CardsGrid.js
 import { Col, Row } from 'antd';
 import RealityCard from './RealityCard';
+=======
+import { List } from 'antd';
+import StoryCard from './StoryCard';
+import {connect} from "react-redux";
+>>>>>>> 5b098b5... completely added favorites:src/Components/StoryCard/CardsGrid.js
 
 
 /*
@@ -10,7 +16,6 @@ class cardsGrid extends React.Component{
 
 
     render(){
-
         return(
             <div>
                 <Row gutter={[24, 24]}>
@@ -27,5 +32,17 @@ class cardsGrid extends React.Component{
     }
 
 }
+const mapStateToProps = state => {
+    return {
+    }
+};
 
-export default cardsGrid
+const mapDispatchToProps = dispatch => {
+    return {
+
+
+    }
+
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(cardsGrid);
