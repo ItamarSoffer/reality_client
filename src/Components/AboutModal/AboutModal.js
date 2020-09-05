@@ -6,6 +6,7 @@ import {connect} from "react-redux";
 // import {Divider} from "antd/es";
 import {setReRenderTimelineAction} from "../../Actions/siteActions";
 import {AboutTableIcons} from "../Icons/Icons";
+import FeaturesCollapse from "./FeaturesCollapse";
 
 const {Title, Text} = Typography;
 const { TabPane } = Tabs;
@@ -44,6 +45,11 @@ class AboutModal extends React.Component{
                 width={500}
             >
                 <Tabs tabPosition={'top'} >
+
+                    <TabPane tab="Features" key="3_features">
+                        <FeaturesCollapse/>
+                    </TabPane>
+
                     <TabPane tab="Story" key="1_about">
                         <Title level={4} >Story</Title>
                         <ConfigProvider direction={'rtl'}>
@@ -79,18 +85,6 @@ class AboutModal extends React.Component{
 
                     </TabPane>
 
-                    <TabPane tab="Features" key="3_features">
-                        - פתיחת ציר
-                        - הוספת אירועים
-                        - תגיות
-                        - הרשאות
-                        - מצבי צפייה
-                        - ייצוא
-                        - ייבוא
-                        - אינטגרציות
-                        - דברים שכתבתי במייל
-
-                    </TabPane>
 
                     <TabPane tab="Contact" key="4_contact">
 
@@ -102,6 +96,12 @@ class AboutModal extends React.Component{
                         - כל דבר אחר
                         מוזמן לפנות:
 
+                    </TabPane>
+
+                    <TabPane tab="Preferences" key="4_preferences">
+                        - default color
+                        - default icon
+                        - extract time or not.
                     </TabPane>
 
                 </Tabs>
