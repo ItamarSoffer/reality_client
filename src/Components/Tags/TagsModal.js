@@ -65,29 +65,13 @@ class TagsModal extends React.Component{
   else if (response.status === 200){
   message.success(response.data, 1);
   this.fetchStoryTags();
-      // this.setState({
-      //     addedPermission: this.state.addedPermission + 1
-      // })
-
   }
   });
-        // console.log(this.props.timelineId);
-        // console.log(this.props.url);
-        // console.log(value);
-        // console.log(this.state.color);
     };
 
     closeModal = () => {
           this.props.hideTagsModalAction();
         this.setState({
-          visible: false,
-        });
-      };
-
-    handleOk = () => {
-        // console.log(e);
-      this.props.hideTagsModalAction();
-      this.setState({
           visible: false,
         });
       };
@@ -118,19 +102,70 @@ class TagsModal extends React.Component{
                 } else if (response.status === 200) {
                     message.success(response.data, 1.5);
                     this.props.setReRenderTimeline(1);
+                    this.fetchStoryTags();
 
                 }
             }
         )
     };
 
+<<<<<<< HEAD
+=======
+     // edit tag functions:
+
+    onTagChangeColorChange = (newColor) => {
+      this.setState({
+          tagChangeColor: newColor
+      });
+        console.log(newColor);
+  };
+
+    onEditTagChange = (selectedTag) => {
+      console.log("Edit Tags", selectedTag);
+          this.setState({
+          targetTag: selectedTag
+      })
+  };
+
+    handleEditTagNameChange = (e) => {
+                console.log("NewTagName", e.target.value);
+          this.setState({
+          tagChangeName: e.target.value
+      })
+      };
+
+    handleUpdateTag = () => {
+          console.log("Handles Update Tag. data", this.state.targetTag, this.state.tagChangeName, this.state.tagChangeColor );
+          // if success:
+            const editTagApi = backendAPI.concat(`/timeline/${this.props.url}/edit_tag`);
+        axios.post(editTagApi, {
+            jwt_token: this.props.jwtToken,
+            tag_id: this.state.targetTag,
+            new_tag_name: this.state.tagChangeName,
+            new_tag_color: this.state.tagChangeColor
+        }).then((response) => {
+              if (response.status === 201){
+                  message.warning(response.data);
+                  this.editTagFormRef.current.resetFields();
+
+              }
+              else if (response.status === 200){
+                  message.success(response.data, 1);
+                  this.editTagFormRef.current.resetFields();
+                  this.fetchStoryTags();
+                  this.props.setReRenderTimeline(1);
+              }
+              });
+        };
+
+>>>>>>> 706aec9... added full tag edit options
 
     render(){
         return(
            <Modal
               title="Story Tags"
               visible={this.props.showTagsModal}
-              onOk={this.handleOk}
+              // onOk={this.handleOk}
               onCancel={this.handleCancel}
               style={{borderRadius: '16px',}}
               footer={null}
