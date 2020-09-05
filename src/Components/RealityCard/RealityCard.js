@@ -39,8 +39,13 @@ const cardStyle = {
         };
 
 
+<<<<<<< HEAD:src/Components/RealityCard/RealityCard.js
 class RealityCard extends React.Component{
      timeline_url = "/timeline/".concat(this.props.cardData.url);
+=======
+class StoryCard extends React.Component{
+    timeline_url = "/story/".concat(this.props.cardData.url);
+>>>>>>> e7d9d64... change routes from /timeline to /story:src/Components/StoryCard/StoryCard.js
 
     handleAddFavorite = () => {
         apiAddFavorites(this.props.jwtToken, this.props.cardData.url)

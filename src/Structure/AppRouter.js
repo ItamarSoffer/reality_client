@@ -12,6 +12,7 @@ import CardsPage from "../Pages/CardsPage";
 import CreateNewEvent from "../Components/NewEvent/NewEventComponent";
 import NewTimelinePage from "../Pages/NewTimelinePage";
 import HomePage from "../Pages/HomePage";
+import {NotExists} from "../Components/NotExists/notExists";
 
 
 class AppRouter extends React.Component{
@@ -28,6 +29,10 @@ class AppRouter extends React.Component{
 
                               <div>
 
+<<<<<<< HEAD
+=======
+                                    <Route path="/story/:timeline_url" component={StoryPage}/>
+>>>>>>> e7d9d64... change routes from /timeline to /story
 
                                   <Route path="/login" component={LoginPage}/>
                                   <Route path="/" component={LoginPage}/>

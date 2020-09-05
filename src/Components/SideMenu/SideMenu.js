@@ -227,6 +227,7 @@ class SideMenu extends React.Component {
                    style={{background: this.state.menuBackground,}}
 >>>>>>> 5b098b5... completely added favorites
             >
+<<<<<<< HEAD
               My Timelines- Coming!
             </Menu.Item>
 <<<<<<< HEAD
@@ -234,6 +235,67 @@ class SideMenu extends React.Component {
               </SubMenu>
                 }
 >>>>>>> 8e9378c... add non exist page
+=======
+                <div className="logo" />
+                <Menu
+                    theme={this.state.theme}
+                    mode="inline"
+                    defaultSelectedKeys={['1']}
+                    selectable={false}
+                >
+
+                    <Menu.Item key="Home" icon={MenuIcons['home']}
+                               onClick={() => {
+                                   this.props.history.push(
+                                       {pathname: `/`,}
+                                   );
+                                   refreshByJwt(this.props.jwtToken);
+                               }
+                               }>
+                        Home
+                    </Menu.Item>
+
+                    <Menu.Item key="s4" icon={MenuIcons['appstore']}
+                               onClick={() => {
+                                   this.props.history.push(
+                                       {pathname: `/all/`,});
+                                   refreshByJwt(this.props.jwtToken);
+                               }
+                               }>
+                        All Stories
+                    </Menu.Item>
+                    {
+                        !this.props.favorites.length > 0 ? null :
+
+                            <SubMenu key="m_favorites" title="Favorites" icon={MenuIcons['star']}>
+                                {this.props.favorites.map(
+                                    function (favItem) {
+                                        return (
+                                            <Menu.Item
+                                                value={`fav_${favItem.story_id}`}
+                                                icon={MenuIcons['star_filled']}
+                                                onClick={() => {
+                                                    window.open(`${localAddress}/story/${favItem.url}`)
+                                                }}
+                                            >
+
+                                                {favItem.name}
+                                            </Menu.Item>)
+                                    }
+                                )}
+                            </SubMenu>
+                    }
+
+
+                    <Menu.Item
+                        key="new"
+                        icon={MenuIcons['nodeindex']}
+                        onClick={() => {this.props.history.push({
+                            pathname: `/new_story/`,});
+                        }}
+                    >New Story
+                    </Menu.Item>
+>>>>>>> e7d9d64... change routes from /timeline to /story
 
 
 
