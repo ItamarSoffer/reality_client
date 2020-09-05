@@ -47,6 +47,7 @@ class SideMenu extends React.Component {
 
 >>>>>>> e914983... completed JWT authentication
   render() {
+      console.log(this.props.history.location);
     return (
 
         <Sider selectable={false}
@@ -126,12 +127,36 @@ class SideMenu extends React.Component {
             pathname: `/new_timeline/`,});
       }}
             >New Timeline
+
             </Menu.Item>
+<<<<<<< HEAD
+=======
+                {!this.props.history.location.pathname.startsWith('/timeline/')? null :
+              <SubMenu key="view" icon={MenuIcons['eye']} title="View Mode">
+
+                  <Menu.Item
+                      key="timeline_mode"
+                      icon={MenuIcons['nodeindex']}
+                      onClick={() => this.handleTimelineMode()}>
+              Timeline
+            </Menu.Item>
+                  <Menu.Item
+                      key="prev_table_mode"
+                      icon={MenuIcons['compress']}
+                      onClick={() => this.handlePreviewTableMode()}>
+              Preview Table
+            </Menu.Item>
+>>>>>>> 8e9378c... add non exist page
 
             <Menu.Item disabled={true} key="my_timelines" icon={MenuIcons['user']}
             >
               My Timelines- Coming!
             </Menu.Item>
+<<<<<<< HEAD
+=======
+              </SubMenu>
+                }
+>>>>>>> 8e9378c... add non exist page
 
 
 

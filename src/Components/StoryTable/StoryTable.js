@@ -91,6 +91,26 @@ class Timeline extends React.Component {
 
             );
         }
+<<<<<<< HEAD
+=======
+        return (
+
+            <Table
+                dataSource={this.props.timeline_events}
+                columns={columns}
+                rowKey={record => record.event_id}
+                expandable={expandableConfig}
+                style={{
+                      // width: '90%',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      // borderRadius: '30px',
+                      // borderColor: '#ddd',
+
+                  }}
+            />
+        );
+>>>>>>> 8e9378c... add non exist page
     }
 }
 const mapStateToProps = state => {

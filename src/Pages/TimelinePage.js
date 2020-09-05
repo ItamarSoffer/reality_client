@@ -16,7 +16,11 @@ import {enableEditAction, disableEditAction} from "../Actions/siteActions";
 >>>>>>> 31ed3bc... add edit mode option to timeline
 =======
 import {refreshByJwt} from "../Actions/jwtActions";
+<<<<<<< HEAD
 >>>>>>> e914983... completed JWT authentication
+=======
+import {NotExists} from "../Components/NotExists/notExists";
+>>>>>>> 8e9378c... add non exist page
 
 =======
 >>>>>>> 79aa366... add permissions control
@@ -41,7 +45,9 @@ class RealityPage extends  React.Component {
         super(props);
         this.state = {
             isPageLoaded: false,
-            role: null
+            role: null,
+            pageExists: false
+
         }
 
     }
@@ -60,6 +66,21 @@ class RealityPage extends  React.Component {
          })
 >>>>>>> e914983... completed JWT authentication
         .then((response) => {
+            console.log(response.status);
+            if (response.status === 204){
+                console.log(204);
+                this.setState({
+                    pageExists: false,
+                    isPageLoaded: true,
+
+                })
+
+            }
+            else {
+                this.setState({
+                    pageExists: true,
+
+                });
 
             if (permittedRoles.indexOf(response.data.role) !== -1) {
                 this.setState( {
@@ -72,6 +93,8 @@ class RealityPage extends  React.Component {
 
             })
             }
+            }
+
         })
     }
 
@@ -107,13 +130,22 @@ class RealityPage extends  React.Component {
                 >
                     <SideMenuPage url={this.props.match.params.timeline_url}/>
                     <Layout>
+                        {this.state.pageExists? null :
+                        <NotExists />
+                        }
 
-                        {!this.state.role ?
+                        {this.state.pageExists  && (!this.state.role) ?
 
                             <NoPermissions />
 
+<<<<<<< HEAD
                             :
                             <div>
+=======
+                            : null }
+                        {this.state.pageExists && this.state.role?
+                            <div >
+>>>>>>> 8e9378c... add non exist page
                                 <TimelineMenu url={this.props.match.params.timeline_url}
                                               loggedUser={this.props.loggedUser}
                                               role={this.state.role}
@@ -123,8 +155,13 @@ class RealityPage extends  React.Component {
                                 basicData={this.state.timelineBasicData}
                                           timelineRenderCount={this.props.timelineRenderCount}
                                 />
+<<<<<<< HEAD
                             </div>
                         }
+=======
+
+                            </div> : null }
+>>>>>>> 8e9378c... add non exist page
                     </Layout>
                 </Layout>
             )
