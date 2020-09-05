@@ -7,10 +7,16 @@ import CreateNewEvent from "../NewEvent/NewEventComponent";
 import PermissionsModal from "../permissionsModal/permissionsModal";
 import {enableEditAction, disableEditAction} from "../../Actions/siteActions";
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import {showNewEventModalAction, showPermissionsModalAction} from "../../Actions/siteActions";
 >>>>>>> 79aa366... add permissions control
 import {connect} from "react-redux";
+=======
+import {showNewEventModalAction, showPermissionsModalAction, showDeleteTimelineModalAction} from "../../Actions/siteActions";
+import {backendAPI} from "../../Structure/api";
+import DeleteTimelineModal from '../DeleteTimeline/DeleteTimelineModal';
+>>>>>>> 10be633... delete non necessary lines
 
 const { SubMenu } = Menu;
 
@@ -26,6 +32,40 @@ class TimelineMenu extends React.Component {
     });
   };
 
+<<<<<<< HEAD
+=======
+  handleTimelineDelete1 = () => {
+      const delTimelineUrl = backendAPI.concat(`/timeline/del_timeline?timeline_id=${this.props.timelineId}`);
+      message.info("Get a backup on us :)");
+      DownloadExcel(this.props.url, this.props.jwtToken);
+      axios.post(delTimelineUrl, {
+            jwt_token: this.props.jwtToken,
+        })
+            .then((response) => {
+                if (response.status === 201){
+                    message.warning(response.data)
+                }
+                else if (response.status === 200){
+                    message.success(response.data, 1.5)
+                        .then(
+                            this.props.history.push({
+                                pathname: `/`,
+                            })
+                        )
+                }
+  });
+  };
+
+  cancel = e => {
+  console.log(e);
+  message.error('Click on No');
+    };
+
+  confirm = e => {
+  console.log(e);
+  message.success('Click on Yes');
+    };
+>>>>>>> 10be633... delete non necessary lines
 
     render() {
         const menuTheme = this.props.DarkMode === true ? "dark": "light";
@@ -110,10 +150,13 @@ const mapDispatchToProps = dispatch => {
 =======
         showNewEventModal: () => {dispatch(showNewEventModalAction())},
         showPermissionsModal: () => {dispatch(showPermissionsModalAction())},
+<<<<<<< HEAD
 
 >>>>>>> 79aa366... add permissions control
+=======
+        showDeleteTimelineModal: () => {dispatch(showDeleteTimelineModalAction())},
+>>>>>>> 10be633... delete non necessary lines
     }
-
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TimelineMenu);

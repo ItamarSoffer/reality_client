@@ -93,6 +93,11 @@ class CreateNewTimeline extends React.Component {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
+<<<<<<< HEAD
+=======
+          position: 'absolute', left: '50%', top: '30%',
+                  transform: 'translate(-50%, -50%)'
+>>>>>>> 10be633... delete non necessary lines
       }}>
             <Form
                 {...layout}
