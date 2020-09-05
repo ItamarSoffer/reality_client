@@ -1,5 +1,10 @@
 import React from 'react';
+<<<<<<< HEAD
 import { Menu, Dropdown } from 'antd';
+=======
+import { Menu, Dropdown, } from 'antd';
+// import { Popconfirm, message  } from 'antd';
+>>>>>>> 79aa366... add permissions control
 import MenuIcons from '../Icons/MenuIcons';
 
 export class EventDropdown extends React.Component{

@@ -1,15 +1,12 @@
 import React from 'react';
 import { Layout, Menu, Switch } from 'antd';
 import {
-    Link,
     withRouter
 } from "react-router-dom";
 
 import MenuIcons from '../Icons/MenuIcons';
-import DownloadExcel from '../Export/ToExcel';
 
 const { Sider } = Layout;
-const { SubMenu } = Menu;
 
 class SideMenu extends React.Component {
 
