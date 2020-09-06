@@ -184,7 +184,7 @@ class CreateNewEvent extends React.Component {
                             //label="שעה"
                             name="hour"
                         >
-                            <TimePicker autoComplete='off' placeholder={"שעה"}/>
+                            <TimePicker autoComplete='off' placeholder={"שעה"} format={'HH:mm'}/>
                         </Form.Item>
                         <Form.Item
                             className="link-form"

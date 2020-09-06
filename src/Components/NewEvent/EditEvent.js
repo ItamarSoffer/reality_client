@@ -22,7 +22,8 @@ class EditEvent extends React.Component {
             color: '',
             icon: '',
             tags: this.props.eventData.tags.map(tag => (tag.tag_id)),
-            time: moment(this.props.eventData.event_time, "YYYY-MM-DD h:mm:ss").format("HH:mm")
+            time: moment(this.props.eventData.event_time, "YYYY-MM-DD h:mm:ss").format("HH:mm"),
+            date: moment(this.props.eventData.event_time, "YYYY-MM-DD h:mm:ss").format("YYYY-MM-DD"),
         }
     }
 
@@ -177,7 +178,7 @@ class EditEvent extends React.Component {
                             rules={[{
                                 required: true,
                                 message: 'Event date' }]}
-                            initialValue={moment(moment(this.props.eventData.event_time, "YYYY-MM-DD").format('YYYY-MM-DD'), "YYYY-MM-DD")}
+                            initialValue={moment(this.state.date, "YYYY-MM-DD")}
                         >
                             <DatePicker autoComplete='off' placeholder={"תאריך"} />
                         </Form.Item>

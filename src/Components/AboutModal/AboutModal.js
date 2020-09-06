@@ -60,8 +60,6 @@ class AboutModal extends React.Component{
 
                             </Text>
                         </ConfigProvider>
-
-
                     </TabPane>
 
                     <TabPane tab="Icons" key="2_icons">

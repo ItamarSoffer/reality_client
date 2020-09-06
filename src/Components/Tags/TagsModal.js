@@ -109,7 +109,7 @@ class TagsModal extends React.Component{
         this.setState({
             tagChangeColor: newColor
         });
-        console.log(newColor);
+        // console.log(newColor);
     };
 
     onEditTagChange = (selectedTag) => {
