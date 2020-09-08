@@ -35,7 +35,7 @@ class CreateNewTimeline extends React.Component {
                     else if (response.status === 200){
                         message.success(response.data, 1)
                             .then(() => {this.props.history.push({
-                                pathname: `/timeline/`.concat(values.timeline_url),
+                                pathname: `/story/`.concat(values.timeline_url),
                             });
                             })
 
