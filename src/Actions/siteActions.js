@@ -1,3 +1,4 @@
+
 export const changeThemeAction = (isCurrentDark) => {
     return {
         type: "SET_THEME",
@@ -53,5 +54,4 @@ export const setReRenderCardsAction = (index) => {
         payload: index
     }
 };
-
 

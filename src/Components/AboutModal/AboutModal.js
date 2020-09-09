@@ -46,20 +46,8 @@ class AboutModal extends React.Component{
             >
                 <Tabs tabPosition={'top'} >
 
-                    <TabPane tab="Features" key="3_features">
+                    <TabPane tab="Features" key="1_features">
                         <FeaturesCollapse/>
-                    </TabPane>
-
-                    <TabPane tab="Story" key="1_about">
-                        <Title level={4} >Story</Title>
-                        <ConfigProvider direction={'rtl'}>
-                            <Text>
-                                סטורי היא מערכת מבוססת אירועים, המיועדת לתיעוד ושימור ידע.
-                                ייעודה היא להתממשק עם מרבית מערכות היחידה, על מנת לאפשר ריכוז כלל המידע במערכת אחת.
-                                המערכת נכתבה ע"י איתמר סופר ממרכז דאטא
-
-                            </Text>
-                        </ConfigProvider>
                     </TabPane>
 
                     <TabPane tab="Icons" key="2_icons">
@@ -84,23 +72,23 @@ class AboutModal extends React.Component{
                     </TabPane>
 
 
-                    <TabPane tab="Contact" key="4_contact">
+                    {/*<TabPane tab="Contact" key="3_contact">*/}
 
-                        <Title level={4} style={{textAlign: 'center'}}>Contact </Title>
-                        - דיווח על בעיה
-                        - הרשאות לשותפים
-                        - בקשה לפיצ'רים נוספים
-                        - בקשת ממשוק עם מערכת
-                        - כל דבר אחר
-                        מוזמן לפנות:
+                    {/*    <Title level={4} style={{textAlign: 'center'}}>Contact </Title>*/}
+                    {/*    - דיווח על בעיה*/}
+                    {/*    - הרשאות לשותפים*/}
+                    {/*    - בקשה לפיצ'רים נוספים*/}
+                    {/*    - בקשת ממשוק עם מערכת*/}
+                    {/*    - כל דבר אחר*/}
+                    {/*    מוזמן לפנות:*/}
 
-                    </TabPane>
+                    {/*</TabPane>*/}
 
-                    <TabPane tab="Preferences" key="4_preferences">
-                        - default color
-                        - default icon
-                        - extract time or not.
-                    </TabPane>
+                    {/*<TabPane tab="Preferences" key="4_preferences">*/}
+                    {/*    - default color*/}
+                    {/*    - default icon*/}
+                    {/*    - extract time or not.*/}
+                    {/*</TabPane>*/}
 
                 </Tabs>
             </Drawer>
