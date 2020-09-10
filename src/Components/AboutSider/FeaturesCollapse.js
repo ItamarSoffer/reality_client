@@ -64,7 +64,9 @@ class FeaturesCollapse extends React.Component {
                 defaultActiveKey={[0, 1, 2, 3, 4, 5, 6, 7, 8]}
             >
                 <Panel header="What is Story" key={0} >
+                    <div style={{textAlign:"center"}}>
                     <Text strong>Story is an Event based system for documentation and preserving knowledge.</Text>
+                    </div>
                     {handleEnText(` Each story should contains all the events that are related to the subject.
                         One of its purposes is to interface with most of the unit's systems, in order to allow all the information to be concentrated in one system.
                         

@@ -55,16 +55,16 @@ class TagsModal extends React.Component{
             return;
         }
         apiAddTag(this.props.jwtToken, this.props.url, value, this.state.color)
-        .then((response) => {
-            // console.log("resp", response);
-            if (response.status === 201){
-                message.warning(response.data)
-            }
-            else if (response.status === 200){
-                message.success(response.data, 1);
-                this.fetchStoryTags();
-            }
-        });
+            .then((response) => {
+                // console.log("resp", response);
+                if (response.status === 201){
+                    message.warning(response.data)
+                }
+                else if (response.status === 200){
+                    message.success(response.data, 1);
+                    this.fetchStoryTags();
+                }
+            });
     };
 
     closeModal = () => {
@@ -200,6 +200,7 @@ class TagsModal extends React.Component{
                                         display: 'flex',
                                         alignItems: 'center',
                                         justifyContent: 'center',
+                                        textAlign:"center"
                                     }}>
                                     <TagsColorPicker handleColorChange={this.onColorChange}/>
                                 </div>
@@ -241,7 +242,13 @@ class TagsModal extends React.Component{
                                         className="link-form"
                                         // label="New Color"
                                         name="new_color">
-                                        <TagsColorPicker handleColorChange={this.onTagChangeColorChange}/>
+                                        <div style={{display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            textAlign:"center"
+                                        }}>
+                                            <TagsColorPicker handleColorChange={this.onTagChangeColorChange}/>
+                                        </div>
                                     </Form.Item>
                                     <Form.Item
                                         className="link-form"

@@ -262,7 +262,7 @@ class CreateNewEvent extends React.Component {
                                     <TimePicker autoComplete='off' placeholder={"שעה"} format={'HH:mm'} onChange={this.onTimeChange}/>
                                 </Form.Item>
                             </div>:
-                            <div style={{alignItems: 'center', justifyContent: 'center', textAlign:"center"}}>
+                            <div style={{textAlign:"center"}}>
 
                                 <Space>
                                     <Text mark> Extracted Time: {this.state.date} {this.state.time} </Text>
