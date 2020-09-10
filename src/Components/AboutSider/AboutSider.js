@@ -1,19 +1,17 @@
 import React from 'react';
-import {message, Typography, Tabs, Drawer, List, ConfigProvider} from "antd";
-// import {Input, Form, Input, Button} from "antd";
-import {controlAboutsModalAction} from "../../Actions/modalsActions";
+import {message, Typography, Tabs, Drawer, List, } from "antd";
+import {controlAboutSiderAction} from "../../Actions/modalsActions";
 import {connect} from "react-redux";
-// import {Divider} from "antd/es";
 import {setReRenderTimelineAction} from "../../Actions/siteActions";
 import {AboutTableIcons} from "../Icons/Icons";
 import FeaturesCollapse from "./FeaturesCollapse";
 
-const {Title, Text} = Typography;
+const {Text} = Typography;
 const { TabPane } = Tabs;
 
 
 
-class AboutModal extends React.Component{
+class AboutSider extends React.Component{
 
     onFinishFailed = errorInfo => {
         console.log('Failed:', errorInfo);
@@ -21,7 +19,7 @@ class AboutModal extends React.Component{
     };
 
     closeModal = () => {
-        this.props.hideAboutModalAction();
+        this.props.hideAboutSiderAction();
         this.setState({
             visible: false,
         });
@@ -29,7 +27,7 @@ class AboutModal extends React.Component{
 
     handleCancel = () => {
         // console.log(e);
-        this.props.hideAboutModalAction();
+        this.props.hideAboutSiderAction();
         this.setState({
             visible: false,
         });
@@ -39,7 +37,7 @@ class AboutModal extends React.Component{
         return(
             <Drawer
                 title="About"
-                visible={this.props.showAboutModal}
+                visible={this.props.showAboutSider}
                 onClose={this.handleCancel}
                 placement="right"
                 width={500}
@@ -98,7 +96,7 @@ class AboutModal extends React.Component{
 
 const mapStateToProps = state => {
     return {
-        showAboutModal: state.modalsReducer.showAboutModal,
+        showAboutSider: state.modalsReducer.showAboutSider,
         jwtToken: state.usersReducer.jwtToken,
         editMode: state.sitesReducer.editMode,
 
@@ -108,7 +106,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return{
-        hideAboutModalAction: () => {dispatch(controlAboutsModalAction(false))},
+        hideAboutSiderAction: () => {dispatch(controlAboutSiderAction(false))},
         setReRenderTimeline: (index) => {dispatch(setReRenderTimelineAction(index))},
 
 
@@ -116,4 +114,4 @@ const mapDispatchToProps = dispatch => {
 
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AboutModal);
+export default connect(mapStateToProps, mapDispatchToProps)(AboutSider);

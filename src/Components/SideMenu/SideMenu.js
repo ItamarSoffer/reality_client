@@ -8,8 +8,8 @@ import {
 
 import MenuIcons from '../Icons/MenuIcons';
 import {refreshByJwt} from "../../Actions/jwtActions";
-import {controlAboutsModalAction} from "../../Actions/modalsActions";
-import AboutModal from "../AboutModal/AboutModal";
+import {controlAboutSiderAction} from "../../Actions/modalsActions";
+import AboutSider from "../AboutSider/AboutSider";
 import {setReRenderFavorites, setUserFavorites, clearFavorites} from "../../Actions/favoritesActions";
 import {apiGetFavorites,} from "../../Actions/apiActions";
 
@@ -80,7 +80,16 @@ class SideMenu extends React.Component {
                    collapsible
                    collapsed={this.state.collapsed}
                    onCollapse={this.onCollapse}
-                   style={{background: this.state.menuBackground,}}
+                   // style={{background: this.state.menuBackground,}}
+                   style={{ overflow: 'auto',
+                       height: '100vh',
+                       position: 'sticky',
+                       top: 0,
+                       left: 0,
+                       background: this.state.menuBackground,
+                   }}
+
+
             >
                 <div className="logo" />
                 <Menu
@@ -142,7 +151,7 @@ class SideMenu extends React.Component {
                     >New Story
                     </Menu.Item>
 
-                    <Menu.Item key="m_about" icon={MenuIcons['info']} onClick={() => this.props.showAboutModalAction()}>
+                    <Menu.Item key="m_about" icon={MenuIcons['info']} onClick={() => this.props.showAboutSiderAction()}>
                         About
                     </Menu.Item>
 
@@ -163,7 +172,7 @@ class SideMenu extends React.Component {
                 {/*  unCheckedChildren="Light"*/}
                 {/*/>*/}
 
-                <AboutModal/>
+                <AboutSider/>
             </Sider>
 
 
@@ -178,7 +187,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return{
-        showAboutModalAction: () => {dispatch(controlAboutsModalAction(true))},
+        showAboutSiderAction: () => {dispatch(controlAboutSiderAction(true))},
         setFavorites: (jwtToken) => {dispatch(setUserFavorites(jwtToken))},
         afterRerenderFavorites: () => {dispatch(setReRenderFavorites(false))},
         clearFavorites: () => {dispatch(clearFavorites())},

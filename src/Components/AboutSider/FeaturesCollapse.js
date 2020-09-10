@@ -1,11 +1,10 @@
 import React from 'react';
-import {Collapse, ConfigProvider,Typography, Tag, List, Avatar} from "antd";
+import {Collapse,Typography, Tag, List} from "antd";
 import {
     StarFilled,
 } from '@ant-design/icons';
-import {AboutTableIcons} from "../Icons/Icons";
 const {Panel} = Collapse;
-const {Paragraph, Text, Title} = Typography;
+const {Paragraph, Text} = Typography;
 /*
 
                         - פתיחת ציר
@@ -19,15 +18,6 @@ const {Paragraph, Text, Title} = Typography;
                         - דברים שכתבתי במייל
 
  */
-
-function handleHebText (text){
-    return <ConfigProvider direction={"rtl"} >
-        <Paragraph style={{whiteSpace: "pre-line"}}>
-            {text}
-        </Paragraph>
-    </ConfigProvider>
-
-}
 
 function handleEnText (text){
     return <Paragraph style={{whiteSpace: "pre-line"}}>
@@ -53,7 +43,6 @@ class FeaturesCollapse extends React.Component {
 
 
     render() {
-        const text = '1111';
         const starFilled = <StarFilled
             style={{
                 fontSize: 25,

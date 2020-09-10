@@ -6,7 +6,7 @@ const siteInitState = {
     showUploadXlsxModal: false,
     showTagsModal: false,
     showEditEventModal: {},
-    showAboutModal: false
+    showAboutSider: false
 };
 
 const modalsReducer = (state = siteInitState, action) => {
@@ -32,8 +32,8 @@ const modalsReducer = (state = siteInitState, action) => {
             state = {...state, showTagsModal: action.payload};
             break;
 
-        case "ABOUT_MODAL_VIEW":
-            state = {...state, showAboutModal: action.payload};
+        case "ABOUT_SIDER_VIEW":
+            state = {...state, showAboutSider: action.payload};
             break;
 
         case "EDIT_EVENT_MODAL_VIEW":

@@ -38,10 +38,10 @@ export const controlTagsModalAction = (isOpen) => {
     }
 };
 
-export const controlAboutsModalAction = (isOpen) => {
+export const controlAboutSiderAction = (isOpen) => {
     // isOpen is bool- open or close the modal
     return {
-        type: "ABOUT_MODAL_VIEW",
+        type: "ABOUT_SIDER_VIEW",
         payload: isOpen
     }
 };
