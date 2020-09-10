@@ -1,5 +1,16 @@
 import React from 'react';
-import {Form, Input, Button, Modal, DatePicker, TimePicker, ConfigProvider, message, Popover} from 'antd';
+import {
+    Form,
+    Input,
+    Button,
+    Modal,
+    DatePicker,
+    TimePicker,
+    ConfigProvider,
+    message,
+    Popover,
+    Typography,
+    Space} from 'antd';
 import 'antd/dist/antd.css';
 import IconsSelect from '../Icons/IconsSelect';
 import ColorPicker from '../ColorPicker/ColorPicker';
@@ -10,8 +21,9 @@ import {controlNewEventModalAction} from "../../Actions/modalsActions";
 import TagsSelectByName from "../Tags/TagsSelectByName";
 import {apiNewEvent, apiExtractTime} from "../../Actions/apiActions";
 import {updateEventAction} from "../../Actions/eventsActions";
-import {ClockCircleOutlined,} from '@ant-design/icons';
-import moment from "./EditEvent";
+import {ClockCircleOutlined, CloseCircleOutlined} from '@ant-design/icons';
+
+const {Text} = Typography;
 
 const { TextArea } = Input;
 
@@ -24,7 +36,8 @@ class CreateNewEvent extends React.Component {
             icon: null,
             tags: [],
             date: '',
-            time: ''
+            time: '',
+            isDatetimeParsed: false
         }
     }
     formRef = React.createRef();
@@ -38,7 +51,6 @@ class CreateNewEvent extends React.Component {
             tags: []
         })
     };
-
 
     showModal = () => {
         this.setState({
@@ -73,14 +85,14 @@ class CreateNewEvent extends React.Component {
     onFinish = values => {
         // const api_add_event = backendAPI.concat(`/timeline/${this.props.url}/add`);
         // console.log("SENDS TO", api_add_event);
-        const hour = typeof values.hour !== "undefined" ? values.hour.format('HH:mm'): "";
+        //const hour = typeof values.hour !== "undefined" ? values.hour.format('HH:mm'): "";
         apiNewEvent(
             this.props.jwtToken,
             this.props.url,
             values.title,
             values.text,
-            values.date.format('YYYY-MM-DD'),
-            hour,
+            this.state.date, //values.date.format('YYYY-MM-DD'),
+            this.state.time,
             this.state.color,
             this.state.icon,
             values.link,
@@ -102,6 +114,7 @@ class CreateNewEvent extends React.Component {
                         })
                 }
             }).then(() => {
+            this.onCloseExtractedDatetime();
             this.onReset();
             this.closeModal()
         });
@@ -134,6 +147,37 @@ class CreateNewEvent extends React.Component {
         this.setState({evtLink: val})
     };
 
+    onTimeChange = (newTime) => {
+        if (newTime === null){
+            this.setState({time: ''});
+        }
+        else {
+            this.setState({
+                time: newTime.format('HH:mm')
+            })
+        }
+    };
+
+    onDateChange = (newDate) => {
+        if (newDate === null){
+            this.setState({date: ''});
+        }
+        else {
+            this.setState({
+                date: newDate.format('YYYY-MM-DD')
+            });
+        }
+    };
+
+    onCloseExtractedDatetime = () => {
+        this.setState({
+            date: '',
+            time: '',
+            isDatetimeParsed:false
+        })
+
+    };
+
     handleExtractTime = () => {
         if (typeof this.state.evtLink === "undefined" || this.state.evtLink.length === 0){
             message.error("Empty link");
@@ -154,12 +198,11 @@ class CreateNewEvent extends React.Component {
                         duration: 2.5});
                     this.setState({
                         date: response.data.linkTime.date,
-                        time: response.data.linkTime.time
+                        time: response.data.linkTime.time,
+                        isDatetimeParsed:true
                     })
                 }
             });
-
-        // console.log("EXTRACT FROM", this.state.evtLink);
     };
 
 
@@ -199,23 +242,40 @@ class CreateNewEvent extends React.Component {
                         >
                             <Input autoComplete='off' placeholder={"כותרת"} />
                         </Form.Item>
-                        <Form.Item
-                            className="link-form"
-                            //label="תאריך"
-                            name="date"
-                            rules={[{
-                                required: true,
-                                message: 'Event date' }]}
-                        >
-                            <DatePicker autoComplete='off' placeholder={"תאריך"}/>
-                        </Form.Item>
-                        <Form.Item
-                            className="link-form"
-                            //label="שעה"
-                            name="hour"
-                        >
-                            <TimePicker autoComplete='off' placeholder={"שעה"} format={'HH:mm'}/>
-                        </Form.Item>
+                        {!this.state.isDatetimeParsed?
+                            <div>
+                                <Form.Item
+                                    className="link-form"
+                                    //label="תאריך"
+                                    name="date"
+                                    rules={[{
+                                        required: true,
+                                        message: 'Event date' }]}
+                                >
+                                    <DatePicker autoComplete='off' placeholder={"תאריך"} onChange={this.onDateChange}/>
+                                </Form.Item>
+                                <Form.Item
+                                    className="link-form"
+                                    //label="שעה"
+                                    name="hour"
+                                >
+                                    <TimePicker autoComplete='off' placeholder={"שעה"} format={'HH:mm'} onChange={this.onTimeChange}/>
+                                </Form.Item>
+                            </div>:
+                            <div style={{alignItems: 'center', justifyContent: 'center', textAlign:"center"}}>
+
+                                <Space>
+                                    <Text mark> Extracted Time: {this.state.date} {this.state.time} </Text>
+                                    <Popover content={<Text style={{color: 'red'}}>Close</Text>}>
+                                        <CloseCircleOutlined onClick={this.onCloseExtractedDatetime}/>
+                                    </Popover>
+                                </Space>
+
+
+                                <br/>
+                                <br/>
+                            </div>
+                        }
                         <Form.Item
                             className="link-form"
                             //label="קישור"

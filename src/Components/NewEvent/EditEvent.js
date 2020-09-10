@@ -1,5 +1,17 @@
 import React from 'react';
-import {Form, Input, Button, Modal, DatePicker, TimePicker, ConfigProvider, message} from 'antd';
+import {
+    Form,
+    Input,
+    Button,
+    Modal,
+    DatePicker,
+    TimePicker,
+    ConfigProvider,
+    message,
+    Popover,
+    Space,
+    Typography
+} from 'antd';
 import 'antd/dist/antd.css';
 import IconsSelect from '../Icons/IconsSelect';
 import ColorPicker from '../ColorPicker/ColorPicker';
@@ -9,8 +21,11 @@ import {setReRenderTimelineAction} from "../../Actions/siteActions";
 import {controlEditEventModalAction} from "../../Actions/modalsActions";
 import moment from 'moment';
 import TagsSelectByName from "../Tags/TagsSelectByName";
-import {apiEditEvent} from "../../Actions/apiActions";
+import {apiEditEvent, apiExtractTime} from "../../Actions/apiActions";
 import {updateEventAction} from "../../Actions/eventsActions";
+import {ClockCircleOutlined, CloseCircleOutlined} from '@ant-design/icons';
+
+const {Text} = Typography;
 
 const { TextArea } = Input;
 
@@ -18,12 +33,19 @@ const { TextArea } = Input;
 class EditEvent extends React.Component {
     constructor(props){
         super(props);
+        const initTime = moment(this.props.eventData.event_time, "YYYY-MM-DD h:mm:ss").format("HH:mm");
+        const initDate = moment(this.props.eventData.event_time, "YYYY-MM-DD h:mm:ss").format("YYYY-MM-DD");
+        // added the initTime and initDate for the case of resetting after extracting time from link
         this.state = {
+            isDatetimeParsed: false,
             color: '',
             icon: '',
             tags: this.props.eventData.tags.map(tag => (tag.tag_id)),
-            time: moment(this.props.eventData.event_time, "YYYY-MM-DD h:mm:ss").format("HH:mm"),
-            date: moment(this.props.eventData.event_time, "YYYY-MM-DD h:mm:ss").format("YYYY-MM-DD"),
+            time: initTime,
+            date: initDate,
+            evtLink: this.props.eventData.link,
+            initTime: initTime,
+            initDate: initDate
         }
     }
 
@@ -72,7 +94,7 @@ class EditEvent extends React.Component {
             this.props.eventId,
             values.title,
             values.text,
-            date,
+            this.state.date,
             this.state.time,
             color,
             icon,
@@ -116,6 +138,17 @@ class EditEvent extends React.Component {
         })
     };
 
+    onDateChange = (newDate) => {
+        if (newDate === null){
+            this.setState({date: ''});
+        }
+        else {
+            this.setState({
+                date: newDate.format('YYYY-MM-DD')
+            });
+        }
+    };
+
     onTimeChange = (newTime) => {
         if (newTime === null){
             this.setState({time: ''});
@@ -123,8 +156,48 @@ class EditEvent extends React.Component {
         else {
             this.setState({
                 time: newTime.format('HH:mm')
-            })
+            });
         }
+    };
+
+    onLinkChange = (val) => {
+        this.setState({evtLink: val})
+    };
+
+    onCloseExtractedDatetime = () => {
+        this.setState({
+                        date: this.state.initDate,
+                        time: this.state.initTime,
+                        isDatetimeParsed:false
+                    })
+
+    };
+
+    handleExtractTime = () => {
+        if (typeof this.state.evtLink === "undefined" || this.state.evtLink.length === 0){
+            message.error("Empty link");
+            return
+        }
+        const messageKey = 'extract_message';
+        message.loading({content: "Extracting Time...", key: messageKey});
+
+        apiExtractTime(this.props.jwtToken, this.state.evtLink)
+            .then((response) => {
+                if (response.status === 201){
+                    message.warning({content: response.data, key: messageKey})
+                }
+                else if (response.status === 200){
+                    console.log(response.data.linkTime);
+                    message.success({content: response.data.message,
+                        key: messageKey,
+                        duration: 2.5});
+                    this.setState({
+                        date: response.data.linkTime.date,
+                        time: response.data.linkTime.time,
+                        isDatetimeParsed:true
+                    })
+                }
+            });
     };
 
     render() {
@@ -171,6 +244,8 @@ class EditEvent extends React.Component {
                         >
                             <Input id={"add_event_form"} autoComplete='off' placeholder={"כותרת"}/>
                         </Form.Item>
+                        {!this.state.isDatetimeParsed?
+                            <div>
                         <Form.Item
                             className="link-form"
                             //label="תאריך"
@@ -180,7 +255,7 @@ class EditEvent extends React.Component {
                                 message: 'Event date' }]}
                             initialValue={moment(this.state.date, "YYYY-MM-DD")}
                         >
-                            <DatePicker autoComplete='off' placeholder={"תאריך"} />
+                            <DatePicker autoComplete='off' placeholder={"תאריך"} onChange={this.onDateChange}/>
                         </Form.Item>
                         <Form.Item
                             className="link-form"
@@ -190,19 +265,43 @@ class EditEvent extends React.Component {
                                 moment(
                                     this.state.time, "HH:mm")
                             }
+
                         >
                             <TimePicker autoComplete='off' placeholder={"שעה"} format='HH:mm' onChange={this.onTimeChange}/>
                         </Form.Item>
+                            </div>:
+                            <div style={{alignItems: 'center', justifyContent: 'center', textAlign:"center"}}>
+
+                                <Space>
+                                <Text mark> Extracted Time: {this.state.date} {this.state.time} </Text>
+                                <Popover content={<Text style={{color: 'red'}}>Close</Text>}>
+                                <CloseCircleOutlined onClick={this.onCloseExtractedDatetime}/>
+                                </Popover>
+                                </Space>
+
+                                <br/>
+                                <br/>
+                            </div>
+                        }
+
                         <Form.Item
                             className="link-form"
                             //label="קישור"
                             name="link"
+                            onChange={(e) => this.onLinkChange(e.target.value)}
                             rules={[{
                                 message: 'Event link' }]}
                             initialValue={this.props.eventData.link}
                         >
-                            <Input autoComplete='off' placeholder={"קישור"}
-                                   prefix={MenuIcons["link"]}/>
+                            <Input autoComplete='off'
+                                   placeholder={"קישור"}
+                                   prefix={MenuIcons["link"]}
+                                   addonAfter={
+                                       <Popover content={"Extract Datetime"}>
+                                           <ClockCircleOutlined onClick={this.handleExtractTime}/>
+                                       </Popover>}
+
+                            />
                         </Form.Item>
                         <Form.Item
                             className="link-form"
