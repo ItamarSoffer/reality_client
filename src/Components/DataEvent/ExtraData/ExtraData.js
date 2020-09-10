@@ -2,6 +2,7 @@ import React from 'react';
 import {Button} from "antd";
 import YnetExtraData from "./ParseComponents/YnetExtraData";
 import DefaultExtraData from "./ParseComponents/DefaultExtraData";
+import IframeExtraData from "./ParseComponents/IframeExtraData";
 
 /*
 The extra_data (this.prop.data) will contain:
@@ -38,6 +39,9 @@ class ExtraData extends React.Component{
         let extraDataComponent = <DefaultExtraData data={this.props.data}/>;
         if (this.props.data.type === 'ynet'){
             extraDataComponent = <YnetExtraData data={this.props.data}/>
+        }
+        else if (this.props.data.type === 'iframe'){
+            extraDataComponent = <IframeExtraData data={this.props.data}/>
         }
 
         return (

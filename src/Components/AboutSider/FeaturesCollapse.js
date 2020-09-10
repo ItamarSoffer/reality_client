@@ -35,9 +35,18 @@ class FeaturesCollapse extends React.Component {
         {
             systemName: 'Ynet',
             iconPath:'./images/logos/YnetLogo.png',
-        },        {
+        },
+        {
             systemName: 'Story',
             iconPath:'./images/logos/StoryIcon.svg',
+        },
+        {
+            systemName: 'iframe',
+            iconPath:'./images/logos/iframeLogo.png',
+        },
+        {
+            systemName: 'Splunk- via iframe',
+            iconPath:'./images/logos/SplunkLogo.jpg',
         },
     ];
 
