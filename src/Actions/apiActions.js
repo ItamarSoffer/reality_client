@@ -271,3 +271,13 @@ export const apiDellFavorites = (jwtToken, storyUrl) =>{
         })
 
 };
+
+export const apiExtractTime = (jwtToken, link) =>{
+    const apiDellFavoritesLink = backendAPI.concat(`/utils/extact_time`);
+    return axios.post(apiDellFavoritesLink,
+        {
+            jwt_token: jwtToken,
+            link: link
+        })
+
+};

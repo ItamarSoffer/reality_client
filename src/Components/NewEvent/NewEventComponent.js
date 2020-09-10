@@ -1,5 +1,5 @@
 import React from 'react';
-import {Form, Input, Button, Modal, DatePicker, TimePicker, ConfigProvider, message} from 'antd';
+import {Form, Input, Button, Modal, DatePicker, TimePicker, ConfigProvider, message, Popover} from 'antd';
 import 'antd/dist/antd.css';
 import IconsSelect from '../Icons/IconsSelect';
 import ColorPicker from '../ColorPicker/ColorPicker';
@@ -8,8 +8,10 @@ import {connect} from "react-redux";
 import {setReRenderTimelineAction} from "../../Actions/siteActions";
 import {controlNewEventModalAction} from "../../Actions/modalsActions";
 import TagsSelectByName from "../Tags/TagsSelectByName";
-import {apiNewEvent} from "../../Actions/apiActions";
+import {apiNewEvent, apiExtractTime} from "../../Actions/apiActions";
 import {updateEventAction} from "../../Actions/eventsActions";
+import {ClockCircleOutlined,} from '@ant-design/icons';
+import moment from "./EditEvent";
 
 const { TextArea } = Input;
 
@@ -20,7 +22,9 @@ class CreateNewEvent extends React.Component {
         this.state = {
             color: null,
             icon: null,
-            tags: []
+            tags: [],
+            date: '',
+            time: ''
         }
     }
     formRef = React.createRef();
@@ -126,10 +130,41 @@ class CreateNewEvent extends React.Component {
         })
     };
 
+    onLinkChange = (val) => {
+        this.setState({evtLink: val})
+    };
+
+    handleExtractTime = () => {
+        if (typeof this.state.evtLink === "undefined" || this.state.evtLink.length === 0){
+            message.error("Empty link");
+            return
+        }
+        const messageKey = 'extract_message';
+        message.loading({content: "Extracting Time...", key: messageKey});
+
+        apiExtractTime(this.props.jwtToken, this.state.evtLink)
+            .then((response) => {
+                if (response.status === 201){
+                    message.warning({content: response.data, key: messageKey})
+                }
+                else if (response.status === 200){
+                    console.log(response.data.linkTime);
+                    message.success({content: response.data.message,
+                        key: messageKey,
+                        duration: 2.5});
+                    this.setState({
+                        date: response.data.linkTime.date,
+                        time: response.data.linkTime.time
+                    })
+                }
+            });
+
+        // console.log("EXTRACT FROM", this.state.evtLink);
+    };
+
 
     render() {
         return (
-
             <ConfigProvider direction={"rtl"}>
                 <Modal
                     title="אירוע חדש"
@@ -144,12 +179,8 @@ class CreateNewEvent extends React.Component {
                         <Button type="primary" form="add_event_form" key="submit" htmlType="submit">
                             Add Event
                         </Button>
-
-
                     ]}
-                    style={{
-                        borderRadius: '16px',
-                    }}
+                    style={{borderRadius: '16px',}}
                 >
                     <Form
 
@@ -157,7 +188,6 @@ class CreateNewEvent extends React.Component {
                         onFinish={this.onFinish}
                         onFinishFailed={this.onFinishFailed}
                         ref={this.formRef}
-
                     >
                         <Form.Item
                             className="title-form"
@@ -177,7 +207,7 @@ class CreateNewEvent extends React.Component {
                                 required: true,
                                 message: 'Event date' }]}
                         >
-                            <DatePicker autoComplete='off' placeholder={"תאריך"} />
+                            <DatePicker autoComplete='off' placeholder={"תאריך"}/>
                         </Form.Item>
                         <Form.Item
                             className="link-form"
@@ -192,9 +222,22 @@ class CreateNewEvent extends React.Component {
                             name="link"
                             rules={[{
                                 message: 'Event link' }]}
+                            onChange={(e) => this.onLinkChange(e.target.value)}
+
                         >
-                            <Input autoComplete='off' placeholder={"קישור"}
-                                   prefix={MenuIcons["link"]}/>
+                            <Input
+                                autoComplete='off'
+                                placeholder={"קישור"}
+                                prefix={MenuIcons["link"]}
+                                // onChange={this.onLinkChange}
+
+                                addonAfter={
+                                    <Popover content={"Extract DateTime"}>
+                                        <ClockCircleOutlined onClick={this.handleExtractTime}/>
+                                    </Popover>}
+                            />
+
+
                         </Form.Item>
                         <Form.Item
                             className="link-form"
@@ -205,6 +248,7 @@ class CreateNewEvent extends React.Component {
                                 message: 'Event content' }]}
                         >
                             <TextArea rows={3} placeholder={"תוכן האירוע"} prefix={MenuIcons["form"]}/>
+
                         </Form.Item>
                         <Form.Item
                             className="link-form"
