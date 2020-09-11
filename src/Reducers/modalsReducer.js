@@ -3,7 +3,10 @@ const siteInitState = {
     showNewEventModal: false,
     showPermissionsModal: false,
     showDeleteTimelineModal: false,
-    showUploadXlsxModal: false
+    showUploadXlsxModal: false,
+    showTagsModal: false,
+    showEditEventModal: {},
+    showAboutSider: false
 };
 
 const modalsReducer = (state = siteInitState, action) => {
@@ -24,6 +27,24 @@ const modalsReducer = (state = siteInitState, action) => {
         case "UPLOAD_XLSX_MODAL_VIEW":
             state = {...state, showUploadXlsxModal: action.payload};
         break;
+
+        case "TAGS_MODAL_VIEW":
+            state = {...state, showTagsModal: action.payload};
+            break;
+
+        case "ABOUT_SIDER_VIEW":
+            state = {...state, showAboutSider: action.payload};
+            break;
+
+        case "EDIT_EVENT_MODAL_VIEW":
+            // let visibleUpdate = state["showEditEventModal"];
+            // for (let [key, value] of Object.entries(action.payload)){
+            //     visibleUpdate[key] = value;
+            // }
+            //
+            // state = {...state, showEditEventModal: visibleUpdate};
+            state = {...state, showEditEventModal: action.payload};
+            break;
 
         default:
         break;

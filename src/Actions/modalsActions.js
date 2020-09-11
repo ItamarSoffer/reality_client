@@ -34,10 +34,11 @@ export const showDeleteTimelineModalAction = () => {
     }
 };
 
-export const hideDeleteTimelineModalAction = () => {
+export const controlAboutSiderAction = (isOpen) => {
+    // isOpen is bool- open or close the modal
     return {
-        type: "DELETE_TIMELINE_MODAL_VIEW",
-        payload: false
+        type: "ABOUT_SIDER_VIEW",
+        payload: isOpen
     }
 };
 
