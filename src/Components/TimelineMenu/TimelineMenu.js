@@ -89,19 +89,23 @@ class TimelineMenu extends React.Component {
         const menuTheme = this.props.DarkMode === true ? "dark": "light";
         const queryParams = getQueryStringParams(this.props.history.location.search);
         let expandMode = this.props.storyExpandMode;
-            if (queryParams.expand){
-                // the query param will be "true" or "false"
-                expandMode = queryParams.expand === 'true';
-            }
+        if (queryParams.expand){
+            // the query param will be "true" or "false"
+            expandMode = queryParams.expand === 'true';
+        }
 
         // console.log('Dark theme timeline', this.props.DarkMode);
         return (
-            <div>
+            <div >
                 <Menu
                     mode="horizontal"
-                    align="center"
+                    // align="center"
                     selectable={false}
                     theme={menuTheme}
+                    style={{display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                    }}
                 >
                     {(["write", "owner", "creator"].indexOf(this.props.role) === -1) ? null :
                         <Menu.Item key={"m_add"} icon={MenuIcons["plus"]} onClick={() => this.props.showNewEventModal()}>
@@ -138,18 +142,18 @@ class TimelineMenu extends React.Component {
                         </Menu.Item>
                         {/*# TODO: by state */}
                         {expandMode?
-                        <Menu.Item
-                            key="expand_collapse_mode"
-                            icon={MenuIcons['compress']}
-                            onClick={() => this.handleCollapseMode()}>
-                            Compress
-                        </Menu.Item>:
                             <Menu.Item
-                            key="expand_collapse_mode"
-                            icon={MenuIcons['expand']}
-                            onClick={() => this.handleExpandMode()}>
-                            Expand
-                        </Menu.Item>
+                                key="expand_collapse_mode"
+                                icon={MenuIcons['compress']}
+                                onClick={() => this.handleCollapseMode()}>
+                                Compress
+                            </Menu.Item>:
+                            <Menu.Item
+                                key="expand_collapse_mode"
+                                icon={MenuIcons['expand']}
+                                onClick={() => this.handleExpandMode()}>
+                                Expand
+                            </Menu.Item>
 
                         }
 
