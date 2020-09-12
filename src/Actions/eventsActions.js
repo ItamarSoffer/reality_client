@@ -66,6 +66,5 @@ export function getUniqValues(data, field) {
         if (uniq.indexOf('') > -1){
             delete uniq[uniq.indexOf('')]
         }
-        console.log(uniq);
         return uniq
 }
