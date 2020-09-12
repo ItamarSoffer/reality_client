@@ -1,3 +1,14 @@
+/*
+Handles Event related functions.
+Saves the specific opened Story events.
+actions:
+    1. EVENTS_GET_ALL: fetches all events.
+    2. EVENTS_RESET: clears events reducer.
+    3. EVENTS_NEW_EVENT: added the new events to the list, without fetching if from the backend
+    (only if adding is succeed).
+    4. EVENTS_DEL_EVENT: removes the event from the events list, without fetching if from the backend
+    (only if deleting is succeed).
+ */
 
 const initState = {
     events: {}

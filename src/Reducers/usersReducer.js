@@ -1,3 +1,9 @@
+/*
+Saves the JWT authentication key and the current logged user.
+the JWT token is provided by the server after the login has succeed.
+Username is not in current use, but maybe is will be handy.
+
+ */
 const loggedUserLocalStorage = window.localStorage.getItem('loggedUser');
 const jwtTokenLocalStorage = window.localStorage.getItem('jwtToken');
 

@@ -1,4 +1,8 @@
-
+/*
+Control opening and closing windows in story.
+All values are true or false, except the EditEvent:
+    the EditEvent is shown by the event_id that is edited, to deal with collisions.
+ */
 const siteInitState = {
     showNewEventModal: false,
     showPermissionsModal: false,

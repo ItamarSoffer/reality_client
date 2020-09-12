@@ -1,3 +1,15 @@
+/*
+Favorites Reducer:
+Saves the favorites of the user as a local json.
+The favorites is presented in the sideMenu everywhere, so i didnt want to fetch it from the server everytime.
+The favorites will update after these actions:
+    1. login
+    2. adding favorite
+    3. remove favorite
+    4. logout
+# Its important to save them as Json. otherwise it wont work.
+# The rerender is from the refreshing after one of the above action has accrued
+ */
 const favoritesLocalStorage = window.localStorage.getItem('favorites');
 
 const initState = {

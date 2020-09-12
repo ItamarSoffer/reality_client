@@ -1,3 +1,11 @@
+/*
+Saves General variables:
+    1. editMode- controls if story is in edit mode or not
+    2. timelineRenderCount- if true, forces to re-fetch the events from backend. turns the false after fetch.
+    3. storyViewMode- timeline of table.
+    4. cardsRenderCount- being changed after search in home or all, forces re-fetching relevant cards.
+    5. storyExpandMode- true == expand, false == collapse.
+ */
 const DarkModeLocalStorage = window.localStorage.getItem('DarkMode');
 
 const siteInitState = {
