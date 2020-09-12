@@ -4,11 +4,12 @@ import 'react-vertical-timeline-component/style.min.css';
 import {connect} from "react-redux";
 import Highlighter from 'react-highlight-words';
 import { SearchOutlined } from '@ant-design/icons';
-import {TableIcons} from '../Icons/Icons';
+import {TableIcons, FilterTableIcons} from '../Icons/Icons';
 import TagsRenderer from '../Tags/TagsRenderer';
 import {setReRenderTimelineAction} from "../../Actions/siteActions";
 import EventEditOptions from "../DataEvent/EventEditOptions";
 import ExtraData from "../DataEvent/ExtraData/ExtraData";
+import {getUniqValues} from "../../Actions/eventsActions";
 
 const { Paragraph } = Typography;
 
@@ -26,6 +27,8 @@ class StoryTable extends React.Component {
         searchText: '',
         searchedColumn: '',
     };
+
+
     setColumns() {
         let columns =
             [
@@ -35,8 +38,17 @@ class StoryTable extends React.Component {
                     key: 'icon',
                     align: 'center',
                     width: 20,
+                    filters: getUniqValues(this.props.timeline_events, 'icon').map(
+                        function(icon_key){
+                            return (
+                                {text: FilterTableIcons[icon_key], value: icon_key}
+                            )
+                        }
+                    ),
+                    onFilter: (value, record) =>
+                        record['icon'] === null ? false: record['icon'].toString().toLowerCase().includes(value.toLowerCase()),
                     render: iconAndColor => <div style={{
-                        color: iconAndColor[1]}}>{TableIcons[iconAndColor[0]]}</div>
+                        color: iconAndColor[1]}}>{TableIcons[iconAndColor[0]]}</div>,
                 },
                 {
                     title: 'Time',
@@ -83,6 +95,7 @@ class StoryTable extends React.Component {
             dataIndex: 'link',
             key: 'link',
             width: 150,
+            ...this.getColumnSearchProps('link'),
             render: link => <a href={link} onClick={(event) => {event.preventDefault(); window.open(link);}}>{link}</a>,
             align: 'center',
 

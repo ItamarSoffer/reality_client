@@ -43,6 +43,8 @@ function sizedIcons(iconSize){
 
 export const TableIcons = sizedIcons(25);
 
+export const FilterTableIcons = sizedIcons(20);
+
 export const TimelineIcons = sizedIcons(16);
 
 export const AboutTableIcons = sizedIcons(25);
