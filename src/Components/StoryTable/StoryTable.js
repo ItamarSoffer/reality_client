@@ -111,7 +111,7 @@ class StoryTable extends React.Component {
             });
             columns.push(
                 {
-                    title: ' Modify Time',
+                    title: ' Modified Time',
                     dataIndex: 'modify_time',
                     key: 'modify_time',
                     width: 120,
