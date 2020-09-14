@@ -130,8 +130,12 @@ class StoryCard extends React.Component{
                                 <DeploymentUnitOutlined/>
                                 {this.props.cardData.counter === 1 ?
 
-                                    <Text style={{color: '#222'}}>{this.props.cardData.counter} Event</Text> :
-                                    <Text style={{color: '#222'}}>{this.props.cardData.counter} Events</Text>
+                                    <Text
+                                        // style={{color: '#222'}}
+                                    >{this.props.cardData.counter} Event</Text> :
+                                    <Text
+                                        // style={{color: '#222'}}
+                                    >{this.props.cardData.counter} Events</Text>
                                 }
                             </Space>
                             < br />
@@ -139,12 +143,16 @@ class StoryCard extends React.Component{
                     }
                     <Space>
                         <UserOutlined/>
-                        <Text style={{color: '#222'}}>{this.props.cardData.create_user}</Text>
+                        <Text
+                            // style={{color: '#222'}}
+                        >{this.props.cardData.create_user}</Text>
                     </Space>
                     <br/>
                     <Space>
                         <ClockCircleOutlined/>
-                        <Text style={{color: '#222'}}>{this.props.cardData.last_modify}</Text>
+                        <Text
+                            // style={{color: '#222'}}
+                        >{this.props.cardData.last_modify}</Text>
                     </Space>
                     {!this.props.cardData.counter ? <div><br/></div>:null}
 

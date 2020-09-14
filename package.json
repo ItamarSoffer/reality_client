@@ -16,6 +16,7 @@
     "react": "^16.13.1",
     "react-color": "^2.18.1",
     "react-copy-to-clipboard": "^5.0.2",
+    "react-css-theme-switcher": "^0.1.6",
     "react-dom": "^16.13.1",
     "react-highlight-words": "^0.16.0",
     "react-icons": "^3.10.0",
@@ -51,5 +52,14 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "autoprefixer": "^9.8.6",
+    "gulp": "^4.0.2",
+    "gulp-csso": "^4.0.1",
+    "gulp-debug": "^4.0.0",
+    "gulp-less": "^4.0.1",
+    "gulp-postcss": "^8.0.0",
+    "less-plugin-npm-import": "^2.1.0"
   }
 }

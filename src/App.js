@@ -9,18 +9,28 @@ import './App.css';
 import 'antd/dist/antd.css';
 import './main.css'
 import {checkJwt} from "./Actions/jwtActions";
+import {ThemeSwitcherProvider} from "react-css-theme-switcher";
 
+
+const themes = {
+    dark: `${process.env.PUBLIC_URL}/dark-theme.css`,
+    light: `${process.env.PUBLIC_URL}/light-theme.css`,
+};
 
 class App extends React.Component{
     componentDidMount() {
         document.title = "Story";
     }
 
+
     render() {
+        const currentTheme = this.props.darkMode? 'dark': 'light';
         return (
-            <AppRouter
-                isLogged={checkJwt(this.props.jwtToken)}
-            />
+            <ThemeSwitcherProvider themeMap={themes} defaultTheme={currentTheme}>
+                <AppRouter
+                    isLogged={checkJwt(this.props.jwtToken)}
+                />
+            </ThemeSwitcherProvider>
 
         );
     }
@@ -28,7 +38,8 @@ class App extends React.Component{
 
 const mapStateToProps = state => {
     return {
-        jwtToken: state.usersReducer.jwtToken
+        jwtToken: state.usersReducer.jwtToken,
+        darkMode: state.sitesReducer.darkMode
     }
 };
 

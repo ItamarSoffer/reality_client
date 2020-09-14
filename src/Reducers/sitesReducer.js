@@ -6,10 +6,18 @@ Saves General variables:
     4. cardsRenderCount- being changed after search in home or all, forces re-fetching relevant cards.
     5. storyExpandMode- true == expand, false == collapse.
  */
-const DarkModeLocalStorage = window.localStorage.getItem('DarkMode');
+const darkModeLocalStorage = window.localStorage.getItem('darkMode');
+
+let darkModeData = null;
+if (darkModeLocalStorage === 'true'){
+    darkModeData = true;
+}
+else if (darkModeLocalStorage === 'false'){
+    darkModeData = false;
+}
 
 const siteInitState = {
-    DarkMode: (DarkModeLocalStorage !== null ? DarkModeLocalStorage : false),
+    darkMode: darkModeData,
     editMode: false,
     timelineRenderCount: 0,
     storyViewMode: 'timeline',
@@ -21,8 +29,8 @@ const sitesReducer = (state = siteInitState, action) => {
 
     switch(action.type){
         case "SET_THEME":
-            window.localStorage.setItem('DarkMode',action.payload);
-            state = {...state, DarkMode: action.payload};
+            window.localStorage.setItem('darkMode',action.payload);
+            state = {...state, darkMode: action.payload};
             break;
 
         case "EDIT_MODE":
