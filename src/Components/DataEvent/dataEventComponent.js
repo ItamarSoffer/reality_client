@@ -21,7 +21,7 @@ class DataEvent extends React.Component {
                     key={this.props.data.event_id}
                     className="vertical-timeline-element--work"
                     contentStyle={{
-                        background: 'rgb(255, 255, 255)',
+                        background: this.props.darkMode? 'rgb(40,40,40)':'rgb(255, 255, 255)',
                         color: '#000',
                         borderTop: `3px solid ${this.props.data.frame_color}`}}
                     contentArrowStyle={{ borderRight: '7px solid  rgb(255, 255, 255)' }}
@@ -79,6 +79,7 @@ const mapStateToProps = state => {
         editMode: state.sitesReducer.editMode,
         loggedUser : state.usersReducer.loggedUser,
         storyExpandMode: state.sitesReducer.storyExpandMode,
+        darkMode: state.sitesReducer.darkMode
 
     }
 };
