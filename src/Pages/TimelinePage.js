@@ -114,7 +114,7 @@ class StoryPage extends  React.Component {
 
 const mapStateToProps = state => {
     return {
-        DarkMode: state.sitesReducer.DarkMode,
+        darkMode: state.sitesReducer.darkMode,
         timelineRenderCount : state.sitesReducer.timelineRenderCount,
         jwtToken: state.usersReducer.jwtToken,
         events: state.eventsReducer.events
