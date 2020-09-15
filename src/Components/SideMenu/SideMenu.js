@@ -152,9 +152,12 @@ class SideMenu extends React.Component {
                 <br/>
                 <br/>
 
-                    {/* DARK MODE SWITCH*/}
-                <ThemeSwitch/>
-
+                {/* DARK MODE SWITCH*/}
+                <div style={{display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center', width: '100%'}}>
+                    <ThemeSwitch/>
+                </div>
                 <AboutSider/>
             </Sider>
 
