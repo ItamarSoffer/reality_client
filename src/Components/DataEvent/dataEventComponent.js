@@ -28,7 +28,7 @@ class DataEvent extends React.Component {
                     iconStyle={{ background: this.props.data.frame_color, color: '#fff' }}
                     icon={TimelineIcons[this.props.data.icon]}
 
-                    date={this.props.data.event_time}
+                    date={<Typography.Text>{this.props.data.event_time}</Typography.Text>}
 
                 >
 
