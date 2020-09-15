@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {withRouter} from "react-router";
 import {logoutAction} from "../Actions/usersActions";
 import SideMenu from '../Components/SideMenu/SideMenu';
-
+import {setThemeAction} from "../Actions/siteActions";
 
 
 class SideMenuPage extends React.Component{
@@ -11,6 +11,7 @@ class SideMenuPage extends React.Component{
     handlerLogout = () => {
         this.props.logout();
         // console.log("Logged Out");
+        this.props.setThemeAction(false);
         this.props.history.push('/login');
     };
 
@@ -45,6 +46,8 @@ const mapDispatchToProps = dispatch => {
         logout: () => {
             dispatch(logoutAction());
         },
+        setThemeAction: (val) => dispatch(setThemeAction(val)),
+
 
     }
 };
