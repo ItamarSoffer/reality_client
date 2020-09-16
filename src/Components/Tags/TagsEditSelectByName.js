@@ -1,7 +1,5 @@
 import React from 'react';
 import {Select, Tag} from "antd";
-import {backendAPI} from "../../Structure/api";
-import axios from "axios";
 import {connect} from "react-redux";
 
 const { Option } = Select;
@@ -16,23 +14,7 @@ class TagsEditSelectByName extends React.Component {
 
     }
 
-    componentWillMount() {
-        this.fetchTags();
-    }
 
-    fetchTags = () => {
-        const fetchTagsApi = backendAPI.concat(`/timeline/${this.props.url}/get_tags`);
-        axios.post(fetchTagsApi, {
-            jwt_token: this.props.jwtToken,
-        }).then(res => res.data)
-            .then(data => data.map(e => ({...e, nameAndColor: [e.tag_name, e.tag_color]})))
-            .then( (data) => {
-                this.setState( {
-                    storyTags: data,
-                    isLoaded: true
-                });
-            })
-    };
     handleChange(value) {
         // console.log(value); // { key: "lucy", label: "Lucy (101)" }
     }
