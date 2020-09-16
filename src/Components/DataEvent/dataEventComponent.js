@@ -7,6 +7,7 @@ import EventEditOptions from "./EventEditOptions";
 import {connect} from "react-redux";
 import TagsRenderer from '../Tags/TagsRenderer'
 import ExtraData from "./ExtraData/ExtraData";
+import LinkView from "./LinkView";
 
 
 const { Paragraph, Title } = Typography;
@@ -41,10 +42,10 @@ class DataEvent extends React.Component {
                                     {this.props.data.text}
                                 </Paragraph>}
                             {!this.props.data.link ? null :
-                                <div><a href={this.props.data.link} onClick={(event) => {
-                                    event.preventDefault();
-                                    window.open(this.props.data.link);
-                                }}>{this.props.data.link}</a> <br/></div>}
+
+                                    <LinkView link={this.props.data.link}/>
+
+                                }
                             {this.props.data.tags.length > 0 ? <TagsRenderer tags={this.props.data.tags}/> : null}
                             {this.props.data.extra_data?
                                 <div>

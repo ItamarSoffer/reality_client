@@ -187,7 +187,6 @@ class EditEvent extends React.Component {
                     message.warning({content: response.data, key: messageKey})
                 }
                 else if (response.status === 200){
-                    console.log(response.data.linkTime);
                     message.success({content: response.data.message,
                         key: messageKey,
                         duration: 2.5});

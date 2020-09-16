@@ -86,7 +86,6 @@ class TimelineMenu extends React.Component {
     };
 
     render() {
-        const menuTheme = this.props.darkMode === true ? "dark": "light";
         const queryParams = getQueryStringParams(this.props.history.location.search);
         let expandMode = this.props.storyExpandMode;
         if (queryParams.expand){
@@ -101,7 +100,6 @@ class TimelineMenu extends React.Component {
                     mode="horizontal"
                     // align="center"
                     selectable={false}
-                    theme={menuTheme}
                     style={{display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
