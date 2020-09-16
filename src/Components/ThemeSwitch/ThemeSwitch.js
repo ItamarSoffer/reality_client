@@ -49,7 +49,7 @@ export default function ThemeSwitch() {
             {/*    checked={isDarkMode}*/}
             {/*    onChange={toggleTheme} />*/}
             {/*    <br/>*/}
-            <Tooltip title={"Switch theme"}>
+            <Tooltip title={"Switch theme"} placement='right'>
                 <Icon component={CgDarkMode} style={{fontSize: 23}}  onClick={onThemeIconClick}/>
             </Tooltip>
 
