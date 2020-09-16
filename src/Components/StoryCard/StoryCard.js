@@ -84,7 +84,7 @@ class StoryCard extends React.Component{
         let favButton =null;
         if (this.props.favoritesIds.indexOf(this.props.cardData.id) !== -1){
             favButton =
-                <Popover content={<Text style={{color: 'red'}}>Remove</Text>}>
+
                 <StarFilled
                     style={{
                         fontSize: 20,
@@ -94,16 +94,13 @@ class StoryCard extends React.Component{
 
                              onClick={() => this.handleRemoveFavorite()}
                 />
-                </Popover>;
         }
         else {
             favButton =
-                <Popover content={<Text>Add</Text>}>
                 <StarOutlined style={{fontSize: 20}}
                              // twoToneColor="#01a9b4"
                              onClick={() => this.handleAddFavorite()}
                 />
-            </Popover>;
         }
 
 
