@@ -11,11 +11,14 @@ import StoryTable from '../StoryTable/StoryTable';
 import {getQueryStringParams} from "../../Actions/queryStringActions";
 import {apiEditStoryDescription, apiEditStoryName, apiGetEvents} from "../../Actions/apiActions";
 import {getStoryEventsAction, eventsCompareSorter} from "../../Actions/eventsActions";
+import {HotKeyCheck, AllKeys, StoryShortcuts} from "../Shortcuts/StoryShortcuts";
 
 
 const { Title } = Typography;
 
 class Timeline extends React.Component {
+
+
 
     constructor(props){
         super(props);
@@ -166,6 +169,7 @@ class Timeline extends React.Component {
                         </VerticalTimeline> : null
                     }
                     <BackTop />
+                    <StoryShortcuts/>
 
                 </div>
 

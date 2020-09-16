@@ -13,6 +13,7 @@ import AboutSider from "../AboutSider/AboutSider";
 import {setReRenderFavorites, setUserFavorites, clearFavorites} from "../../Actions/favoritesActions";
 import {apiGetFavorites,} from "../../Actions/apiActions";
 import ThemeSwitch from "../ThemeSwitch/ThemeSwitch";
+import {MenuShortcuts} from "../Shortcuts/StoryShortcuts";
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
@@ -158,6 +159,7 @@ class SideMenu extends React.Component {
                     <ThemeSwitch/>
                 </div>
                 <AboutSider/>
+                <MenuShortcuts/>
             </Sider>
 
 
