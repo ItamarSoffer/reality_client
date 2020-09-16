@@ -8,24 +8,25 @@ import {setThemeAction} from "../../Actions/siteActions";
 import {CgDarkMode} from "react-icons/cg";
 
 export default function ThemeSwitch() {
-    const [isDarkMode, setIsDarkMode] = React.useState();
-    const { switcher, currentTheme, status, themes } = useThemeSwitcher();
+    // const [isDarkMode, setIsDarkMode] = React.useState();
+    // const { switcher, currentTheme, themes } = useThemeSwitcher();
+    const { status} = useThemeSwitcher();
 
     const state = useSelector(state => state);
     const dispatch = useDispatch();
 
-    const toggleTheme = (isChecked) => {
-        /*
-        the switcher function is a hook that can replace the theme anywhere.
-        I used the setThemeAction-
-        that changes the theme in redux and then it is changed in App component.
-        */
-
-        setIsDarkMode(isChecked);
-        switcher({ theme: isChecked ? themes.dark : themes.light });
-        dispatch(setThemeAction(isChecked))
-
-    };
+    // const toggleTheme = (isChecked) => {
+    //     /*
+    //     the switcher function is a hook that can replace the theme anywhere.
+    //     I used the setThemeAction-
+    //     that changes the theme in redux and then it is changed in App component.
+    //     */
+    //
+    //     setIsDarkMode(isChecked);
+    //     switcher({ theme: isChecked ? themes.dark : themes.light });
+    //     dispatch(setThemeAction(isChecked))
+    //
+    // };
 
     const onThemeIconClick = () => {
         dispatch(setThemeAction(!state.sitesReducer.darkMode));

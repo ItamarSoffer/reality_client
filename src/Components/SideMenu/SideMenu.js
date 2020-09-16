@@ -1,6 +1,6 @@
 import React from 'react';
 import {Layout, Menu, message} from 'antd';
-import { Switch } from 'antd';
+// import { Switch } from 'antd';
 import {connect} from "react-redux";
 import {
     withRouter
@@ -122,7 +122,6 @@ class SideMenu extends React.Component {
                                                     window.open(`${localAddress}/story/${favItem.url}`)
                                                 }}
                                             >
-
                                                 {favItem.name}
                                             </Menu.Item>)
                                     }
