@@ -8,8 +8,7 @@ import PermissionsModal from "../permissionsModal/permissionsModal";
 import {
     enableEditAction,
     disableEditAction,
-    storyModeTimelineAction,
-    storyModeTableAction,
+    setStoryViewModeAction,
     storyExpandModeAction
 } from "../../Actions/siteActions";
 import {
@@ -25,8 +24,9 @@ import StoryInSearch from './Search/StorySearch';
 import UploadXlsxModal from './UploadXlsxModal/UploadXlsxModal';
 import TagsModal from '../Tags/TagsModal';
 import TagsSearch from "./Search/TagsSearch";
-import {getQueryStringParams} from "../../Actions/queryStringActions";
+import {getQueryStringParams, setUrlParam} from "../../Actions/queryStringActions";
 import {withRouter} from "react-router";
+import {HotKeyPermissionsModal, StoryEditShortcuts} from "../Shortcuts/StoryShortcuts";
 
 const { SubMenu } = Menu;
 
@@ -202,19 +202,29 @@ class TimelineMenu extends React.Component {
                     </SubMenu>
 
                 </Menu>
-                <CreateNewEvent url={this.props.url} />
-                <PermissionsModal url={this.props.url}/>
-                <DeleteTimelineModal
-                    url={this.props.url}
-                    timelineId={this.props.timelineId}/>
-                <UploadXlsxModal
-                    urlAddress={this.props.url}
-                    timelineId={this.props.timelineId}/>
-                <TagsModal
-                    url={this.props.url}
-                    timelineId={this.props.timelineId}
-                    role={this.props.role}
-                />
+                {(["owner", "creator"].indexOf(this.props.role) === -1)? null:
+                    <div>
+
+                        <HotKeyPermissionsModal/>
+                        <PermissionsModal url={this.props.url}/>
+                    </div>}
+                {(["write", "owner", "creator"].indexOf(this.props.role) === -1)? null:
+                    <div>
+                        <CreateNewEvent url={this.props.url} />
+                        <DeleteTimelineModal
+                            url={this.props.url}
+                            timelineId={this.props.timelineId}/>
+                        <UploadXlsxModal
+                            urlAddress={this.props.url}
+                            timelineId={this.props.timelineId}/>
+                        <TagsModal
+                            url={this.props.url}
+                            timelineId={this.props.timelineId}
+                            role={this.props.role}
+                        />
+                        <StoryEditShortcuts/>
+
+                    </div>}
             </div>
 
 
@@ -240,8 +250,8 @@ const mapDispatchToProps = dispatch => {
         showDeleteTimelineModal: () => {dispatch(controlDeleteTimelineModalAction(true))},
         showUploadXlsxModal: () => {dispatch(controlUploadXlsxModalAction(true))},
         showTagsModal: () => {dispatch(controlTagsModalAction(true))},
-        storyModeTimelineAction: () => {dispatch(storyModeTimelineAction())},
-        storyModeTableAction: () => {dispatch(storyModeTableAction())},
+        storyModeTimelineAction: () => {dispatch(setStoryViewModeAction('timeline'))},
+        storyModeTableAction: () => {dispatch(setStoryViewModeAction('table'))},
         // storyModePrevTableAction: () => {dispatch(storyModePrevTableAction())},
         storyExpandModeAction: () => {dispatch(storyExpandModeAction(true))},
         storyCollapseModeAction: () => {dispatch(storyExpandModeAction(false))},

@@ -11,7 +11,7 @@ import StoryTable from '../StoryTable/StoryTable';
 import {getQueryStringParams} from "../../Actions/queryStringActions";
 import {apiEditStoryDescription, apiEditStoryName, apiGetEvents} from "../../Actions/apiActions";
 import {getStoryEventsAction, eventsCompareSorter} from "../../Actions/eventsActions";
-import {HotKeyCheck, AllKeys, StoryShortcuts} from "../Shortcuts/StoryShortcuts";
+import {StoryShortcuts, } from "../Shortcuts/StoryShortcuts";
 
 
 const { Title } = Typography;

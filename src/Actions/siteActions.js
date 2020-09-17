@@ -28,19 +28,13 @@ export const setReRenderTimelineAction = (index) => {
     }
 };
 
-export const storyModeTimelineAction = () => {
+export const setStoryViewModeAction = (val) => {
     return {
         type: "STORY_TYPE_MODE",
-        payload: 'timeline'
+        payload: val
     }
 };
 
-export const storyModeTableAction = () => {
-    return {
-        type: "STORY_TYPE_MODE",
-        payload: 'table'
-    }
-};
 
 export const storyExpandModeAction = (val) => {
     return {

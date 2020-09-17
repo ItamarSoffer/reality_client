@@ -1,11 +1,16 @@
-import Hotkeys from "react-hot-keys";
 import React from "react";
+import Hotkeys from "react-hot-keys";
 import { useSelector, useDispatch } from "react-redux";
-import {controlNewEventModalAction,
-controlPermissionsModalAction, controlAboutSiderAction} from "../../Actions/modalsActions";
+import { useHistory } from "react-router-dom";
+import {
+    controlNewEventModalAction,
+    controlPermissionsModalAction,
+    controlAboutSiderAction,
+    controlTagsModalAction} from "../../Actions/modalsActions";
 import {enableEditAction, disableEditAction} from "../../Actions/siteActions";
 import {logoutAction} from "../../Actions/usersActions";
-import {setThemeAction} from "../../Actions/siteActions";
+import {setThemeAction, setStoryViewModeAction, storyExpandModeAction, StoryOpenAllExtraData} from "../../Actions/siteActions";
+import {getQueryStringParams} from "../../Actions/queryStringActions";
 
 /*
 - הוספת אירוע חדש- alt+ n
@@ -45,11 +50,11 @@ export function HotKeyNewEvent(){
         onKeyUp={onKeyUp}
     />)}
 
+export function HotKeyTagsModal(){
+    const dispatch = useDispatch();
 
-export function HotKeyModeSwitch(){
     const onKeyUp = (keyName, e, handle) => {
-        console.log("keyName", keyName);
-        console.log("test:onKeyUp", e, handle);
+        dispatch(controlTagsModalAction(true));
     };
     return (<Hotkeys
         keyName="alt+t"
@@ -57,10 +62,57 @@ export function HotKeyModeSwitch(){
     />)}
 
 
-export function HotKeyExpandSwitch(){
+
+export function HotKeyModeSwitch(){
+    const state = useSelector(state => state);
+    const dispatch = useDispatch();
+    let history = useHistory();
+
+
     const onKeyUp = (keyName, e, handle) => {
-        console.log("keyName", keyName);
-        console.log("test:onKeyUp", e, handle);
+        const pathName = history.location.pathname;
+        let currentSearchQuery = getQueryStringParams(history.location.search);
+        const currentView = currentSearchQuery['view']? currentSearchQuery['view'] : state.sitesReducer.storyViewMode;
+        const newView = currentView === 'timeline'? 'table': 'timeline';
+
+
+        currentSearchQuery['view'] = newView;
+        history.push(
+            {
+                pathname: pathName,
+                search: "?" + new URLSearchParams(
+                    {...currentSearchQuery}
+                ).toString()
+            });
+        dispatch(setStoryViewModeAction(newView));
+    };
+    return (<Hotkeys
+        keyName="alt+v"
+        onKeyUp={onKeyUp}
+    />)}
+
+
+export function HotKeyExpandSwitch(){
+    const state = useSelector(state => state);
+    const dispatch = useDispatch();
+    let history = useHistory();
+
+
+    const onKeyUp = (keyName, e, handle) => {
+        const pathName = history.location.pathname;
+        let currentSearchQuery = getQueryStringParams(history.location.search);
+        const currentExpand = currentSearchQuery['expand']? currentSearchQuery['expand'] : state.sitesReducer.storyExpandMode;
+        const newExpand = currentExpand !== 'true';
+
+        currentSearchQuery['expand'] = newExpand.toString();
+        history.push(
+            {
+                pathname: pathName,
+                search: "?" + new URLSearchParams(
+                    {...currentSearchQuery}
+                ).toString()
+            });
+        dispatch(storyExpandModeAction(newExpand));
     };
     return (<Hotkeys
         keyName="alt+x"
@@ -75,15 +127,15 @@ export function HotKeyDarkMode(){
         dispatch(setThemeAction(!state.sitesReducer.darkMode));
     };
     return (<Hotkeys
-        keyName="shift+d"
+        keyName="alt+a"
         onKeyUp={onKeyUp}
     />)}
 
 
 export function HotKeyNewStory(){
+    let history = useHistory();
     const onKeyUp = (keyName, e, handle) => {
-        console.log("keyName", keyName);
-        console.log("test:onKeyUp", e, handle);
+        history.push("/new_story");
     };
     return (<Hotkeys
         keyName="shift+alt+n"
@@ -91,7 +143,7 @@ export function HotKeyNewStory(){
     />)}
 
 export function HotKeyAboutSider(){
-        const dispatch = useDispatch();
+    const dispatch = useDispatch();
     const onKeyUp = (keyName, e, handle) => {
         dispatch(controlAboutSiderAction(true));
         console.log("keyName", keyName);
@@ -103,9 +155,9 @@ export function HotKeyAboutSider(){
     />)}
 
 export function HotKeyHomeScreen(){
+    let history = useHistory();
     const onKeyUp = (keyName, e, handle) => {
-        console.log("keyName", keyName);
-        console.log("test:onKeyUp", e, handle);
+        history.push("/");
     };
     return (<Hotkeys
         keyName="shift+alt+h"
@@ -114,7 +166,7 @@ export function HotKeyHomeScreen(){
 
 
 export function HotKeyLogout(){
-        const dispatch = useDispatch();
+    const dispatch = useDispatch();
     const onKeyUp = (keyName, e, handle) => {
         dispatch(setThemeAction(false));
         dispatch(logoutAction());
@@ -144,14 +196,26 @@ export function HotKeyEditMode(){
 
 
 export function HotKeyPermissionsModal(){
-        const dispatch = useDispatch();
+    const dispatch = useDispatch();
     const onKeyUp = (keyName, e, handle) => {
-                dispatch(controlPermissionsModalAction(true));
+        dispatch(controlPermissionsModalAction(true));
     };
     return (<Hotkeys
         keyName="alt+p"
         onKeyUp={onKeyUp}
     />)}
+export function HotKeyOpenAllExtra(){
+    const dispatch = useDispatch();
+    const state = useSelector(state => state);
+
+    const onKeyUp = (keyName, e, handle) => {
+        dispatch(StoryOpenAllExtraData(!state.sitesReducer.storyOpenAllExtra));
+    };
+    return (<Hotkeys
+        keyName="shift+alt+x"
+        onKeyUp={onKeyUp}
+    />)}
+
 
 export function AllKeys(){
     return (<div>
@@ -181,11 +245,18 @@ export function MenuShortcuts(){
 }
 
 export function StoryShortcuts(){
+    // permissions is alone
     return (<div>
-        <HotKeyNewEvent/>
-        <HotKeyPermissionsModal/>
         <HotKeyModeSwitch/>
-        <HotKeyEditMode/>
         <HotKeyExpandSwitch/>
+        <HotKeyOpenAllExtra/>
+    </div>)
+}
+
+export function StoryEditShortcuts(){
+    return (<div>
+        <HotKeyEditMode/>
+        <HotKeyNewEvent/>
+        <HotKeyTagsModal/>
     </div>)
 }
