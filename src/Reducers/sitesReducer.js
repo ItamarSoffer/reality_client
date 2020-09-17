@@ -22,7 +22,8 @@ const siteInitState = {
     timelineRenderCount: 0,
     storyViewMode: 'timeline',
     cardsRenderCount: 0,
-    storyExpandMode: true
+    storyExpandMode: true,
+    storyOpenAllExtra: false
 };
 
 const sitesReducer = (state = siteInitState, action) => {
@@ -53,6 +54,10 @@ const sitesReducer = (state = siteInitState, action) => {
 
         case "CARDS_RENDER_COUNT":
             state = {...state, cardsRenderCount: action.payload};
+            break;
+
+        case "STORY_EXTRA_OPEN_ALL":
+            state = {...state, storyOpenAllExtra: action.payload};
             break;
 
 

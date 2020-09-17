@@ -49,7 +49,10 @@ class DataEvent extends React.Component {
                             {this.props.data.extra_data?
                                 <div>
                                     <br/>
-                                    <ExtraData key={"extra_".concat(this.props.data.event_id)} data={this.props.data.extra_data}/>
+                                    <ExtraData key={"extra_".concat(this.props.data.event_id)}
+                                               data={this.props.data.extra_data}
+                                               storyOpenAllExtra={this.props.storyOpenAllExtra}
+                                    />
                                 </div>
                                 : null}
                             {!this.props.editMode? null:
@@ -78,7 +81,8 @@ const mapStateToProps = state => {
     return {
         editMode: state.sitesReducer.editMode,
         loggedUser : state.usersReducer.loggedUser,
-        darkMode: state.sitesReducer.darkMode
+        darkMode: state.sitesReducer.darkMode,
+        storyOpenAllExtra: state.sitesReducer.storyOpenAllExtra
 
     }
 };

@@ -56,3 +56,10 @@ export const setReRenderCardsAction = (index) => {
     }
 };
 
+export const StoryOpenAllExtraData = (val) => {
+    return {
+        type: "STORY_EXTRA_OPEN_ALL",
+        payload: val
+    }
+};
+

@@ -46,7 +46,7 @@ class ExtraData extends React.Component{
 
         return (
             <div >
-                {this.state.visible? extraDataComponent: null}
+                {this.state.visible || this.props.storyOpenAllExtra? extraDataComponent: null}
                 {showButton}
             </div>
         );
