@@ -14,7 +14,6 @@ const { Paragraph, Title } = Typography;
 
 
 class DataEvent extends React.Component {
-
     render() {
         return (
             <ConfigProvider direction={"rtl"} >
@@ -35,7 +34,7 @@ class DataEvent extends React.Component {
 
                     {!this.props.data.header ? null : <Title level={3}>{this.props.data.header}</Title> }
 
-                    {this.props.storyExpandMode?
+                    {this.props.expandMode?
                         <div>
                             {!this.props.data.text ? null :
                                 <Paragraph ellipsis={{rows: 3, expandable: true}} style={{whiteSpace: "pre-line"}}>
@@ -79,7 +78,6 @@ const mapStateToProps = state => {
     return {
         editMode: state.sitesReducer.editMode,
         loggedUser : state.usersReducer.loggedUser,
-        storyExpandMode: state.sitesReducer.storyExpandMode,
         darkMode: state.sitesReducer.darkMode
 
     }
