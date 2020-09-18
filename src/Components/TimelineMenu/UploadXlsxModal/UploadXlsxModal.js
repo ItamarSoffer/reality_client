@@ -1,5 +1,5 @@
 import React from 'react';
-import {message, Modal, Typography, Upload, Divider} from "antd";
+import {Divider, message, Modal, Typography, Upload} from "antd";
 import {connect} from "react-redux";
 import {controlUploadXlsxModalAction} from "../../../Actions/modalsActions";
 import {FileExcelOutlined} from '@ant-design/icons';
@@ -95,7 +95,7 @@ class UploadXlsxModal extends React.Component {
                 </Paragraph>
                 <Dragger {...this.draggerProps}>
                     <p className="ant-upload-drag-icon">
-                        <FileExcelOutlined />
+                        <FileExcelOutlined style={{color: '#008000'}}/>
                     </p>
                     <p className="ant-upload-text">Click or drag file to this area to upload</p>
                     <p className="ant-upload-hint">

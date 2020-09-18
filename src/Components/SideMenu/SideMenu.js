@@ -11,7 +11,7 @@ import AboutSider from "../AboutSider/AboutSider";
 import {clearFavorites, setReRenderFavorites, setUserFavorites} from "../../Actions/favoritesActions";
 import {apiGetFavorites,} from "../../Actions/apiActions";
 import ThemeSwitch from "../ThemeSwitch/ThemeSwitch";
-import {MenuShortcuts} from "../Shortcuts/StoryShortcuts";
+import {MenuShortcuts} from "../Shortcuts/MenuShortcuts";
 import ShortcutsModal from "../Shortcuts/ShortcutsModal";
 
 const { Sider } = Layout;
