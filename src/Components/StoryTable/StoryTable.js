@@ -24,10 +24,13 @@ function handleText (text){
 }
 
 class StoryTable extends React.Component {
-    state = {
-        searchText: '',
-        searchedColumn: '',
-    };
+    constructor(props){
+        super(props);
+        this.state = {
+            searchText: '',
+            searchedColumn: '',
+        };
+    }
 
 
     setColumns() {
@@ -208,13 +211,13 @@ class StoryTable extends React.Component {
 
     render() {
         const columns = this.setColumns();
-        let expandableConfig = {};
         const paginationConfig= {
             total: this.props.timeline_events.length,
             showSizeChanger: true,
             showTotal: (total, range) => `${range[0]}-${range[1]} מתוך ${total}`
         };
-        expandableConfig = {};
+
+        let expandableConfig = {};
         if (!this.props.expandMode){
             expandableConfig = {
                 expandedRowRender: record =>
@@ -223,7 +226,9 @@ class StoryTable extends React.Component {
                         {record.extra_data?
                             <div>
                                 <br/>
-                                <ExtraData key={"t_extra_".concat(record.event_id)} data={record.extra_data}/>
+                                <ExtraData key={"t_extra_".concat(record.event_id)}
+                                           storyOpenAllExtra={this.props.storyOpenAllExtra}
+                                           data={record.extra_data}/>
                             </div>
                             : null}
 
@@ -238,7 +243,11 @@ class StoryTable extends React.Component {
                         {record.extra_data?
                             <div>
                                 <br/>
-                                <ExtraData key={"t_extra_".concat(record.event_id)} data={record.extra_data} startsOpen/>
+                                <ExtraData
+                                    key={"t_extra_".concat(record.event_id)}
+                                    data={record.extra_data}
+                                    storyOpenAllExtra={this.props.storyOpenAllExtra}
+                                    startsOpen/>
                             </div>
                             : null}
 
@@ -271,6 +280,7 @@ const mapStateToProps = state => {
     return {
         editMode: state.sitesReducer.editMode,
         jwtToken: state.usersReducer.jwtToken,
+        storyOpenAllExtra: state.sitesReducer.storyOpenAllExtra
 
 
     }
