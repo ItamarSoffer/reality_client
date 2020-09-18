@@ -28,8 +28,6 @@ const storyShortcuts = [
     {content: 'Switch Expand-collapse',
         hotKeys: ['Alt', 'X']
     },
-    {content: 'Add New Event',
-        hotKeys: ['', '']},
     {content: 'Open Attachments',
         hotKeys: ['Shift', 'Alt', 'X']
     },
