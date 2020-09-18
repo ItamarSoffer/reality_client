@@ -10,8 +10,7 @@ import {
     controlTagsModalAction
 } from "../../Actions/modalsActions";
 import {
-    disableEditAction,
-    enableEditAction,
+    controlEditAction,
     setStoryViewModeAction,
     setThemeAction,
     storyExpandModeAction,
@@ -49,9 +48,11 @@ export function HotKeyCheck(){
 
 export function HotKeyNewEvent(){
     const dispatch = useDispatch();
+    const state = useSelector(state => state);
+
 
     const onKeyUp = (keyName, e, handle) => {
-        dispatch(controlNewEventModalAction(true));
+        dispatch(controlNewEventModalAction(!state.modalsReducer.showNewEventModal));
     };
     return (<Hotkeys
         keyName="alt+n"
@@ -60,15 +61,15 @@ export function HotKeyNewEvent(){
 
 export function HotKeyTagsModal(){
     const dispatch = useDispatch();
+    const state = useSelector(state => state);
 
     const onKeyUp = (keyName, e, handle) => {
-        dispatch(controlTagsModalAction(true));
+        dispatch(controlTagsModalAction(!state.modalsReducer.showTagsModal));
     };
     return (<Hotkeys
         keyName="alt+t"
         onKeyUp={onKeyUp}
     />)}
-
 
 
 export function HotKeyModeSwitch(){
@@ -152,10 +153,10 @@ export function HotKeyNewStory(){
 
 export function HotKeyAboutSider(){
     const dispatch = useDispatch();
+    const state = useSelector(state => state);
+
     const onKeyUp = (keyName, e, handle) => {
-        dispatch(controlAboutSiderAction(true));
-        console.log("keyName", keyName);
-        console.log("test:onKeyUp", e, handle);
+        dispatch(controlAboutSiderAction(!state.modalsReducer.showAboutSider));
     };
     return (<Hotkeys
         keyName="alt+h"
@@ -190,12 +191,7 @@ export function HotKeyEditMode(){
     const state = useSelector(state => state);
     const dispatch = useDispatch();
     const onKeyUp = (keyName, e, handle) => {
-        if (state.sitesReducer.editMode){
-            dispatch(disableEditAction())
-        }
-        else {
-            dispatch(enableEditAction())
-        }
+        dispatch(controlEditAction(!state.sitesReducer.editMode));
     };
     return (<Hotkeys
         keyName="alt+c"
@@ -205,8 +201,10 @@ export function HotKeyEditMode(){
 
 export function HotKeyPermissionsModal(){
     const dispatch = useDispatch();
+    const state = useSelector(state => state);
+
     const onKeyUp = (keyName, e, handle) => {
-        dispatch(controlPermissionsModalAction(true));
+        dispatch(controlPermissionsModalAction(!state.modalsReducer.showPermissionsModal));
     };
     return (<Hotkeys
         keyName="alt+p"
@@ -227,9 +225,10 @@ export function HotKeyOpenAllExtra(){
 
 export function HotKeyShortcutsModal() {
     const dispatch = useDispatch();
+    const state = useSelector(state => state);
 
     const onKeyUp = (keyName, e, handle) => {
-        dispatch(controlShortcutsModalAction(true));
+        dispatch(controlShortcutsModalAction(!state.modalsReducer.showShortcutsModal));
     };
     return (<Hotkeys
         keyName="alt+s,s+c"
