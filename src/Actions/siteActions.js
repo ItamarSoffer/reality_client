@@ -7,17 +7,10 @@ export const setThemeAction = (isCurrentDark) => {
 };
 
 
-export const enableEditAction = () => {
+export const controlEditAction = (val) => {
     return {
         type: "EDIT_MODE",
-        payload: true
-    }
-};
-
-export const disableEditAction = () => {
-    return {
-        type: "EDIT_MODE",
-        payload: false
+        payload: val
     }
 };
 

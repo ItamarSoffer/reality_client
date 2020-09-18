@@ -5,12 +5,7 @@ import MenuIcons from '../Icons/MenuIcons';
 import DownloadExcel from '../Export/ToExcel';
 import CreateNewEvent from "../NewEvent/NewEventComponent";
 import PermissionsModal from "../permissionsModal/permissionsModal";
-import {
-    disableEditAction,
-    enableEditAction,
-    setStoryViewModeAction,
-    storyExpandModeAction
-} from "../../Actions/siteActions";
+import {controlEditAction, setStoryViewModeAction, storyExpandModeAction} from "../../Actions/siteActions";
 import {
     controlDeleteTimelineModalAction,
     controlNewEventModalAction,
@@ -243,8 +238,12 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return{
-        enableEdit: () => {dispatch(enableEditAction())},
-        disableEdit: () => {dispatch(disableEditAction())},
+        enableEdit: () => {
+            dispatch(controlEditAction(true))
+        },
+        disableEdit: () => {
+            dispatch(controlEditAction(false))
+        },
         showNewEventModal: () => {dispatch(controlNewEventModalAction(true))},
         showPermissionsModal: () => {dispatch(controlPermissionsModalAction(true))},
         showDeleteTimelineModal: () => {dispatch(controlDeleteTimelineModalAction(true))},
