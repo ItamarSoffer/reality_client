@@ -35,9 +35,18 @@ class FeaturesCollapse extends React.Component {
         {
             systemName: 'Ynet',
             iconPath:'./images/logos/YnetLogo.png',
-        },        {
+        },
+        {
             systemName: 'Story',
             iconPath:'./images/logos/StoryIcon.svg',
+        },
+        {
+            systemName: 'iframe',
+            iconPath:'./images/logos/iframeLogo.png',
+        },
+        {
+            systemName: 'Splunk- via iframe',
+            iconPath:'./images/logos/SplunkLogo.jpg',
         },
     ];
 
@@ -50,39 +59,35 @@ class FeaturesCollapse extends React.Component {
             }}/>;
 
         return (
-
+            <div>
             <Collapse
-                defaultActiveKey={[0, 1, 2, 3, 4, 5, 6, 7, 8]}
+                defaultActiveKey={[1, 2, 3, 4, 5, 6, 7, 8]}
             >
-                <Panel header="What is Story" key={0} >
-                    <Text strong>Story is an Event based system for documentation and preserving knowledge.</Text>
-                    {handleEnText(` Each story should contains all the events that are related to the subject.
-                        One of its purposes is to interface with most of the unit's systems, in order to allow all the information to be concentrated in one system.
-                        
-                        Story is writen by Itamar Soffer from Data.`)}
+                <Panel header="What is Story" key={1}>
+                    <div style={{textAlign:"center"}}>
+                    <Text strong style={{fontSize: 16} }>Story is an events based system for documenting and preserving knowledge.</Text>
+                    </div>
+
+                        <Paragraph style={{whiteSpace: "pre-line"}}>
+                            {`Every story is built from events: click on the "Add" button to add a new one. 
+                            Each event includes the following parameters: title, date, time, link, content, icon, color and tags. 
+                            Enabling `} <Text strong>Edit Mode</Text>{` will open "edit" and "delete" buttons for each event.`}
+                        </Paragraph>
+
                         <img src={require('./images/logos/StoryIcon.svg')} alt={'storyIcon.svg'} width={'120px'}/>
-                </Panel>
-                <Panel header="Basics" key={1}>
-                    {
-                        handleEnText(
-                            `Each story is built from events.
-                            After creating a new story, clicking on the "Add Event" will open the the relevant modal.
-                            An event includes the following parameters: Title, date, time, link, content, icon, color and tags. 
-                            The events are editable and deletable- by enabling Edit Mode the buttons will appear. `
-                        )
-                    }
 
                 </Panel>
                 <Panel header="Tags" key={2}>
-                    {handleEnText(`Tags makes our life much easier. 
-                    We use tags as keywords for quick searching and filtering. Story lets you preform the following actions:
-                    1. Create: choose keyword and color.
-                    2. Add: add the tag to the relevant events.
-                    3. Edit: change the tag's text or color, and it will update everywhere.
-                    4. Delete: remove the tag from all events.
+                    <Paragraph style={{whiteSpace: "pre-line"}}>
+                    {`Tags are used as keywords for allowing quick searching and filtering.
+                    Story lets you:
+                    1. `} <Text strong>Create</Text>{`: choose keyword and color.
+                    2. `} <Text strong>Add</Text>{`: attach the tag to the relevant events.
+                    3. `} <Text strong>Edit</Text>{`: change the tag's text or color, and it will update everywhere.
+                    4. `} <Text strong>Delete</Text>{`: remove the tag from all events.
                     
-                    All of this is in the Edit menu -> tags. 
-                   # Tags are not shareable between stories.`)}
+                   # Tags are not shareable between stories.`}
+                    </Paragraph>
                     <Tag color={'#2f54eb'} key={'example_1'} closable>
                         תגית
                     </Tag>
@@ -95,27 +100,30 @@ class FeaturesCollapse extends React.Component {
 
                 </Panel>
                 <Panel header="Filters" key={3}>
-                    {handleEnText(
-                        `Story Lets you to filter by the following parameters:
-                    1. Time: Select a Time range of the events.
-                    2. Text: Searches in title, content and link.
-                    3. Tags: Matches all the events with al least one of the selected tags.
-                    The filter will be saved in the URL, so it can be copied.
-                    `)}
+
+                    <Paragraph style={{whiteSpace: "pre-line"}}>
+                        {`Story Lets you filter events by the following parameters:
+                    1. `} <Text strong>Time</Text>{`: select a Time range of the events.
+                    2. `} <Text strong>Text</Text>{`: searches in title, content and link.
+                    3. `} <Text strong>Tags</Text>{`: matches all the events with al least one of the selected tags.
+                    Filter will be saved in the URL for coping and sharing.
+                    `}
+                    </Paragraph>
 
                     <img src={require('./images/StoryFilters.png')} alt={'StoryFilters.png'} width={280} height={124}/>
                     <br/>
                     <Text strong>Tip: Use _ as wildcard!</Text>
                 </Panel>
                 <Panel header="Permissions" key={4}>
-                    {handleEnText(
-                        `Each story has an inner permission control.
-                        There are 4 permission roles:
-                        1. Read: Only read the story, can not edit.
-                        2. Write: Read + Edit story.
-                        3. Owner:  Write + add permissions to other users. Can delete the whole story. 
-                        4. Creator: The user who created the story. These permissions can not be given by a user.
-                    `)}
+                    <Paragraph style={{whiteSpace: "pre-line"}}>
+                        {`Each story has an inner permission control.
+                        There are 4 permission levels:
+                        1. `}<Text strong>Read</Text>{`: can only read the story.
+                        2. `} <Text strong> Write</Text>{`: can read and edit story.
+                        3. `} <Text strong>Owner</Text>{`:  can write and add permissions to other users.
+                        4. `} <Text strong>Creator</Text>{`: the user who created the story. These permissions can not be given by a user.
+                    `}
+                    </Paragraph>
                     <Tag color={'geekblue'} key={'read'}>
                         {'READ'}
                     </Tag>
@@ -137,10 +145,10 @@ class FeaturesCollapse extends React.Component {
                         <Panel header="Modes" key={5.1}>
                             <Paragraph style={{whiteSpace: "pre-line"}}>
                                 {`Story presents your events in two classic modes:
-                                1.`}
+                                1. `}
                                 <Text strong>Timeline Mode</Text>
                                 {`: Watch the events one by one, by the order they occur.
-                                2.`} <Text strong>Table Mode</Text>
+                                2. `} <Text strong>Table Mode</Text>
                                 {`: Like the classic M.D. table- but much better.
 
                                 Switch between modes in the View menu.`}
@@ -150,18 +158,18 @@ class FeaturesCollapse extends React.Component {
                         </Panel>
                         <Panel header="Views" key={5.2}>
                             <Paragraph style={{whiteSpace: "pre-line"}}>
-                                {`For every mode, You can display the content in two ways:
-                                1.`}
-                                <Text strong>Expanded</Text>
+                                {`Display the content in two ways:
+                                1. `}
+                                <Text strong>Expand</Text>
                                 {`: All the content of the events, in a spacious display.
-                                2.`} <Text strong>Compressed</Text>
-                                {`: Summarize of the events, watch more events in the same window.
+                                2. `} <Text strong>Compress</Text>
+                                {`: Summary of the events, watch more events in the same window.
 
                                 Switch between displays in the View menu.`}
 
                             </Paragraph>
-                            {handleEnText()}
                         </Panel>
+
                     </Collapse>
                 </Panel>
                 <Panel header="Import & Export" key={6}>
@@ -178,7 +186,7 @@ class FeaturesCollapse extends React.Component {
                 <Panel header="Integrations" key={7}>
                     {
                         handleEnText(`In our vision, Story will integrate with many of the unit's systems.
-                        The current system integrates with us:`)
+                        The systems that integrate with us today:`)
                     }
                     <List
                         itemLayout="horizontal"
@@ -195,7 +203,7 @@ class FeaturesCollapse extends React.Component {
                 </Panel>
                 <Panel header="Favorites" key={8}>
                     {handleEnText(`Story lets you choose your favorites stories, and creates shortcut for quick access!
-                    You can add any story to favorites, regardless to your permissions, and it will appear on the left at any time. `)}
+                    Favorite stories will appear on the left at any time.`)}
                     <div style={{alignItems: 'center'}}>
 
                         {starFilled}
@@ -212,6 +220,9 @@ class FeaturesCollapse extends React.Component {
                 </Panel>
 
             </Collapse>
+                <br/>
+                <Text>Writen by Itamar Soffer.</Text>
+                </div>
         )
 
     }

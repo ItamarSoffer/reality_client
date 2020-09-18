@@ -1,228 +1,254 @@
 import React from 'react';
-<<<<<<< HEAD
-
-import { Menu } from 'antd';
-=======
 import {connect} from "react-redux";
 import {Menu, message} from 'antd';
->>>>>>> df262e5... add string and date filters
 import MenuIcons from '../Icons/MenuIcons';
 import DownloadExcel from '../Export/ToExcel';
 import CreateNewEvent from "../NewEvent/NewEventComponent";
 import PermissionsModal from "../permissionsModal/permissionsModal";
-import {enableEditAction, disableEditAction} from "../../Actions/siteActions";
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-import {showNewEventModalAction, showPermissionsModalAction} from "../../Actions/siteActions";
->>>>>>> 79aa366... add permissions control
-import {connect} from "react-redux";
-=======
-import {showNewEventModalAction, showPermissionsModalAction, showDeleteTimelineModalAction} from "../../Actions/siteActions";
-=======
 import {
-    showNewEventModalAction,
-    showPermissionsModalAction,
-    showDeleteTimelineModalAction,
-showUploadXlsxModalAction} from "../../Actions/modalsActions";
->>>>>>> 452b362... add option to upload xlsx file
+    enableEditAction,
+    disableEditAction,
+    storyModeTimelineAction,
+    storyModeTableAction,
+    storyExpandModeAction
+} from "../../Actions/siteActions";
+import {
+    controlNewEventModalAction,
+    controlPermissionsModalAction,
+    controlDeleteTimelineModalAction,
+    controlTagsModalAction,
+    controlUploadXlsxModalAction
+} from "../../Actions/modalsActions";
 import DeleteTimelineModal from '../DeleteTimeline/DeleteTimelineModal';
-<<<<<<< HEAD
->>>>>>> 10be633... delete non necessary lines
-=======
 import StoryRangePicker from './Search/StoryRangePicker';
-<<<<<<< HEAD
-import StoryInSearch from './Search/StorySearch'
->>>>>>> df262e5... add string and date filters
-=======
 import StoryInSearch from './Search/StorySearch';
 import UploadXlsxModal from './UploadXlsxModal/UploadXlsxModal';
->>>>>>> 452b362... add option to upload xlsx file
+import TagsModal from '../Tags/TagsModal';
+import TagsSearch from "./Search/TagsSearch";
+import {getQueryStringParams} from "../../Actions/queryStringActions";
+import {withRouter} from "react-router";
 
 const { SubMenu } = Menu;
 
 class TimelineMenu extends React.Component {
-  state = {
-    current: 'mail',
-  };
+    constructor(props) {
+        super(props);
+        const darkCheck = (this.props.darkMode === "true") || (this.props.darkMode === true);
+        this.state = {
+            menuTheme: darkCheck ? "dark" : "light",
+            visiblePop: false,
 
-  handleClick = e => {
-    console.log('click ', e);
-    this.setState({
-      current: e.key,
-    });
-  };
-
-<<<<<<< HEAD
-=======
-  handleTimelineDelete1 = () => {
-      const delTimelineUrl = backendAPI.concat(`/timeline/del_timeline?timeline_id=${this.props.timelineId}`);
-      message.info("Get a backup on us :)");
-      DownloadExcel(this.props.url, this.props.jwtToken);
-      axios.post(delTimelineUrl, {
-            jwt_token: this.props.jwtToken,
-        })
-            .then((response) => {
-                if (response.status === 201){
-                    message.warning(response.data)
-                }
-                else if (response.status === 200){
-                    message.success(response.data, 1.5)
-                        .then(
-                            this.props.history.push({
-                                pathname: `/`,
-                            })
-                        )
-                }
-  });
-  };
-
-  cancel = e => {
-  console.log(e);
-  message.error('Click on No');
+        };
     };
 
-  confirm = e => {
-  console.log(e);
-  message.success('Click on Yes');
+    setUrlParam = (key, value) => {
+        const pathName = this.props.history.location.pathname;
+        let currentSearchQuery = getQueryStringParams(this.props.history.location.search);
+        currentSearchQuery[key] = value;
+        this.props.history.push(
+            {
+                pathname: pathName,
+                search: "?" + new URLSearchParams(
+                    {...currentSearchQuery}
+                ).toString()
+            });
     };
->>>>>>> 10be633... delete non necessary lines
+
+    handleTimelineMode = () => {
+        this.props.storyModeTimelineAction();
+        this.setUrlParam('view', 'timeline');
+    };
+
+    handleTableMode = () => {
+        this.props.storyModeTableAction();
+        this.setUrlParam('view', 'table');
+    };
+
+
+    handleCollapseMode = () => {
+        this.props.storyCollapseModeAction();
+        this.setUrlParam('expand', 'false');
+    };
+
+    handleExpandMode = () => {
+        this.props.storyExpandModeAction();
+        this.setUrlParam('expand', 'true');
+    };
+
+    cancel = e => {
+        console.log(e);
+        message.error('Click on No');
+    };
+
+    confirm = e => {
+        console.log(e);
+        message.success('Click on Yes');
+    };
 
     render() {
         const menuTheme = this.props.DarkMode === true ? "dark": "light";
+        const queryParams = getQueryStringParams(this.props.history.location.search);
+        let expandMode = this.props.storyExpandMode;
+        if (queryParams.expand){
+            // the query param will be "true" or "false"
+            expandMode = queryParams.expand === 'true';
+        }
+
         // console.log('Dark theme timeline', this.props.DarkMode);
-    return (
-      <Menu
-          onClick={this.handleClick}
-          mode="horizontal"
-          align="center"
-          selectable={false}
-          theme={menuTheme}
-      >
-<<<<<<< HEAD
-<<<<<<< HEAD
-          <Menu.Item key={"m_add"} >
-                     <CreateNewEvent url={this.props.url} loggedUser={this.props.loggedUser} />
-             </Menu.Item>
-=======
-=======
-          {(["write", "owner"].indexOf(this.props.role) === -1) ? null :
->>>>>>> e914983... completed JWT authentication
-          <Menu.Item key={"m_add"} icon={MenuIcons["plus"]} onClick={() => this.props.showNewEventModal()}>
-                    Add Event
-         </Menu.Item>}
-          {(this.props.role !== 'owner')? null:
-          <Menu.Item key={"m_permissions"} icon={MenuIcons["user"]}
-                             onClick={() => this.props.showPermissionsModal()}>
-                Permissions
-         </Menu.Item>}
+        return (
+            <div >
+                <Menu
+                    mode="horizontal"
+                    // align="center"
+                    selectable={false}
+                    theme={menuTheme}
+                    style={{display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                    }}
+                >
+                    {(["write", "owner", "creator"].indexOf(this.props.role) === -1) ? null :
+                        <Menu.Item key={"m_add"} icon={MenuIcons["plus"]} onClick={() => this.props.showNewEventModal()}>
+                            Add Event
+                        </Menu.Item>}
 
->>>>>>> 79aa366... add permissions control
-        <SubMenu icon={MenuIcons["setting"]} title="Filter">
-<<<<<<< HEAD
-            <Menu.Item disabled key="filter_by_time" >By Date</Menu.Item>
-            <Menu.Item disabled key="filter_by_word">By Word</Menu.Item>
-=======
-            <Menu.Item disabled key="filter_by_time" >
+                    <SubMenu icon={MenuIcons["filter"]} title="Filter">
+                        <Menu.Item disabled key="filter_by_time" >
 
-            <StoryRangePicker />
-            </Menu.Item>
-            <Menu.Item disabled key="filter_by_word">
-                <StoryInSearch/>
-            </Menu.Item>
->>>>>>> df262e5... add string and date filters
-        </SubMenu>
-          {(["write", "owner"].indexOf(this.props.role) === -1) ? null :
-              <SubMenu key="m_edit" icon={MenuIcons['edit']} title="Edit">
-                  <Menu.Item key="m_enable_edit" onClick={() => this.props.enableEdit()}>
-                      Enable Edit
-                  </Menu.Item>
-                  <Menu.Item key="m_disable_edit" onClick={() => this.props.disableEdit()}>
-                      Disable Edit
-                  </Menu.Item>
-              </SubMenu>
-          }
+                            <StoryRangePicker />
+                        </Menu.Item>
+                        <Menu.Item disabled key="filter_by_word">
+                            <StoryInSearch/>
+                        </Menu.Item>
+                        <Menu.Item disabled key="filter_by_tag">
+                            <TagsSearch/>
+                        </Menu.Item>
+                    </SubMenu>
 
-<<<<<<< HEAD
-=======
-         <SubMenu key="m_more" icon={MenuIcons['setting']} title="More">
-             {(["owner", "creator"].indexOf(this.props.role) === -1)? null:
-          <Menu.Item key={"m_permissions"} icon={MenuIcons["user"]}
-                             onClick={() => this.props.showPermissionsModal()}>
-                Permissions
-         </Menu.Item>}
->>>>>>> 452b362... add option to upload xlsx file
+                    <SubMenu key="view" icon={MenuIcons['eye']} title="View">
 
-         <SubMenu key="export" icon={MenuIcons['download']} title="Export">
-              <Menu.Item key="export_excel" icon={MenuIcons['excel']} onClick={() => DownloadExcel(this.props.url)}>
-                      Excel
-            </Menu.Item>
+                        <Menu.Item
+                            key="timeline_mode"
+                            icon={MenuIcons['nodeindex']}
+                            onClick={() => this.handleTimelineMode()}>
+                            Timeline
+                        </Menu.Item>
 
-            </SubMenu>
-<<<<<<< HEAD
+                        <Menu.Item
+                            key="table_mode"
+                            icon={MenuIcons['table']}
+                            onClick={() => this.handleTableMode()}>
+                            Table
+                        </Menu.Item>
+                        {/*# TODO: by state */}
+                        {expandMode?
+                            <Menu.Item
+                                key="expand_collapse_mode"
+                                icon={MenuIcons['compress']}
+                                onClick={() => this.handleCollapseMode()}>
+                                Compress
+                            </Menu.Item>:
+                            <Menu.Item
+                                key="expand_collapse_mode"
+                                icon={MenuIcons['expand']}
+                                onClick={() => this.handleExpandMode()}>
+                                Expand
+                            </Menu.Item>
 
-<<<<<<< HEAD
+                        }
 
-=======
 
-          {(["write", "owner", "creator"].indexOf(this.props.role) === -1)? null:
-          <Menu.Item key={"m_upload"} icon={MenuIcons["upload"]}
-                             onClick={() => this.props.showUploadXlsxModal()}>
-                Import
-         </Menu.Item>}
-         </SubMenu>
 
-      </Menu>
-            <CreateNewEvent url={this.props.url} />
-            <PermissionsModal url={this.props.url}/>
-            <DeleteTimelineModal
-                url={this.props.url}
-                timelineId={this.props.timelineId}/>
-            <UploadXlsxModal
-                url={this.props.url}
-                timelineId={this.props.timelineId}/>
->>>>>>> 452b362... add option to upload xlsx file
+                    </SubMenu>
+                    {(["write", "owner", "creator"].indexOf(this.props.role) === -1) ? null :
+                        <SubMenu key="m_edit" icon={MenuIcons['edit']} title="Edit">
+                            {!this.props.editMode?
+                                <Menu.Item key="m_enable_edit" onClick={() => this.props.enableEdit()}>
+                                    Enable Edit
+                                </Menu.Item>:
+                                <Menu.Item key="m_disable_edit" onClick={() => this.props.disableEdit()}>
+                                    Disable Edit
+                                </Menu.Item>
+                            }
+                            <Menu.Item key="m_tags" onClick={() => this.props.showTagsModal()}>
+                                Tags
+                            </Menu.Item>
+                            <Menu.Item key="m_del_timeline" style={{color:"red"}} onClick={() => this.props.showDeleteTimelineModal()}>
 
-      </Menu>
-=======
-      </Menu>
-            <CreateNewEvent url={this.props.url} loggedUser={this.props.loggedUser} />
-            <PermissionsModal url={this.props.url} loggedUser={this.props.loggedUser}/>
+                                Delete Story
+
+                            </Menu.Item>
+                        </SubMenu>
+                    }
+
+                    <SubMenu key="m_more" icon={MenuIcons['setting']} title="More">
+                        {(["owner", "creator"].indexOf(this.props.role) === -1)? null:
+                            <Menu.Item key={"m_permissions"} icon={MenuIcons["user"]}
+                                       onClick={() => this.props.showPermissionsModal()}>
+                                Permissions
+                            </Menu.Item>}
+
+                        <SubMenu key="export" icon={MenuIcons['download']} title="Export">
+                            <Menu.Item key="export_excel" icon={MenuIcons['excel']}
+                                       onClick={() => DownloadExcel(this.props.url, this.props.jwtToken)}>
+                                Excel
+                            </Menu.Item>
+
+                        </SubMenu>
+
+                        {(["write", "owner", "creator"].indexOf(this.props.role) === -1)? null:
+                            <Menu.Item key={"m_upload"} icon={MenuIcons["upload"]}
+                                       onClick={() => this.props.showUploadXlsxModal()}>
+                                Import
+                            </Menu.Item>}
+                    </SubMenu>
+
+                </Menu>
+                <CreateNewEvent url={this.props.url} />
+                <PermissionsModal url={this.props.url}/>
+                <DeleteTimelineModal
+                    url={this.props.url}
+                    timelineId={this.props.timelineId}/>
+                <UploadXlsxModal
+                    urlAddress={this.props.url}
+                    timelineId={this.props.timelineId}/>
+                <TagsModal
+                    url={this.props.url}
+                    timelineId={this.props.timelineId}
+                    role={this.props.role}
+                />
             </div>
->>>>>>> 79aa366... add permissions control
-    );
-  }
+
+
+        );
+    }
 }
 const mapStateToProps = state => {
-  return {
-    loggedUser: state.usersReducer.loggedUser,
-      DarkMode: state.sitesReducer.DarkMode,
-      editMode: state.sitesReducer.editMode
+    return {
+        DarkMode: state.sitesReducer.DarkMode,
+        editMode: state.sitesReducer.editMode,
+        jwtToken: state.usersReducer.jwtToken,
+        storyExpandMode: state.sitesReducer.storyExpandMode
 
-  }
+    }
 };
 
 const mapDispatchToProps = dispatch => {
     return{
         enableEdit: () => {dispatch(enableEditAction())},
         disableEdit: () => {dispatch(disableEditAction())},
-<<<<<<< HEAD
-=======
-        showNewEventModal: () => {dispatch(showNewEventModalAction())},
-        showPermissionsModal: () => {dispatch(showPermissionsModalAction())},
-<<<<<<< HEAD
+        showNewEventModal: () => {dispatch(controlNewEventModalAction(true))},
+        showPermissionsModal: () => {dispatch(controlPermissionsModalAction(true))},
+        showDeleteTimelineModal: () => {dispatch(controlDeleteTimelineModalAction(true))},
+        showUploadXlsxModal: () => {dispatch(controlUploadXlsxModalAction(true))},
+        showTagsModal: () => {dispatch(controlTagsModalAction(true))},
+        storyModeTimelineAction: () => {dispatch(storyModeTimelineAction())},
+        storyModeTableAction: () => {dispatch(storyModeTableAction())},
+        // storyModePrevTableAction: () => {dispatch(storyModePrevTableAction())},
+        storyExpandModeAction: () => {dispatch(storyExpandModeAction(true))},
+        storyCollapseModeAction: () => {dispatch(storyExpandModeAction(false))},
 
->>>>>>> 79aa366... add permissions control
-=======
-        showDeleteTimelineModal: () => {dispatch(showDeleteTimelineModalAction())},
-<<<<<<< HEAD
->>>>>>> 10be633... delete non necessary lines
-=======
-        showUploadXlsxModal: () => {dispatch(showUploadXlsxModalAction())},
-
->>>>>>> 452b362... add option to upload xlsx file
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TimelineMenu);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(TimelineMenu));

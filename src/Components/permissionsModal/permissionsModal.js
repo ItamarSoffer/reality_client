@@ -1,136 +1,150 @@
 import React from 'react';
-import axois from 'axios';
-import {Form, Modal, Input, message, Button} from 'antd';
-// import {AutoComplete} from 'antd';
+import {Form, Modal, message, Button, Typography, Divider} from 'antd';
+// import {Input} from 'antd';
 import {connect} from 'react-redux';
-import {hidePermissionsModalAction} from "../../Actions/siteActions";
+import {controlPermissionsModalAction} from "../../Actions/modalsActions";
 import RolesSelect from "./rolesSelect";
-import {backendAPI} from "../../Structure/api";
+import PermissionsTable from "./permissionsTable"
+import UsersSelect from "./UsersSelect";
+import {apiSetPermissions} from "../../Actions/apiActions";
 
-
-
-
+const {Text} = Typography;
 
 class PermissionsModal extends React.Component{
 
-    showModal = () => {
-    this.setState({
-      visible: true,
-    });
-  };
+    constructor(props){
+        super(props);
+        this.state = {
+            addedPermission: 0
+        }
+    }
 
     onFinish = values => {
-        const apiSetPermissions = backendAPI.concat(`/timeline/${this.props.url}/set_permissions/`);
-        console.log("VALS", values.username, values.role);
-        axois.post(apiSetPermissions, {
-            "username": values.username,
-            "role": this.state.role,
-            // "adding_user": this.props.loggedUser
-        }).then((response) => {
-  // console.log("resp", response);
-  if (response.status === 201){
-      message.warning(response.data)
-  }
-  else if (response.status === 200){
-  message.success(response.data, 1.5)
+        apiSetPermissions(this.props.jwtToken, this.props.url, this.state.selectedUser, this.state.role)
+            .then((response) => {
+            // console.log("resp", response);
+            if (response.status === 201){
+                message.warning(response.data)
+            }
+            else if (response.status === 200){
+                message.success(response.data, 1.5);
+                this.setState({
+                    addedPermission: this.state.addedPermission + 1
+                })
 
-  }
-  }).then(() => this.closeModal());
-  };
+            }
+        })
+        // .then(() => this.closeModal());
+    };
 
-      onFinishFailed = errorInfo => {
-    console.log('Failed:', errorInfo);
-    message.error('Missing fields!')
-  };
+    onFinishFailed = errorInfo => {
+        console.log('Failed:', errorInfo);
+        message.error('Missing fields!')
+    };
 
-  closeModal = () => {
-      this.props.hidePermissionsModal();
-    this.setState({
-      visible: false,
-    });
-  };
+    closeModal = () => {
+        this.props.hidePermissionsModal();
+        this.setState({
+            visible: false,
+        });
+    };
 
-  handleOk = () => {
-    // console.log(e);
-  this.props.hidePermissionsModal();
-    this.setState({
-      visible: false,
-    });
-  };
+    handleOk = () => {
+        // console.log(e);
+        this.props.hidePermissionsModal();
+        this.setState({
+            visible: false,
+        });
+    };
 
-  handleCancel = () => {
-    // console.log(e);
-            this.props.hidePermissionsModal();
-    this.setState({
-      visible: false,
-    });
-  };
+    handleCancel = () => {
+        // console.log(e);
+        this.props.hidePermissionsModal();
+        this.setState({
+            visible: false,
+        });
+    };
 
-  onRoleChange = (newRole) => {
-      this.setState({
-          role: newRole
-      })
-  };
+    onRoleChange = (newRole) => {
+        this.setState({
+            role: newRole
+        })
+    };
 
-  render(){
-      return (
-          <Modal
-              title="Edit Permissions"
-              visible={this.props.showPermissionsModal}
-              onOk={this.handleOk}
-              onCancel={this.handleCancel}
-              style={{borderRadius: '16px',}}
-              footer={[<Button type="default"  key="close" onClick={this.handleCancel}>
-            Cancel
-        </Button>,
-        <Button type="primary" form="permissions_form" key="submit" htmlType="submit">
-            Set
-        </Button>
-        ]}
-              >
-              <Form
-                  id={"permissions_form"}
-                  onFinish={this.onFinish}
-                  onFinishFailed={this.onFinishFailed}
+    onUserChange = (selectedUsers) => {
+        this.setState(
+            {
+                selectedUser: selectedUsers
+            }
+        )
 
-                  >
+    };
 
-                  <Form.Item
-                    className="username-form"
-                    name="username"
-                    rules={[{
-                        required: true,
-                        message: 'Enter Username' }]}
+    render(){
+        return (
+            <Modal
+                title="Edit Permissions"
+                visible={this.props.showPermissionsModal}
+                onOk={this.handleOk}
+                onCancel={this.handleCancel}
+                style={{borderRadius: '16px',}}
+                footer={[<Button type="default"  key="close" onClick={this.handleCancel}>
+                    Close
+                </Button>,
+                    <Button type="primary" form="permissions_form" key="submit" htmlType="submit">
+                        Set
+                    </Button>
+                ]}
+            >
+
+                <Form
+                    id={"permissions_form"}
+                    onFinish={this.onFinish}
+                    onFinishFailed={this.onFinishFailed}
                 >
-                    <Input autoComplete='off' placeholder={"Username"} />
-                </Form.Item>
 
-                  <Form.Item
-                    className="role-form"
-                    name="role"
-                    rules={[{
-                        message: 'User Role' }]}
-                >
-                    <RolesSelect handleRoleChange={this.onRoleChange}/>
-                </Form.Item>
-              </Form>
+                    <Form.Item
+                        className="username-form"
+                        name="username"
+                        value={this.state.selectedUser}
+                        rules={[{
+                            message: 'Enter Username' }]}
+                    >
+                        <UsersSelect handleUserChange={this.onUserChange}/>
+                        {/*<Input autoComplete='off' placeholder={"Username"} />*/}
+                    </Form.Item>
 
-          </Modal>
-      )
-  }
+                    <Form.Item
+                        className="role-form"
+                        name="role"
+                        rules={[{
+                            message: 'User Role' }]}
+                    >
+                        <RolesSelect handleRoleChange={this.onRoleChange}/>
+                    </Form.Item>
+                </Form>
+                <Text>for public story, add permissions to </Text>
+                <Text strong>public</Text>
+                <Divider> Current Permissions</Divider>
+                <PermissionsTable url={this.props.url} addedPermission={this.state.addedPermission}/>
+
+            </Modal>
+        )
+    }
 
 }
 
 const mapStateToProps = state => {
-  return {
-      showPermissionsModal: state.sitesReducer.showPermissionsModal
+    return {
+        showPermissionsModal: state.modalsReducer.showPermissionsModal,
+        jwtToken: state.usersReducer.jwtToken,
 
-  }
+    }
 };
 
 const mapDispatchToProps = dispatch => {
     return{
-        hidePermissionsModal: () => {dispatch(hidePermissionsModalAction())}
+        hidePermissionsModal: () => {dispatch(controlPermissionsModalAction(false))}
     }
 
 };

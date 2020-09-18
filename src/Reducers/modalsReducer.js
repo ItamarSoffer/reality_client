@@ -1,4 +1,8 @@
-
+/*
+Control opening and closing windows in story.
+All values are true or false, except the EditEvent:
+    the EditEvent is shown by the event_id that is edited, to deal with collisions.
+ */
 const siteInitState = {
     showNewEventModal: false,
     showPermissionsModal: false,
@@ -14,19 +18,19 @@ const modalsReducer = (state = siteInitState, action) => {
     switch(action.type){
         case "NEW_EVENT_MODAL_VIEW":
             state = {...state, showNewEventModal: action.payload};
-        break;
+            break;
 
         case "PERMISSIONS_MODAL_VIEW":
             state = {...state, showPermissionsModal: action.payload};
-        break;
+            break;
 
         case "DELETE_TIMELINE_MODAL_VIEW":
             state = {...state, showDeleteTimelineModal: action.payload};
-        break;
+            break;
 
         case "UPLOAD_XLSX_MODAL_VIEW":
             state = {...state, showUploadXlsxModal: action.payload};
-        break;
+            break;
 
         case "TAGS_MODAL_VIEW":
             state = {...state, showTagsModal: action.payload};
@@ -47,7 +51,7 @@ const modalsReducer = (state = siteInitState, action) => {
             break;
 
         default:
-        break;
+            break;
     }
 
     return state;

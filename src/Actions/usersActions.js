@@ -1,26 +1,25 @@
-import axios from 'axios';
 import {message} from "antd";
-import {LoginApi} from "../Structure/api";
-
+import {apiLogin} from "./apiActions";
 
 export const loginAction = (username, password) => {
+
     return async (dispatch) =>{
-        const userLoginApi = LoginApi.concat(`?username=${username}&password=${password}`);
-    axios.get(userLoginApi)
-               .then((response) => {
-  console.log("resp", response);
-  if (response.status === 201){
-      message.warning(response.data)
-  }
-  else if (response.status === 200){
-  message.success(response.data, 1.5);
-  return dispatch({
-      type: "LOGIN",
-      payload: true,
-      loggedUser: username
-  })
-  }
-               })
+        apiLogin(username, password)
+            .then((response) => {
+                // console.log("resp", response);
+                if (response.status === 201){
+                    message.warning(response.data)
+                }
+                else if (response.status === 200){
+                    message.success(`${username} logged in successfully`, 1.5);
+                    return dispatch({
+                        type: "LOGIN",
+                        payload: true,
+                        loggedUser: username,
+                        jwtToken: response.data
+                    })
+                }
+            })
 
     }
 };
@@ -29,6 +28,8 @@ export const loginAction = (username, password) => {
 export const logoutAction = () => {
     return {
         type: "LOGIN",
-        payload: false
+        payload: false,
+        loggedUser: '',
+        jwtToken: ''
     }
 };

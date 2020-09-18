@@ -1,6 +1,3 @@
-import {apiGetFavorites} from "./apiActions";
-import {message} from "antd";
-
 export const setUserFavorites = (favoritesList) => {
     return {
         type: "FAVORITES_SET",

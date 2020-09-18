@@ -1,13 +1,13 @@
 import React from 'react';
-import {Form, Input, Button, message} from 'antd';
+import {Form, Input, Button, message, Card, Typography} from 'antd';
 import 'antd/dist/antd.css';
-import axios from "axios";
 import { withRouter } from "react-router-dom";
-
-import {api_create_timeline} from '../../Structure/api';
 import MenuIcons from "../Icons/MenuIcons";
+import {connect} from "react-redux";
+import {apiCreateStory} from "../../Actions/apiActions";
 
 const { TextArea } = Input;
+const {Title} = Typography;
 
 // const layout = {
 //   labelCol: { span: 8 },
@@ -20,148 +20,132 @@ const { TextArea } = Input;
 
 class CreateNewTimeline extends React.Component {
 
-<<<<<<< HEAD
-    constructor(props){
-        super(props);
-        this.state = {
-            check: 1
-
-        }
-    }
-
-=======
->>>>>>> da2bd71... add auto update after change (add or delete event)
     onFinish = values => {
 
         if (values.timeline_url.length <= 3){
             message.error("URL must be al least 3 chars!")
         }
         else {
-<<<<<<< HEAD
-    console.log('Received values from form: ', values);
-     axios.post(api_create_timeline, {
-             create_user: this.props.loggedUser,
-=======
-            const ApiCreateTimeline = backendAPI.concat("/create_timeline");
-     axios.post(ApiCreateTimeline, {
-            jwt_token: this.props.jwtToken,
-             // create_user: this.props.loggedUser,
->>>>>>> e914983... completed JWT authentication
-             description: values.description,
-             name: values.title,
-             url: values.timeline_url
-     })
+            apiCreateStory(this.props.jwtToken, values.title, values.description, values.timeline_url)
+                .then((response) => {
+                    // console.log("resp", response);
+                    if (response.status === 201){
+                        message.warning(response.data)
+                    }
+                    else if (response.status === 200){
+                        message.success(response.data, 1)
+                            .then(() => {this.props.history.push({
+                                pathname: `/story/`.concat(values.timeline_url),
+                            });
+                            })
 
-         .then((response) => {
-  console.log("resp", response);
-  if (response.status === 201){
-      message.warning(response.data)
-  }
-  else if (response.status === 200){
-  message.success(response.data, 1.5)
-      .then(() => {
-      return message.loading('redirecting', 1);
-  })
-      .then(() => {this.props.history.push({
-            pathname: `/timeline/`.concat(values.timeline_url),
-        });
-      })
+                    }
+                }, (error) => {
+                    // console.log("error", error);
+                    message.error(error);
+                });
+            // remove later.
 
-  }
-}, (error) => {
-  console.log("error", error);
-  message.error(error);
-});
-     // remove later.
-    console.log(values.timeline_url);
-    console.log(values.timeline_title);
-    console.log(values.timeline_description);
-    console.log(this.props.loggedUser);
- }
-  };
+        }
+    };
 
     onFinishFailed = errorInfo => {
-    console.log('Failed:', errorInfo);
-    message.error('Missing fields!')
-  };
+        // console.log('Failed:', errorInfo);
+        message.error('Missing fields!')
+    };
 
     render() {
 
         return (
             <div
-      style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-<<<<<<< HEAD
-=======
-          position: 'absolute', left: '50%', top: '30%',
-                  transform: 'translate(-50%, -50%)'
->>>>>>> 10be633... delete non necessary lines
-      }}>
-            <Form
-                {...layout}
-                onFinish={this.onFinish}
-                onFinishFailed={this.onFinishFailed}
+                style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    position: 'absolute', left: '50%', top: '30%',
+                    transform: 'translate(-50%, -50%)'
+                }}>
+                <Card
+                    style={{
+                        width: '200%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        borderRadius: '12px',
+                        borderColor: '#ddd',
+                        minHeight: 300
+
+                    }}>
+                    <Title level={1} style={{textAlign:"center"}}>New Story</Title>
+
+                    <Form
+                        onFinish={this.onFinish}
+                        onFinishFailed={this.onFinishFailed}
 
 
-            >
 
-                <Form.Item
-                    className="title-form"
-                    label="Title"
-                    name="title"
-                    rules={[{
-                        required: true,
-                        message: 'Timeline Title' }]}
-                >
+                    >
 
-                    <Input />
-                </Form.Item>
+                        <Form.Item
+                            className="title-form"
+                            name="title"
+                            rules={[{
+                                required: true,
+                                message: 'Timeline Title' }]}
+                        >
 
-                <Form.Item
-                    className="link-form"
-                    label="URL"
-                    name="timeline_url"
-                    rules={[{
-                        required: true,
-                        message: 'Uniq URL' }]}
-                >
-                    <Input />
-                </Form.Item>
+                            <Input placeholder="Title"/>
+                        </Form.Item>
 
-                <Form.Item
-                    //className="link-form"
-                    label="Description"
-                    name="description"
-                    rules={[{
-                        message: 'Timeline Description' }]}
-                >
-                    <TextArea rows={3} placeholder={"Description"} prefix={MenuIcons["form"]}/>
-                </Form.Item>
+                        <Form.Item
+                            className="link-form"
+                            name="timeline_url"
+                            rules={[{
+                                required: true,
+                                message: 'Uniq URL' }]}
+                        >
+                            <Input placeholder="URL" />
+                        </Form.Item>
 
-<<<<<<< HEAD
-                 <Form.Item {...tailLayout}>
-                     <Button type="primary" htmlType="submit" >
-=======
-                 <Form.Item >
-                     <Button type="primary" htmlType="submit"
-                             style={{width:550,
-                                 background:'#722ed1',
-                                 borderColor:'#b37feb',
-                             color:'#000'}} >
->>>>>>> da2bd71... add auto update after change (add or delete event)
-                         Create
-                     </Button>
+                        <Form.Item
+                            //className="link-form"
+                            name="description"
+                            rules={[{
+                                message: 'Timeline Description' }]}
+                        >
+                            <TextArea rows={3} placeholder={"Description"} prefix={MenuIcons["form"]}/>
+                        </Form.Item>
 
-                 </Form.Item>
+                        <Form.Item >
+                            <Button type="primary" htmlType="submit"
+                                    style={{width:550,
+                                        background:'#722ed1',
+                                        borderColor:'#b37feb',
+                                    }} >
+                                Create
+                            </Button>
 
-            </Form>
+                        </Form.Item>
 
-          </div>
+                    </Form>
+                </Card>
+
+            </div>
         )
     }
 
 }
 
-export default withRouter(CreateNewTimeline)
+const mapStateToProps = state => {
+    return {
+        jwtToken: state.usersReducer.jwtToken,
+
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {}
+
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(CreateNewTimeline));

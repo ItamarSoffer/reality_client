@@ -51,3 +51,20 @@ export function eventsCompareSorter( a, b, ) {
   return 0;
 }
 
+export function getUniqValues(data, field) {
+        /*
+        gets an array of objects (data), and returns a uniq list of field values
+        data- array of objects.
+        field- the field to filter by.
+        if null in, removes it.
+         */
+        let iconsList = data.map( record => record[field]);
+        let uniq = [...new Set(iconsList)];
+        if (uniq.indexOf(null) > -1){
+            delete uniq[uniq.indexOf(null)]
+        }
+        if (uniq.indexOf('') > -1){
+            delete uniq[uniq.indexOf('')]
+        }
+        return uniq
+}

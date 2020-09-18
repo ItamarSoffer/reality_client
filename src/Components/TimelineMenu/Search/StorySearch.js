@@ -1,6 +1,5 @@
 import React from 'react';
 import { Input } from 'antd';
-import moment from 'moment';
 import { withRouter } from "react-router-dom";
 import {setReRenderTimelineAction} from "../../../Actions/siteActions";
 import {connect} from "react-redux";
@@ -14,12 +13,12 @@ class StoryInSearch extends React.Component{
         let currentSearchQuery = getQueryStringParams(this.props.history.location.search);
         if (value === null || value === ''){
             delete currentSearchQuery['search_string'];
-                        this.props.history.push(
+            this.props.history.push(
                 {pathname: pathName,
                     search: "?" + new URLSearchParams(
                         {...currentSearchQuery}
-                        ).toString()
-            });
+                    ).toString()
+                });
         }
         else{
             currentSearchQuery['search_string'] = value;
@@ -27,11 +26,11 @@ class StoryInSearch extends React.Component{
                 {pathname: pathName,
                     search: "?" + new URLSearchParams(
                         {...currentSearchQuery}
-                        ).toString()
+                    ).toString()
 
-            });
+                });
         }
-  this.props.setReRenderTimeline(1);
+        this.props.setReRenderTimeline(1);
     };
 
     render(){
@@ -49,14 +48,14 @@ class StoryInSearch extends React.Component{
                 onSearch={this.onSearch}
                 style={{ width: 200 }}
                 defaultValue={defaultQueryValues}
-    />
+            />
 
         )
     }
 }
 const mapStateToProps = state => {
-  return {
-  }
+    return {
+    }
 };
 
 const mapDispatchToProps = dispatch => {

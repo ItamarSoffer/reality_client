@@ -12,27 +12,14 @@ import {
     Typography,
     Space} from 'antd';
 import 'antd/dist/antd.css';
-import axios from "axios";
 import IconsSelect from '../Icons/IconsSelect';
 import ColorPicker from '../ColorPicker/ColorPicker';
 import MenuIcons from "../Icons/MenuIcons";
-import {backendAPI} from "../../Structure/api";
-<<<<<<< HEAD
-import { Typography } from 'antd';
-=======
 import {connect} from "react-redux";
-<<<<<<< HEAD
-<<<<<<< HEAD
-import {hideNewEventModalAction} from "../../Actions/siteActions";
->>>>>>> 79aa366... add permissions control
-=======
-import {hideNewEventModalAction, setReRenderTimelineAction} from "../../Actions/siteActions";
->>>>>>> da2bd71... add auto update after change (add or delete event)
-=======
 import {setReRenderTimelineAction} from "../../Actions/siteActions";
 import {controlNewEventModalAction} from "../../Actions/modalsActions";
 import TagsSelectByName from "../Tags/TagsSelectByName";
-import {apiNewEvent} from "../../Actions/apiActions";
+import {apiNewEvent, apiExtractTime} from "../../Actions/apiActions";
 import {updateEventAction} from "../../Actions/eventsActions";
 import {ClockCircleOutlined, CloseCircleOutlined} from '@ant-design/icons';
 
@@ -42,138 +29,6 @@ const { TextArea } = Input;
 
 
 class CreateNewEvent extends React.Component {
-<<<<<<< HEAD
-  state = { visible: false };
-
-  showModal = () => {
-    this.setState({
-      visible: true,
-    });
-  };
-
-  closeModal = () => {
-<<<<<<< HEAD
-=======
-      this.props.hideNewEventModal();
->>>>>>> 79aa366... add permissions control
-    this.setState({
-      visible: false,
-    });
-  };
-
-<<<<<<< HEAD
-  handleOk = e => {
-    console.log(e);
-=======
-  handleOk = () => {
-    // console.log(e);
-  this.props.hideNewEventModal();
->>>>>>> 79aa366... add permissions control
-    this.setState({
-      visible: false,
-    });
-  };
-
-<<<<<<< HEAD
-  handleCancel = e => {
-    console.log(e);
-=======
-  handleCancel = () => {
-    // console.log(e);
-            this.props.hideNewEventModal();
->>>>>>> 79aa366... add permissions control
-    this.setState({
-      visible: false,
-    });
-  };
-
-  onFinish = values => {
-      const api_add_event = backendAPI.concat(`/timeline/${this.props.url}/add`);
-      console.log("FINITO", values);
-      console.log("SENDS TO", api_add_event);
-      const hour = typeof values.hour !== "undefined" ? values.hour.format('hh:mm:ss'): "";
-      axios.post(api_add_event, {
-          "header": values.title,
-          "text": values.text,
-          "date": values.date.format('YYYY-MM-DD'),
-          "hour":hour,
-          "frame_color": this.state.color,
-          "icon": this.state.icon,
-          "link": values.link,
-          // "user": this.props.loggedUser
-})
-         .then((response) => {
-  console.log("resp", response);
-  if (response.status === 201){
-      message.warning(response.data)
-  }
-  else if (response.status === 200){
-  message.success(response.data, 1.5)
-
-      .then(() => {
-          this.props.setReRenderTimeline(this.props.timelineRenderCount +    1);
-  })
-  }
-  }).then(() => this.closeModal());
-  };
-
-  onFinishFailed = errorInfo => {
-    console.log('Failed:', errorInfo);
-    message.error('Missing fields!')
-  };
-
-  onColorChange = (newColor) => {
-      this.setState({
-          color: newColor
-      })
-  };
-
-  onIconChange = (newIcon) => {
-      this.setState({
-          icon: newIcon
-      })
-  };
-
-  render() {
-    return (
-      <div>
-        <Text onClick={this.showModal} >
-            {MenuIcons['plus']}Add Event
-        </Text>
-          <ConfigProvider direction={"rtl"}>
-        <Modal
-          title="אירוע חדש"
-          visible={this.state.visible}
-          onOk={this.handleOk}
-          onCancel={this.handleCancel}
-            okText="צור אירוע"
-          cancelText="בטל"
-          footer={[<Button type="default"  key="close" onClick={this.handleCancel}>
-            Cancel
-        </Button>,
-        <Button type="primary" form="add_event_form" key="submit" htmlType="submit">
-            Add Event
-        </Button>
-
-
-        ]}
-          style={{
-  borderRadius: '16px',
-        }}
-        >
-            <Form
-                id={"add_event_form"}
-                onFinish={this.onFinish}
-                onFinishFailed={this.onFinishFailed}
->
-                <Form.Item
-                    className="title-form"
-                    // label="כותרת"
-                    name="title"
-                    rules={[{
-                        required: true,
-                        message: 'Event Title' }]}
-=======
     constructor(props){
         super(props);
         this.state = {
@@ -288,6 +143,9 @@ class CreateNewEvent extends React.Component {
         })
     };
 
+    onLinkChange = (val) => {
+        this.setState({evtLink: val})
+    };
 
     onTimeChange = (newTime) => {
         if (newTime === null){
@@ -350,7 +208,6 @@ class CreateNewEvent extends React.Component {
 
     render() {
         return (
-
             <ConfigProvider direction={"rtl"}>
                 <Modal
                     title="אירוע חדש"
@@ -365,13 +222,8 @@ class CreateNewEvent extends React.Component {
                         <Button type="primary" form="add_event_form" key="submit" htmlType="submit">
                             Add Event
                         </Button>
-
-
                     ]}
-                    style={{
-                        borderRadius: '16px',
-                    }}
->>>>>>> 8a372ee... add, edit and del event dont fetch all
+                    style={{borderRadius: '16px',}}
                 >
                     <Form
 
@@ -410,7 +262,7 @@ class CreateNewEvent extends React.Component {
                                     <TimePicker autoComplete='off' placeholder={"שעה"} format={'HH:mm'} onChange={this.onTimeChange}/>
                                 </Form.Item>
                             </div>:
-                            <div style={{alignItems: 'center', justifyContent: 'center', textAlign:"center"}}>
+                            <div style={{textAlign:"center"}}>
 
                                 <Space>
                                     <Text mark> Extracted Time: {this.state.date} {this.state.time} </Text>
@@ -492,29 +344,22 @@ class CreateNewEvent extends React.Component {
     }
 }
 
-<<<<<<< HEAD
-=======
 const mapStateToProps = state => {
-  return {
-      showNewEventModal: state.sitesReducer.showNewEventModal,
-      timelineRenderCount: state.sitesReducer.timelineRenderCount,
+    return {
+        showNewEventModal: state.modalsReducer.showNewEventModal,
+        timelineRenderCount: state.sitesReducer.timelineRenderCount,
+        jwtToken: state.usersReducer.jwtToken,
 
-  }
+    }
 };
 
 const mapDispatchToProps = dispatch => {
     return{
-<<<<<<< HEAD
-        hideNewEventModal: () => {dispatch(hideNewEventModalAction())},
-        setReRenderTimeline: (index) => {dispatch(setReRenderTimelineAction(index))}
-=======
         hideNewEventModal: () => {dispatch(controlNewEventModalAction(false))},
         setReRenderTimeline: (index) => {dispatch(setReRenderTimelineAction(index))},
         updateEventAction: (event) => {dispatch(updateEventAction(event))},
->>>>>>> 8a372ee... add, edit and del event dont fetch all
     }
 
 };
->>>>>>> 79aa366... add permissions control
 
-export default CreateNewEvent;
+export default connect(mapStateToProps, mapDispatchToProps)(CreateNewEvent);

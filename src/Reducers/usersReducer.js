@@ -1,21 +1,22 @@
-const isLoggedLocalStorage = window.localStorage.getItem('isLogged');
+/*
+Saves the JWT authentication key and the current logged user.
+the JWT token is provided by the server after the login has succeed.
+Username is not in current use, but maybe is will be handy.
+
+ */
 const loggedUserLocalStorage = window.localStorage.getItem('loggedUser');
+const jwtTokenLocalStorage = window.localStorage.getItem('jwtToken');
 
 const initState = {
-    isLogged: (isLoggedLocalStorage !== null ? (isLoggedLocalStorage === 'true') : false),
-    loggedUser: (loggedUserLocalStorage !== null ? loggedUserLocalStorage : null)
+    loggedUser: (loggedUserLocalStorage !== null ? loggedUserLocalStorage : null),
+    jwtToken: (jwtTokenLocalStorage !== null ? jwtTokenLocalStorage : ''),
 };
 
 const usersReducer = (state = initState, action) => {
 
     switch(action.type){
         case "LOGIN":
-            window.localStorage.setItem('isLogged',action.payload);
             window.localStorage.setItem('loggedUser',action.loggedUser);
-<<<<<<< HEAD
-            state = {...state, isLogged: action.payload, loggedUser: action.loggedUser};
-        break;
-=======
             window.localStorage.setItem('jwtToken',action.jwtToken);
             state = {...state,
                 loggedUser: action.loggedUser,
@@ -25,12 +26,10 @@ const usersReducer = (state = initState, action) => {
             if (action.jwtToken === ''){
             }
             break;
->>>>>>> 5b098b5... completely added favorites
         default:
-        break;
+            break;
     }
 
-    console.log('Users Reducers', state);
     return state;
 };
 

@@ -1,33 +1,34 @@
 import React from 'react';
-import { VerticalTimeline }  from 'react-vertical-timeline-component';
-import { Typography } from 'antd';
+import {Typography, Table, ConfigProvider, Button, Space, Input} from 'antd';
 import 'react-vertical-timeline-component/style.min.css';
-
-import axios from 'axios';
-import DataEvent from '../DataEvent/dataEventComponent';
-import LoadingPage from '../LoadingComponent/LoadingPage';
-import {backendAPI} from "../../Structure/api";
-import {setReRenderTimelineAction} from "../../Actions/siteActions";
 import {connect} from "react-redux";
-const { Title } = Typography;
+import Highlighter from 'react-highlight-words';
+import { SearchOutlined } from '@ant-design/icons';
+import {TableIcons, FilterTableIcons} from '../Icons/Icons';
+import TagsRenderer from '../Tags/TagsRenderer';
+import {setReRenderTimelineAction} from "../../Actions/siteActions";
+import EventEditOptions from "../DataEvent/EventEditOptions";
+import ExtraData from "../DataEvent/ExtraData/ExtraData";
+import {getUniqValues} from "../../Actions/eventsActions";
 
+const { Paragraph } = Typography;
 
+function handleText (text){
+    return <ConfigProvider direction={"rtl"} >
+        <Paragraph style={{whiteSpace: "pre-line"}}>
+            {text}
+        </Paragraph>
+    </ConfigProvider>
 
+}
 
-<<<<<<< HEAD
-class Timeline extends React.Component {
-
-    constructor(props){
-        super(props);
-        this.state={
-            isLoaded: false,
-            timeline_events: []
-=======
 class StoryTable extends React.Component {
-      state = {
-    searchText: '',
-    searchedColumn: '',
-  };
+    state = {
+        searchText: '',
+        searchedColumn: '',
+    };
+
+
     setColumns() {
         let columns =
             [
@@ -37,115 +38,174 @@ class StoryTable extends React.Component {
                     key: 'icon',
                     align: 'center',
                     width: 20,
+                    filters: getUniqValues(this.props.timeline_events, 'icon').map(
+                        function(icon_key){
+                            return (
+                                {text: FilterTableIcons[icon_key], value: icon_key}
+                            )
+                        }
+                    ),
+                    onFilter: (value, record) =>
+                        record['icon'] === null ? false: record['icon'].toString().toLowerCase().includes(value.toLowerCase()),
                     render: iconAndColor => <div style={{
-                        color: iconAndColor[1]}}>{TableIcons[iconAndColor[0]]}</div>
-        },
-        {
-            title: 'Time',
-            dataIndex: 'event_time',
-            key: 'event_time',
-            width: 120,
-            align: 'center',
-            sorter: (a, b) => Date.parse(a.event_time) - Date.parse(b.event_time),
-            // defaultSortOrder: 'descend',
+                        color: iconAndColor[1]}}>{TableIcons[iconAndColor[0]]}</div>,
+                },
+                {
+                    title: 'Time',
+                    dataIndex: 'event_time',
+                    key: 'event_time',
+                    width: 120,
+                    align: 'center',
+                    sorter: (a, b) => Date.parse(a.event_time) - Date.parse(b.event_time),
+                    // defaultSortOrder: 'descend',
 
-        },
-        {
-            title: 'Title',
-            dataIndex: 'header',
-            key: 'header',
-            align: 'center',
-            render: text => handleText(text),
-            ...this.getColumnSearchProps('header'),
+                },
+                {
+                    title: 'Title',
+                    dataIndex: 'header',
+                    key: 'header',
+                    align: 'center',
+                    render: text => handleText(text),
+                    ...this.getColumnSearchProps('header'),
 
 
-        },
-        // {
-        //     title: 'Adding User',
-        //     dataIndex: 'create_user',
-        //     key: 'create_user',
-        //     align: 'center',
-        // },
-];
-        if (this.props.viewMode === 'full_table'){
+                },
+                // {
+                //     title: 'Adding User',
+                //     dataIndex: 'create_user',
+                //     key: 'create_user',
+                //     align: 'center',
+                // },
+            ];
+        if (this.props.expandMode){
             columns.push(                {
-            title: 'Content',
-            dataIndex: 'text',
-            key: 'text',
-            align: 'center',
-            render: text => handleText(text),
-            ...this.getColumnSearchProps('text'),
+                title: 'Content',
+                dataIndex: 'text',
+                key: 'text',
+                width: 280,
+                align: 'center',
+                render: text => handleText(text),
+                ...this.getColumnSearchProps('text'),
 
 
-        })
+            })
         }
         columns.push({
             title: 'Link',
             dataIndex: 'link',
             key: 'link',
             width: 150,
-            render: link => <a href={link}>{link}</a>,
+            ...this.getColumnSearchProps('link'),
+            render: link => <a href={link} onClick={(event) => {event.preventDefault(); window.open(link);}}>{link}</a>,
             align: 'center',
+
         });
-        if (this.props.viewMode  === 'full_table'){
-        columns.push({
-            title: 'Tags',
-            dataIndex: 'tags',
-            key: 'tags',
-            width: 170 ,
-            render: tags => <TagsRenderer tags={tags}/>,
-            align: 'center',
+        if (this.props.expandMode){
+            columns.push({
+                title: 'Tags',
+                dataIndex: 'tags',
+                key: 'tags',
+                width: 170 ,
+                render: tags => <TagsRenderer tags={tags}/>,
+                align: 'center',
+            });
+            columns.push(
+                {
+                    title: ' Modified Time',
+                    dataIndex: 'modify_time',
+                    key: 'modify_time',
+                    width: 120,
+                    align: 'center',
+                    sorter: (a, b) => Date.parse(a.modify_time) - Date.parse(b.modify_time),
+                }
+            )
+        }
+        if (this.props.editMode){
+            columns.push({
+                title: 'Actions',
+                key: 'actions',
+                width: 150 ,
+                align: ' center',
+                render: (_, record)=>
+                    <div>
+                        <EventEditOptions
+                            key={"t_menu_".concat(record.event_id)}
+                            data={record}
+                            eventId={record.event_id}
+                            url={this.props.url}
+                        />
+
+                    </div>
+
+            });
+        }
+        return columns
+    }
+
+    getColumnSearchProps = dataIndex => ({
+        filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
+            <div style={{ padding: 8 }}>
+                <Input
+                    ref={node => {
+                        this.searchInput = node;
+                    }}
+                    placeholder={`Search ${dataIndex}`}
+                    value={selectedKeys[0]}
+                    onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+                    onPressEnter={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
+                    style={{ width: 188, marginBottom: 8, display: 'block' }}
+                />
+                <Space>
+                    <Button
+                        type="primary"
+                        onClick={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
+                        icon={<SearchOutlined />}
+                        size="small"
+                        style={{ width: 90 }}
+                    >
+                        Search
+                    </Button>
+                    <Button onClick={() => this.handleReset(clearFilters)} size="small" style={{ width: 90 }}>
+                        Reset
+                    </Button>
+                </Space>
+            </div>
+        ),
+        filterIcon: filtered => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
+        onFilter: (value, record) =>
+            record[dataIndex] === null ? false: record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
+        onFilterDropdownVisibleChange: visible => {
+            if (visible) {
+                setTimeout(() => this.searchInput.select());
+            }
+        },
+        render: text =>
+            this.state.searchedColumn === dataIndex ?
+                <Highlighter
+                    highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
+                    searchWords={[this.state.searchText]}
+                    autoEscape
+                    textToHighlight={text.toString()}
+                />
+                :
+                handleText(text)
+        ,
+    });
+
+    handleSearch = (selectedKeys, confirm, dataIndex) => {
+        confirm();
+        this.setState({
+            searchText: selectedKeys[0],
+            searchedColumn: dataIndex,
         });
-        columns.push(
-            {
-            title: ' Modify Time',
-            dataIndex: 'modify_time',
-            key: 'modify_time',
-            width: 120,
-            align: 'center',
-            sorter: (a, b) => Date.parse(a.event_time) - Date.parse(b.event_time),
-        }
-        )
->>>>>>> 4ce1692... full copy from NH
-        }
-    }
+    };
 
-    fetchData() {
-        const TimelineUrl = this.props.url;
-        const apiGetEvents = backendAPI.concat(`/timeline/${TimelineUrl}`);
-        // console.log(apiGetEvents);
-        axios.post(apiGetEvents,
-            {
-                jwt_token: this.props.jwtToken,
-            })
-            .then(res => res.data.events)
-            .then((evs) => {
-                this.setState({
-                    timeline_events:evs,
-                    isLoaded: true})});
-                // .then(() => {console.log("StateEvents:", this.state.timeline_events)});
-    }
-
-    componentDidMount() {
-        this.fetchData();
-    }
-
-    componentWillUpdate(nextProps, nextState, nextContext) {
-        if (nextProps.timelineRenderCount === 1) {
-            this.fetchData();
-            this.props.setReRenderTimeline(0);
-        }
-
-    }
-
+    handleReset = clearFilters => {
+        clearFilters();
+        this.setState({ searchText: '' });
+    };
 
     render() {
-<<<<<<< HEAD
-        if (!this.state.isLoaded) {
-            // if Not Loaded:
-
-            return <LoadingPage/>;
-=======
         const columns = this.setColumns();
         let expandableConfig = {};
         const paginationConfig= {
@@ -153,79 +213,74 @@ class StoryTable extends React.Component {
             showSizeChanger: true,
             showTotal: (total, range) => `${range[0]}-${range[1]} מתוך ${total}`
         };
-        if (this.props.viewMode === 'preview_table'){
+        expandableConfig = {};
+        if (!this.props.expandMode){
             expandableConfig = {
-                    expandedRowRender: record => handleText(record.text),
-                    rowExpandable: record => record.text !== null && record.text.length > 0,
-                }
->>>>>>> 4ce1692... full copy from NH
+                expandedRowRender: record =>
+                    <div>
+                        {handleText(record.text)}
+                        {record.extra_data?
+                            <div>
+                                <br/>
+                                <ExtraData key={"t_extra_".concat(record.event_id)} data={record.extra_data}/>
+                            </div>
+                            : null}
+
+                    </div>,
+                rowExpandable: record => (record.text !== null && record.text.length > 0) || record.extra_data
+            }
         }
-        else if (this.state.timeline_events.length === 0){
-            return (
-                <div>
+        else {
+            expandableConfig = {
+                expandedRowRender: record =>
+                    <div>
+                        {record.extra_data?
+                            <div>
+                                <br/>
+                                <ExtraData key={"t_extra_".concat(record.event_id)} data={record.extra_data} startsOpen/>
+                            </div>
+                            : null}
 
-                <Title level={1} style={{textAlign:'center'}}>{this.props.url}</Title>
-                <Title level={2} style={{textAlign:'center'}}>Empty! Start add some events.</Title>
-
-                </div>
-            )
+                    </div>,
+                rowExpandable: record => (record.extra_data && true)
+            }
         }
-        else
-            {
-                //returns the timeline.
-            return (
-                <div
-                    //style={{backgroundColor: '#ccc'}}
-                >
-
-                    <Title level={1} style={{textAlign:'center'}}>{this.props.basicData.name}</Title>
-                    <Title level={4} style={{textAlign:'center'}}>{this.props.basicData.description}</Title>
-                    <VerticalTimeline
-                        id={this.props.basicData.id}
-                        style={{background: '#f00'}}>
-                        {this.state.timeline_events.map(
-                            function(evt){
-                                return <DataEvent data={evt}  />
-                            })}
-                    </VerticalTimeline>
-                </div>
-
-            );
-        }
-<<<<<<< HEAD
-=======
         return (
+            <ConfigProvider direction='rtl'>
+                <Table
+                    dataSource={this.props.timeline_events}
+                    columns={columns}
+                    rowKey={record => record.event_id}
+                    expandable={expandableConfig}
+                    pagination={paginationConfig}
+                    style={{
+                        // width: '90%',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        // borderRadius: '30px',
+                        // borderColor: '#ddd',
 
-            <Table
-                dataSource={this.props.timeline_events}
-                columns={columns}
-                rowKey={record => record.event_id}
-                expandable={expandableConfig}
-                pagination={paginationConfig}
-                style={{
-                      // width: '90%',
-                      display: 'flex',
-                      justifyContent: 'center',
-                      // borderRadius: '30px',
-                      // borderColor: '#ddd',
-
-                  }}
-            />
+                    }}
+                />
+            </ConfigProvider>
         );
->>>>>>> 8e9378c... add non exist page
     }
 }
 const mapStateToProps = state => {
-  return {
-      jwtToken: state.usersReducer.jwtToken,
-  }
+    return {
+        editMode: state.sitesReducer.editMode,
+        jwtToken: state.usersReducer.jwtToken,
+
+
+    }
 };
 
 const mapDispatchToProps = dispatch => {
     return{
-        setReRenderTimeline: (index) => {dispatch(setReRenderTimelineAction(index))}
+        setReRenderTimeline: (index) => {dispatch(setReRenderTimelineAction(index))},
+
     }
 
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Timeline);
+export default connect(mapStateToProps, mapDispatchToProps)(StoryTable);

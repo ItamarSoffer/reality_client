@@ -5,69 +5,46 @@ import {
     Route,
 } from "react-router-dom";
 import LoginPage from "../Pages/LoginPage";
-import SideMenuDemo from "../Components/SideMenu/OriginalSideMenu";
-import BaseTimeline from "../Components/Timelines/base_timeline";
-import RealityPage from "../Pages/TimelinePage";
+import StoryPage from "../Pages/TimelinePage";
 import CardsPage from "../Pages/CardsPage";
-import CreateNewEvent from "../Components/NewEvent/NewEventComponent";
 import NewTimelinePage from "../Pages/NewTimelinePage";
 import HomePage from "../Pages/HomePage";
-import {NotExists} from "../Components/NotExists/notExists";
 
 
 class AppRouter extends React.Component{
 
     render() {
         return(
-             <Router>
+            <Router>
 
-			  <div>
+                <div>
 
-				  <Switch>
-                      {
-                          !this.props.isLogged ?
+                    <Switch>
+                        {
+                            !this.props.isLogged ?
 
-                              <div>
+                                <div>
+                                    <Route path="/" component={LoginPage}/>
+                                </div> :
+                                <div>
 
-<<<<<<< HEAD
-=======
                                     <Route path="/story/:timeline_url" component={StoryPage}/>
->>>>>>> e7d9d64... change routes from /timeline to /story
 
-                                  <Route path="/login" component={LoginPage}/>
-                                  <Route path="/" component={LoginPage}/>
-                              </div> :
-                              <div>
+                                    <Route path="/all" component={CardsPage}/>
 
-                                  < Route path="/side_menu" component={SideMenuDemo}/>
+                                    <Route path="/new_story" component={NewTimelinePage}/>
 
-                                  <Route path="/base_timeline" component={BaseTimeline}/>
+                                    <Route path="/login" component={LoginPage}/>
 
-                                  <Route path="/timeline/:timeline_url" component={RealityPage}/>
+                                    <Route exact={true} path="/home" component={HomePage}/>
+                                    <Route exact={true} path="/" component={HomePage}/>
 
-                                  <Route path="/all" component={CardsPage}/>
+                                </div>
+                        }
+                    </Switch>
 
-                                  <Route path="/new_event" component={CreateNewEvent}/>
-
-                                  <Route path="/new_story" component={NewTimelinePage}/>
-
-                                  {/*<Route path="/login" component={LoginPage}/>*/}
-                                  <Route path="/login" component={LoginPage}/>
-
-                                  {/*<Route exact={true} path="/home" component={HomePage}/>*/}
-                                  {/*<Route exact={true} path="/" component={HomePage}/>*/}
-
-                                  <Route exact={true} path="/home" component={CardsPage}/>
-                                  <Route exact={true} path="/" component={CardsPage}/>
-                              </div>
-
-                      }
-
-
-				  </Switch>
-
-			  </div>
-		  </Router>
+                </div>
+            </Router>
         )
     }
 }

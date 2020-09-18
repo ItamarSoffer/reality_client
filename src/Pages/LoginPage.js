@@ -6,11 +6,13 @@ import {
 
 import LoginForm from '../Components/loginForm/loginForm';
 import {loginAction} from '../Actions/usersActions';
+import {checkJwt} from "../Actions/jwtActions";
 
 class LoginPage extends React.Component{
 
     componentWillMount() {
-        console.log("props",this.props);
+        document.title = "Story";
+        // console.log("props",this.props);
         if(this.props.isLogged === true) {
             this.props.history.push({pathname: `/`,})
             // this.props.history.push('/');
@@ -36,7 +38,8 @@ class LoginPage extends React.Component{
 
 const mapStateToProps = state => {
     return {
-        isLogged: state.usersReducer.isLogged
+        isLogged: checkJwt(state.usersReducer.jwtToken),
+
     }
 };
 

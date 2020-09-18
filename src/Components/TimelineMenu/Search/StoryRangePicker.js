@@ -11,17 +11,17 @@ const { RangePicker } = DatePicker;
 class StoryRangePicker extends React.Component{
 
     onChange = (dates, dateStrings) => {
-  const pathName = this.props.history.location.pathname;
-  let currentSearchQuery = getQueryStringParams(this.props.history.location.search);
+        const pathName = this.props.history.location.pathname;
+        let currentSearchQuery = getQueryStringParams(this.props.history.location.search);
         if (dates === null){
             delete currentSearchQuery['min_time'];
             delete currentSearchQuery['max_time'];
-                        this.props.history.push(
+            this.props.history.push(
                 {pathname: pathName,
                     search: "?" + new URLSearchParams(
                         {...currentSearchQuery}
-                        ).toString()
-            });
+                    ).toString()
+                });
         }
         else{
             currentSearchQuery['min_time'] = dateStrings[0];
@@ -30,11 +30,11 @@ class StoryRangePicker extends React.Component{
                 {pathname: pathName,
                     search: "?" + new URLSearchParams(
                         {...currentSearchQuery}
-                        ).toString()
+                    ).toString()
 
-            });
+                });
         }
-  this.props.setReRenderTimeline(1);
+        this.props.setReRenderTimeline(1);
     };
 
     render(){
@@ -47,23 +47,23 @@ class StoryRangePicker extends React.Component{
 
         return (
             <RangePicker
-      ranges={{
-        'Day': [moment(), moment()],
-        'Week': [moment().startOf('week'), moment().endOf('week')],
-        'Month': [moment().startOf('month'), moment().endOf('month')],
-        'Year': [moment().startOf('year'), moment().endOf('year')],
-      }}
-      onChange={this.onChange}
-      defaultValue={defaultPickerQueryValues}
+                ranges={{
+                    'Day': [moment(), moment()],
+                    'Week': [moment().startOf('week'), moment().endOf('week')],
+                    'Month': [moment().startOf('month'), moment().endOf('month')],
+                    'Year': [moment().startOf('year'), moment().endOf('year')],
+                }}
+                onChange={this.onChange}
+                defaultValue={defaultPickerQueryValues}
 
-    />
+            />
 
         )
     }
 }
 const mapStateToProps = state => {
-  return {
-  }
+    return {
+    }
 };
 
 const mapDispatchToProps = dispatch => {

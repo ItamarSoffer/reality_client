@@ -7,28 +7,34 @@ import AppRouter from './Structure/AppRouter';
 
 import './App.css';
 import 'antd/dist/antd.css';
-//import './login/adds_atnd.css'
 import './main.css'
+import {checkJwt} from "./Actions/jwtActions";
 
 
 class App extends React.Component{
-  render() {
-	  return (
-	  	<AppRouter isLogged={this.props.isLogged}/>
+    componentDidMount() {
+        document.title = "Story";
+    }
 
-	  );
-  }
+    render() {
+        return (
+            <AppRouter
+                isLogged={checkJwt(this.props.jwtToken)}
+            />
+
+        );
+    }
 }
 
 const mapStateToProps = state => {
-  return {
-    isLogged: state.usersReducer.isLogged
-  }
+    return {
+        jwtToken: state.usersReducer.jwtToken
+    }
 };
 
 const mapDispatchToProps = disaptch => {
-    return {}
-
+    return {
+    }
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

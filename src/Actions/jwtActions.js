@@ -8,14 +8,14 @@ export const checkJwt = (jwtToken) => {
     const dateNow = new Date();
     // console.log("LEFT", tokenExpiration - dateNow.getTime()/1000);
     return (tokenExpiration > dateNow.getTime()/1000)
-    };
+};
 
 export const refreshByJwt = (jwtToken) => {
-      if (!checkJwt(jwtToken)){
-          window.location.reload();
+    if (!checkJwt(jwtToken)){
+        window.location.reload();
 
-      }
-      else{
-      }
+    }
+    else{
+    }
 
-  };
+};

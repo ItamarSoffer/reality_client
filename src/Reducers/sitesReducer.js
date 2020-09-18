@@ -1,18 +1,20 @@
+/*
+Saves General variables:
+    1. editMode- controls if story is in edit mode or not
+    2. timelineRenderCount- if true, forces to re-fetch the events from backend. turns the false after fetch.
+    3. storyViewMode- timeline of table.
+    4. cardsRenderCount- being changed after search in home or all, forces re-fetching relevant cards.
+    5. storyExpandMode- true == expand, false == collapse.
+ */
 const DarkModeLocalStorage = window.localStorage.getItem('DarkMode');
 
 const siteInitState = {
     DarkMode: (DarkModeLocalStorage !== null ? DarkModeLocalStorage : false),
-<<<<<<< HEAD
-    editMode: false
-=======
     editMode: false,
-    showNewEventModal: false,
-    showPermissionsModal: false,
-<<<<<<< HEAD
->>>>>>> 79aa366... add permissions control
-=======
     timelineRenderCount: 0,
->>>>>>> da2bd71... add auto update after change (add or delete event)
+    storyViewMode: 'timeline',
+    cardsRenderCount: 0,
+    storyExpandMode: true
 };
 
 const sitesReducer = (state = siteInitState, action) => {
@@ -21,38 +23,37 @@ const sitesReducer = (state = siteInitState, action) => {
         case "SET_THEME":
             window.localStorage.setItem('DarkMode',action.payload);
             state = {...state, DarkMode: action.payload};
-        break;
+            break;
 
         case "EDIT_MODE":
             state = {...state, editMode: action.payload};
-        break;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
-
->>>>>>> da2bd71... add auto update after change (add or delete event)
-        case "NEW_EVENT_MODAL_VIEW":
-            state = {...state, showNewEventModal: action.payload};
-        break;
-
-        case "PERMISSIONS_MODAL_VIEW":
-            state = {...state, showPermissionsModal: action.payload};
-        break;
-<<<<<<< HEAD
->>>>>>> 79aa366... add permissions control
-=======
+            break;
 
         case "TIMELINE_RENDER_COUNT":
             state = {...state, timelineRenderCount: action.payload};
-        break;
+            break;
 
->>>>>>> da2bd71... add auto update after change (add or delete event)
+        case "STORY_TYPE_MODE":
+            state = {...state, storyViewMode: action.payload};
+            // console.log(action.payload);
+            break;
+
+        case "STORY_EXPAND_MODE":
+            state = {...state, storyExpandMode: action.payload};
+            // console.log(action.payload);
+            break;
+
+        case "CARDS_RENDER_COUNT":
+            state = {...state, cardsRenderCount: action.payload};
+            break;
+
+
+
         default:
-        break;
+            break;
     }
 
-    console.log('Sites Reducers', state);
+    // console.log('Sites Reducers', state);
     return state;
 };
 

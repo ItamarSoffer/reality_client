@@ -16,17 +16,18 @@ import {
     LinkOutlined,
     FormOutlined,
     HomeOutlined,
-<<<<<<< HEAD
-    EditOutlined
-=======
     EditOutlined,
     EyeOutlined,
     TableOutlined,
     CompressOutlined,
     MoreOutlined,
     FilterOutlined,
-    UploadOutlined
->>>>>>> 452b362... add option to upload xlsx file
+    UploadOutlined,
+    InfoCircleOutlined,
+    StarOutlined,
+    StarFilled,
+    ExpandAltOutlined,
+
 } from '@ant-design/icons';
 
 export const MenuIcons = {
@@ -46,18 +47,18 @@ export const MenuIcons = {
     "link": <LinkOutlined />,
     "form": <FormOutlined />,
     "home": <HomeOutlined/>,
-<<<<<<< HEAD
-    "edit": <EditOutlined />
-=======
     "edit": <EditOutlined />,
     'eye': <EyeOutlined />,
     "table": <TableOutlined />,
     "compress": <CompressOutlined />,
     "more": <MoreOutlined/>,
     "filter": <FilterOutlined/>,
-    "upload": <UploadOutlined/>
+    "upload": <UploadOutlined/>,
+    "info": <InfoCircleOutlined />,
+    "star": <StarOutlined />,
+    "star_filled": <StarFilled />,
+    "expand": <ExpandAltOutlined />
 
->>>>>>> 452b362... add option to upload xlsx file
 
 };
 export default MenuIcons;

@@ -6,34 +6,40 @@ import {connect} from "react-redux";
 
 
 class NewTimelinePage extends React.Component{
+    componentDidMount() {
+
+        document.title = "New Story";
+    }
     render() {
-                console.log("props", this.props);
         return(
             <Layout style={{ minHeight: '100vh' }} >
                 <SideMenuPage url={this.props.match.params.timeline_url} />
-                  <Layout>
-                      <div
-                      style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  position: 'absolute', left: '50%', top: '40%',
-                  transform: 'translate(-50%, -50%)'
+                <Layout>
+                    <div
+                        style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            position: 'absolute',
+                            left: '50%', top: '40%',
+                            transform: 'translate(-50%, -50%)'
 
-              }}>
-                      <CreateNewTimeline loggedUser={this.props.loggedUser}/>
-                      </div>
-                  </Layout>
-        </Layout>
+                        }}>
+                        <CreateNewTimeline loggedUser={this.props.loggedUser}/>
+                    </div>
+                </Layout>
+            </Layout>
 
         )
     }
 }
 
 const mapStateToProps = state => {
-  return {
-    loggedUser: state.usersReducer.loggedUser
-  }
+    return {
+        loggedUser: state.usersReducer.loggedUser,
+        DarkMode: state.sitesReducer.DarkMode,
+
+    }
 };
 
 const mapDispatchToProps = disaptch => {
@@ -41,3 +47,6 @@ const mapDispatchToProps = disaptch => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewTimelinePage);
+
+
+
