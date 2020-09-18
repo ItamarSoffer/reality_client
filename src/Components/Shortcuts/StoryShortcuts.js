@@ -1,15 +1,23 @@
 import React from "react";
 import Hotkeys from "react-hot-keys";
-import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {useHistory} from "react-router-dom";
 import {
+    controlAboutSiderAction,
     controlNewEventModalAction,
     controlPermissionsModalAction,
-    controlAboutSiderAction,
-    controlTagsModalAction} from "../../Actions/modalsActions";
-import {enableEditAction, disableEditAction} from "../../Actions/siteActions";
+    controlShortcutsModalAction,
+    controlTagsModalAction
+} from "../../Actions/modalsActions";
+import {
+    disableEditAction,
+    enableEditAction,
+    setStoryViewModeAction,
+    setThemeAction,
+    storyExpandModeAction,
+    StoryOpenAllExtraData
+} from "../../Actions/siteActions";
 import {logoutAction} from "../../Actions/usersActions";
-import {setThemeAction, setStoryViewModeAction, storyExpandModeAction, StoryOpenAllExtraData} from "../../Actions/siteActions";
 import {getQueryStringParams} from "../../Actions/queryStringActions";
 
 /*
@@ -26,8 +34,8 @@ import {getQueryStringParams} from "../../Actions/queryStringActions";
  */
 
 export function HotKeyCheck(){
-    const state = useSelector(state => state);
-    const dispatch = useDispatch();
+    // const state = useSelector(state => state);
+    // const dispatch = useDispatch();
 
     const onKeyUp = (keyName, e, handle) => {
         console.log("keyName", keyName);
@@ -204,6 +212,7 @@ export function HotKeyPermissionsModal(){
         keyName="alt+p"
         onKeyUp={onKeyUp}
     />)}
+
 export function HotKeyOpenAllExtra(){
     const dispatch = useDispatch();
     const state = useSelector(state => state);
@@ -215,6 +224,19 @@ export function HotKeyOpenAllExtra(){
         keyName="shift+alt+x"
         onKeyUp={onKeyUp}
     />)}
+
+export function HotKeyShortcutsModal() {
+    const dispatch = useDispatch();
+
+    const onKeyUp = (keyName, e, handle) => {
+        dispatch(controlShortcutsModalAction(true));
+    };
+    return (<Hotkeys
+        keyName="alt+s,s+c"
+        onKeyUp={onKeyUp}
+    />)
+}
+
 
 
 export function AllKeys(){
@@ -239,6 +261,7 @@ export function MenuShortcuts(){
         <HotKeyLogout/>
         <HotKeyNewStory/>
         <HotKeyAboutSider/>
+        <HotKeyShortcutsModal/>
     </div>)
 
 

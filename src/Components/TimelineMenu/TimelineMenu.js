@@ -6,15 +6,15 @@ import DownloadExcel from '../Export/ToExcel';
 import CreateNewEvent from "../NewEvent/NewEventComponent";
 import PermissionsModal from "../permissionsModal/permissionsModal";
 import {
-    enableEditAction,
     disableEditAction,
+    enableEditAction,
     setStoryViewModeAction,
     storyExpandModeAction
 } from "../../Actions/siteActions";
 import {
+    controlDeleteTimelineModalAction,
     controlNewEventModalAction,
     controlPermissionsModalAction,
-    controlDeleteTimelineModalAction,
     controlTagsModalAction,
     controlUploadXlsxModalAction
 } from "../../Actions/modalsActions";
@@ -24,7 +24,7 @@ import StoryInSearch from './Search/StorySearch';
 import UploadXlsxModal from './UploadXlsxModal/UploadXlsxModal';
 import TagsModal from '../Tags/TagsModal';
 import TagsSearch from "./Search/TagsSearch";
-import {getQueryStringParams, setUrlParam} from "../../Actions/queryStringActions";
+import {getQueryStringParams,} from "../../Actions/queryStringActions";
 import {withRouter} from "react-router";
 import {HotKeyPermissionsModal, StoryEditShortcuts} from "../Shortcuts/StoryShortcuts";
 

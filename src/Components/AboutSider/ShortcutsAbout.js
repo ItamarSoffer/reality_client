@@ -1,5 +1,5 @@
 import React from 'react';
-import {Typography, Divider, List} from "antd";
+import {Divider, List, Typography} from "antd";
 
 const {Text, Title} = Typography;
 
@@ -11,34 +11,50 @@ every object will be:
 
 const storyShortcuts = [
     {content: 'Open New Event Window',
-        hotKeys: ['Alt', 'n']},
+        hotKeys: ['Alt', 'N']
+    },
     {content: 'Tags Window',
-        hotKeys: ['Alt', 't']},
+        hotKeys: ['Alt', 'T']
+    },
     {content: 'Open Permissions Control',
-        hotKeys: ['Alt', 'p']},
+        hotKeys: ['Alt', 'P']
+    },
     {content: 'Enable\\Disable Edit Mode',
-        hotKeys: ['Alt', 'c']},
+        hotKeys: ['Alt', 'C']
+    },
     {content: 'Switch Timeline-Table View',
-        hotKeys: ['Alt', 'v']},
+        hotKeys: ['Alt', 'V']
+    },
     {content: 'Switch Expand-collapse',
-        hotKeys: ['Alt', 'x']},
+        hotKeys: ['Alt', 'X']
+    },
     {content: 'Add New Event',
         hotKeys: ['', '']},
     {content: 'Open Attachments',
-        hotKeys: ['Shift', 'Alt', 'x']},
+        hotKeys: ['Shift', 'Alt', 'X']
+    },
 ];
 
 const generalShortcuts = [
     {content: 'Switch Theme',
-        hotKeys: ['Alt', 'a']},
+        hotKeys: ['Alt', 'A']
+    },
     {content: 'Open Help',
-        hotKeys: ['Alt', 'h']},
+        hotKeys: ['Alt', 'H']
+    },
+    {
+        content: 'Open Shortcuts Help',
+        hotKeys: [['Alt', 'S'], 'or', ['S', 'C']]
+    },
     {content: 'Create New Story',
-        hotKeys: ['Shift', 'Alt', 'n']},
+        hotKeys: ['Shift', 'Alt', 'N']
+    },
     {content: 'Jump to Home Screen',
-        hotKeys: ['Shift', 'Alt', 'h']},
+        hotKeys: ['Shift', 'Alt', 'H']
+    },
     {content: 'Logout',
-        hotKeys: ['Shift', 'Alt', 'l']},
+        hotKeys: ['Shift', 'Alt', 'L']
+    },
 ];
 
 
@@ -52,7 +68,26 @@ const generateShortcutsList =(shortcutsList, title) => {
                 renderItem={item => (
                     <List.Item>
                         <Text strong>{item.content} </Text>{' '}
-                        {item.hotKeys.map(val => <Text keyboard>{val}</Text>)}
+                        {item.hotKeys.map(function (val) {
+                            if (typeof val === 'string') {
+                                if (val === 'or') {
+                                    return (
+                                        <Text>{' '}{val}{' '}</Text>
+                                    )
+                                } else {
+                                    return (
+                                        <Text keyboard strong>{val}</Text>
+                                    )
+                                }
+                            }
+                            if (Array.isArray(val)) {
+                                return (val.map(
+                                    innerVal => <Text keyboard strong>{innerVal}</Text>
+                                ))
+
+                            }
+
+                        })}
                     </List.Item>
                 )}
             />
@@ -67,11 +102,6 @@ class ShortcutsAbout extends React.Component {
             <div>
                 {generateShortcutsList(generalShortcuts, "General Shortcuts")}
                 {generateShortcutsList(storyShortcuts, "In Story Shortcuts")}
-
-
-
-
-
             </div>
 
         )

@@ -2,18 +2,17 @@ import React from 'react';
 import {Layout, Menu, message} from 'antd';
 // import { Switch } from 'antd';
 import {connect} from "react-redux";
-import {
-    withRouter
-} from "react-router-dom";
+import {withRouter} from "react-router-dom";
 
 import MenuIcons from '../Icons/MenuIcons';
 import {refreshByJwt} from "../../Actions/jwtActions";
 import {controlAboutSiderAction} from "../../Actions/modalsActions";
 import AboutSider from "../AboutSider/AboutSider";
-import {setReRenderFavorites, setUserFavorites, clearFavorites} from "../../Actions/favoritesActions";
+import {clearFavorites, setReRenderFavorites, setUserFavorites} from "../../Actions/favoritesActions";
 import {apiGetFavorites,} from "../../Actions/apiActions";
 import ThemeSwitch from "../ThemeSwitch/ThemeSwitch";
 import {MenuShortcuts} from "../Shortcuts/StoryShortcuts";
+import ShortcutsModal from "../Shortcuts/ShortcutsModal";
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
@@ -159,6 +158,7 @@ class SideMenu extends React.Component {
                     <ThemeSwitch/>
                 </div>
                 <AboutSider/>
+                <ShortcutsModal/>
                 <MenuShortcuts/>
             </Sider>
 

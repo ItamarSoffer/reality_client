@@ -10,7 +10,8 @@ const siteInitState = {
     showUploadXlsxModal: false,
     showTagsModal: false,
     showEditEventModal: {},
-    showAboutSider: false
+    showAboutSider: false,
+    showShortcutsModal: false,
 };
 
 const modalsReducer = (state = siteInitState, action) => {
@@ -49,6 +50,10 @@ const modalsReducer = (state = siteInitState, action) => {
             // state = {...state, showEditEventModal: visibleUpdate};
             state = {...state, showEditEventModal: action.payload};
             break;
+        case "SHORTCUTS_MODAL_VIEW":
+            state = {...state, showShortcutsModal: action.payload};
+            break;
+
 
         default:
             break;

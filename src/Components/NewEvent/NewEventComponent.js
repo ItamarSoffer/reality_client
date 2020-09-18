@@ -1,16 +1,17 @@
 import React from 'react';
 import {
+    Button,
+    ConfigProvider,
+    DatePicker,
     Form,
     Input,
-    Button,
-    Modal,
-    DatePicker,
-    TimePicker,
-    ConfigProvider,
     message,
+    Modal,
     Popover,
-    Typography,
-    Space} from 'antd';
+    Space,
+    TimePicker,
+    Typography
+} from 'antd';
 import 'antd/dist/antd.css';
 import IconsSelect from '../Icons/IconsSelect';
 import ColorPicker from '../ColorPicker/ColorPicker';
@@ -19,7 +20,7 @@ import {connect} from "react-redux";
 import {setReRenderTimelineAction} from "../../Actions/siteActions";
 import {controlNewEventModalAction} from "../../Actions/modalsActions";
 import TagsSelectByName from "../Tags/TagsSelectByName";
-import {apiNewEvent, apiExtractTime} from "../../Actions/apiActions";
+import {apiExtractTime, apiNewEvent} from "../../Actions/apiActions";
 import {updateEventAction} from "../../Actions/eventsActions";
 import {ClockCircleOutlined, CloseCircleOutlined} from '@ant-design/icons';
 
@@ -51,7 +52,6 @@ class CreateNewEvent extends React.Component {
             tags: []
         })
     };
-
     showModal = () => {
         this.setState({
             visible: true,
@@ -292,7 +292,7 @@ class CreateNewEvent extends React.Component {
                                 // onChange={this.onLinkChange}
 
                                 addonAfter={
-                                    <Popover content={"Extract DateTime"}>
+                                    <Popover content={"Extract Datetime"}>
                                         <ClockCircleOutlined onClick={this.handleExtractTime}/>
                                     </Popover>}
                             />

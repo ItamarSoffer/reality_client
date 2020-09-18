@@ -64,3 +64,12 @@ export const controlEditEventModalAction = (eventId) => {
         payload: eventId
     }
 };
+
+
+export const controlShortcutsModalAction = (isOpen) => {
+    // isOpen is bool- open or close the modal
+    return {
+        type: "SHORTCUTS_MODAL_VIEW",
+        payload: isOpen
+    }
+};
