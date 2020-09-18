@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import {setReRenderTimelineAction} from "../../Actions/siteActions";
 import {AboutTableIcons} from "../Icons/Icons";
 import FeaturesCollapse from "./FeaturesCollapse";
+import ShortcutsAbout from "./ShortcutsAbout";
 
 const {Text} = Typography;
 const { TabPane } = Tabs;
@@ -67,6 +68,11 @@ class AboutSider extends React.Component{
                                 </List.Item>
                             )}/>
 
+                    </TabPane>
+
+                     <TabPane tab="Shortcuts" key="3_shortcuts">
+
+                        <ShortcutsAbout/>
                     </TabPane>
 
 

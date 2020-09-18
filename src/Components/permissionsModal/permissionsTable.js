@@ -5,6 +5,7 @@ import Highlighter from "react-highlight-words";
 import { SearchOutlined } from '@ant-design/icons';
 import {Typography} from "antd";
 import {apiGetPermissions} from "../../Actions/apiActions";
+import {getUniqValues} from "../../Actions/eventsActions";
 const {Paragraph} = Typography;
 
 
@@ -63,6 +64,18 @@ class PermissionsTable extends React.Component{
                 title: 'Role',
                 dataIndex: 'role',
                 key: 'role',
+                filters: getUniqValues(this.state.permissionsData, 'role').map(
+                    function(role){
+                        return (
+                            {text:
+                                    <Tag color={colormap[role]} key={role}>
+                                        {role.toUpperCase()}
+                                    </Tag>, value: role}
+                        )
+                    }
+                ),
+                onFilter: (value, record) =>
+                    record['role'] === null ? false: record['role'].toString().toLowerCase().includes(value.toLowerCase()),
                 render:  tag => (
                     <>{
 

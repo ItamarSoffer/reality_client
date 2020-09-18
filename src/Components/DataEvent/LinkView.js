@@ -1,10 +1,9 @@
 import React from 'react';
-import {Popover, message, Typography, Tag}  from 'antd';
+import {message, Popover, Tag, Typography} from 'antd';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 
-
-const {Text, Link, Paragraph} = Typography;
+const {Text, Paragraph} = Typography;
 
 /*
 Renders the link in the timeline and table.

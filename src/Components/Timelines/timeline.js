@@ -11,11 +11,14 @@ import StoryTable from '../StoryTable/StoryTable';
 import {getQueryStringParams} from "../../Actions/queryStringActions";
 import {apiEditStoryDescription, apiEditStoryName, apiGetEvents} from "../../Actions/apiActions";
 import {getStoryEventsAction, eventsCompareSorter} from "../../Actions/eventsActions";
+import {StoryShortcuts, } from "../Shortcuts/StoryShortcuts";
 
 
 const { Title } = Typography;
 
 class Timeline extends React.Component {
+
+
 
     constructor(props){
         super(props);
@@ -132,6 +135,13 @@ class Timeline extends React.Component {
             if (queryParams.view){
                 viewMode = queryParams.view;
             }
+
+            let expandMode = this.props.storyExpandMode;
+            if (queryParams.expand){
+                expandMode = queryParams.expand === 'true';
+            }
+
+
             let nameOnChange = false;
             let descriptionOnChange = false;
             if (this.props.editMode){
@@ -149,7 +159,7 @@ class Timeline extends React.Component {
                     </ConfigProvider>
                     {viewMode !== 'timeline'?
                         <StoryTable
-                            expandMode={this.props.storyExpandMode}
+                            expandMode={expandMode}
                             url={urlAddress}
                             timeline_events={Object.values(this.props.events).sort(eventsCompareSorter)}
                             /> : null}
@@ -160,12 +170,14 @@ class Timeline extends React.Component {
                             {Object.values(this.props.events).sort(eventsCompareSorter).map(
                                 function (evt) {
                                     return <DataEvent
+                                        expandMode={expandMode}
                                         data={evt}
                                         url={urlAddress} />
                                 })}
                         </VerticalTimeline> : null
                     }
                     <BackTop />
+                    <StoryShortcuts/>
 
                 </div>
 
