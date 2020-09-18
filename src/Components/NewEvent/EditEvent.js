@@ -83,7 +83,7 @@ class EditEvent extends React.Component {
     // fine
     onFinish = values => {
         // console.log("FINITO", values);
-        const date = typeof values.date !== "undefined" ? values.date.format('YYYY-MM-DD'): "";
+        // const date = typeof values.date !== "undefined" ? values.date.format('YYYY-MM-DD'): "";
         const color = this.state.color === '' ? this.props.eventData.frame_color: this.state.color ;
         const icon = this.state.icon === ''?  this.props.eventData.icon: this.state.icon ;
         const tags = this.state.tags === []?  this.props.eventData.tags: this.state.tags;
@@ -187,7 +187,6 @@ class EditEvent extends React.Component {
                     message.warning({content: response.data, key: messageKey})
                 }
                 else if (response.status === 200){
-                    console.log(response.data.linkTime);
                     message.success({content: response.data.message,
                         key: messageKey,
                         duration: 2.5});

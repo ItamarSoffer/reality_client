@@ -86,7 +86,6 @@ class TimelineMenu extends React.Component {
     };
 
     render() {
-        const menuTheme = this.props.DarkMode === true ? "dark": "light";
         const queryParams = getQueryStringParams(this.props.history.location.search);
         let expandMode = this.props.storyExpandMode;
         if (queryParams.expand){
@@ -94,14 +93,13 @@ class TimelineMenu extends React.Component {
             expandMode = queryParams.expand === 'true';
         }
 
-        // console.log('Dark theme timeline', this.props.DarkMode);
+        // console.log('Dark theme timeline', this.props.darkMode);
         return (
             <div >
                 <Menu
                     mode="horizontal"
                     // align="center"
                     selectable={false}
-                    theme={menuTheme}
                     style={{display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
@@ -225,7 +223,7 @@ class TimelineMenu extends React.Component {
 }
 const mapStateToProps = state => {
     return {
-        DarkMode: state.sitesReducer.DarkMode,
+        darkMode: state.sitesReducer.darkMode,
         editMode: state.sitesReducer.editMode,
         jwtToken: state.usersReducer.jwtToken,
         storyExpandMode: state.sitesReducer.storyExpandMode

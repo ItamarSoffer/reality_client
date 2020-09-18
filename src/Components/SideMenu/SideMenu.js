@@ -12,6 +12,7 @@ import {controlAboutSiderAction} from "../../Actions/modalsActions";
 import AboutSider from "../AboutSider/AboutSider";
 import {setReRenderFavorites, setUserFavorites, clearFavorites} from "../../Actions/favoritesActions";
 import {apiGetFavorites,} from "../../Actions/apiActions";
+import ThemeSwitch from "../ThemeSwitch/ThemeSwitch";
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
@@ -20,11 +21,8 @@ const { SubMenu } = Menu;
 class SideMenu extends React.Component {
     constructor(props){
         super(props);
-        const darkCheck = (this.props.darkMode === "true") || (this.props.darkMode === true)  ;
         this.state = {
             collapsed: true,
-            theme: darkCheck ? 'dark' : 'light',
-            menuBackground: darkCheck ? 'rgb(0,21,41)' : 'rgb(255,255,255)'
         };
     }
     fetchFavorites(){
@@ -58,13 +56,6 @@ class SideMenu extends React.Component {
         this.setState({ collapsed });
     };
 
-    changeTheme = value => {
-        this.props.handleChangeTheme(!value);
-        this.setState({
-            theme: value ? 'dark' : 'light',
-            menuBackground: value ? 'rgb(0,21,41)' : 'rgb(255,255,255)'
-        });
-    };
 
     handleLogout = () => {
         this.props.handlerLogout();
@@ -80,20 +71,18 @@ class SideMenu extends React.Component {
                    collapsible
                    collapsed={this.state.collapsed}
                    onCollapse={this.onCollapse}
-                   // style={{background: this.state.menuBackground,}}
                    style={{ overflow: 'auto',
                        height: '100vh',
                        position: 'sticky',
                        top: 0,
                        left: 0,
-                       background: this.state.menuBackground,
+                       background: this.props.darkMode? null: 'white',
                    }}
 
 
             >
                 <div className="logo" />
                 <Menu
-                    theme={this.state.theme}
                     mode="inline"
                     defaultSelectedKeys={['1']}
                     selectable={false}
@@ -133,7 +122,6 @@ class SideMenu extends React.Component {
                                                     window.open(`${localAddress}/story/${favItem.url}`)
                                                 }}
                                             >
-
                                                 {favItem.name}
                                             </Menu.Item>)
                                     }
@@ -163,15 +151,12 @@ class SideMenu extends React.Component {
                 <br/>
                 <br/>
 
-                {/*    // DARK MODE SWITCH*/}
-                {/*    <Switch*/}
-                {/*        id={"theme_switch"}*/}
-                {/*  checked={this.state.theme === 'dark'}*/}
-                {/*  onChange={this.changeTheme}*/}
-                {/*  checkedChildren="Dark"*/}
-                {/*  unCheckedChildren="Light"*/}
-                {/*/>*/}
-
+                {/* DARK MODE SWITCH*/}
+                <div style={{display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center', width: '100%'}}>
+                    <ThemeSwitch/>
+                </div>
                 <AboutSider/>
             </Sider>
 
@@ -181,7 +166,8 @@ class SideMenu extends React.Component {
 }
 const mapStateToProps = state => {
     return {
-        favoritesRerender: state.favoritesReducer.favoritesRerender
+        favoritesRerender: state.favoritesReducer.favoritesRerender,
+        darkMode: state.sitesReducer.darkMode
     }
 };
 

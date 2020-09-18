@@ -22,17 +22,6 @@ The Reality card will get a data as prop with the the following things:
 - create user
  */
 
-const cardStyle = {
-    //height: '120px',
-    fontSize: '14px',
-    textAlign: 'center',
-    // lineHeight: '20px',
-    minHeight: '180px',
-    borderRadius: '8px',
-    borderColor: "#999999"
-
-    //background: '#0092ff',
-};
 
 
 class StoryCard extends React.Component{
@@ -66,15 +55,26 @@ class StoryCard extends React.Component{
 
 
     render() {
+        const cardStyle = {
+            //height: '120px',
+            fontSize: '14px',
+            textAlign: 'center',
+            // lineHeight: '20px',
+            minHeight: '180px',
+            borderRadius: '8px',
+            borderColor: "#999999",
+
+            background: this.props.darkMode? null: 'white',
+        };
 
         let name = this.props.cardData.name;
         let titleComponent = null;
         if (name.length > 22){
             name = name.slice(0,20) + '...';
-             titleComponent =
+            titleComponent =
                 <Popover content={this.props.cardData.name}>
-                <Title level={4} style={{color: '#1890ff'}}>{name} </Title>
-            </Popover>
+                    <Title level={4} style={{color: '#1890ff'}}>{name} </Title>
+                </Popover>
         }
         else {
             titleComponent =
@@ -84,7 +84,7 @@ class StoryCard extends React.Component{
         let favButton =null;
         if (this.props.favoritesIds.indexOf(this.props.cardData.id) !== -1){
             favButton =
-                <Popover content={<Text style={{color: 'red'}}>Remove</Text>}>
+
                 <StarFilled
                     style={{
                         fontSize: 20,
@@ -92,18 +92,15 @@ class StoryCard extends React.Component{
                         borderWidth: 'thin',
                     }}
 
-                             onClick={() => this.handleRemoveFavorite()}
+                    onClick={() => this.handleRemoveFavorite()}
                 />
-                </Popover>;
         }
         else {
             favButton =
-                <Popover content={<Text>Add</Text>}>
                 <StarOutlined style={{fontSize: 20}}
-                             // twoToneColor="#01a9b4"
-                             onClick={() => this.handleAddFavorite()}
+                    // twoToneColor="#01a9b4"
+                              onClick={() => this.handleAddFavorite()}
                 />
-            </Popover>;
         }
 
 
@@ -130,8 +127,12 @@ class StoryCard extends React.Component{
                                 <DeploymentUnitOutlined/>
                                 {this.props.cardData.counter === 1 ?
 
-                                    <Text style={{color: '#222'}}>{this.props.cardData.counter} Event</Text> :
-                                    <Text style={{color: '#222'}}>{this.props.cardData.counter} Events</Text>
+                                    <Text
+                                        // style={{color: '#222'}}
+                                    >{this.props.cardData.counter} Event</Text> :
+                                    <Text
+                                        // style={{color: '#222'}}
+                                    >{this.props.cardData.counter} Events</Text>
                                 }
                             </Space>
                             < br />
@@ -139,12 +140,16 @@ class StoryCard extends React.Component{
                     }
                     <Space>
                         <UserOutlined/>
-                        <Text style={{color: '#222'}}>{this.props.cardData.create_user}</Text>
+                        <Text
+                            // style={{color: '#222'}}
+                        >{this.props.cardData.create_user}</Text>
                     </Space>
                     <br/>
                     <Space>
                         <ClockCircleOutlined/>
-                        <Text style={{color: '#222'}}>{this.props.cardData.last_modify}</Text>
+                        <Text
+                            // style={{color: '#222'}}
+                        >{this.props.cardData.last_modify}</Text>
                     </Space>
                     {!this.props.cardData.counter ? <div><br/></div>:null}
 
@@ -162,7 +167,8 @@ class StoryCard extends React.Component{
 const mapStateToProps = state => {
     return {
         jwtToken: state.usersReducer.jwtToken,
-        favoritesIds: state.favoritesReducer.favorites.map( (fav) => (fav.story_id))
+        favoritesIds: state.favoritesReducer.favorites.map( (fav) => (fav.story_id)),
+        darkMode: state.sitesReducer.darkMode
 
     }
 };

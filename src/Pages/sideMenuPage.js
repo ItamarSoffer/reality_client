@@ -2,9 +2,8 @@ import React from 'react';
 import {connect} from "react-redux";
 import {withRouter} from "react-router";
 import {logoutAction} from "../Actions/usersActions";
-import {changeThemeAction} from '../Actions/siteActions';
 import SideMenu from '../Components/SideMenu/SideMenu';
-
+import {setThemeAction} from "../Actions/siteActions";
 
 
 class SideMenuPage extends React.Component{
@@ -12,21 +11,17 @@ class SideMenuPage extends React.Component{
     handlerLogout = () => {
         this.props.logout();
         // console.log("Logged Out");
+        this.props.setThemeAction(false);
         this.props.history.push('/login');
     };
 
-    handleChangeTheme = (isDark) => {
-        this.props.changeTheme(isDark)
-
-    };
 
     render() {
 
         return (
             <SideMenu url={this.props.url}
-                      darkMode={this.props.DarkMode}
+                      darkMode={this.props.darkMode}
                       handlerLogout={this.handlerLogout}
-                      handleChangeTheme={this.handleChangeTheme}
                       jwtToken={this.props.jwtToken}
                       favorites={this.props.favorites}
 
@@ -39,7 +34,7 @@ class SideMenuPage extends React.Component{
 
 const mapStateToProps = state => {
     return {
-        DarkMode: state.sitesReducer.DarkMode,
+        darkMode: state.sitesReducer.darkMode,
         jwtToken: state.usersReducer.jwtToken,
         favorites: state.favoritesReducer.favorites
 
@@ -51,7 +46,8 @@ const mapDispatchToProps = dispatch => {
         logout: () => {
             dispatch(logoutAction());
         },
-        changeTheme : (isDark) => {dispatch(changeThemeAction(isDark));},
+        setThemeAction: (val) => dispatch(setThemeAction(val)),
+
 
     }
 };

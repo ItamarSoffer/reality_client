@@ -10,6 +10,7 @@ import {setReRenderTimelineAction} from "../../Actions/siteActions";
 import EventEditOptions from "../DataEvent/EventEditOptions";
 import ExtraData from "../DataEvent/ExtraData/ExtraData";
 import {getUniqValues} from "../../Actions/eventsActions";
+import LinkView from "../DataEvent/LinkView";
 
 const { Paragraph } = Typography;
 
@@ -96,7 +97,7 @@ class StoryTable extends React.Component {
             key: 'link',
             width: 150,
             ...this.getColumnSearchProps('link'),
-            render: link => <a href={link} onClick={(event) => {event.preventDefault(); window.open(link);}}>{link}</a>,
+            render: link => <LinkView link={link}/>,
             align: 'center',
 
         });

@@ -77,15 +77,15 @@ class Timeline extends React.Component {
 
         apiEditStoryName(this.props.jwtToken, this.props.url, newName)
             .then((response) => {
-                if (response.status === 201){
-                    message.warning(response.data)
+                    if (response.status === 201){
+                        message.warning(response.data)
+                    }
+                    else if (response.status === 200){
+                        message.success(response.data, 1);
+                        this.setState({storyName: newName});
+                    }
                 }
-                else if (response.status === 200){
-                    message.success(response.data, 1);
-                    this.setState({storyName: newName});
-                }
-            }
-        );
+            );
     };
 
     handleDescriptionChange =(newDescription) => {
@@ -93,15 +93,15 @@ class Timeline extends React.Component {
 
         apiEditStoryDescription(this.props.jwtToken, this.props.url, newDescription)
             .then((response) => {
-                if (response.status === 201){
-                    message.warning(response.data)
+                    if (response.status === 201){
+                        message.warning(response.data)
+                    }
+                    else if (response.status === 200){
+                        message.success(response.data, 1);
+                        this.setState({storyDescription: newDescription});
+                    }
                 }
-                else if (response.status === 200){
-                    message.success(response.data, 1);
-                    this.setState({storyDescription: newDescription});
-                }
-            }
-        );
+            );
     };
 
 

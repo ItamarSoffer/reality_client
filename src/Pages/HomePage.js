@@ -39,7 +39,7 @@ class HomePage extends  React.Component {
 const mapStateToProps = state => {
     return {
         loggedUser: state.usersReducer.loggedUser,
-        DarkMode: state.sitesReducer.DarkMode,
+        darkMode: state.sitesReducer.darkMode,
         timelineRenderCount : state.sitesReducer.timelineRenderCount
 
     }
