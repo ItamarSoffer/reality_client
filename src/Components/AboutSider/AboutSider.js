@@ -58,7 +58,7 @@ class AboutSider extends React.Component{
                         <List
                             size="small"
                             bordered
-                            dataSource={Object.keys(AboutTableIcons)}
+                            dataSource={Object.keys(AboutTableIcons).sort()}
                             renderItem = {item => (
                                 <List.Item>
                                     <List.Item.Meta

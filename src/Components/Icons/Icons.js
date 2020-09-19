@@ -11,14 +11,34 @@ import {
     MdExtension,
     MdBugReport,
     MdImportantDevices,
-    MdEvent
+    MdEvent,
+    MdPlace,
+    MdEmail,
+    MdMouse
 } from "react-icons/md";
 import {
     AiFillStar as StarIcon,
     AiFillCamera,
-    AiFillPhone
+    AiFillPhone,
+    AiFillClockCircle,
+    AiFillCode,
+
 } from "react-icons/ai";
 import { FaLightbulb, FaPython } from "react-icons/fa";
+import {
+    CgMouse,
+    CgMail,
+    CgMagnet,
+    CgUsb,
+    CgSmartphone,
+    CgLock,
+
+} from "react-icons/cg";
+
+import {VscGraph } from "react-icons/vsc";
+import { GiUsbKey} from "react-icons/gi";
+import { RiLockFill, RiSmartphoneFill} from "react-icons/ri";
+
 
 function sizedIcons(iconSize){
     return  {
@@ -37,7 +57,17 @@ function sizedIcons(iconSize){
         "phone": <AiFillPhone size={iconSize}/>,
         "bug": <MdBugReport size={iconSize}/>,
         "screen": <MdImportantDevices size={iconSize}/>,
-        "event": <MdEvent size={iconSize} />
+        "event": <MdEvent size={iconSize} />,
+        "time": <AiFillClockCircle size={iconSize} />,
+        "code": <AiFillCode size={iconSize} />,
+        "mouse": <MdMouse size={iconSize} />,
+        "mail": <MdEmail size={iconSize} />,
+        "magnet": <CgMagnet size={iconSize} />,
+        "usb": <GiUsbKey size={iconSize} />,
+        "smartphone": <RiSmartphoneFill size={iconSize} />,//change
+        "lock": <RiLockFill size={iconSize} />,
+        "graph": <VscGraph size={iconSize} />,
+        "place": <MdPlace size={iconSize} />,
     }
 }
 

@@ -31,16 +31,23 @@ class IconsSelect extends React.Component {
         return(
             <Select
                 //labelInValue
+                allowClear
+                showSearch
                 defaultValue={defaultValue}
                 placeholder={"icon"}
-                style={{ width: 80 }}
+                style={{ width: 120 }}
                 onChange={value => handleIconChange(value)}
+                filterOption={(input, option) =>
+                    option.value.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                }
             >
 
-                {Object.keys(TimelineIcons).map(
+                {Object.keys(TimelineIcons).sort().map(
                     function(icon_key){
                         return (
-                            <Option value={icon_key}>{TimelineIcons[icon_key]}</Option>
+                            <Option value={icon_key}>
+                                {TimelineIcons[icon_key]}
+                            </Option>
                         )
                     }
                 )}
