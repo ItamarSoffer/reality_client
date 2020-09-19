@@ -50,7 +50,7 @@ function sizedIcons(iconSize){
         "fingerprint": <MdFingerprint size={iconSize}/>,
         "android": <MdAndroid size={iconSize}/>,
         "globe": <MdLanguage size={iconSize}/>,
-        "Building": <MdAccountBalance size={iconSize}/>,
+        "building": <MdAccountBalance size={iconSize}/>,
         "account": <MdAccountCircle size={iconSize}/>,
         "puzzle": <MdExtension size={iconSize}/>,
         "camera": <AiFillCamera size={iconSize}/>,
