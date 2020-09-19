@@ -38,7 +38,7 @@ class FeaturesCollapse extends React.Component {
         },
         {
             systemName: 'Story',
-            iconPath:'./images/logos/StoryIcon.svg',
+            iconPath:'./images/logos/StoryIcon.png',
         },
         {
             systemName: 'iframe',
@@ -74,7 +74,7 @@ class FeaturesCollapse extends React.Component {
                             Enabling `} <Text strong>Edit Mode</Text>{` will open "edit" and "delete" buttons for each event.`}
                         </Paragraph>
 
-                        <img src={require('./images/logos/StoryIcon.svg')} alt={'storyIcon.svg'} width={'120px'}/>
+                        <img src={require('./images/logos/StoryLogo.png')} alt={'storyIcon.svg'} width={'180px'}/>
 
                 </Panel>
                 <Panel header="Tags" key={2}>

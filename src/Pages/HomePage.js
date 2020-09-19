@@ -5,6 +5,7 @@ import StoryHome from '../Components/HomePage/StoryHome';
 import SideMenuPage from './sideMenuPage';
 import {connect} from "react-redux";
 import CardsSearch from "../Components/StoryCard/Search/CardsSearch";
+import StoryLogo from "../Components/Logo/StoryLogo";
 
 
 class HomePage extends  React.Component {
@@ -24,6 +25,7 @@ class HomePage extends  React.Component {
                     <div style={{display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center'}}>
+                        <StoryLogo/>
                         <CardsSearch/>
                     </div>
                     <br/>

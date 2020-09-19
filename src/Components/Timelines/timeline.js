@@ -12,6 +12,7 @@ import {getQueryStringParams} from "../../Actions/queryStringActions";
 import {apiEditStoryDescription, apiEditStoryName, apiGetEvents} from "../../Actions/apiActions";
 import {getStoryEventsAction, eventsCompareSorter} from "../../Actions/eventsActions";
 import {StoryShortcuts, } from "../Shortcuts/StoryShortcuts";
+import StoryLogo from "../Logo/StoryLogo";
 
 
 const { Title } = Typography;
@@ -176,6 +177,10 @@ class Timeline extends React.Component {
                                 })}
                         </VerticalTimeline> : null
                     }
+                    <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center',}}>
+                        <StoryLogo/>
+                    </div>
+
                     <BackTop />
                     <StoryShortcuts/>
 

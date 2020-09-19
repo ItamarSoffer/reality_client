@@ -9,6 +9,7 @@ import {getQueryStringParams} from "../Actions/queryStringActions";
 import CardsSearch from "../Components/StoryCard/Search/CardsSearch";
 import {setReRenderCardsAction} from "../Actions/siteActions";
 import {apiGetAllCards} from "../Actions/apiActions";
+import StoryLogo from "../Components/Logo/StoryLogo";
 
 
 class CardsPage extends  React.Component {
@@ -61,9 +62,12 @@ class CardsPage extends  React.Component {
 
                 <Layout>
                     <br/>
+
+
                     <div style={{display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center'}}>
+                    <StoryLogo/>
                         <CardsSearch/>
                     </div>
                     <br/>
