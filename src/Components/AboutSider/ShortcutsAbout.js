@@ -66,6 +66,7 @@ const generateShortcutsList =(shortcutsList, title) => {
                 renderItem={item => (
                     <List.Item>
                         <Text strong>{item.content} </Text>{' '}
+                        {/* eslint-disable-next-line array-callback-return */}
                         {item.hotKeys.map(function (val) {
                             if (typeof val === 'string') {
                                 if (val === 'or') {

@@ -3,6 +3,7 @@ import {Collapse,Typography, Tag, List} from "antd";
 import {
     StarFilled,
 } from '@ant-design/icons';
+import StoryLogo from "../Logo/StoryLogo";
 const {Panel} = Collapse;
 const {Paragraph, Text} = Typography;
 /*
@@ -70,11 +71,11 @@ class FeaturesCollapse extends React.Component {
 
                         <Paragraph style={{whiteSpace: "pre-line"}}>
                             {`Every story is built from events: click on the "Add" button to add a new one. 
-                            Each event includes the following parameters: title, date, time, link, content, icon, color and tags. 
+                             Each event includes the following parameters: title, date, time, link, content, icon, color and tags. 
                             Enabling `} <Text strong>Edit Mode</Text>{` will open "edit" and "delete" buttons for each event.`}
                         </Paragraph>
 
-                        <img src={require('./images/logos/StoryLogo.png')} alt={'storyIcon.svg'} width={'180px'}/>
+                        <StoryLogo size={'40%'}/>
 
                 </Panel>
                 <Panel header="Tags" key={2}>

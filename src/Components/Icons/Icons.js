@@ -26,13 +26,7 @@ import {
 } from "react-icons/ai";
 import { FaLightbulb, FaPython } from "react-icons/fa";
 import {
-    CgMouse,
-    CgMail,
     CgMagnet,
-    CgUsb,
-    CgSmartphone,
-    CgLock,
-
 } from "react-icons/cg";
 
 import {VscGraph } from "react-icons/vsc";
