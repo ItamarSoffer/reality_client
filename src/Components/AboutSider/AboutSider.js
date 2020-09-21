@@ -6,6 +6,7 @@ import {setReRenderTimelineAction} from "../../Actions/siteActions";
 import {AboutTableIcons} from "../Icons/Icons";
 import FeaturesCollapse from "./FeaturesCollapse";
 import ShortcutsAbout from "./ShortcutsAbout";
+import ContactTab from "./ContactTab";
 
 const {Text} = Typography;
 const { TabPane } = Tabs;
@@ -71,22 +72,12 @@ class AboutSider extends React.Component{
                     </TabPane>
 
                      <TabPane tab="Shortcuts" key="3_shortcuts">
-
                         <ShortcutsAbout/>
                     </TabPane>
 
-
-                    {/*<TabPane tab="Contact" key="3_contact">*/}
-
-                    {/*    <Title level={4} style={{textAlign: 'center'}}>Contact </Title>*/}
-                    {/*    - דיווח על בעיה*/}
-                    {/*    - הרשאות לשותפים*/}
-                    {/*    - בקשה לפיצ'רים נוספים*/}
-                    {/*    - בקשת ממשוק עם מערכת*/}
-                    {/*    - כל דבר אחר*/}
-                    {/*    מוזמן לפנות:*/}
-
-                    {/*</TabPane>*/}
+                    <TabPane tab="Contact" key="3_contact">
+                        <ContactTab/>
+                    </TabPane>
 
                     {/*<TabPane tab="Preferences" key="4_preferences">*/}
                     {/*    - default color*/}

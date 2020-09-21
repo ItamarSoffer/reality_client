@@ -281,3 +281,14 @@ export const apiExtractTime = (jwtToken, link) =>{
         })
 
 };
+
+export const apiContactSupport = (jwtToken, title, content) =>{
+    const apiContactSupportLink = backendAPI.concat('/contact');
+    return axios.post(apiContactSupportLink ,
+        {
+            jwt_token: jwtToken,
+            title: title,
+            content: content
+        })
+
+};
