@@ -216,7 +216,9 @@ class EditEvent extends React.Component {
                     footer={[<Button type="default"  key="close" onClick={this.handleCancel}>
                         Cancel
                     </Button>,
-                        <Button type="primary" form={formId} key="submit" htmlType="submit" onClick={this.onFinish}>
+                        <Button type="primary" form={formId} key="submit" htmlType="submit"
+                                // onClick={this.onFinish}
+                        >
                             Update
                         </Button>
 
