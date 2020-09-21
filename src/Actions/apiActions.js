@@ -66,7 +66,6 @@ export const apiNewEvent = (jwtToken, storyUrl, title, text, date, hour, color=n
 
 export const apiEditEvent= (jwtToken, storyUrl, eventId, title, text, date, hour, color, icon, link, tags) => {
     const api_edit_event = backendAPI.concat(`/timeline/${storyUrl}/edit`);
-    console.log("EDITING");
     const postData = {
         "jwt_token": jwtToken,
         "event_id": eventId,
