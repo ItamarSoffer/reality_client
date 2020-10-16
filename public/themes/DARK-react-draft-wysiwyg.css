@@ -1,3 +1,13 @@
+/*DARK THEME:
+COLOR CAHNGES:
+
+#F1F1F1 --
+#BFBDBD --
+#FFFFFF --
+#f5f5f5 --
+# background: white -- #303030
+*/
+
 demo-editor.rdw-option-wrapper {
   border: 3px solid #F1F1F1;
   padding: 5px;
@@ -9,7 +19,7 @@ demo-editor.rdw-option-wrapper {
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  background: white;
+  background: #303030;
   text-transform: capitalize;
 }
 .rdw-option-wrapper:hover {
@@ -28,20 +38,20 @@ demo-editor.rdw-option-wrapper {
 
 .rdw-dropdown-wrapper {
   height: 30px;
-  background: white;
+  background: #303030;
   cursor: pointer;
   border: 1px solid #F1F1F1;
   border-radius: 2px;
   margin: 0 3px;
   text-transform: capitalize;
-  background: white;
+  background: #303030;
 }
 .rdw-dropdown-wrapper:focus {
   outline: none;
 }
 .rdw-dropdown-wrapper:hover {
   box-shadow: 1px 1px 0px #BFBDBD;
-  background-color: #FFFFFF;
+  background-color: #303030;
 }
 .rdw-dropdown-wrapper:active {
   box-shadow: 1px 1px 0px #BFBDBD inset;
@@ -78,7 +88,7 @@ demo-editor.rdw-option-wrapper {
   position: relative;
   border: 1px solid #F1F1F1;
   width: 98%;
-  background: white;
+  background: #303030;
   border-radius: 2px;
   margin: 0;
   padding: 0;
@@ -87,7 +97,7 @@ demo-editor.rdw-option-wrapper {
 }
 .rdw-dropdown-optionwrapper:hover {
   box-shadow: 1px 1px 0px #BFBDBD;
-  background-color: #FFFFFF;
+  background-color: #303030;
 }
 
 .rdw-dropdownoption-default {
@@ -97,10 +107,10 @@ demo-editor.rdw-option-wrapper {
   padding: 0 5px;
 }
 .rdw-dropdownoption-highlighted {
-  background: #F1F1F1;
+  background: #646464;
 }
 .rdw-dropdownoption-active {
-  background: #f5f5f5;
+  background: #373737;
 }
 .rdw-dropdownoption-disabled {
   opacity: 0.3;
@@ -240,7 +250,7 @@ demo-editor.rdw-option-wrapper {
   padding: 15px;
   border-radius: 2px;
   z-index: 100;
-  background: white;
+  background: #303030;
   box-shadow: 3px 3px 5px #BFBDBD;
 }
 .rdw-colorpicker-modal-header {
@@ -320,7 +330,7 @@ demo-editor.rdw-option-wrapper {
   padding: 15px;
   border-radius: 2px;
   z-index: 100;
-  background: white;
+  background: #303030;
   box-shadow: 3px 3px 5px #BFBDBD;
 }
 .rdw-link-modal-label {
@@ -353,7 +363,7 @@ demo-editor.rdw-option-wrapper {
   border: 1px solid #F1F1F1;
   border-radius: 2px;
   cursor: pointer;
-  background: white;
+  background: #303030;
   text-transform: capitalize;
 }
 .rdw-link-modal-btn:hover {
@@ -396,7 +406,7 @@ demo-editor.rdw-option-wrapper {
   padding: 15px;
   border-radius: 2px;
   z-index: 100;
-  background: white;
+  background: #303030;
   justify-content: space-between;
   box-shadow: 3px 3px 5px #BFBDBD;
 }
@@ -431,6 +441,7 @@ demo-editor.rdw-option-wrapper {
   border-radius: 2px;
   font-size: 15px;
   padding: 0 5px;
+  background: #303030;
 }
 .rdw-embedded-modal-link-input-wrapper {
   display: flex;
@@ -450,7 +461,7 @@ demo-editor.rdw-option-wrapper {
   border: 1px solid #F1F1F1;
   border-radius: 2px;
   cursor: pointer;
-  background: white;
+  background: #303030;
   text-transform: capitalize;
 }
 .rdw-embedded-modal-btn:hover {
@@ -463,7 +474,7 @@ demo-editor.rdw-option-wrapper {
   outline: none !important;
 }
 .rdw-embedded-modal-btn:disabled {
-  background: #ece9e9;
+  background: #303030;
 }
 .rdw-embedded-modal-size {
   align-items: center;
@@ -477,6 +488,7 @@ demo-editor.rdw-option-wrapper {
   border: 1px solid #F1F1F1;
   border-radius: 2px;
   font-size: 12px;
+  background: #303030;
 }
 .rdw-embedded-modal-size-input:focus {
   outline: none;
@@ -502,7 +514,7 @@ demo-editor.rdw-option-wrapper {
   padding: 15px;
   border-radius: 2px;
   z-index: 100;
-  background: white;
+  background: #303030;
   box-shadow: 3px 3px 5px #BFBDBD;
 }
 .rdw-emoji-icon {
@@ -573,7 +585,7 @@ demo-editor.rdw-option-wrapper {
   padding: 15px;
   border-radius: 2px;
   z-index: 100;
-  background: white;
+  background: #303030;
   box-shadow: 3px 3px 5px #BFBDBD;
 }
 .rdw-image-modal-header {
@@ -591,7 +603,7 @@ demo-editor.rdw-option-wrapper {
 }
 .rdw-image-modal-header-label {
   width: 80px;
-  background: #f1f1f1;
+  background: #303030;
   border: 1px solid #f1f1f1;
   margin-top: 5px;
 }
@@ -653,6 +665,7 @@ demo-editor.rdw-option-wrapper {
   border-radius: 2px;
   font-size: 15px;
   padding: 0 5px;
+  background: #303030;
 }
 .rdw-image-modal-btn-section {
   margin: 10px auto 0;
@@ -667,7 +680,7 @@ demo-editor.rdw-option-wrapper {
   border: 1px solid #F1F1F1;
   border-radius: 2px;
   cursor: pointer;
-  background: white;
+  background: #303030;
   text-transform: capitalize;
 }
 .rdw-image-modal-btn:hover {
@@ -680,7 +693,7 @@ demo-editor.rdw-option-wrapper {
   outline: none !important;
 }
 .rdw-image-modal-btn:disabled {
-  background: #ece9e9;
+  background: #303030;
 }
 .rdw-image-modal-spinner {
   position: absolute;
@@ -716,6 +729,7 @@ demo-editor.rdw-option-wrapper {
   border: 1px solid #F1F1F1;
   border-radius: 2px;
   font-size: 12px;
+  background: #303030;
 }
 .rdw-image-modal-size-input:focus {
   outline: none;
@@ -757,7 +771,7 @@ demo-editor.rdw-option-wrapper {
   left: 40%;
   top: 0;
   cursor: pointer;
-  background-color: white;
+  background-color: #303030;
 }
 
 .rdw-mention-link {
@@ -779,7 +793,7 @@ demo-editor.rdw-option-wrapper {
   min-width: 100px;
   max-height: 150px;
   overflow: auto;
-  background: white;
+  background: #303030;
   z-index: 100;
 }
 .rdw-suggestion-option {
@@ -800,7 +814,7 @@ demo-editor.rdw-option-wrapper {
 
 .rdw-image-alignment-options-popup {
   position: absolute;
-  background: white;
+  background: #303030;
   display: flex;
   padding: 5px 2px;
   border-radius: 2px;
@@ -849,7 +863,7 @@ demo-editor.rdw-option-wrapper {
   border: 1px solid #F1F1F1;
   display: flex;
   justify-content: flex-start;
-  background: white;
+  background: #303030;
   flex-wrap: wrap;
   font-size: 15px;
   margin-bottom: 5px;
@@ -869,7 +883,7 @@ demo-editor.rdw-option-wrapper {
   padding-left: 5px;
 }
 .rdw-editor-main pre {
-  background: #f1f1f1;
+  background: #303030;
   border-radius: 3px;
   padding: 1px 10px;
 }
