@@ -21,6 +21,21 @@ class UploadEventFiles extends React.Component {
         super(props);
     }
 
+    onRemoveFile(file, jwtToken, url, eventId, fileId){
+        apiDeleteEventFile(jwtToken, url, eventId, file.fileId)
+            .then((response) => {
+                    if (response.status === 200){
+                        message.success("Deleted File");
+                        return true;
+                    }
+                    else{
+                        message.warning(response.data);
+                        return false
+                    }
+                }
+            )
+    }
+
     uploadUrl = backendXlsxAPI.concat(`/${this.props.url}/${this.props.eventId}/upload_file?jwt_token=${this.props.jwtToken}`);
 
     Uploadprops = {
@@ -42,24 +57,11 @@ class UploadEventFiles extends React.Component {
                 }
             }),
         showUploadList: true,
-        onRemove: this.onRemoveFile
+        onRemove: (file) => this.onRemoveFile(file, this.props.jwtToken, this.props.url, this.props.eventId)
 
     };
 
-    onRemoveFile(file){
-        apiDeleteEventFile(this.props.jwtToken, this.props.url, this.props.eventId, file.fileId)
-            .then((response) => {
-                    if (response.status === 200){
-                        message.success("Deleted File");
-                        return true;
-                    }
-                    else{
-                        message.warning(response.data);
-                        return false
-                    }
-                }
-            )
-    }
+
 
 
     render(){
