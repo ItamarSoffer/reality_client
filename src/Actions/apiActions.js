@@ -292,3 +292,14 @@ export const apiContactSupport = (jwtToken, title, content) =>{
         })
 
 };
+
+export const apiDeleteEventFile = (jwtToken, storyUrl, eventId, fileId) => {
+  const apiDeleteFileUrl = backendAPI.concat((`/timeline/${storyUrl}/${eventId}/del_file`))
+  return axios.post(
+      apiDeleteFileUrl,
+      {
+          jwt_token: jwtToken,
+          file_id: fileId
+      }
+  )
+};

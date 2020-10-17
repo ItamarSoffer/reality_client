@@ -8,6 +8,7 @@ import {connect} from "react-redux";
 import TagsRenderer from '../Tags/TagsRenderer'
 import ExtraData from "./ExtraData/ExtraData";
 import LinkView from "./LinkView";
+import FilesView from "./FilesView";
 
 
 const { Paragraph, Title } = Typography;
@@ -45,6 +46,14 @@ class DataEvent extends React.Component {
                                     <LinkView link={this.props.data.link}/>
 
                                 }
+
+                            {!this.props.data.files? null :
+                                <FilesView
+                                    filesList={this.props.data.files}
+                                    eventId={this.props.data.event_id}
+                                    url={this.props.url}
+                                />
+                            }
                             {this.props.data.tags.length > 0 ? <TagsRenderer tags={this.props.data.tags}/> : null}
                             {this.props.data.extra_data?
                                 <div>

@@ -11,6 +11,7 @@ import EventEditOptions from "../DataEvent/EventEditOptions";
 import ExtraData from "../DataEvent/ExtraData/ExtraData";
 import {getUniqValues} from "../../Actions/eventsActions";
 import LinkView from "../DataEvent/LinkView";
+import FilesView from "../DataEvent/FilesView";
 
 const { Paragraph } = Typography;
 
@@ -113,6 +114,19 @@ class StoryTable extends React.Component {
                 render: tags => <TagsRenderer tags={tags}/>,
                 align: 'center',
             });
+            columns.push({
+                title: 'Files',
+                dataIndex: 'files',
+                key: 'files',
+                width: 180 ,
+                render: (files, record, index) =>
+                    <FilesView filesList={files}
+                               eventId={record.event_id}
+                               url={this.props.url}
+
+                    />,
+                align: 'center',
+            });
             columns.push(
                 {
                     title: ' Modified Time',
@@ -122,7 +136,8 @@ class StoryTable extends React.Component {
                     align: 'center',
                     sorter: (a, b) => Date.parse(a.modify_time) - Date.parse(b.modify_time),
                 }
-            )
+            );
+
         }
         if (this.props.editMode){
             columns.push({

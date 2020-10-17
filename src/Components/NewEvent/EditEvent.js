@@ -24,6 +24,7 @@ import TagsSelectByName from "../Tags/TagsSelectByName";
 import {apiEditEvent, apiExtractTime} from "../../Actions/apiActions";
 import {updateEventAction} from "../../Actions/eventsActions";
 import {ClockCircleOutlined, CloseCircleOutlined} from '@ant-design/icons';
+import UploadEventFiles from "./UploadEventFiles/UploadEventFiles";
 
 const {Text} = Typography;
 
@@ -348,6 +349,11 @@ class EditEvent extends React.Component {
                         </Form.Item>
 
                     </Form>
+                    <UploadEventFiles
+                        url={this.props.url}
+                        eventId={this.props.eventId}
+                        filesList={this.props.eventData.files}
+                    />
                 </Modal>
             </ConfigProvider>
         );

@@ -338,6 +338,7 @@ class CreateNewEvent extends React.Component {
                         </Form.Item>
 
                     </Form>
+                    <Text>#לאחר ההוספה ניתן להוסיף קבצים לאירוע</Text>
                 </Modal>
             </ConfigProvider>
         );
