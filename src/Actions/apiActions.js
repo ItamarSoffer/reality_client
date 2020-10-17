@@ -294,9 +294,20 @@ export const apiContactSupport = (jwtToken, title, content) =>{
 };
 
 export const apiDeleteEventFile = (jwtToken, storyUrl, eventId, fileId) => {
-  const apiDeleteFileUrl = backendAPI.concat((`/timeline/${storyUrl}/${eventId}/del_file`))
+  const apiDeleteFileUrl = backendAPI.concat((`/timeline/${storyUrl}/${eventId}/del_file`));
   return axios.post(
       apiDeleteFileUrl,
+      {
+          jwt_token: jwtToken,
+          file_id: fileId
+      }
+  )
+};
+
+export const apiDownloadEventFile = (jwtToken, storyUrl, eventId, fileId) => {
+  const apiDownloadFileUrl = backendAPI.concat((`/timeline/${storyUrl}/${eventId}/download_file`));
+  return axios.post(
+      apiDownloadFileUrl,
       {
           jwt_token: jwtToken,
           file_id: fileId
