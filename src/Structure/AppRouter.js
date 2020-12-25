@@ -9,6 +9,7 @@ import StoryPage from "../Pages/TimelinePage";
 import CardsPage from "../Pages/CardsPage";
 import NewTimelinePage from "../Pages/NewTimelinePage";
 import HomePage from "../Pages/HomePage";
+import ExternalAddPage from '../Pages/ExternalAddPage';
 
 
 class AppRouter extends React.Component{
@@ -35,6 +36,7 @@ class AppRouter extends React.Component{
                                     <Route path="/new_story" component={NewTimelinePage}/>
 
                                     <Route path="/login" component={LoginPage}/>
+                                    <Route path="/external" component={ExternalAddPage}/>
 
                                     <Route exact={true} path="/home" component={HomePage}/>
                                     <Route exact={true} path="/" component={HomePage}/>

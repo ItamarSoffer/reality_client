@@ -4,8 +4,6 @@ import { Editor } from 'react-draft-wysiwyg';
 import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
 
-import {Button} from "antd";
-
 
 class RichTextEditor extends Component {
     state = {
@@ -49,7 +47,6 @@ class RichTextEditor extends Component {
                     disabled
                     value={draftToHtml(convertToRaw(editorState.getCurrentContent()))}
                 />
-                <Button onClick={() => console.log(draftToHtml(convertToRaw(editorState.getCurrentContent())))}>console.log</Button>
             </div>
         );
     }

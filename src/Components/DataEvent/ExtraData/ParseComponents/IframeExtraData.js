@@ -7,6 +7,8 @@ import Iframe from "react-iframe";
 class IframeExtraData extends React.Component{
 
     render() {
+        let iFrameConsts = this.props.data.content;
+        iFrameConsts['width'] = '100%';
         return (
             <Card
                 size="small"
@@ -14,7 +16,9 @@ class IframeExtraData extends React.Component{
                 title={this.props.data.type}
                 extra={<div><BarcodeOutlined /></div>}
             >
-                <Iframe url={this.props.data.content.src} {...this.props.data.content}/>
+                <div>
+                <Iframe url={this.props.data.content.src} {...iFrameConsts}/>
+                </div>
             </Card>
         )
 

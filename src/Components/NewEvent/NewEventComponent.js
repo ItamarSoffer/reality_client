@@ -23,6 +23,7 @@ import TagsSelectByName from "../Tags/TagsSelectByName";
 import {apiExtractTime, apiNewEvent} from "../../Actions/apiActions";
 import {updateEventAction} from "../../Actions/eventsActions";
 import {ClockCircleOutlined, CloseCircleOutlined} from '@ant-design/icons';
+import RichTextEditor from "../RichTextEditor/RichTextEditor";
 
 const {Text} = Typography;
 
@@ -38,7 +39,8 @@ class CreateNewEvent extends React.Component {
             tags: [],
             date: '',
             time: '',
-            isDatetimeParsed: false
+            isDatetimeParsed: false,
+            links: [null]
         }
     }
     formRef = React.createRef();
@@ -205,6 +207,17 @@ class CreateNewEvent extends React.Component {
             });
     };
 
+    handleAddLink =() => {
+        let newLinks = this.state.links;
+        newLinks.push(null);
+        this.setState({links: newLinks});
+
+    };
+
+    onLinkChangeNew = (val) => {
+        this.setState({evtLink: val})
+    };
+
 
     render() {
         return (
@@ -296,9 +309,20 @@ class CreateNewEvent extends React.Component {
                                         <ClockCircleOutlined onClick={this.handleExtractTime}/>
                                     </Popover>}
                             />
-
-
                         </Form.Item>
+                            {
+                                this.state.links.map(function (value, index){
+                                    return (
+                                        <p>More Link {index}</p>
+                                    )
+                                })
+                            }
+                            <Button
+                            onClick={() => this.handleAddLink()}
+                            >Add more</Button>
+
+
+
                         <Form.Item
                             className="link-form"
                             //label="תוכן"
