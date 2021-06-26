@@ -12,6 +12,7 @@ const siteInitState = {
     showEditEventModal: {},
     showAboutSider: false,
     showShortcutsModal: false,
+    showNewStoryModal: false
 };
 
 const modalsReducer = (state = siteInitState, action) => {
@@ -52,6 +53,9 @@ const modalsReducer = (state = siteInitState, action) => {
             break;
         case "SHORTCUTS_MODAL_VIEW":
             state = {...state, showShortcutsModal: action.payload};
+            break;
+        case "NEW_STORY_MODAL_VIEW":
+            state = {...state, showNewStoryModal: action.payload};
             break;
 
 

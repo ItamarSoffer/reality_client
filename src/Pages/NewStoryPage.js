@@ -3,7 +3,6 @@ import {Layout} from "antd";
 import CreateNewStory from '../Components/NewStory/NewStoryComponent';
 import SideMenuPage from "./sideMenuPage";
 import {connect} from "react-redux";
-import CreateNewEvent from "../Components/NewEvent/NewEventComponent";
 
 
 class NewStoryPage extends React.Component{
@@ -26,7 +25,7 @@ class NewStoryPage extends React.Component{
                             transform: 'translate(-50%, -50%)'
 
                         }}>
-                        <CreateNewStory loggedUser={this.props.loggedUser}/>
+                        <CreateNewStory />
                     </div>
                 </Layout>
             </Layout>
@@ -36,11 +35,7 @@ class NewStoryPage extends React.Component{
 }
 
 const mapStateToProps = state => {
-    return {
-        loggedUser: state.usersReducer.loggedUser,
-        darkMode: state.sitesReducer.darkMode,
 
-    }
 };
 
 const mapDispatchToProps = disaptch => {

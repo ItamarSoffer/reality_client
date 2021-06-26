@@ -73,3 +73,11 @@ export const controlShortcutsModalAction = (isOpen) => {
         payload: isOpen
     }
 };
+
+export const controlNewStoryModalAction = (isOpen) => {
+    // isOpen is bool- open or close the modal
+    return {
+        type: "NEW_STORY_MODAL_VIEW",
+        payload: isOpen
+    }
+};
