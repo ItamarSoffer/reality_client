@@ -129,16 +129,6 @@ class SideMenu extends React.Component {
                             </SubMenu>
                     }
 
-
-                    <Menu.Item
-                        key="new"
-                        icon={MenuIcons['nodeindex']}
-                        onClick={() => {this.props.history.push({
-                            pathname: `/new_story/`,});
-                        }}
-                    >New Story
-                    </Menu.Item>
-
                     <Menu.Item key="m_about" icon={MenuIcons['info']} onClick={() => this.props.showAboutSiderAction()}>
                         About
                     </Menu.Item>

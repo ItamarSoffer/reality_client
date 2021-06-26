@@ -1,11 +1,13 @@
 import React from 'react';
-import {Layout} from "antd";
+import {Layout, Button} from "antd";
 import StoryHome from '../Components/HomePage/StoryHome';
 
 import SideMenuPage from './sideMenuPage';
 import {connect} from "react-redux";
 import CardsSearch from "../Components/StoryCard/Search/CardsSearch";
 import StoryLogo from "../Components/Logo/StoryLogo";
+import {controlNewStoryModalAction} from "../Actions/modalsActions";
+import NewStoryModal from "../Components/NewStory/NewStoryModal";
 
 
 class HomePage extends  React.Component {
@@ -25,8 +27,11 @@ class HomePage extends  React.Component {
                     <div style={{display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center'}}>
+
                         <StoryLogo/>
                         <CardsSearch/>
+                        <Button shape="round" onClick={() => this.props.showNewStoryModal()}> New Story</Button>
+                        <NewStoryModal/>
                     </div>
                     <br/>
                     <StoryHome loggedUser={this.props.loggedUser}/>
@@ -48,7 +53,10 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-    return {}
+    return {
+        showNewStoryModal: () => {dispatch(controlNewStoryModalAction(true))},
+
+    }
 
 };
 
