@@ -2,6 +2,7 @@ import React from 'react';
 import {Form, Input, Button, Card} from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { Typography } from 'antd';
+import StoryLogo from "../Logo/StoryLogo";
 const { Title } = Typography;
 
 
@@ -34,7 +35,10 @@ class LoginForm extends React.Component{
                         minHeight: 300
 
                     }}>
-                    <Title level={1} style={{textAlign:"center"}}>Tell Your Story </Title>
+                    <div style={{textAlign:"center"}}>
+                    <StoryLogo size={'60%'}/>
+                    </div>
+                    <br/>
                     <Form
                         name="normal_login"
                         className="login-form"
