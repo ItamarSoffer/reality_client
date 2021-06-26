@@ -1,11 +1,12 @@
 import React from 'react';
 import {Layout} from "antd";
-import CreateNewTimeline from '../Components/NewTimeline/NewTimelineComponent';
+import CreateNewStory from '../Components/NewStory/NewStoryComponent';
 import SideMenuPage from "./sideMenuPage";
 import {connect} from "react-redux";
+import CreateNewEvent from "../Components/NewEvent/NewEventComponent";
 
 
-class NewTimelinePage extends React.Component{
+class NewStoryPage extends React.Component{
     componentDidMount() {
 
         document.title = "New Story";
@@ -25,7 +26,7 @@ class NewTimelinePage extends React.Component{
                             transform: 'translate(-50%, -50%)'
 
                         }}>
-                        <CreateNewTimeline loggedUser={this.props.loggedUser}/>
+                        <CreateNewStory loggedUser={this.props.loggedUser}/>
                     </div>
                 </Layout>
             </Layout>
@@ -46,7 +47,7 @@ const mapDispatchToProps = disaptch => {
 
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewTimelinePage);
+export default connect(mapStateToProps, mapDispatchToProps)(NewStoryPage);
 
 
 

@@ -13,7 +13,7 @@ import {
     controlTagsModalAction,
     controlUploadXlsxModalAction
 } from "../../Actions/modalsActions";
-import DeleteTimelineModal from '../DeleteTimeline/DeleteTimelineModal';
+import DeleteTimelineModal from '../DeleteStory/DeleteStoryModal';
 import StoryRangePicker from './Search/StoryRangePicker';
 import StoryInSearch from './Search/StorySearch';
 import UploadXlsxModal from './UploadXlsxModal/UploadXlsxModal';
@@ -25,7 +25,7 @@ import {HotKeyPermissionsModal, StoryEditShortcuts} from "../Shortcuts/StoryShor
 
 const { SubMenu } = Menu;
 
-class TimelineMenu extends React.Component {
+class StoryMenu extends React.Component {
     constructor(props) {
         super(props);
         const darkCheck = (this.props.darkMode === "true") || (this.props.darkMode === true);
@@ -258,4 +258,4 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(TimelineMenu));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(StoryMenu));

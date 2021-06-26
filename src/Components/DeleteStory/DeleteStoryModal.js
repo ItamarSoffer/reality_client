@@ -7,7 +7,7 @@ import {withRouter} from "react-router";
 import {apiDeleteStory} from "../../Actions/apiActions";
 const {Text, Title} = Typography;
 
-class DeleteTimelineModal extends React.Component{
+class DeleteStoryModal extends React.Component{
     handleTimelineDelete = () => {
         message.info("Get a backup on us :)", 3);
         DownloadExcel(this.props.url, this.props.jwtToken);
@@ -98,4 +98,4 @@ const mapDispatchToProps = dispatch => {
 
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(DeleteTimelineModal));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(DeleteStoryModal));

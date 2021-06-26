@@ -5,9 +5,9 @@ import {
     Route,
 } from "react-router-dom";
 import LoginPage from "../Pages/LoginPage";
-import StoryPage from "../Pages/TimelinePage";
+import StoryPage from "../Pages/StoryPage";
 import CardsPage from "../Pages/CardsPage";
-import NewTimelinePage from "../Pages/NewTimelinePage";
+import NewTimelinePage from "../Pages/NewStoryPage";
 import HomePage from "../Pages/HomePage";
 
 

@@ -18,7 +18,7 @@ const {Title} = Typography;
 // };
 
 
-class CreateNewTimeline extends React.Component {
+class CreateNewStory extends React.Component {
 
     onFinish = values => {
 
@@ -148,4 +148,4 @@ const mapDispatchToProps = dispatch => {
 
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(CreateNewTimeline));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(CreateNewStory));

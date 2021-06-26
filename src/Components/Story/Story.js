@@ -16,7 +16,7 @@ import {StoryShortcuts, } from "../Shortcuts/StoryShortcuts";
 
 const { Title } = Typography;
 
-class Timeline extends React.Component {
+class Story extends React.Component {
 
 
 
@@ -204,4 +204,4 @@ const mapDispatchToProps = dispatch => {
 
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Timeline));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Story));
